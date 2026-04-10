@@ -2,6 +2,6 @@
 
 Simulator de serviciu de sifonare de bani publici (satiră).
 
-Ca deobicei, AI a fost folosit pentru a automatiza proiectul.
+Ca deobicei pentru proiectele mai noi, AI a fost folosit pentru a automatiza proiectul.
 
 Programul este încă în beta, incomplet.
