@@ -1,0 +1,2844 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SifonatorPRO — Platformă Națională de Achiziții Publice</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f6f5f4;--card:#fff;--hbar:#3d3846;--sidebar:#eeede9;--sbborder:rgba(0,0,0,.11);
+  --blue:#3584e4;--blue-h:#1c71d8;--green:#26a269;--orange:#e66100;
+  --red:#c01c28;--yellow:#f5c211;--gold:#e5a50a;--purple:#813d9c;--psd:#cc0000;
+  --text1:#1d1d1d;--text2:#5e5c64;--text3:#9a9996;
+  --border:rgba(0,0,0,.11);--r:6px;--rm:12px;--rl:16px;
+  --sh1:0 1px 3px rgba(0,0,0,.09),0 1px 2px rgba(0,0,0,.05);
+  --sh2:0 6px 24px rgba(0,0,0,.13);
+  --font:'Cantarell',system-ui,sans-serif;--mono:'Courier New',monospace;
+  --sw:234px;--hh:46px;
+}
+html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg);color:var(--text1);overflow:hidden}
+
+/* ── DISCLAIMER MODAL ── */
+#disc-wrap{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px}
+#disc-wrap.hid{display:none}
+#disc-box{background:var(--card);border-radius:var(--rl);box-shadow:0 24px 64px rgba(0,0,0,.3);max-width:480px;width:100%;padding:32px;text-align:center}
+#disc-box .disc-ico{font-size:52px;margin-bottom:12px}
+#disc-box h2{font-size:20px;font-weight:700;margin-bottom:8px}
+#disc-box p{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:20px}
+#disc-box small{font-size:11px;color:var(--text3);display:block;margin-top:10px}
+
+/* ── LOGIN ── */
+#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:var(--bg)}
+.login-card{background:var(--card);border-radius:var(--rl);box-shadow:var(--sh2);padding:32px;max-width:500px;width:100%}
+.login-logo{text-align:center;margin-bottom:24px}
+.login-logo h1{font-size:22px;font-weight:700;margin-top:8px}
+.login-logo p{font-size:11px;color:var(--text2);margin-top:4px;line-height:1.4}
+.fg{margin-bottom:13px}
+.fg label{display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;letter-spacing:.01em}
+.fg input,.fg select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;background:#fff;color:var(--text1);outline:none;transition:border-color .15s,box-shadow .15s}
+.fg input:focus,.fg select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(53,132,228,.11)}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.demo-toggle{display:flex;gap:10px;margin-bottom:16px}
+.demo-opt{flex:1;padding:10px;border:2px solid var(--border);border-radius:var(--r);cursor:pointer;text-align:center;transition:all .15s;font-size:13px;font-weight:700;color:var(--text2)}
+.demo-opt:hover{border-color:var(--blue);background:rgba(53,132,228,.04)}
+.demo-opt.sel{border-color:var(--blue);background:rgba(53,132,228,.08);color:var(--blue)}
+.demo-opt .do-icon{font-size:24px;display:block;margin-bottom:4px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:var(--r);border:none;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:700;transition:background .12s,transform .08s;text-decoration:none;white-space:nowrap;line-height:1.2}
+.btn:active{transform:scale(.975)}
+.btn-p{background:var(--blue);color:#fff}.btn-p:hover{background:var(--blue-h)}
+.btn-d{background:var(--red);color:#fff}.btn-d:hover{background:#a0141e}
+.btn-s{background:var(--green);color:#fff}
+.btn-f{background:transparent;color:var(--text1);border:1px solid var(--border)}.btn-f:hover{background:rgba(0,0,0,.05)}
+.btn-g{background:var(--gold);color:#fff}
+.btn-psd{background:var(--psd);color:#fff}
+.btn-full{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+.btn-sm{padding:5px 10px;font-size:12px}
+
+/* ── APP LAYOUT ── */
+#app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+#hbar{height:var(--hh);background:var(--hbar);color:rgba(255,255,255,.9);display:flex;align-items:center;padding:0 12px;gap:10px;flex-shrink:0;border-bottom:1px solid rgba(0,0,0,.28)}
+.hb-left{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;flex:1}
+.hb-mid{display:flex;align-items:center;gap:6px;font-size:13px}
+.party-bdg{font-size:10px;font-weight:700;padding:2px 7px;border-radius:12px;color:#fff}
+.hb-fn{font-size:12px;opacity:.6}
+.hb-right{display:flex;align-items:center;gap:8px}
+.rep-chip{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.13);padding:4px 10px;border-radius:20px;font-size:12px;cursor:pointer;transition:background .13s}
+.rep-chip:hover{background:rgba(255,255,255,.22)}
+.wand-active-chip{display:flex;align-items:center;gap:5px;background:rgba(229,165,10,.22);border:1px solid rgba(229,165,10,.4);padding:3px 10px;border-radius:20px;font-size:12px;color:#f5c211;animation:blink-gold 1.4s ease-in-out infinite}
+@keyframes blink-gold{0%,100%{opacity:1}50%{opacity:.55}}
+.debug-btn{background:transparent;border:none;cursor:pointer;color:rgba(255,255,255,.35);font-size:16px;padding:4px;transition:color .15s;line-height:1}
+.debug-btn:hover{color:rgba(255,255,255,.7)}
+
+#layout{display:flex;flex:1;overflow:hidden}
+
+/* ── SIDEBAR ── */
+#sidebar{width:var(--sw);background:var(--sidebar);border-right:1px solid var(--sbborder);display:flex;flex-direction:column;padding:8px 0;overflow-y:auto;flex-shrink:0}
+.nav-sec{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:8px 16px 4px}
+.nav-i{display:flex;align-items:center;gap:10px;padding:8px 12px;margin:1px 6px;border-radius:var(--r);cursor:pointer;color:var(--text1);font-size:14px;transition:background .1s;user-select:none}
+.nav-i:hover{background:rgba(0,0,0,.055)}
+.nav-i.active{background:rgba(53,132,228,.13);color:var(--blue);font-weight:700}
+.nav-i .ni{font-size:17px;width:22px;text-align:center;flex-shrink:0}
+.nbdg{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:10px;min-width:18px;text-align:center}
+.nbdg.yellow{background:var(--gold)}
+.sid-foot{margin-top:auto;padding:10px 14px;border-top:1px solid var(--sbborder);font-size:11px;color:var(--text3);line-height:1.6;text-align:center}
+
+/* ── CONTENT ── */
+#content{flex:1;overflow-y:auto}
+
+.view{display:none;padding:22px;max-width:980px;margin:0 auto}
+.view-wide{max-width:1120px}
+.view.active{display:block}
+.vh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
+.vh h2{font-size:20px;font-weight:700}
+.vh p{font-size:13px;color:var(--text2);margin-top:2px}
+.vh-actions{display:flex;gap:8px;align-items:center;flex-shrink:0}
+
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:var(--rm);border:1px solid var(--border);box-shadow:var(--sh1);overflow:hidden}
+.ch{padding:13px 17px;border-bottom:1px solid var(--border)}
+.ch h3{font-size:15px;font-weight:700}
+.ch p{font-size:12px;color:var(--text2);margin-top:2px}
+.cc{padding:15px 17px}
+.card-accent-g{border-color:rgba(38,162,105,.25);background:rgba(38,162,105,.03)}
+.card-accent-r{border-color:rgba(192,28,40,.25);background:rgba(192,28,40,.03)}
+.card-accent-o{border-color:rgba(230,97,0,.22);background:rgba(230,97,0,.03)}
+
+/* ── STAT GRID ── */
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:11px;margin-bottom:20px}
+.sc{background:var(--card);border-radius:var(--rm);padding:17px;border:1px solid var(--border);box-shadow:var(--sh1)}
+.sc .si{font-size:26px;margin-bottom:7px}
+.sc .sv{font-size:23px;font-weight:700;line-height:1}
+.sc .sl{font-size:12px;color:var(--text2);margin-top:3px}
+.sc .sd{font-size:11px;margin-top:5px}
+.sd.pos{color:var(--green)}.sd.neg{color:var(--red)}
+
+/* ── LIST ROWS ── */
+.lrow{display:flex;align-items:center;gap:12px;padding:11px 17px;border-bottom:1px solid var(--border);transition:background .1s}
+.lrow:last-child{border-bottom:none}
+.lrow:hover{background:rgba(0,0,0,.022)}
+.lrow .ri{font-size:21px;flex-shrink:0;width:26px;text-align:center}
+.lrow .rt{font-weight:700;font-size:14px}
+.lrow .rs{font-size:12px;color:var(--text2);margin-top:2px}
+.lrow .re{margin-left:auto;display:flex;align-items:center;gap:7px;flex-shrink:0}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
+.bb{background:rgba(53,132,228,.11);color:#1c71d8}
+.bg{background:rgba(38,162,105,.11);color:#1a7e51}
+.bo{background:rgba(230,97,0,.11);color:#924100}
+.br{background:rgba(192,28,40,.11);color:#a0141e}
+.bk{background:rgba(0,0,0,.07);color:var(--text2)}
+.bgold{background:rgba(229,165,10,.14);color:#9a6600}
+.bpur{background:rgba(129,61,156,.11);color:#5c2b70}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:2px;margin-bottom:13px;background:rgba(0,0,0,.06);padding:3px;border-radius:var(--r);width:fit-content}
+.tab{padding:5px 13px;border-radius:5px;cursor:pointer;font-size:13px;font-weight:700;color:var(--text2);transition:all .13s;user-select:none}
+.tab.active{background:#fff;color:var(--text1);box-shadow:var(--sh1)}
+
+/* ── PROGRESS ── */
+.prog{height:6px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden}
+.pb{height:100%;border-radius:3px;transition:width .4s}
+.pb-b{background:var(--blue)}.pb-g{background:var(--green)}.pb-o{background:var(--orange)}.pb-gold{background:var(--gold)}
+
+/* ── TWO COL ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:680px){.two-col{grid-template-columns:1fr}}
+
+/* ── DIALOG ── */
+#overlay{position:fixed;inset:0;background:rgba(0,0,0,.48);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
+#overlay.hid{display:none}
+#dlg{background:var(--card);border-radius:var(--rl);box-shadow:0 20px 60px rgba(0,0,0,.26);max-width:560px;width:100%;max-height:90vh;overflow-y:auto;animation:din .17s ease-out}
+@keyframes din{from{opacity:0;transform:scale(.95) translateY(-8px)}to{opacity:1;transform:none}}
+.dh{padding:20px 22px 0}
+.dh h3{font-size:18px;font-weight:700}
+.dh p{font-size:13px;color:var(--text2);margin-top:4px}
+.dc{padding:15px 22px}
+.da{padding:10px 22px 18px;display:flex;gap:8px;justify-content:flex-end}
+
+/* ── TOASTS ── */
+#toasts{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none}
+.toast{background:#2d2d2d;color:#fff;padding:8px 18px;border-radius:24px;font-size:13px;box-shadow:var(--sh2);pointer-events:auto;animation:tin .2s ease-out;max-width:440px;text-align:center;line-height:1.4}
+.toast.err{background:var(--red)}.toast.ok{background:var(--green)}.toast.warn{background:var(--orange)}.toast.dna{background:#18003e;border:1px solid rgba(192,28,40,.6)}
+@keyframes tin{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+/* ── WAND ── */
+.wand-wrap{background:linear-gradient(135deg,#0d0d24 0%,#14103c 50%,#0e2e5c 100%);border-radius:var(--rl);padding:28px;color:#fff;position:relative;overflow:hidden;margin-bottom:16px}
+.wand-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 85%,rgba(245,194,17,.07),transparent 55%),radial-gradient(circle at 85% 15%,rgba(53,132,228,.07),transparent 55%)}
+.wt{font-size:20px;font-weight:700;margin-bottom:3px}
+.ws{font-size:13px;opacity:.5;margin-bottom:20px}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;position:relative;z-index:1}
+.wig label{font-size:11px;opacity:.65;margin-bottom:5px;display:block}
+.wig input{width:100%;padding:9px 11px;border-radius:var(--r);border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.08);color:#fff;font-family:var(--font);font-size:14px;outline:none;transition:border-color .15s}
+.wig input:focus{border-color:rgba(255,255,255,.42)}
+.wig input::placeholder{color:rgba(255,255,255,.25)}
+.wsl{grid-column:1/-1}
+.wsl input[type=range]{width:100%;accent-color:var(--yellow);margin-top:5px;cursor:pointer}
+.wres{background:rgba(255,255,255,.08);border-radius:var(--rm);padding:18px;margin-bottom:18px;display:none;position:relative;z-index:1}
+.wres.show{display:block}
+.wsurp{font-size:32px;font-weight:700;color:var(--yellow)}
+.wbr{margin-top:10px;font-size:12px;opacity:.62}
+.wbr div{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.sparkle{position:absolute;pointer-events:none;font-size:17px;animation:sp .9s ease-out forwards;z-index:5}
+@keyframes sp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-65px) scale(.2)}}
+
+/* WAND SESSION */
+.session-active{background:linear-gradient(135deg,rgba(229,165,10,.15),rgba(229,165,10,.06));border:1px solid rgba(229,165,10,.35);border-radius:var(--rm);padding:16px 18px;margin-bottom:16px}
+.session-timer{font-size:36px;font-weight:700;font-family:var(--mono);color:var(--yellow);letter-spacing:.05em}
+.session-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px solid var(--border)}
+.session-row:last-child{border-bottom:none}
+.sessions-list .sess-item{display:flex;align-items:center;gap:10px;padding:9px 17px;border-bottom:1px solid var(--border);font-size:13px}
+.sessions-list .sess-item:last-child{border-bottom:none}
+.sess-time{font-family:var(--mono);font-size:11px;color:var(--text3);min-width:40px}
+.sess-surplus{font-weight:700;color:var(--green);margin-left:auto}
+.sess-dur{font-size:11px;color:var(--text2);font-family:var(--mono)}
+
+/* ── PLANS ── */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:20px}
+@media(max-width:680px){.plan-grid{grid-template-columns:1fr}}
+.plan-card{border:2px solid var(--border);border-radius:var(--rl);padding:20px;text-align:center;transition:all .15s;background:var(--card);position:relative;overflow:hidden;cursor:pointer}
+.plan-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:var(--sh2)}
+.plan-card.feat{border-color:var(--gold)}
+.plan-card.feat::after{content:'RECOMANDAT';position:absolute;top:22px;right:-36px;background:var(--gold);color:#fff;font-size:9px;font-weight:700;padding:3px 36px;transform:rotate(45deg)}
+.pname{font-size:16px;font-weight:700;margin-bottom:3px}
+.pprice{font-size:28px;font-weight:700;color:var(--blue);margin:10px 0}
+.pprice small{font-size:13px;color:var(--text2)}
+.pfeats{text-align:left;font-size:12px;list-style:none;margin:13px 0}
+.pfeats li{padding:3px 0;color:var(--text2)}
+.pfeats li::before{content:'✓ ';color:var(--green);font-weight:700}
+
+/* ── JUSTICE ── */
+.jcard{border-radius:var(--rm);padding:20px;text-align:center;margin-bottom:20px}
+.jcard.clean{background:rgba(38,162,105,.07);border:1px solid rgba(38,162,105,.25)}
+.jcard.danger{background:rgba(192,28,40,.07);border:1px solid rgba(192,28,40,.25);animation:pdgr 2s infinite}
+@keyframes pdgr{0%,100%{border-color:rgba(192,28,40,.25)}50%{border-color:rgba(192,28,40,.65)}}
+.ji{font-size:44px;margin-bottom:10px}
+.jt{font-size:18px;font-weight:700;margin-bottom:5px}
+.jd{font-size:13px;color:var(--text2)}
+.rh-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
+.rh-row:last-child{border-bottom:none}
+.rd{font-weight:700}.rd.pos{color:var(--green)}.rd.neg{color:var(--red)}
+
+/* ── SIFONPAY ── */
+.sph{background:linear-gradient(135deg,#0f0f25,#1a1a40);color:#fff;padding:17px 20px;border-radius:var(--rl) var(--rl) 0 0;text-align:center}
+.sp-logo{font-size:26px;margin-bottom:2px}
+.sp-name{font-size:20px;font-weight:700;letter-spacing:.05em}
+.sp-tag{font-size:11px;opacity:.45;margin-top:2px}
+.card-inp{font-family:var(--mono);font-size:16px;letter-spacing:.1em;padding:10px 13px;border:2px solid var(--border);border-radius:var(--r);width:100%;outline:none;transition:border-color .15s}
+.card-inp:focus{border-color:var(--blue)}
+
+/* ── ACTIVITY ── */
+.act-i{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.act-i:last-child{border-bottom:none}
+.act-t{color:var(--text3);font-size:11px;font-family:var(--mono);flex-shrink:0;margin-top:1px;min-width:42px}
+.gline{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
+.gline:last-child{border-bottom:none}
+.gk{color:var(--text2)}
+.gv{font-weight:700}
+
+/* ── PROFILE ── */
+.profile-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;flex-shrink:0}
+
+/* ── DEBUG BAR ── */
+#debug-bar{background:#1a1a2e;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.8);padding:6px 14px;display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:11px;flex-shrink:0;flex-wrap:wrap;transition:all .2s}
+#debug-bar.hid{display:none}
+.dbk{color:rgba(255,255,255,.4)}
+.dbv{color:#f5c211;font-weight:700}
+#debug-bar .btn-sm{font-size:10px;padding:3px 8px;border-radius:4px}
+
+/* ── ȘPAGAFON — colț dreapta-jos, „telefon” rotunjit, HUD non-modal ── */
+#spagafon-root{position:fixed;inset:0;z-index:950;pointer-events:none}
+.spgf-dock{
+  position:absolute;
+  right:max(12px,env(safe-area-inset-right,0px));
+  bottom:max(12px,env(safe-area-inset-bottom,0px));
+  pointer-events:auto;
+  filter:drop-shadow(0 10px 32px rgba(0,0,0,.38));
+}
+.spgf-phone{
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(165deg,#2e2a3d 0%,#16141f 48%,#12101a 100%);
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  transition:max-height .38s cubic-bezier(.25,.82,.25,1),box-shadow .25s;
+}
+#spagafon-root:not(.open) .spgf-phone{
+  width:max-content;
+  max-width:min(300px,calc(100vw - 24px));
+}
+#spagafon-root.open .spgf-phone{
+  width:min(300px,calc(100vw - 24px));
+  max-height:min(72vh,620px);
+  display:flex;
+  flex-direction:column;
+}
+.spgf-notch{
+  width:88px;height:5px;margin:10px auto 4px;
+  background:rgba(255,255,255,.12);border-radius:4px;flex-shrink:0;
+}
+#spagafon-root:not(.open) .spgf-notch{display:none}
+#spgf-launcher{
+  display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;
+  padding:13px 20px;border:none;width:100%;
+  background:transparent;color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;
+  border-radius:28px;position:relative;transition:background .15s;
+}
+#spgf-launcher:hover{background:rgba(255,255,255,.06)}
+#spgf-launcher .spgf-ico{font-size:22px;line-height:1}
+#spgf-launcher .spgf-lbl{letter-spacing:.02em}
+#spgf-launcher .spgf-badge{
+  position:absolute;top:6px;right:10px;min-width:18px;height:18px;padding:0 5px;border-radius:10px;
+  background:var(--red);color:#fff;font-size:10px;font-weight:800;line-height:18px;display:none;
+}
+#spgf-launcher.has-unread .spgf-badge{display:inline-flex;align-items:center;justify-content:center}
+#spagafon-root.open #spgf-launcher{display:none}
+#spgf-sheet{
+  display:none;flex-direction:column;flex:1;min-height:0;width:100%;
+  background:transparent;border:none;border-radius:0;
+  overflow:hidden;pointer-events:auto;
+}
+#spagafon-root.open #spgf-sheet{display:flex}
+#spgf-sheet .spgf-head{flex-shrink:0}
+#spgf-sheet .spgf-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.spgf-head{padding:4px 14px 8px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
+.spgf-brand{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.spgf-brand h3{font-size:15px;font-weight:700;color:#fff;margin:0}
+.spgf-brand small{display:block;font-size:10px;color:rgba(255,255,255,.45);margin-top:2px;font-weight:600;letter-spacing:.04em}
+.spgf-close{background:transparent;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:18px;padding:4px 8px;line-height:1;border-radius:var(--r)}
+.spgf-close:hover{color:#fff}
+.spgf-tabs{display:flex;gap:4px}
+.spgf-tab{flex:1;padding:8px 6px;border-radius:var(--r);border:none;background:transparent;color:rgba(255,255,255,.45);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font);transition:background .12s,color .12s}
+.spgf-tab:hover{color:rgba(255,255,255,.75)}
+.spgf-tab.on{background:rgba(53,132,228,.22);color:#8ec5ff}
+.spgf-body{padding:10px 12px 14px}
+.spgf-msgs{display:flex;flex-direction:column;gap:10px}
+.spgf-msg{align-self:flex-start;max-width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:10px 12px}
+.spgf-msg .sm-from{font-size:10px;font-weight:800;color:#9ab8e8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.spgf-msg .sm-body{font-size:13px;color:rgba(255,255,255,.92);line-height:1.45;word-break:break-word}
+.spgf-msg .sm-time{font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;font-family:var(--mono)}
+.spgf-msg.sm-code{border-color:rgba(38,162,105,.35);background:rgba(38,162,105,.1)}
+.spgf-msg .sm-actions{margin-top:8px}
+.spgf-empty{text-align:center;padding:22px 12px;color:rgba(255,255,255,.4);font-size:12px;line-height:1.5}
+.spgf-apps{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.spgf-app-btn{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:11px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#fff;font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;text-align:left;transition:background .12s,border-color .12s}
+.spgf-app-btn:hover{background:rgba(53,132,228,.18);border-color:rgba(53,132,228,.35)}
+.spgf-app-btn .ap-ico{font-size:20px}
+.spgf-app-btn .ap-sub{font-size:10px;font-weight:600;color:rgba(255,255,255,.45)}
+.spgf-applet-back{
+  display:flex;align-items:center;gap:6px;width:100%;padding:8px 10px;margin-bottom:10px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#c5d4ff;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);
+}
+.spgf-applet-back:hover{background:rgba(53,132,228,.15)}
+.spgf-applet-back.hid{display:none!important}
+.spgf-app-grid.hid{display:none!important}
+.spgf-applet-host .spgf-ap-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:.02em}
+.spgf-applet-host .spgf-ap-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:12px;color:rgba(255,255,255,.88)}
+.spgf-applet-host .spgf-ap-row:last-child{border-bottom:none}
+.spgf-applet-host .spgf-ap-k{color:rgba(255,255,255,.45);flex-shrink:0}
+.spgf-applet-host .spgf-ap-v{font-weight:700;text-align:right;word-break:break-word}
+.spgf-applet-host .spgf-ap-mut{font-size:11px;color:rgba(255,255,255,.4);line-height:1.45;margin-top:10px;font-style:italic}
+.spgf-applet-host .spgf-ap-list{margin:8px 0 0;padding-left:14px;font-size:11px;color:rgba(255,255,255,.78);line-height:1.5}
+.spgf-pane{display:none}
+.spgf-pane.on{display:block}
+
+
+/* ── OPT ROW ── */
+.opt-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;transition:background .1s;margin-bottom:7px}
+.opt-row:hover{background:var(--bg)}
+.opt-row input[type=radio]{accent-color:var(--blue)}
+
+/* ── SPINNER ── */
+.spinner{width:26px;height:26px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--blue);border-radius:50%;animation:spin .75s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── UTILS ── */
+.mt8{margin-top:8px}.mt14{margin-top:14px}.mt20{margin-top:20px}
+.mb8{margin-bottom:8px}.mb14{margin-bottom:14px}
+.tsm{font-size:12px}.tmut{color:var(--text2)}.tc{text-align:center}.bold{font-weight:700}
+.flex{display:flex}.aic{align-items:center}.g8{gap:8px}.g12{gap:12px}.mla{margin-left:auto}
+.hid{display:none!important}
+.sep{border:none;border-top:1px solid var(--border);margin:12px 0}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(0,0,0,.13);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ═══ DISCLAIMER POPUP ═══ -->
+<div id="disc-wrap">
+  <div id="disc-box">
+    <div class="disc-ico">🎭</div>
+    <h2>Aplicație Satirică</h2>
+    <p>
+      <strong>SifonatorPRO</strong> este o <strong>parodie fictivă</strong> a sistemelor
+      de achiziții publice din România (SIPE, MySMIS) și satirizează corupția din
+      administrația publică, sistemul de licitații și slăbiciunile justiției.
+      <br><br>
+      Nicio plată nu este procesată. Nicio acțiune nu are efecte reale.
+      Toate personajele, firmele și evenimentele sunt complet fictive.
+      <br><br>
+      Programul se află în stadiu de beta și nu toate mecanismele funcționează.
+    </p>
+    <button class="btn btn-p btn-full" onclick="dismissDisc()">Am înțeles — Continuă</button>
+    <small>Prin continuare accepți că această aplicație este exclusiv satirică.</small>
+  </div>
+</div>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div style="font-size:50px">🏛️</div>
+      <h1>SifonatorPRO</h1>
+      <p>Sistem Integrat de Achiziții Electronice și Optimizare Fiscală<br>
+    </div>
+
+    <div class="fg-row">
+      <div class="fg"><label>Nume și prenume</label>
+        <input type="text" id="l-name" placeholder="ex: Gigel Popescu"/></div>
+      <div class="fg"><label>Partid</label>
+        <select id="l-party">
+          <option value="PSD">PSD</option><option value="PNL">PNL</option>
+          <option value="USR">USR</option><option value="AUR">AUR</option>
+          <option value="UDMR">UDMR</option><option value="PP-DD">PP-DD</option>
+          <option value="Independent">Independent</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Funcție</label>
+        <select id="l-fn">
+          <option>Primar</option><option>Viceprimar</option>
+          <option>Președinte Consiliu Județean</option><option>Consilier local</option>
+          <option>Director Direcție Buget</option><option>Inspector ANAP</option>
+          <option>Șef Serviciu Achiziții</option>
+        </select>
+      </div>
+      <div class="fg"><label>Județ</label>
+        <select id="l-jud">
+          <option>Teleorman</option><option>Ilfov</option><option>Dolj</option>
+          <option>Prahova</option><option>Olt</option><option>Galați</option>
+          <option>Vâlcea</option><option>Dâmbovița</option><option>Neamț</option>
+          <option>Vaslui</option><option>Bacău</option><option>Constanța</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="fg"><label>Tip cont</label>
+      <div class="demo-toggle">
+        <div class="demo-opt sel" id="opt-demo" onclick="selDemo('demo')">
+          <span class="do-icon">🎭</span>Date demonstrative
+        </div>
+        <div class="demo-opt" id="opt-empty" onclick="selDemo('empty')">
+          <span class="do-icon">📋</span>Cont gol
+        </div>
+      </div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Profil instituție</label>
+        <select id="l-persona">
+          <option value="primarie">Primărie mică</option>
+          <option value="cj">Consiliu Județean</option>
+          <option value="minister">Minister</option>
+        </select>
+      </div>
+      <div class="fg"><label>Dificultate</label>
+        <select id="l-diff">
+          <option value="easy">Ușor</option>
+          <option value="normal" selected>Normal</option>
+          <option value="hard">Greu</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Persistență sesiune</label>
+        <select id="l-persist">
+          <option value="in_memory" selected>In-memory (reset la refresh)</option>
+          <option value="local_storage">localStorage (continuă între sesiuni)</option>
+        </select>
+      </div>
+      <div class="fg"><label>Canal briefing implicit</label>
+        <select id="l-press-def">
+          <option value="tv_local">TV local</option>
+          <option value="tv_national">TV național</option>
+          <option value="social">Social media</option>
+          <option value="investigatii">Presa investigații</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn btn-p btn-full" onclick="doLogin()">🔐 Autentificare prin SIPE</button>
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:11px;line-height:1.5">
+      Versiune beta nesecurizată. Nu suntem responsabili pentru anchetele DNA.<br>
+      Prin autentificare accepți <u>Termenii și Condițiile Fictive v3.2</u>.
+    </p>
+  </div>
+</div>
+
+<!-- ═══ MAIN APP ═══ -->
+<div id="app" class="hid">
+  <header id="hbar">
+    <div class="hb-left">
+      <span style="font-size:19px">🏛️</span>
+      <span>SifonatorPRO</span>
+    </div>
+    <div class="hb-mid">
+      <span id="hb-name" style="cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px" onclick="openProfileDlg()" title="Editează profilul">Gigel Popescu</span>
+      <span class="party-bdg" id="hb-party" style="background:var(--psd)">PSD</span>
+      <span class="hb-fn" id="hb-fn">Primar · Teleorman</span>
+    </div>
+    <div class="hb-right">
+      <div id="wand-chip" class="wand-active-chip hid">⚡ <span id="wand-chip-timer">00:00</span></div>
+      <div class="rep-chip" onclick="navigate('just')" title="Puncte de reputație">
+        <span style="color:var(--yellow)">⭐</span>
+        <span id="hb-rep">0</span>
+        <span id="hb-rep-cap" style="opacity:.45;font-size:11px">/250</span>
+      </div>
+      <button type="button" class="debug-btn hid" id="debug-toggle-btn" onclick="toggleDebug()" title="Panou de depanare (activează cu ?debug=1)">🐛</button>
+    </div>
+  </header>
+
+  <div id="layout">
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+      <div class="nav-sec">Principal</div>
+      <div class="nav-i active" onclick="navigate('dash')" data-v="dash">
+        <span class="ni">📊</span><span>Tablou de Bord</span>
+      </div>
+      <div class="nav-i" onclick="navigate('proj')" data-v="proj">
+        <span class="ni">🏗️</span><span>Proiecte Publice</span>
+        <span class="nbdg" id="nbp">0</span>
+      </div>
+      <div class="nav-i" onclick="navigate('tend')" data-v="tend">
+        <span class="ni">📋</span><span>Licitații</span>
+        <span class="nbdg yellow hid" id="nbt">0</span>
+      </div>
+      <div class="nav-sec" style="margin-top:6px">Instrumente</div>
+      <div class="nav-i" onclick="navigate('wand')" data-v="wand">
+        <span class="ni">✨</span><span>Bagheta Magică</span>
+      </div>
+      <div class="nav-sec" style="margin-top:6px">Monitorizare</div>
+      <div class="nav-i" onclick="navigate('audit')" data-v="audit">
+        <span class="ni">🧾</span><span>Audit &amp; Trasabilitate</span>
+      </div>
+      <div class="nav-i" onclick="navigate('press')" data-v="press">
+        <span class="ni">📰</span><span>Presa &amp; Percepție</span>
+      </div>
+      <div class="nav-i" onclick="navigate('ops')" data-v="ops">
+        <span class="ni">🛰️</span><span>Centrul Operațional</span>
+      </div>
+      <div class="nav-sec" style="margin-top:6px">Juridic &amp; Financiar</div>
+      <div class="nav-i" onclick="navigate('just')" data-v="just">
+        <span class="ni">⚖️</span><span>Sistem Judiciar</span>
+        <span class="nbdg hid" id="nbj">!</span>
+      </div>
+      <div class="nav-i" onclick="navigate('sub')" data-v="sub">
+        <span class="ni">💳</span><span>Abonament &amp; Plăți</span>
+      </div>
+      <div class="nav-i" onclick="navigate('howto')" data-v="howto">
+        <span class="ni">📖</span><span>Ghid &amp; reguli</span>
+      </div>
+      <div class="sid-foot">
+        SifonatorPRO v2.0<br>
+        <span style="font-size:10px;color:var(--text3)">Conform OUG 13 (parodie)</span>
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main id="content">
+
+      <!-- ── DASHBOARD ── -->
+      <div id="view-dash" class="view view-wide active">
+        <div class="vh">
+          <div><h2>Tablou de Bord</h2><p id="dash-greet">Bună ziua!</p><div id="dash-meta" class="mt8"></div></div>
+        </div>
+        <div class="sg" id="sg"></div>
+        <div class="two-col">
+          <div class="card">
+            <div class="ch"><h3>Activitate Recentă</h3></div>
+            <div class="cc" id="act-log"></div>
+          </div>
+          <div>
+            <div class="card mb14">
+              <div class="ch"><h3>Reputație Politică</h3></div>
+              <div class="cc">
+                <div class="flex aic g8 mb8">
+                  <span id="rep-d1" style="font-size:28px;font-weight:700">0</span>
+                  <div><div class="tmut tsm">puncte</div><div class="tsm">Nivel: <strong id="rep-lv1">Aspirant</strong></div></div>
+                </div>
+                <div class="prog mb8"><div class="pb pb-b" id="rep-b1" style="width:0%"></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="ch"><h3>Abonament</h3></div>
+              <div class="cc" id="sub-status-dash"></div>
+            </div>
+          </div>
+        </div>
+        <div id="dna-alert-box" class="hid mt20" style="background:linear-gradient(135deg,#1a0000,#2d0000);border:1px solid var(--red);border-radius:var(--rm);padding:15px 18px;color:#fff">
+          <div style="font-weight:700;color:#ff6b6b;margin-bottom:4px">🚨 DNA VĂ SUPRAVEGHEAZĂ</div>
+          <div id="dna-alert-txt" style="font-size:12px;opacity:.7"></div>
+          <div style="display:flex;gap:8px;margin-top:11px">
+            <button class="btn btn-f btn-sm" style="color:#fff;border-color:rgba(255,255,255,.25)" onclick="$('dna-alert-box')?.classList.add('hid')">Ignoră</button>
+            <button class="btn btn-f btn-sm" style="color:#fff;border-color:rgba(255,255,255,.25)" onclick="navigate('just')">Gestionează Situația</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PROIECTE ── -->
+      <div id="view-proj" class="view">
+        <div class="vh">
+          <div><h2>Proiecte Publice</h2><p>Gestionează, finalizează și pariază pe calitatea proiectelor tale</p></div>
+          <div class="vh-actions"><button class="btn btn-p" onclick="openNewProjDlg()">+ Proiect Nou</button></div>
+        </div>
+        <div class="tabs">
+          <div class="tab active" onclick="filterProj('all',this)">Toate</div>
+          <div class="tab" onclick="filterProj('in_progress',this)">În desfășurare</div>
+          <div class="tab" onclick="filterProj('completed',this)">Finalizate</div>
+          <div class="tab" onclick="filterProj('late',this)">Întârziate</div>
+        </div>
+        <div class="card" id="proj-list"></div>
+      </div>
+
+      <!-- ── LICITAȚII ── -->
+      <div id="view-tend" class="view">
+        <div class="vh">
+          <div><h2>Licitații Publice</h2><p>Adjudecă contracte cu criterii „obiective și transparente"</p></div>
+          <div class="vh-actions"><button class="btn btn-p" onclick="openNewTendDlg()">+ Licitație Nouă</button></div>
+        </div>
+        <div class="card" id="tend-list"></div>
+        <div class="card mt14 card-accent-o">
+          <div class="cc"><p class="tsm" style="color:var(--orange)">
+            💡 <strong>Sfat de eficiență:</strong> Asigură-te că specificațiile tehnice sunt suficient de specifice pentru a permite participarea unui singur ofertant. Criteriu recomandat: „cel mai mic preț" + „experiență similară" (definită de tine în caietul de sarcini).
+          </p></div>
+        </div>
+      </div>
+
+      <!-- ── BAGHETA MAGICĂ ── -->
+      <div id="view-wand" class="view">
+        <div class="vh">
+          <div><h2>✨ Bagheta Magică</h2><p>Optimizare contabilă automată; calculatorul tău de „surplus"</p></div>
+          <div class="hb-right">
+            <div id="wand-quota-chip" class="badge bb" style="padding:6px 12px;font-size:13px">⏱ <span id="wq-disp">0h 0m</span> disponibile</div>
+          </div>
+        </div>
+
+        <!-- Active session display -->
+        <div id="sess-active-card" class="session-active hid">
+          <div class="flex aic g12 mb8">
+            <span style="font-size:20px">⚡</span>
+            <div class="bold" style="font-size:15px">Sesiune activă</div>
+            <button class="btn btn-d btn-sm mla" onclick="stopSession()">■ Oprește Sesiunea</button>
+          </div>
+          <div class="session-timer" id="sess-timer-disp">00:00:00</div>
+          <div style="font-size:12px;opacity:.6;margin-top:4px" id="sess-info-disp"></div>
+          <div style="font-size:11px;opacity:.75;margin-top:8px;line-height:1.55" id="sess-quota-hints"></div>
+          <div style="margin-top:10px;font-size:13px">
+            Surplus acumulat: <strong id="sess-surplus-disp" style="color:var(--green)">0 RON</strong>
+          </div>
+        </div>
+
+        <!-- Wand form (hidden when session active) -->
+        <div id="wand-form-wrap" class="wand-wrap">
+          <div style="position:relative;z-index:1">
+            <div class="wt">✨ Bagheta Magică Contabilă</div>
+            <div class="ws">Introdu valorile reale și lasă-ne să facem „matematica"</div>
+            <div class="wg">
+              <div class="wig"><label>Valoare reală proiect (RON)</label>
+                <input type="number" id="w-real" placeholder="calculat automat" readonly/></div>
+              <div class="wig"><label>Valoare declarată / bugetată (RON)</label>
+                <input type="number" id="w-decl" placeholder="calculat automat" readonly/></div>
+              <div class="wig wsl"><label>Proiect țintă pentru optimizare</label>
+                <select id="w-proj" onchange="onWandProjectChange()" style="width:100%;padding:9px 11px;border-radius:var(--r);border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.08);color:#fff;font-family:var(--font);font-size:14px;outline:none"></select>
+              </div>
+              <div class="wig wsl">
+                <label>Factor de Optimizare: <strong id="wf-d">50</strong>%
+                  <span style="font-size:10px;opacity:.4">(recomandat: sub 70% pentru a evita auditul ANAF)</span>
+                </label>
+                <input type="range" id="w-fac" min="0" max="95" value="50" disabled/>
+              </div>
+            </div>
+            <div class="wres" id="w-res">
+              <div style="font-size:11px;opacity:.5;margin-bottom:3px">SURPLUS DISPONIBIL PENTRU REDISTRIBUIRE</div>
+              <div class="wsurp" id="w-surp">0 RON</div>
+              <div class="wbr" id="w-brkd"></div>
+            </div>
+            <div class="wres show" id="w-ai-box" style="margin-top:-8px">
+              <div style="font-size:11px;opacity:.5;margin-bottom:6px">SIMULATOR AI CONTABIL</div>
+              <div id="w-ai-insight" class="tsm">Selectează un proiect pentru estimare automată.</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <button class="btn btn-g" id="wand-start-btn" onclick="startSession()">✨ Pornește Sesiunea de Optimizare</button>
+              <span style="font-size:11px;opacity:.38">Fără abonament: 50 RON/oră</span>
+              <button class="btn btn-f btn-sm" id="wand-buy-hours-btn" style="color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.17);margin-left:auto" onclick="navigate('sub')">+ Cumpără ore</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sessions history -->
+        <div class="card">
+          <div class="ch"><h3>Istoric Sesiuni</h3><p>Toate sesiunile de optimizare contabilă</p></div>
+          <div id="sessions-list" class="sessions-list"></div>
+        </div>
+      </div>
+
+      <!-- ── AUDIT ── -->
+      <div id="view-audit" class="view">
+        <div class="vh">
+          <div><h2>Audit &amp; Trasabilitate</h2><p>Timeline procedural pentru când „totul e în regulă” pe hârtie</p></div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3>Jurnal Complet Activitate</h3></div>
+          <div class="cc" id="audit-log"></div>
+        </div>
+      </div>
+
+      <!-- ── PRESĂ ── -->
+      <div id="view-press" class="view">
+        <div class="vh">
+          <div><h2>Presa &amp; Percepție Publică</h2><p>Controlează narativul, nu doar bugetul</p></div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Control narativ</h3><p>Instrumente de influență mediatică</p></div>
+          <div class="cc" style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-p btn-sm" onclick="pressAction('briefing')">🎙️ Briefing oficial</button>
+            <button class="btn btn-psd btn-sm" onclick="pressAction('campaign')">📺 Campanie pozitivă</button>
+            <button class="btn btn-f btn-sm" onclick="pressAction('diversion')">🧨 Diversiune media</button>
+            <button class="btn btn-d btn-sm" onclick="pressAction('counter')">⚔️ Contraatac la investigații</button>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="ch"><h3>Indice de imagine</h3></div>
+            <div class="cc" id="press-score"></div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3>Titluri de presă simulate</h3></div>
+            <div class="cc" id="press-feed"></div>
+          </div>
+        </div>
+        <div class="card mt14">
+          <div class="ch"><h3>Istoric influență presă</h3></div>
+          <div class="cc" id="press-history"></div>
+        </div>
+      </div>
+
+      <!-- ── OPS ── -->
+      <div id="view-ops" class="view">
+        <div class="vh">
+          <div><h2>Centrul Operațional</h2><p>Indicatori tactici pentru fluxul administrativ „optimizat”</p></div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3>Stare Sistem</h3></div>
+          <div class="cc" id="ops-state"></div>
+        </div>
+      </div>
+
+      <!-- ── SISTEM JUDICIAR ── -->
+      <div id="view-just" class="view">
+        <div class="vh">
+          <div><h2>Sistem Judiciar</h2><p>Gestionează-ți „situația juridică" cu ajutorul punctelor de reputație</p></div>
+        </div>
+        <div id="j-status"></div>
+        <div class="two-col mt14">
+          <div class="card">
+            <div class="ch"><h3>Puncte de Reputație</h3><p>Acumulează strategic, cheltuiește înțelept</p></div>
+            <div class="cc">
+              <div class="flex aic g8 mb8">
+                <span id="rep-d2" style="font-size:32px;font-weight:700;color:var(--gold)">0</span>
+                <div><div class="tmut tsm">puncte disponibile</div><div class="tsm">Nivel: <strong id="rep-lv2">Aspirant</strong></div></div>
+              </div>
+              <div class="prog" style="height:8px;margin-bottom:10px"><div class="pb pb-gold" id="rep-b2" style="width:0%"></div></div>
+              <p class="tsm tmut" id="just-rep-hint">Cheltuiește puncte de reputație pentru a „influența" sistemul judiciar (costul variază cu dificultatea).</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3>Cum obții / pierzi puncte</h3></div>
+            <div class="cc">
+              <div class="rh-row"><span>Proiect de mântuială finalizat</span><span class="rd pos">+1</span></div>
+              <div class="rh-row"><span>Proiect calitate moderată finalizat</span><span class="rd pos">+2</span></div>
+              <div class="rh-row"><span>Proiect calitate ridicată finalizat</span><span class="rd pos">+3</span></div>
+              <div class="rh-row"><span>Pariu corect pe calitate proiect</span><span class="rd pos">+2 până la +4</span></div>
+              <div class="rh-row"><span>Proiect nefinalizat la termen</span><span class="rd neg">-1</span></div>
+              <div class="rh-row"><span>Proiect neinceput la termen</span><span class="rd neg">-2</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt14">
+          <div class="ch"><h3>Istoric Puncte</h3></div>
+          <div class="cc" id="rep-hist"></div>
+        </div>
+      </div>
+
+      <!-- ── ABONAMENT ── -->
+      <div id="view-sub" class="view">
+        <div class="vh">
+          <div><h2>Abonament &amp; Plăți</h2></div>
+        </div>
+        <p class="tsm tmut mb14">
+          Cu <strong id="disc-rep">0</strong> puncte de reputație, beneficiezi de un discount de
+          <strong id="disc-pct">0%</strong> la orice abonament sau oră. (0,1% per punct, max 25%)
+        </p>
+        <div class="plan-grid" id="plan-grid"></div>
+        <div class="card" id="hours-buy-card">
+          <div class="ch"><h3>Cumpără Ore Bagheta Magică</h3><p>Disponibil doar fără abonament activ · 50 RON/oră</p></div>
+          <div class="cc">
+            <div class="flex aic g12">
+              <div>
+                <input type="number" id="buy-h" value="5" min="1" max="100" oninput="updBuyH()"
+                  style="width:72px;padding:8px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--font)"/>
+                <span class="tmut tsm" style="margin-left:6px">ore</span>
+              </div>
+              <div class="tsm tmut">Cost: <strong id="buy-h-cost">250 RON</strong> <span id="buy-h-disc" style="color:var(--green)"></span></div>
+              <button class="btn btn-p mla" onclick="openBuyHDlg()">Cumpără Ore</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── GHID ── -->
+      <div id="view-howto" class="view">
+        <div class="vh">
+          <div><h2>Ghid &amp; reguli</h2><p id="howto-meta" class="tsm tmut">—</p>
+            <p class="tsm tmut mt8" style="max-width:820px;line-height:1.65"><strong>SifonatorPRO</strong> este o simulare satirică în stadiu de beta unde nu toate mecanismele funcționează. Nicio plată nu este reală; mecanismele (licitații, DNA, SifonPay™) imită proceduri publice și bancare doar în scop narativ.</p>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Structura jocului</h3><p>Module principale și cum se leagă</p></div>
+          <div class="cc">
+            <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
+              <li><strong>Proiecte</strong> — buget declarat vs. valoare reală; calitate la finalizare; întârzieri; dosar lunar.</li>
+              <li><strong>Licitații</strong> — legate de un proiect; oferte simulate, scor, câștigător, risc de contestație legat de context.</li>
+              <li><strong>Bagheta Magică</strong> — consumă timp din abonament sau din ore cumpărate; o singură sesiune „profundă” per proiect.</li>
+              <li><strong>Presă &amp; reputație</strong> — imagine publică și puncte cheltuite pe acțiuni narative.</li>
+              <li><strong>Justiție / DNA</strong> — presiune din fonduri, licitații, presă; etape de risc.</li>
+              <li><strong>Abonament &amp; plăți</strong> — planuri lunare sau ore pentru Baghetă; checkout fictiv (card sau „bani publici”).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Licitații (achiziții)</h3><p>Integrare cu proiectele</p></div>
+          <div class="cc">
+            <p class="tsm" style="line-height:1.65">O licitație nouă <strong>trebuie</strong> asociată unui proiect în curs sau planificat. Etapele parcurg clarificări → depuneri → comisie → <strong>evaluare</strong> (oferte generate și punctate) → adjudecare sau contestație. Scorul combină preț, tehnologie, conformitate documente și „rețea”; riscul de contestație ține cont de diferența declarat/real a proiectului, întârzieri și presiunea curentă.</p>
+            <p class="tsm tmut mt8">Progresul automat lunar poate avansa licitațiile; la etapa de evaluare se folosește același motor ca la „Evaluează Oferte”.</p>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Bagheta Magică</h3><p>Timp, surplus, o sesiune per proiect</p></div>
+          <div class="cc">
+            <ul style="font-size:13px;line-height:1.65;color:var(--text2);padding-left:18px">
+              <li>Timpul vine din <strong>ore cumpărate</strong> sau din <strong>cota lunară</strong> a abonamentului (nelimitat doar pe planul Enterprise).</li>
+              <li>În sesiune, cota <strong>scade în timp real</strong>; la zero, sesiunea se oprește singură.</li>
+              <li>Fiecare proiect: <strong>o singură</strong> optimizare profundă (Bagheta deja folosită).</li>
+              <li>Surplusul crește până la plafonul teoretic; la plafon, sesiunea se încheie automat.</li>
+              <li>Dificultatea modifică viteza de acumulare a surplusului (Bagheta).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Plăți fictive: abonamente, ore &amp; SifonPay™</h3><p>Același tip de flux pentru abonament și pentru ore</p></div>
+          <div class="cc">
+            <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: alegi <strong>SifonPay™</strong> (card) sau <strong>PSD Direct Connect™</strong> („bani publici”), cu pași simulați — nu există variantă „instant” care să sari peste acest flux.</p>
+            <p class="tsm tmut mt8">Tranzacția apare narativ ca procesată de SifonPay™; datele cardului sunt fictive.</p>
+            <div id="howto-sifonpay-bin" class="mt12"></div>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Reputație &amp; dificultate</h3></div>
+          <div class="cc">
+            <p class="tsm" style="line-height:1.65">Dificultatea (Ușor / Normal / Greu) influențează presiunea DNA, costurile la presă, surplusul Baghetei, licitațiile, plafonul de puncte și costurile de „manipulare” judiciară. Reputația se câștigă la finalizare proiect / pariuri; se cheltuie la presă și în anumite acțiuni.</p>
+            <p class="tsm tmut mt8">Discount la prețul afișat al abonamentelor/orilor: <strong>0,1%</strong> per punct reputație, maximum <strong>25%</strong>.</p>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Persistență &amp; sesiune</h3></div>
+          <div class="cc">
+            <p class="tsm" style="line-height:1.65">La login poți alege <strong>localStorage</strong> pentru a continua progresul între reîncărcări. O sesiune Bagheta activă poate fi restaurată; timpul este simulat conform regulilor din ghid.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3>Depanare (dezvoltatori)</h3></div>
+          <div class="cc">
+            <p class="tsm tmut">Deschide aplicația cu <code style="background:var(--bg);padding:2px 6px;border-radius:4px">?debug=1</code> în URL sau setează <code style="background:var(--bg);padding:2px 6px;border-radius:4px">localStorage.sifonator_debug=1</code> pentru butonul 🐛 și bara de debug.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- DEBUG BAR -->
+  <div id="debug-bar" class="hid">
+    <span class="dbk">REP:</span><span class="dbv" id="db-rep">0</span>
+    <span class="dbk">SUB:</span><span class="dbv" id="db-sub">none</span>
+    <span class="dbk">TIMP WAND:</span><span class="dbv" id="db-wand">0s</span>
+    <span class="dbk">SIFONAT:</span><span class="dbv" id="db-siph">0</span>
+    <span class="dbk">DNA:</span><span class="dbv" id="db-just">curat</span>
+    <span class="dbk">SHIFT:</span><span class="dbv" id="db-shift">0h</span>
+    <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-sm" style="background:#3584e4;color:#fff" onclick="dbAddRep(50)">+50 rep</button>
+      <button class="btn btn-sm" style="background:#e5a50a;color:#fff" onclick="dbAddTime(3600)">+1h wand</button>
+      <button class="btn btn-sm" style="background:var(--psd);color:#fff" onclick="simAncheta()">DNA ancheta</button>
+      <button class="btn btn-sm" style="background:#813d9c;color:#fff" onclick="simPuscarie()">DNA pușcărie</button>
+      <button class="btn btn-sm" style="background:#6f8396;color:#fff" onclick="dbSimuleazaControlANAF()">Control ANAF</button>
+      <button class="btn btn-sm" style="background:#5a4b8a;color:#fff" onclick="dbLeakPresa()">Leak în presă</button>
+      <button class="btn btn-sm" style="background:#9a5d00;color:#fff" onclick="dbTickWand(120)">+2m wand live</button>
+      <button class="btn btn-sm" style="background:#2f6f9e;color:#fff" onclick="dbShiftTime(86400)">+1 zi</button>
+      <button class="btn btn-sm" style="background:#2f6f9e;color:#fff" onclick="dbShiftTime(604800)">+7 zile</button>
+      <button class="btn btn-sm" style="background:#2f6f9e;color:#fff" onclick="dbShiftTime(2678400)">+31 zile</button>
+      <button class="btn btn-sm" style="background:#455a64;color:#fff" onclick="dbResetTimeShift()">Reset timp</button>
+      <button class="btn btn-sm" style="background:#1a7e51;color:#fff" onclick="dbCreateProj()">+ proiect rapid</button>
+      <button class="btn btn-sm" style="background:var(--green);color:#fff" onclick="dbActivateSub('pro')">Sub PRO</button>
+      <button class="btn btn-sm btn-f" onclick="dbReset()">Reset</button>
+    </div>
+  </div>
+
+  <!-- ȘPAGAFON — colț dreapta-jos, satiră „telefon pentru politicieni” -->
+  <div id="spagafon-root">
+    <div class="spgf-dock">
+      <div class="spgf-phone">
+      <button type="button" id="spgf-launcher" onclick="toggleSpagafon()" title="Șpagafon — mesaje &amp; mini-aplicații" aria-expanded="false" aria-controls="spgf-sheet">
+        <span class="spgf-badge" id="spgf-unread">0</span>
+        <span class="spgf-ico">📱</span>
+        <span class="spgf-lbl">Șpagafon</span>
+      </button>
+      <div id="spgf-sheet" aria-hidden="true">
+        <div class="spgf-notch" aria-hidden="true"></div>
+        <div class="spgf-head">
+          <div class="spgf-brand">
+            <div>
+              <h3>Șpagafon</h3>
+              <small class="mb8">rețea mobilă de încredere</small>
+            </div>
+            <button type="button" class="spgf-close" onclick="toggleSpagafon(false)" title="Închide">✕</button>
+          </div>
+          <div class="spgf-tabs" role="tablist">
+            <button type="button" class="spgf-tab on" id="spgf-tab-sms" onclick="spgfSetTab('sms')">Mesaje</button>
+            <button type="button" class="spgf-tab" id="spgf-tab-apps" onclick="spgfSetTab('apps')">Portal rapid</button>
+          </div>
+        </div>
+        <div class="spgf-body">
+          <div id="spgf-pane-sms" class="spgf-pane on">
+            <div id="spgf-msgs" class="spgf-msgs"></div>
+          </div>
+          <div id="spgf-pane-apps" class="spgf-pane">
+            <button type="button" id="spgf-applet-back" class="spgf-applet-back hid" onclick="spgfCloseApplet()">← Înapoi la aplicații</button>
+            <div id="spgf-applet-host" class="spgf-applet-host"></div>
+            <div id="spgf-app-grid" class="spgf-apps spgf-app-grid">
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('dash')"><span class="ap-ico">📊</span>Tablou<span class="ap-sub">rezumat VIP</span></button>
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('proj')"><span class="ap-ico">🏗️</span>Proiecte<span class="ap-sub">șantiere „publice”</span></button>
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('tend')"><span class="ap-ico">📋</span>Licitații<span class="ap-sub">SEAP express</span></button>
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('wand')"><span class="ap-ico">✨</span>Bagheta<span class="ap-sub">timp rămas</span></button>
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('just')"><span class="ap-ico">⚖️</span>DNA info<span class="ap-sub">linie fierbinte</span></button>
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('sub')"><span class="ap-ico">💳</span>Abonament<span class="ap-sub">SifonPay™</span></button>
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('press')"><span class="ap-ico">📰</span>Presă<span class="ap-sub">spălare imagine</span></button>
+              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('ops')"><span class="ap-ico">🛰️</span>OPS<span class="ap-sub">tactici</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIALOG -->
+<div id="overlay" class="hid">
+  <div id="dlg">
+    <div class="dh" id="dlg-h"></div>
+    <div class="dc" id="dlg-c"></div>
+    <div class="da" id="dlg-a"></div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div id="toasts"></div>
+
+<script>
+// ═══ STATE ═══
+const S={
+  user:{name:'',fn:'',jud:'',party:'PSD',since:''},
+  settings:{difficulty:'normal',persona:'primarie',persistence:'in_memory'},
+  simClock:{monthTick:0,lastAdvanceTs:0},
+  ledger:{publicBudget:0,redistributedSurplus:0,influenceSpend:0,reputationCost:0},
+  actors:[],
+  worldMemory:{blacklistedFirms:[],hostilePress:[],magistrateHeat:0},
+  rep:0, repH:[],
+  siphoned:0,
+  justice:{stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false},
+  sub:null,            // {tier, exp, secTotal, secUsed}
+  purchSec:0,          // purchased seconds without subscription
+  purchSecUsed:0,
+  activeSession:null,  // {id,startReal,realCost,declCost,factor}
+  sessTimer:null,
+  sessions:[],
+  judiciaryRisk:0,
+  pressTone:50,
+  pressHistory:[],
+  timeShiftSec:0,
+  projFilter:'all',
+  projects:[],
+  tenders:[],
+  actLog:[],
+  npid:1, ntid:1,
+  demoMode:true,
+  smsInbox:[],
+  pending3DS:null,
+  spagafonLastSeen:0,
+};
+
+const PERSONAS={
+  primarie:{label:'Primărie mică',budget:12000000,scrutiny:0.8,network:0.45},
+  cj:{label:'Consiliu județean',budget:46000000,scrutiny:1.0,network:0.6},
+  minister:{label:'Minister',budget:180000000,scrutiny:1.3,network:0.75},
+};
+const DIFFS={easy:0.85,normal:1,hard:1.2};
+function diffTune(){
+  const d=S.settings.difficulty||'normal';
+  return{
+    judiciary:DIFFS[d]||1,
+    repGain:d==='easy'?1.12:d==='hard'?0.88:1,
+    repLoss:d==='easy'?0.88:d==='hard'?1.12:1,
+    pressCost:d==='easy'?0.88:d==='hard'?1.15:1,
+    wandRate:d==='easy'?1.08:d==='hard'?0.9:1,
+    fundHeat:d==='easy'?0.9:d==='hard'?1.1:1,
+    tenderLuck:d==='easy'?1.08:d==='hard'?0.92:1,
+    justiceRepCost:d==='easy'?0.9:d==='hard'?1.12:1,
+  };
+}
+function repMax(){return{easy:280,normal:250,hard:220}[S.settings.difficulty]||250}
+function manipCost(kind){const base=kind==='ancheta'?150:200;return Math.max(80,Math.round(base*diffTune().justiceRepCost))}
+const PRESS_CHANNELS=['tv_local','tv_national','social','investigatii'];
+const TENDER_CONTRACTORS=[
+  {name:'SC Favorit Construct SRL',tech:62,compliance:48,price:0.92,network:0.78},
+  {name:'SC Proiect Urban Integrat SA',tech:83,compliance:77,price:1.08,network:0.44},
+  {name:'SC Drumuri și Beton Est SRL',tech:74,compliance:61,price:0.98,network:0.55},
+  {name:'SC Digital Civic Solutions SRL',tech:86,compliance:72,price:1.12,network:0.36},
+  {name:'SC Relații Publice & Contracte SA',tech:58,compliance:42,price:0.95,network:0.84},
+  {name:'SC Auditabil Teoretic SRL',tech:69,compliance:83,price:1.05,network:0.25},
+];
+const CARD_BANK_RULES=[
+  {prefixes:['451900','451901'],bank:'Banca Poporului Unită SA',chance:0.58},
+  {prefixes:['527410','527411'],bank:'Creditul Carpatin IFN',chance:0.52},
+  {prefixes:['601188','601189'],bank:'Dunărea Digital Bank',chance:0.64},
+  {prefixes:['379421','379422'],bank:'Imperial Trust România',chance:0.71},
+];
+
+const PLANS=[
+  {id:'basic', name:'Corupt Basic',   price:99,   secMonth:7200,
+   feats:['5 proiecte active','Licitații standard','Suport 9-17'],feat:false},
+  {id:'pro',   name:'Oligarh Pro',    price:499,  secMonth:36000,
+   feats:['20 proiecte active','Licitații prioritare','Suport 24/7 discret'],feat:true},
+  {id:'ent',   name:'Interlop Enterprise',price:1999,secMonth:-1,
+   feats:['Proiecte nelimitate','Protector DNA inclus','Avocat dedicat','Consilier imagine premium'],feat:false},
+];
+
+const DEMO_PROJ=[
+  {id:1,name:'Reabilitare DJ-404 Not Found',budget:2300000,realValue:1420000,declaredValue:2680000,status:'in_progress',quality:null,bet:null,due:'2025-06-30',lateS:false,lateF:false},
+  {id:2,name:'Modernizare iluminat public Alibaba Edition',budget:850000,realValue:520000,declaredValue:1010000,status:'completed',quality:'mantuiala',bet:null,due:'2024-12-01',lateS:false,lateF:false},
+  {id:3,name:'Sală de sport — Etapa 1: studiu de fezabilitate, fără execuție',budget:5200000,realValue:2980000,declaredValue:6400000,status:'planned',quality:null,bet:null,due:'2026-12-31',lateS:true,lateF:false},
+  {id:4,name:'Copaci artificiali UV anti-vandalism rezistenți la întreținere',budget:1200000,realValue:760000,declaredValue:1490000,status:'in_progress',quality:null,bet:null,due:'2025-03-31',lateS:false,lateF:true},
+  {id:5,name:'Digitalizare arhivă primărie (3 dosare + 1 stick USB Kingston 32GB)',budget:450000,realValue:310000,declaredValue:560000,status:'completed',quality:'moderata',bet:null,due:'2025-01-15',lateS:false,lateF:false},
+];
+const DEMO_TEND=[
+  {id:1,projectId:1,name:'Achiziție flotă auto reprezentare primărie — 5x BMW X7',budget:3500000,status:'open',winner:null},
+  {id:2,projectId:3,name:'Servicii consultanță dosare finanțare UE — SC Soția Primarului SRL',budget:750000,status:'evaluation',winner:null},
+  {id:3,projectId:5,name:'Consumabile birou premium — pixuri Mont Blanc x200, hârtie italiană',budget:2100000,status:'awarded',winner:'SC Papetăria VIP SRL'},
+  {id:4,projectId:4,name:'Renovare cabinet primar — marmură Carrara, candelabru Murano',budget:1800000,status:'contested',winner:'SC Luxor Interior SRL'},
+];
+const DEMO_LOG=[
+  {t:'09:14',txt:'Proiect „Modernizare iluminat" finalizat. +1 punct reputație.'},
+  {t:'10:32',txt:'Licitație „Consumabile birou" adjudecată SC Papetăria VIP SRL.'},
+  {t:'11:05',txt:'Sesiune Bagheta Magică: surplus 635.000 RON identificat.'},
+  {t:'13:45',txt:'Proiect „Digitalizare arhivă" finalizat. +2 puncte reputație.'},
+  {t:'14:20',txt:'Contestație licitație „Renovare cabinet" respinsă cu succes.'},
+];
+const DEMO_REPH=[
+  {t:'Proiect „Modernizare iluminat" finalizat (de mântuială)',d:1},
+  {t:'Proiect „Digitalizare arhivă" finalizat (calitate moderată)',d:2},
+  {t:'Proiect neinceput la termen (sală de sport)',d:-2},
+];
+
+// ═══ HELPERS ═══
+const $=id=>document.getElementById(id);
+const fRON=n=>new Intl.NumberFormat('ro-RO',{style:'currency',currency:'RON',maximumFractionDigits:0}).format(n);
+function fSec(s){
+  if(s===Infinity||s<0)return'∞';
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  if(h>0)return`${h}h ${m}m`;
+  if(m>0)return`${m}m ${sec}s`;
+  return`${sec}s`;
+}
+function fTimer(s){
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+function nowTs(){return Date.now()+(S.timeShiftSec*1000)}
+function nowDate(){return new Date(nowTs())}
+function saveState(){
+  if(S.settings.persistence!=='local_storage')return;
+  try{
+    const activeSer=S.activeSession?{...S.activeSession,quotaSecAtStart:S.activeSession.quotaSecAtStart===Infinity?-1:S.activeSession.quotaSecAtStart}:null;
+    localStorage.setItem('sifonator_state_v3',JSON.stringify({
+      settings:S.settings,user:S.user,rep:S.rep,repH:S.repH,siphoned:S.siphoned,justice:S.justice,smsInbox:S.smsInbox,spagafonLastSeen:S.spagafonLastSeen,sub:S.sub,
+      purchSec:S.purchSec,purchSecUsed:S.purchSecUsed,sessions:S.sessions,activeSession:activeSer,judiciaryRisk:S.judiciaryRisk,
+      pressTone:S.pressTone,pressHistory:S.pressHistory,timeShiftSec:S.timeShiftSec,projects:S.projects,tenders:S.tenders,
+      actLog:S.actLog,npid:S.npid,ntid:S.ntid,ledger:S.ledger,actors:S.actors,worldMemory:S.worldMemory,simClock:S.simClock
+    }));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const raw=localStorage.getItem('sifonator_state_v3');
+    if(!raw)return false;
+    const d=JSON.parse(raw);
+    if(!d||!d.settings)return false;
+    Object.assign(S,d);
+    if(S.justice){if(typeof S.justice.debugPin!=='boolean')S.justice.debugPin=false;if(typeof S.justice.dnaEscalation!=='boolean')S.justice.dnaEscalation=false}
+    if(!Array.isArray(S.smsInbox))S.smsInbox=[];
+    if(typeof S.spagafonLastSeen!=='number')S.spagafonLastSeen=0;
+    S.pending3DS=null;
+    fixLoadedActiveSession();
+    return true;
+  }catch(e){return false}
+}
+function addLedger(kind,amount,reason){
+  if(!S.ledger[kind]&&S.ledger[kind]!==0)return;
+  S.ledger[kind]+=amount;
+  addAct(`Ledger ${kind}: ${amount>=0?'+':''}${fRON(amount)} · ${reason}`);
+}
+function initActors(){
+  if(S.actors.length)return;
+  S.actors=[
+    {id:'firmaCasa',type:'contractor',name:'SC Favorit Construct SRL',trust:62,influence:55},
+    {id:'avocatCreativ',type:'legal',name:'Cabinet Lex Procedural',trust:58,influence:61},
+    {id:'jurnalist',type:'press',name:'Redacția Observator Civic',trust:30,influence:70},
+    {id:'inspector',type:'audit',name:'Inspector PREVENT',trust:25,influence:80},
+    {id:'liderPartid',type:'politic',name:'Coordonator local partid',trust:66,influence:72},
+  ];
+}
+function checkSubLifecycle(){
+  if(!S.sub)return;
+  const now=nowTs();
+  const pl=PLANS.find(p=>p.id===S.sub.tier);
+  if(!pl){S.sub=null;return}
+  let renewed=false;
+  let expMs=new Date(S.sub.exp).getTime();
+  while(now>expMs){
+    const d=new Date(expMs);d.setMonth(d.getMonth()+1);expMs=d.getTime();
+    S.sub.secUsed=0;renewed=true;
+  }
+  if(renewed){
+    S.sub.exp=new Date(expMs).toISOString();
+    addAct(`[AUTO] Abonament ${pl.name} reînnoit. Cota lunară resetată.`);
+  }
+}
+function advanceSimulationMonths(months){
+  for(let i=0;i<months;i++){
+    S.simClock.monthTick++;
+    S.projects.forEach(p=>{
+      if(!p.monthly)p.monthly={progress:Math.floor(Math.random()*18),contractorPerf:55+Math.floor(Math.random()*35),changeOrders:0};
+      if(p.status==='in_progress'){
+        const drift=Math.floor(Math.random()*12)-2;
+        p.monthly.progress=Math.max(0,Math.min(100,p.monthly.progress+drift+p.monthly.contractorPerf/25));
+        if(Math.random()<0.28){p.monthly.changeOrders++;p.declaredValue+=Math.round(p.declaredValue*0.03);p.budget=p.declaredValue;addAct(`Change order pe „${p.name}”: +3% valoare declarată.`)}
+        if(p.monthly.progress>=100){p.status='completed';addAct(`Proiect „${p.name}” a fost finalizat prin avans lunar.`)}
+      }
+      if(!p.dossier)p.dossier=[];
+      p.dossier.unshift({t:nowDate().toLocaleDateString('ro-RO'),txt:`Revizie lunară #${S.simClock.monthTick}: progres ${(p.monthly?.progress||0).toFixed(0)}%`});
+      if(p.dossier.length>20)p.dossier.pop();
+    });
+    const tl=Math.min(0.95,0.52*diffTune().tenderLuck);
+    S.tenders.forEach(t=>{
+      if(t.status==='evaluation'&&Math.random()<tl){evaluateTenderNow(t);return}
+      if(t.status==='contested'&&Math.random()<(0.36*diffTune().tenderLuck)){t.status='evaluation';return}
+      const next={open:'clarificari',clarificari:'depuneri',depuneri:'evaluation',awarded:'executie',executie:'executie'}[t.status];
+      if(next&&Math.random()<tl)t.status=next;
+    });
+  }
+  recalcJudiciaryPressure();
+}
+function recalcJudiciaryPressure(){
+  if(S.justice?.debugPin)return;
+  const procurementHeat=S.tenders.filter(t=>['contested','evaluation'].includes(t.status)).length*6;
+  const fundHeat=Math.min(75,Math.round(S.siphoned/220000*diffTune().fundHeat));
+  const pressHeat=Math.max(0,55-S.pressTone);
+  const personaMult=PERSONAS[S.settings.persona]?.scrutiny||1;
+  const diffMult=DIFFS[S.settings.difficulty]||1;
+  let pressure=Math.round((procurementHeat+fundHeat+pressHeat)*personaMult*diffMult);
+  pressure=Math.min(100,pressure);
+  if(S.justice?.dnaEscalation)pressure=Math.max(pressure,60);
+  S.justice.pressure=pressure;
+  if(S.justice.pressure<35)S.justice.stage='clean';
+  else if(S.justice.pressure<55)S.justice.stage='monitorizare';
+  else if(S.justice.pressure<75)S.justice.stage='ancheta';
+  else if(S.justice.pressure<90)S.justice.stage='audiere';
+  else S.justice.stage='recurs';
+  S.justice.timeline.unshift({t:nowDate().toLocaleString('ro-RO'),stage:S.justice.stage,pressure:S.justice.pressure});
+  if(S.justice.timeline.length>25)S.justice.timeline.pop();
+}
+function normalizeProjectAccounting(){
+  S.sessions=S.sessions.filter(s=>S.projects.some(p=>p.id===s.projectId));
+  S.projects.forEach(p=>{
+    if(!p.realValue)p.realValue=Math.round((p.budget||1)*0.68);
+    if(!p.declaredValue||p.declaredValue<=p.realValue)p.declaredValue=Math.round((p.budget||1)*1.2);
+    p.budget=p.declaredValue;
+    if(!p.wandUsed&&S.sessions.some(s=>s.projectId===p.id))p.wandUsed=true;
+  });
+}
+function fixLoadedActiveSession(){
+  if(!S.activeSession)return;
+  if(S.activeSession.quotaSecAtStart===-1||S.activeSession.quotaSecAtStart===null)S.activeSession.quotaSecAtStart=Infinity;
+  if(!S.projects.some(p=>p.id===S.activeSession.projectId)){
+    S.activeSession=null;
+  }
+}
+function projectWandAlreadyUsed(projectId){
+  if(projectId==null||projectId===''||Number.isNaN(Number(projectId)))return false;
+  const id=typeof projectId==='number'?projectId:parseInt(projectId,10);
+  const p=S.projects.find(x=>x.id===id);
+  return!!(p?.wandUsed)||S.sessions.some(s=>s.projectId===id);
+}
+function disc(){return Math.min(S.rep*0.1,25)}
+function applyDisc(p){return p*(1-disc()/100)}
+function repLevel(r){
+  if(r<20)return'Aspirant';if(r<50)return'Funcționar Corupt';
+  if(r<100)return'Politician cu Inițiativă';if(r<150)return'Oligarh Regional';
+  if(r<200)return'Baron Local';return'Interlop de Elită';
+}
+function qLabel(q){return{mantuiala:'De mântuială',moderata:'Calitate moderată',ridicata:'Calitate ridicată'}[q]||'—'}
+function qBadge(q){return{mantuiala:'br',moderata:'bo',ridicata:'bg'}[q]||'bk'}
+function sLabel(s){return{planned:'Planificat',in_progress:'În desfășurare',completed:'Finalizat',late:'Întârziat'}[s]||s}
+function sBadge(s){return{planned:'bk',in_progress:'bb',completed:'bg',late:'br'}[s]||'bk'}
+function tsLabel(s){return{open:'Publicată',clarificari:'Clarificări',depuneri:'Depuneri',evaluation:'Comisie evaluare',awarded:'Adjudecată',contested:'Contestată',executie:'Execuție contract'}[s]||s}
+function tsBadge(s){return{open:'bb',clarificari:'bk',depuneri:'bo',evaluation:'bo',awarded:'bg',contested:'br',executie:'bb'}[s]||'bk'}
+function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+let CARD_PAY_CTX=null;
+function pickMany(arr,count){
+  const pool=[...arr],out=[];
+  while(pool.length&&out.length<count){
+    const i=Math.floor(Math.random()*pool.length);
+    out.push(pool.splice(i,1)[0]);
+  }
+  return out;
+}
+function tenderCtx(t){
+  const p=S.projects.find(x=>x.id===t.projectId)||null;
+  const declared=Math.max(1,p?.declaredValue||t.budget||1);
+  const real=Math.max(1,p?.realValue||Math.round(declared*0.72));
+  const spread=clamp((declared-real)/declared,0,0.8);
+  return{
+    project:p,
+    declared,real,spread,
+    projectRisk:(p?.lateF?12:0)+(p?.lateS?8:0)+(p?.status==='planned'?4:0),
+  };
+}
+function normalizeTenderData(){
+  S.tenders=S.tenders.filter(t=>!t.projectId||S.projects.some(p=>p.id===t.projectId));
+  S.tenders.forEach(t=>{
+    if(!t.procType)t.procType='open';
+    if(!t.complexity)t.complexity=clamp(Math.round((t.budget||1)/600000),1,5);
+    if(!t.auditRisk)t.auditRisk=0;
+    if(!Array.isArray(t.bids))t.bids=[];
+  });
+}
+function buildTenderBids(t){
+  const ctx=tenderCtx(t);
+  const n=t.procType==='direct'?2:clamp(3+Math.floor(Math.random()*3),3,5);
+  const players=pickMany(TENDER_CONTRACTORS,n);
+  const offers=players.map(c=>{
+    const volatility=0.9+Math.random()*0.24;
+    const offer=Math.round((t.budget||1)*c.price*volatility);
+    const tech=clamp(c.tech+Math.round((Math.random()*14)-7)-Math.round(t.complexity*1.5),35,96);
+    const compliance=clamp(c.compliance+Math.round((Math.random()*16)-8)-Math.round(ctx.spread*20),20,98);
+    return{name:c.name,offer,tech,compliance,network:c.network};
+  });
+  const minOffer=Math.max(1,Math.min(...offers.map(o=>o.offer)));
+  return offers.map(o=>{
+    const priceScore=clamp(Math.round((minOffer/o.offer)*100),40,100);
+    const networkWeight=t.procType==='direct'?0.13:0.07;
+    const score=Math.round((o.tech*0.42)+(o.compliance*0.33)+(priceScore*0.18)+(o.network*100*networkWeight));
+    const flags=[];
+    if(o.compliance<45)flags.push('documentație slabă');
+    if(o.network>0.75)flags.push('legături politice vizibile');
+    if(o.offer<(t.budget*0.82))flags.push('ofertă anormal de mică');
+    return{...o,priceScore,score,flags};
+  }).sort((a,b)=>b.score-a.score);
+}
+function evaluateTenderNow(t){
+  const ctx=tenderCtx(t);
+  if(!t.bids?.length)t.bids=buildTenderBids(t);
+  const top=t.bids[0];
+  const runner=t.bids[1]||top;
+  t.winner=top?.name||null;
+  t.winnerScore=top?.score||0;
+  const margin=Math.max(0,(top?.score||0)-(runner?.score||0));
+  const riskBase=16+(ctx.spread*32)+ctx.projectRisk+(t.complexity*3)+Math.max(0,10-margin);
+  const publicPressure=Math.max(0,Math.round((S.justice.pressure||0)*0.12));
+  t.auditRisk=clamp(Math.round(riskBase+publicPressure),6,96);
+  t.evalSummary=`Scor câștigător ${top?.score||0} · marjă ${margin} · risc contestare ${t.auditRisk}%`;
+  const winProj=ctx.project;
+  if(winProj){
+    if(!winProj.monthly)winProj.monthly={progress:0,contractorPerf:60,changeOrders:0};
+    winProj.monthly.contractorPerf=clamp(Math.round((winProj.monthly.contractorPerf*0.55)+((top?.tech||60)*0.45)),35,96);
+  }
+  const contestChance=clamp((t.auditRisk/100)*(diffTune().judiciary>1?1.15:0.9),0.08,0.85);
+  if(Math.random()<contestChance){
+    t.status='contested';
+    addAct(`Licitație „${t.name}" contestată (risc ${t.auditRisk}%).`);
+    toast('Contestație depusă după evaluare','warn');
+    return;
+  }
+  t.status='awarded';
+  addAct(`Licitație „${t.name}" adjudecată ${t.winner} (scor ${t.winnerScore}).`);
+}
+function wandQuotaBase(){
+  checkSubLifecycle();
+  if(S.sub){if(S.sub.secTotal<0)return Infinity;return Math.max(0,S.sub.secTotal-S.sub.secUsed)}
+  return Math.max(0,S.purchSec-S.purchSecUsed);
+}
+function wandAvailSec(){
+  const base=wandQuotaBase();
+  if(!S.activeSession)return base===Infinity?Infinity:base;
+  if(base===Infinity)return Infinity;
+  const elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
+  const q0=S.activeSession.quotaSecAtStart;
+  const startAvail=(q0===Infinity||q0===-1)?base:Math.min(base,q0);
+  return Math.max(0,startAvail-elapsed);
+}
+function computePressDisplayScore(){
+  return Math.max(0,Math.min(100,Math.round(S.pressTone+(S.rep*0.2)-Math.min(35,S.judiciaryRisk/3))));
+}
+function partyColor(p){return{PSD:'#cc0000',PNL:'#ffaa00',USR:'#1a73e8',AUR:'#b8a000',UDMR:'#009900',Independent:'#666'}[p]||'#555'}
+
+// ═══ DISCLAIMER ═══
+function dismissDisc(){$('disc-wrap')?.classList.add('hid')}
+
+// ═══ LOGIN ═══
+let demoChoice='demo';
+function selDemo(v){
+  demoChoice=v;
+  $('opt-demo')?.classList.toggle('sel',v==='demo');
+  $('opt-empty')?.classList.toggle('sel',v==='empty');
+}
+function doLogin(){
+  S.settings.persistence=$('l-persist')?.value||'in_memory';
+  if(S.settings.persistence==='local_storage'&&loadState()){
+    $('login-screen')?.classList.add('hid');
+    $('app')?.classList.remove('hid');
+    ensureWandTimer();
+    applyProfile();renderAll();updSpagafonBadge();toast('Sesiune restaurată din localStorage','ok');schedDNA();return;
+  }
+  const name=$('l-name')?.value?.trim();
+  if(!name){toast('Introdu numele tău','err');return}
+  S.user.name=name;
+  S.user.fn=$('l-fn')?.value;
+  S.user.jud=$('l-jud')?.value;
+  S.user.party=$('l-party')?.value;
+  S.user.since=nowDate().toLocaleDateString('ro-RO');
+  S.settings.persona=$('l-persona')?.value||'primarie';
+  S.settings.difficulty=$('l-diff')?.value||'normal';
+  S.pressDefaultChannel=$('l-press-def')?.value||'tv_local';
+  const persona=PERSONAS[S.settings.persona]||PERSONAS.primarie;
+  S.ledger.publicBudget=persona.budget;
+  if(demoChoice==='demo'){
+    S.projects=JSON.parse(JSON.stringify(DEMO_PROJ));
+    S.tenders=JSON.parse(JSON.stringify(DEMO_TEND));
+    S.actLog=JSON.parse(JSON.stringify(DEMO_LOG));
+    S.repH=JSON.parse(JSON.stringify(DEMO_REPH));
+    S.rep=11; S.npid=6; S.ntid=5;
+    S.purchSec=7200; // 2 demo hours
+  }
+  initActors();
+  recalcJudiciaryPressure();
+  $('login-screen')?.classList.add('hid');
+  $('app')?.classList.remove('hid');
+  applyProfile();
+  spagafonWelcome();
+  updSpagafonBadge();
+  renderAll();
+  saveState();
+  toast(`Autentificat cu succes, ${name}! 🏛️`,'ok');
+  schedDNA();
+}
+function applyProfile(){
+  $('hb-name') && ($('hb-name').textContent=S.user.name);
+  $('hb-party') && ($('hb-party').textContent=S.user.party, $('hb-party').style.background=partyColor(S.user.party));
+  $('hb-fn') && ($('hb-fn').textContent=`${S.user.fn} · ${S.user.jud}`);
+  $('dash-greet') && ($('dash-greet').textContent=`Bună ziua, ${S.user.name}! Ce sifonăm azi?`);
+}
+function renderAll(){normalizeProjectAccounting();normalizeTenderData();checkSubLifecycle();renderDash();renderProj();renderTend();renderJust();renderSub();renderAudit();renderPress();renderOps();renderHowto();updRep();updWandChip();updWandQuota();renderSessions();updWandProjectOptions();syncWandSessionUI();saveState();}
+
+// ═══ NAV ═══
+function navigate(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));
+  $(`view-${v}`)?.classList.add('active');
+  document.querySelector(`[data-v="${v}"]`)?.classList.add('active');
+  if(v==='dash')renderDash();
+  if(v==='sub')renderSub();
+  if(v==='just')renderJust();
+  if(v==='audit')renderAudit();
+  if(v==='press')renderPress();
+  if(v==='ops')renderOps();
+  if(v==='wand'){updWandQuota();renderSessions();syncWandSessionUI();}
+  if(v==='howto')renderHowto();
+}
+
+// ═══ TOAST ═══
+function toast(msg,type=''){
+  const el=document.createElement('div');
+  el.className=`toast ${type}`;el.textContent=msg;
+  $('toasts')?.appendChild(el);
+  setTimeout(()=>el.remove(),4200);
+}
+
+// ═══ DIALOG ═══
+function dlgOpen(title,sub,content,actions){
+  $('dlg-h').innerHTML=`<h3>${title}</h3>${sub?`<p>${sub}</p>`:''}`;
+  $('dlg-c').innerHTML=content;
+  $('dlg-a').innerHTML=actions;
+  $('overlay')?.classList.remove('hid');
+}
+function dlgClose(){$('overlay')?.classList.add('hid')}
+
+// ═══ ȘPAGAFON ═══
+function spagafonUnreadCount(){
+  const t=S.spagafonLastSeen||0;
+  return S.smsInbox.filter(m=>(m.ts||0)>t).length;
+}
+function updSpagafonBadge(){
+  const n=spagafonUnreadCount();
+  const el=$('spgf-unread'),btn=$('spgf-launcher');
+  if(el)el.textContent=n>9?'9+':String(n);
+  btn?.classList.toggle('has-unread',n>0);
+}
+function spagafonPushSms(from,body,opts){
+  const o=opts||{};
+  const ts=Date.now();
+  S.smsInbox.unshift({id:ts,ts,from,body,t:new Date(ts).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}),code:o.code||null,is3ds:!!o.is3ds});
+  if(S.smsInbox.length>50)S.smsInbox.pop();
+  updSpagafonBadge();
+  if($('spagafon-root')?.classList.contains('open')){renderSpagafon();renderSpagafonAppletUI();}
+}
+function renderSpagafon(){
+  const box=$('spgf-msgs');
+  if(!box)return;
+  if(!S.smsInbox.length){
+    box.innerHTML='<p class="spgf-empty">Niciun SMS încă.<br/>Codurile 3D Secure de la SifonPay™ apar aici automat.</p>';
+    return;
+  }
+  box.innerHTML=S.smsInbox.map(m=>{
+    const codeHtml=m.is3ds&&m.code
+      ?`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick="fillTdsFromSpagafon(${JSON.stringify(m.code)})">Completează în plată</button></div>`
+      :'';
+    const extra=m.is3ds?' sm-code':'';
+    return`<div class="spgf-msg${extra}"><div class="sm-from">${escapeHtml(m.from)}</div><div class="sm-body">${escapeHtml(m.body)}</div><div class="sm-time">${m.t||''}</div>${codeHtml}</div>`;
+  }).join('');
+}
+function escapeHtml(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function fillTdsFromSpagafon(code){
+  const inp=$('tds-code');
+  if(inp)inp.value=code;
+  toggleSpagafon(false);
+  toast('Cod completat din Șpagafon','ok');
+}
+let spgfAppletId=null;
+function spgfSetTab(which){
+  $('spgf-tab-sms')?.classList.toggle('on',which==='sms');
+  $('spgf-tab-apps')?.classList.toggle('on',which==='apps');
+  $('spgf-pane-sms')?.classList.toggle('on',which==='sms');
+  $('spgf-pane-apps')?.classList.toggle('on',which==='apps');
+  renderSpagafonAppletUI();
+}
+function spgfApRow(k,v){
+  return`<div class="spgf-ap-row"><span class="spgf-ap-k">${escapeHtml(k)}</span><span class="spgf-ap-v">${escapeHtml(v)}</span></div>`;
+}
+function spgfDeskBtn(navKey){
+  return`<button type="button" class="btn btn-sm btn-f" style="width:100%;margin-top:12px;color:#fff;border-color:rgba(255,255,255,.22)" data-nav="${navKey}" onclick="spgfOpenDesktopFromAttr(this)">Ecran mare — deschide în platformă</button>`;
+}
+function spgfOpenDesktopFromAttr(el){
+  const v=el&&el.dataset&&el.dataset.nav;
+  if(v)spgfOpenDesktop(v);
+}
+function spgfOpenDesktop(v){
+  spgfAppletId=null;
+  renderSpagafonAppletUI();
+  navigate(v);
+  toggleSpagafon(false);
+}
+function spgfCloseApplet(){
+  spgfAppletId=null;
+  renderSpagafonAppletUI();
+}
+function spgfOpenApplet(id){
+  spgfAppletId=id;
+  spgfSetTab('apps');
+}
+function renderSpagafonAppletUI(){
+  const back=$('spgf-applet-back'),grid=$('spgf-app-grid'),host=$('spgf-applet-host');
+  if(!host)return;
+  if(spgfAppletId){
+    back?.classList.remove('hid');
+    grid?.classList.add('hid');
+    host.innerHTML=buildSpagafonAppletHtml(spgfAppletId);
+  }else{
+    back?.classList.add('hid');
+    grid?.classList.remove('hid');
+    host.innerHTML='';
+  }
+}
+function buildSpagafonAppletHtml(id){
+  const desk=(k)=>spgfDeskBtn(k);
+  if(id==='dash'){
+    const av=wandAvailSec();
+    const tim=av===Infinity?'∞':fSec(av);
+    const sess=S.activeSession?'⚡ sesiune activă':'😴 fără optimizare live';
+    return`<div class="spgf-ap-title">Tablou VIP</div>
+      ${spgfApRow('Reputație',String(S.rep)+' pt')}
+      ${spgfApRow('Sifonat (narativ)',fRON(S.siphoned))}
+      ${spgfApRow('Presiune judiciară',String(S.judiciaryRisk)+'%')}
+      ${spgfApRow('DNA / etapă',String(S.justice?.stage||'clean'))}
+      ${spgfApRow('Bagheta (timp)',tim)}
+      ${spgfApRow('Status sesiune',sess)}
+      <p class="spgf-ap-mut">Versiunea mobilă pentru demnitari grăbiți.</p>
+      ${desk('dash')}`;
+  }
+  if(id==='proj'){
+    const rows=S.projects.slice(0,6).map(p=>{
+      const raw=p.name||'—';
+      const nm=raw.length>36?raw.slice(0,34)+'…':raw;
+      return`<li>${escapeHtml(nm)} · <strong>${escapeHtml(sLabel(p.status))}</strong></li>`;
+    }).join('')||'<li>Niciun proiect — perfect pentru tranșee invizibile.</li>';
+    return`<div class="spgf-ap-title">Proiecte „publice”</div>
+      ${spgfApRow('Total în portofoliu',String(S.projects.length))}
+      <ul class="spgf-ap-list">${rows}</ul>
+      <p class="spgf-ap-mut">Aplicația completă: licitații, dosare, pariuri pe calitate.</p>
+      ${desk('proj')}`;
+  }
+  if(id==='tend'){
+    const rows=S.tenders.slice(0,6).map(t=>{
+      const raw=t.name||'Licit.';
+      const nm=raw.length>32?raw.slice(0,30)+'…':raw;
+      return`<li>${escapeHtml(nm)} · ${escapeHtml(tsLabel(t.status))}</li>`;
+    }).join('')||'<li>Nicio licitație — SEAP-ul așteaptă „corectitudinea” ta.</li>';
+    return`<div class="spgf-ap-title">Licitații express</div>
+      ${spgfApRow('Active',String(S.tenders.length))}
+      <ul class="spgf-ap-list">${rows}</ul>
+      <p class="spgf-ap-mut">Publică, contestă, câștigă; totul din varianta desktop.</p>
+      ${desk('tend')}`;
+  }
+  if(id==='wand'){
+    const av=wandAvailSec();
+    const tim=av===Infinity?'Nelimitat (abonament)':fSec(av);
+    let extra='';
+    if(S.activeSession){
+      const p=S.projects.find(x=>x.id===S.activeSession.projectId);
+      const pn=p&&p.name?p.name:'—';
+      const pshort=pn.length>28?pn.slice(0,26)+'…':pn;
+      extra=spgfApRow('Proiect curent',pshort)+
+        spgfApRow('Factor „optimizare”',(S.activeSession.factor*100).toFixed(0)+'%');
+    }
+    return`<div class="spgf-ap-title">Bagheta mobilă</div>
+      ${spgfApRow('Timp disponibil',tim)}
+      ${extra}
+      <p class="spgf-ap-mut">Pornești sesiunea doar din platformă; aici doar vezi cât ai „inspiratie” rămasă.</p>
+      ${desk('wand')}`;
+  }
+  if(id==='just'){
+    const st=S.justice?.stage||'clean';
+    return`<div class="spgf-ap-title">Linie DNA</div>
+      ${spgfApRow('Etapă curentă',st)}
+      ${spgfApRow('Presiune estimată',String(S.judiciaryRisk)+'%')}
+      ${spgfApRow('Manipulare ancheta',String(manipCost('ancheta'))+' pt')}
+      ${spgfApRow('Manipulare sever',String(manipCost('puscarie'))+' pt')}
+      <p class="spgf-ap-mut">„Nu înlocuiește avocatul. Nici bunul-simț."</p>
+      ${desk('just')}`;
+  }
+  if(id==='sub'){
+    const pl=S.sub?PLANS.find(p=>p.id===S.sub.tier):null;
+    const line=pl?`${pl.name} · exp. ${(S.sub.exp||'').slice(0,10)}`:'Fără abonament activ';
+    return`<div class="spgf-ap-title">SifonPay™ mobil</div>
+      ${spgfApRow('Status',line)}
+      ${spgfApRow('Discount rep',disc().toFixed(1)+'%')}
+      <p class="spgf-ap-mut">3D Secure și „fonduri publice” rămân pe ecranul mare</p>
+      ${desk('sub')}`;
+  }
+  if(id==='press'){
+    const sc=computePressDisplayScore();
+    const h=S.pressHistory&&S.pressHistory[0];
+    const hl=h?((h.txt||'').length>80?h.txt.slice(0,78)+'…':h.txt):'— liniște editorială suspectă';
+    return`<div class="spgf-ap-title">Presă &amp; imagine</div>
+      ${spgfApRow('Scor afișat',String(sc)+'/100')}
+      ${spgfApRow('Ton presă (raw)',String(S.pressTone))}
+      ${spgfApRow('Ultimul titlu',hl)}
+      <p class="spgf-ap-mut">Briefing-urile costă reputație — vezi canalul în platformă.</p>
+      ${desk('press')}`;
+  }
+  if(id==='ops'){
+    const openP=S.projects.filter(p=>p.status==='in_progress').length;
+    const wand=S.activeSession?'ACTIVĂ':'STATICĂ';
+    return`<div class="spgf-ap-title">Centru operațional</div>
+      ${spgfApRow('Proiecte în execuție',String(openP))}
+      ${spgfApRow('Bagheta',wand)}
+      ${spgfApRow('Presiune juridică',String(S.judiciaryRisk)+'%')}
+      ${spgfApRow('Etapă justiție',String(S.justice?.stage||'clean'))}
+      <p class="spgf-ap-mut">HUD tactic pentru corupți.</p>
+      ${desk('ops')}`;
+  }
+  return`<div class="spgf-ap-title">Aplicație</div><p class="spgf-ap-mut">Necunoscut.</p>${desk('dash')}`;
+}
+function toggleSpagafon(force){
+  const root=$('spagafon-root');
+  if(!root)return;
+  const open=force===undefined?!root.classList.contains('open'):!!force;
+  root.classList.toggle('open',open);
+  $('app')?.classList.toggle('spagafon-open',open);
+  $('spgf-launcher')?.setAttribute('aria-expanded',open?'true':'false');
+  $('spgf-sheet')?.setAttribute('aria-hidden',open?'false':'true');
+  if(open){
+    S.spagafonLastSeen=Date.now();
+    updSpagafonBadge();
+    renderSpagafon();
+    renderSpagafonAppletUI();
+  }else{
+    spgfAppletId=null;
+    renderSpagafonAppletUI();
+  }
+}
+function spagafonWelcome(){
+  spagafonPushSms('Șpagafon','Bun venit! Ai activat linia mobilă „de serviciu". SMS-urile pentru 3D Secure (SifonPay™) apar în Mesaje.');
+}
+
+// ═══ REPUTATION ═══
+function updRep(){
+  const rmax=repMax(),pct=(S.rep/rmax)*100, lv=repLevel(S.rep);
+  $('hb-rep-cap') && ($('hb-rep-cap').textContent='/'+rmax);
+  $('hb-rep') && ($('hb-rep').textContent=S.rep);
+  $('rep-d1') && ($('rep-d1').textContent=S.rep);
+  $('rep-d2') && ($('rep-d2').textContent=S.rep);
+  $('rep-b1') && ($('rep-b1').style.width=pct+'%');
+  $('rep-b2') && ($('rep-b2').style.width=pct+'%');
+  $('rep-lv1') && ($('rep-lv1').textContent=lv);
+  $('rep-lv2') && ($('rep-lv2').textContent=lv);
+  $('disc-rep') && ($('disc-rep').textContent=S.rep);
+  $('disc-pct') && ($('disc-pct').textContent=disc().toFixed(1)+'%');
+  $('just-rep-hint')&&($('just-rep-hint').innerHTML=`Anchetă: <strong>${manipCost('ancheta')}</strong> · Fază severă: <strong>${manipCost('puscarie')}</strong> puncte (modificate de dificultate).`);
+  const rh=$('rep-hist');
+  if(rh)rh.innerHTML=S.repH.length
+    ?S.repH.map(e=>`<div class="rh-row"><span>${e.t}</span><span class="rd ${e.d>0?'pos':'neg'}">${e.d>0?'+':''}${e.d}</span></div>`).join('')
+    :'<p class="tmut tsm">Niciun eveniment înregistrat.</p>';
+  updDebug();
+}
+function chgRep(delta,reason,raw){
+  let d=delta;
+  if(!raw){
+    if(d>0)d*=diffTune().repGain;
+    else if(d<0)d*=diffTune().repLoss;
+  }
+  d=Math.round(d*100)/100;
+  const mx=repMax();
+  S.rep=Math.max(0,Math.min(mx,S.rep+d));
+  S.repH.unshift({t:reason,d:delta});
+  if(S.repH.length>20)S.repH.pop();
+  updRep();
+  toast(`${delta>0?'+'+delta:delta} puncte reputație: ${reason}`,delta>0?'ok':'err');
+}
+
+// ═══ DASHBOARD ═══
+function renderHowto(){
+  const el=$('howto-meta');
+  if(el)el.innerHTML=`<span class="tmut">Dificultate curentă: <strong>${S.settings.difficulty||'normal'}</strong> · Plafon reputație: <strong>${repMax()}</strong> · Discount abonament: <strong>${disc().toFixed(1)}%</strong></span>`;
+  const bin=$('howto-sifonpay-bin');
+  if(bin){
+    const rows=CARD_BANK_RULES.flatMap(r=>r.prefixes.map(p=>({p,bank:r.bank,chance:r.chance})));
+    const tbody=rows.map(x=>`<tr><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono)"><code>${x.p}</code></td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">${x.bank}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">~${Math.round(x.chance*100)}%</td></tr>`).join('');
+    bin.innerHTML=`
+      <p class="tsm mt8" style="line-height:1.65"><strong>Prefix (BIN)</strong> — primele <strong>6 cifre</strong> ale numărului de card identifică în joc o <strong>bancă fictivă</strong>. Dacă introduci un număr care începe cu unul dintre prefixele de mai jos, există o <strong>probabilitate</strong> ca SifonPay™ să ceară un pas suplimentar <strong>3D Secure</strong> (cod SMS fictiv). Nu este obligatoriu la fiecare plată; alte prefixe trec direct după procesare.</p>
+      <div style="overflow-x:auto;margin-top:10px">
+        <table style="width:100%;font-size:12px;border-collapse:collapse">
+          <thead><tr><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Prefix (6 cifre)</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Bancă fictivă</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Șansă 3DS*</th></tr></thead>
+          <tbody>${tbody}</tbody>
+        </table>
+      </div>
+      <p class="tsm tmut mt8">* Probabilitate orientativă pe tranzacție; nu garantează 3DS la fiecare încercare. Exemplu: pentru test poți începe numărul cu <code style="background:var(--bg);padding:1px 5px;border-radius:4px">451900</code> sau <code style="background:var(--bg);padding:1px 5px;border-radius:4px">379421</code> (apoi completezi restul cifrelor).</p>`;
+  }
+}
+function renderDash(){
+  checkSubLifecycle();
+  $('dash-meta')&&($('dash-meta').innerHTML=`<p class="tsm tmut">Dificultate: <strong>${S.settings.difficulty||'normal'}</strong> · Reputație <strong>${S.rep}/${repMax()}</strong> · Discount abonament: <strong>${disc().toFixed(1)}%</strong></p>`);
+  const act=S.projects.filter(p=>p.status==='in_progress').length;
+  const late=S.projects.filter(p=>p.lateF||p.lateS).length;
+  const openT=S.tenders.filter(t=>t.status==='open').length;
+  $('sg').innerHTML=`
+    <div class="sc"><div class="si">💰</div><div class="sv">${fRON(S.siphoned)}</div><div class="sl">Total „Optimizat"</div><div class="sd ${S.siphoned>0?'pos':''}">${S.siphoned>0?'▲ În creștere':'Pornește Bagheta Magică'}</div></div>
+    <div class="sc"><div class="si">🏦</div><div class="sv">${fRON(S.ledger.publicBudget)}</div><div class="sl">Buget Public Disponibil</div><div class="sd">${PERSONAS[S.settings.persona]?.label||'Instituție'}</div></div>
+    <div class="sc"><div class="si">🏗️</div><div class="sv">${act}</div><div class="sl">Proiecte Active</div><div class="sd">${S.projects.length} total</div></div>
+    <div class="sc"><div class="si">📋</div><div class="sv">${S.tenders.length}</div><div class="sl">Licitații</div><div class="sd">${openT} deschise</div></div>
+    <div class="sc"><div class="si">⚠️</div><div class="sv" style="color:var(--orange)">${late}</div><div class="sl">Proiecte cu Probleme</div><div class="sd ${late>0?'neg':''}">${late>0?'Necesită atenție':'Totul în regulă!'}</div></div>`;
+  $('act-log').innerHTML=S.actLog.slice(0,5).map(a=>
+    `<div class="act-i"><span class="act-t">${a.t}</span><span>${a.txt}</span></div>`
+  ).join('')||'<p class="tmut tsm">Nicio activitate.</p>';
+  const sc=$('sub-status-dash');
+  if(sc){
+    if(S.sub){
+      const pl=PLANS.find(p=>p.id===S.sub.tier);
+      const usedH=(S.sub.secUsed/3600).toFixed(1);
+      const totalH=S.sub.secTotal<0?'∞':(S.sub.secTotal/3600).toFixed(0);
+      sc.innerHTML=`<div class="badge bg mb8">✓ ACTIV</div><div class="bold">${pl.name}</div>
+        <div class="tsm tmut mt8">Timp utilizat: ${usedH}h / ${totalH}h luna aceasta</div>
+        <div class="tsm tmut">Expiră: ${new Date(S.sub.exp).toLocaleDateString('ro-RO')}</div>`;
+    }else{
+      sc.innerHTML=`<p class="tmut tsm">Nu ai un abonament activ.</p><button class="btn btn-p mt8" style="width:100%" onclick="navigate('sub')">Alege un plan</button>`;
+    }
+  }
+}
+function addAct(txt){
+  const now=nowDate();
+  const t=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  S.actLog.unshift({t,txt});
+  if(S.actLog.length>20)S.actLog.pop();
+}
+function updWandProjectOptions(prefId){
+  const sel=$('w-proj');if(!sel)return;
+  const previous=prefId!=null&&prefId!==undefined?String(prefId):sel.value;
+  const opts=['<option value="">— Selectează proiect —</option>'].concat(
+    S.projects.map(p=>{
+      const used=projectWandAlreadyUsed(p.id);
+      return`<option value="${p.id}"${used?' disabled':''}>${p.name}${used?' · ✓ Bagheta folosită':''} · ${sLabel(p.status)}</option>`;
+    })
+  );
+  sel.innerHTML=opts.join('');
+  let next='';
+  if(previous&&S.projects.some(p=>String(p.id)===previous)&&!projectWandAlreadyUsed(parseInt(previous,10)))next=previous;
+  else{
+    const first=S.projects.find(p=>!projectWandAlreadyUsed(p.id));
+    next=first?String(first.id):'';
+  }
+  sel.value=next;
+  onWandProjectChange();
+}
+function getProjectProcurementSummary(projectId){
+  const rel=S.tenders.filter(t=>t.projectId===projectId);
+  const hasAwarded=rel.some(t=>t.status==='awarded');
+  const hasPipeline=rel.some(t=>t.status==='open'||t.status==='evaluation');
+  return {count:rel.length,hasAwarded,hasPipeline,items:rel};
+}
+function onWandProjectChange(){
+  const pid=parseInt($('w-proj')?.value||'0',10);
+  const p=S.projects.find(x=>x.id===pid);
+  const ai=$('w-ai-insight');
+  if(!p){
+    if(ai)ai.textContent='Selectează un proiect pentru a încărca valorile contabile din sistemul de proiecte publice.';
+    wPreview();
+    return;
+  }
+  const st=sLabel(p.status);
+  const pr=getProjectProcurementSummary(p.id);
+  if(ai)ai.textContent=`Proiect detectat: „${p.name}” · buget ${fRON(p.budget)} · status ${st}. Valorile sunt sincronizate automat din modulul proiecte.`;
+  if(ai)ai.textContent+=` Achiziții asociate: ${pr.count}${pr.hasAwarded?' (contract adjudecat)':''}.`;
+  syncWandFromProject();
+  wPreview();
+}
+function getProjectAccountingValues(p){
+  const real=Math.max(1,parseInt(p.realValue||0,10));
+  const declared=Math.max(real,parseInt(p.declaredValue||0,10));
+  const recFactor=Math.max(20,Math.min(85,Math.round(((declared-real)/Math.max(1,declared))*100)));
+  return {real,declared,recFactor};
+}
+function syncWandFromProject(){
+  const pid=parseInt($('w-proj')?.value||'0',10);
+  const p=S.projects.find(x=>x.id===pid);
+  if(!p)return;
+  const est=getProjectAccountingValues(p);
+  $('w-real')&&($('w-real').value=String(est.real));
+  $('w-decl')&&($('w-decl').value=String(est.declared));
+  $('w-fac')&&($('w-fac').value=String(est.recFactor));
+  $('wf-d')&&($('wf-d').textContent=String(est.recFactor));
+  const ai=$('w-ai-insight');
+  if(ai)ai.textContent=`AI contabil: sincronizat din proiect „${p.name}” → real ${fRON(est.real)}, declarat ${fRON(est.declared)}, factor ${est.recFactor}%.`;
+  wPreview();
+}
+function ensureProjectForWand(cb){
+  if(S.projects.length){cb();return}
+  dlgOpen('Bagheta are nevoie de proiect','Nu există proiecte active sau planificate',
+    `<p class="tsm tmut mb14">Pentru realism satiric, optimizarea trebuie legată de un proiect. Creează unul rapid acum.</p>
+    <div class="fg"><label>Denumire proiect</label><input id="wand-ap-name" placeholder="ex: Canalizare inteligentă cu senzori decorativi" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none"/></div>
+    <div class="fg"><label>Buget (RON)</label><input id="wand-ap-budget" type="number" value="1800000" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none"/></div>
+    <div class="fg"><label>Termen</label><input id="wand-ap-due" type="date" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none"/></div>`,
+    `<button class="btn btn-f" onclick="dlgClose();navigate('proj')">Mai târziu</button>
+     <button class="btn btn-p" onclick="createQuickProjForWand()">Creează &amp; Continuă</button>`
+  );
+}
+function createQuickProjForWand(){
+  const name=$('wand-ap-name')?.value?.trim();
+  const budget=parseInt($('wand-ap-budget')?.value||'0',10);
+  const due=$('wand-ap-due')?.value||new Date(nowTs()+1000*60*60*24*90).toISOString().slice(0,10);
+  if(!name||!budget){toast('Completează datele proiectului','err');return}
+  const id=S.npid++;
+  S.projects.push({id,name,budget,realValue:Math.round(budget*0.66),declaredValue:Math.round(budget*1.22),status:'in_progress',quality:null,bet:null,due,lateS:false,lateF:false});
+  dlgClose();
+  updWandProjectOptions(id);
+  $('w-proj')&&($('w-proj').value=String(id));
+  renderProj();renderDash();
+  toast('Proiect creat și legat de Bagheta Magică','ok');
+}
+
+// ═══ PROFILE DIALOG ═══
+function openProfileDlg(){
+  dlgOpen('Profil Utilizator','',
+    `<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding:14px;background:var(--bg);border-radius:var(--r)">
+      <div class="profile-avatar" style="background:${partyColor(S.user.party)}">${S.user.name.charAt(0).toUpperCase()}</div>
+      <div>
+        <div class="bold" style="font-size:16px">${S.user.name}</div>
+        <div class="tsm tmut">${S.user.fn} · ${S.user.jud}</div>
+        <div class="tsm tmut">Partid: <strong>${S.user.party}</strong> · Cont din: ${S.user.since}</div>
+      </div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Nume și prenume</label><input id="pr-name" value="${S.user.name}" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none"/></div>
+      <div class="fg"><label>Partid</label><select id="pr-party" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
+        ${['PSD','PNL','USR','AUR','UDMR','PP-DD','Independent'].map(p=>`<option${p===S.user.party?' selected':''}>${p}</option>`).join('')}
+      </select></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Funcție</label><select id="pr-fn" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
+        ${['Primar','Viceprimar','Președinte Consiliu Județean','Consilier local','Director Direcție Buget','Inspector ANAP','Șef Serviciu Achiziții'].map(f=>`<option${f===S.user.fn?' selected':''}>${f}</option>`).join('')}
+      </select></div>
+      <div class="fg"><label>Județ</label><select id="pr-jud" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
+        ${['Teleorman','Ilfov','Dolj','Prahova','Olt','Galați','Vâlcea','Dâmbovița','Neamț','Vaslui','Bacău','Constanța'].map(j=>`<option${j===S.user.jud?' selected':''}>${j}</option>`).join('')}
+      </select></div>
+    </div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
+     <button class="btn btn-p" onclick="saveProfile()">Salvează</button>`
+  );
+}
+function saveProfile(){
+  const n=$('pr-name')?.value?.trim();
+  if(!n){toast('Numele este obligatoriu','err');return}
+  S.user.name=n;
+  S.user.party=$('pr-party')?.value;
+  S.user.fn=$('pr-fn')?.value;
+  S.user.jud=$('pr-jud')?.value;
+  dlgClose();applyProfile();
+  toast('Profil actualizat','ok');
+}
+
+// ═══ PROJECTS ═══
+function renderProj(){
+  const f=S.projFilter;
+  let list=S.projects;
+  if(f==='in_progress')list=S.projects.filter(p=>p.status==='in_progress');
+  else if(f==='completed')list=S.projects.filter(p=>p.status==='completed');
+  else if(f==='late')list=S.projects.filter(p=>p.lateF||p.lateS);
+  const el=$('proj-list');
+  if(!el)return;
+  if(!list.length){el.innerHTML=`<div style="text-align:center;padding:38px;color:var(--text2)"><div style="font-size:38px;margin-bottom:10px">📋</div><p>Niciun proiect de afișat.</p></div>`;return}
+  el.innerHTML=list.map(p=>{
+    const late=p.lateF||p.lateS;
+    const bdgs=[
+      late?`<span class="badge br">⏰ Întârziat</span>`:'',
+      p.quality?`<span class="badge ${qBadge(p.quality)}">${qLabel(p.quality)}</span>`:'',
+      p.bet?`<span class="badge bgold">🎲 Pariu activ</span>`:'',
+    ].filter(Boolean);
+    const acts=[];
+    if(p.status==='in_progress'){
+      acts.push(`<button class="btn btn-s btn-sm" onclick="openCompDlg(${p.id})">✓ Finalizează</button>`);
+      if(!p.bet)acts.push(`<button class="btn btn-g btn-sm" onclick="openBetDlg(${p.id})">🎲 Pariază</button>`);
+    }
+    if(p.status==='planned')acts.push(`<button class="btn btn-p btn-sm" onclick="startProj(${p.id})">▶ Începe</button>`);
+    acts.push(`<button class="btn btn-f btn-sm" onclick="openProjDossier(${p.id})">🗂 Dosar</button>`);
+    acts.push(`<button class="btn btn-f btn-sm" onclick="openProjManageDlg(${p.id})">⚙️ Gestionează</button>`);
+    return`<div class="lrow">
+      <span class="ri">${p.status==='completed'?'✅':p.status==='planned'?'📐':late?'⚠️':'🔨'}</span>
+      <div style="flex:1;min-width:0">
+        <div class="rt">${p.name}</div>
+        <div class="rs">${fRON(p.budget)} · ${sLabel(p.status)} · Termen: ${p.due}</div>
+        <div class="rs">Real: ${fRON(p.realValue||0)} · Declarat: ${fRON(p.declaredValue||0)} · Progres lunar: ${(p.monthly?.progress||0).toFixed(0)}%</div>
+        ${bdgs.length?`<div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap">${bdgs.join('')}</div>`:''}
+      </div>
+      <div class="re">${acts.join('')}</div>
+    </div>`;
+  }).join('');
+  $('nbp') && ($('nbp').textContent=S.projects.filter(p=>p.status==='in_progress'||p.lateF).length);
+}
+function filterProj(f,el){
+  S.projFilter=f;
+  document.querySelectorAll('#view-proj .tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');renderProj();
+}
+function startProj(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  p.status='in_progress';renderProj();addAct(`Proiect „${p.name}" a început.`);renderDash();
+  toast(`Proiect început: ${p.name}`,'ok');
+}
+function openProjManageDlg(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  const inp='width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none';
+  dlgOpen('Gestionare Proiect',`Organizator satiric: „${p.name}"`,
+    `<div class="fg"><label>Status proiect</label>
+      <select id="pm-status" style="${inp}">
+        <option value="planned"${p.status==='planned'?' selected':''}>Planificat</option>
+        <option value="in_progress"${p.status==='in_progress'?' selected':''}>În desfășurare</option>
+        <option value="completed"${p.status==='completed'?' selected':''}>Finalizat</option>
+      </select>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Întârziere start</label>
+        <select id="pm-ls" style="${inp}">
+          <option value="0"${!p.lateS?' selected':''}>Nu</option>
+          <option value="1"${p.lateS?' selected':''}>Da</option>
+        </select>
+      </div>
+      <div class="fg"><label>Întârziere finalizare</label>
+        <select id="pm-lf" style="${inp}">
+          <option value="0"${!p.lateF?' selected':''}>Nu</option>
+          <option value="1"${p.lateF?' selected':''}>Da</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Valoare reală proiect (RON)</label><input id="pm-real" type="number" value="${p.realValue||Math.round(p.budget*0.7)}" style="${inp}"/></div>
+      <div class="fg"><label>Valoare declarată proiect (RON)</label><input id="pm-decl" type="number" value="${p.declaredValue||Math.round(p.budget*1.18)}" style="${inp}"/></div>
+    </div>
+    <p class="tsm tmut">Poți marca explicit întârzierile pentru a reflecta realitatea „organizatorică” a proiectului.</p>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
+     <button class="btn btn-p" onclick="saveProjManage(${id})">Salvează schimbările</button>`
+  );
+}
+function saveProjManage(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  const oldStatus=p.status,oldLateS=p.lateS,oldLateF=p.lateF;
+  const rv=parseInt($('pm-real')?.value||'0',10);
+  const dv=parseInt($('pm-decl')?.value||'0',10);
+  p.status=$('pm-status')?.value||p.status;
+  p.lateS=($('pm-ls')?.value==='1');
+  p.lateF=($('pm-lf')?.value==='1');
+  if(!rv||!dv||dv<rv){toast('Valorile contabile trebuie completate (declarată >= reală)','err');return}
+  p.realValue=rv;
+  p.declaredValue=dv;
+  if(p.status==='completed'&&p.lateF&& !p.quality)p.quality='mantuiala';
+  dlgClose();
+  renderProj();renderDash();updWandProjectOptions();
+  if(oldStatus!==p.status)addAct(`Status proiect „${p.name}" schimbat: ${sLabel(oldStatus)} → ${sLabel(p.status)}.`);
+  if(oldLateS!==p.lateS)addAct(`Proiect „${p.name}”: întârziere start ${p.lateS?'marcată':'eliminată'}.`);
+  if(oldLateF!==p.lateF)addAct(`Proiect „${p.name}”: întârziere finalizare ${p.lateF?'marcată':'eliminată'}.`);
+  toast('Proiect actualizat în organizator','ok');
+}
+function openProjDossier(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  const docs=(p.dossier||[]).slice(0,12).map(d=>`<div class="rh-row"><span>${d.t}</span><span>${d.txt}</span></div>`).join('')||'<p class="tmut tsm">Dosar gol.</p>';
+  const mt=p.monthly||{progress:0,contractorPerf:60,changeOrders:0};
+  const tend=S.tenders.filter(t=>t.projectId===p.id);
+  const tendRows=tend.length?tend.map(t=>`<div class="rh-row"><span>${t.name}</span><span>${tsLabel(t.status)}${t.winner?` · ${t.winner}`:''}</span></div>`).join(''):'<p class="tmut tsm">Fără licitații asociate.</p>';
+  dlgOpen(`Dosar electronic: ${p.name}`,'Istoric procedural și operațional',
+    `<div class="gline"><span class="gk">Progres</span><span class="gv">${mt.progress.toFixed(0)}%</span></div>
+    <div class="gline"><span class="gk">Performanță contractor</span><span class="gv">${mt.contractorPerf}</span></div>
+    <div class="gline"><span class="gk">Change orders</span><span class="gv">${mt.changeOrders}</span></div>
+    <div class="gline"><span class="gk">Licitații asociate</span><span class="gv">${tend.length}</span></div>
+    <div class="mb8 mt8">${tendRows}</div>
+    <hr class="sep"/>
+    <div>${docs}</div>`,
+    `<button class="btn btn-p" onclick="dlgClose()">Închide</button>`
+  );
+}
+function openNewProjDlg(){
+  const inp='width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none';
+  dlgOpen('Proiect Public Nou','Conform HG nr. [REDACTAT]/2024 privind achizițiile publice',
+    `<div class="fg"><label>Denumire proiect</label><input type="text" id="np-n" placeholder="ex: Reabilitare stradă principală" style="${inp}"/></div>
+    <div class="fg-row">
+      <div class="fg"><label>Valoare reală proiect (RON)</label><input type="number" id="np-rv" placeholder="ex: 980000" style="${inp}"/></div>
+      <div class="fg"><label>Valoare declarată proiect (RON)</label><input type="number" id="np-dv" placeholder="ex: 1800000" style="${inp}"/></div>
+    </div>
+    <div class="fg"><label>Dată limită</label><input type="date" id="np-d" style="${inp}"/></div>
+    <div class="fg"><label>Status inițial</label><select id="np-s" style="${inp}"><option value="planned">Planificat</option><option value="in_progress">În desfășurare</option></select></div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button><button class="btn btn-p" onclick="addProj()">Adaugă Proiect</button>`
+  );
+}
+function addProj(){
+  const n=$('np-n')?.value?.trim(),d=$('np-d')?.value,s=$('np-s')?.value;
+  const rv=parseInt($('np-rv')?.value||'0',10),dv=parseInt($('np-dv')?.value||'0',10);
+  if(!n||!d||!rv||!dv){toast('Completează toate câmpurile','err');return}
+  if(dv<rv){toast('Valoarea declarată nu poate fi mai mică decât valoarea reală','err');return}
+  const b=dv;
+  S.projects.push({id:S.npid++,name:n,budget:b,realValue:rv,declaredValue:dv,status:s,quality:null,bet:null,due:d,lateS:false,lateF:false});
+  dlgClose();renderProj();renderDash();updWandProjectOptions();addAct(`Proiect nou adăugat: „${n}" (${fRON(dv)} declarat / ${fRON(rv)} real).`);
+  toast(`Proiect adăugat: ${n}`,'ok');
+}
+function openCompDlg(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  dlgOpen('Finalizează Proiect',`„${p.name}"`,
+    `<p class="tsm tmut mb14">Selectează calitatea reală a proiectului.${p.bet?` Ai un pariu activ pe <strong>„${qLabel(p.bet.quality)}"</strong>.`:''}</p>
+    ${[['mantuiala','🔴','De mântuială','proiect finalizat superficial',1],['moderata','🟠','Calitate moderată','acceptabil, fără probleme grave',2],['ridicata','🟢','Calitate ridicată','proiect exemplar (neobișnuit, dar posibil)',3]].map(([q,ic,lb,desc,pts])=>
+      `<label class="opt-row"><input type="radio" name="cq" value="${q}"/><div><div class="bold">${ic} ${lb}</div><div class="tsm tmut">+${pts} punct${pts>1?'e':''} reputație. ${desc}</div></div></label>`
+    ).join('')}`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button><button class="btn btn-s" onclick="compProj(${id})">Finalizează</button>`
+  );
+}
+function compProj(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  const q=document.querySelector('input[name="cq"]:checked')?.value;
+  if(!q){toast('Selectează calitatea','err');return}
+  const qpts={mantuiala:1,moderata:2,ridicata:3};
+  const bonus={mantuiala:2,moderata:3,ridicata:4};
+  let bp=qpts[q],bonPts=0,betMsg='';
+  if(p.bet){
+    if(p.bet.quality===q){bonPts=bonus[q];betMsg=` Pariu CÂȘTIGAT! +${bonPts} puncte bonus.`}
+    else betMsg=' Pariul a fost pierdut.';
+  }
+  p.status='completed';p.quality=q;p.bet=null;
+  dlgClose();renderProj();
+  chgRep(bp+bonPts,`Proiect „${p.name}" finalizat (${qLabel(q)})`);
+  addAct(`Proiect „${p.name}" finalizat.${betMsg}`);
+  renderDash();
+}
+function openBetDlg(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  dlgOpen('🎲 Pariază pe Calitate',`Proiect: „${p.name}"`,
+    `<p class="tsm tmut mb14">Pariază pe calitatea finală. Dacă ghicești, obții puncte bonus. Dacă nu, pierzi doar oportunitatea.</p>
+    ${[['mantuiala','🔴','De mântuială',2],['moderata','🟠','Calitate moderată',3],['ridicata','🟢','Calitate ridicată',4]].map(([q,ic,lb,b])=>
+      `<label class="opt-row"><input type="radio" name="bq" value="${q}"/><div><div class="bold">${ic} ${lb}</div><div class="tsm tmut">Dacă ghicești: +${b} puncte bonus</div></div></label>`
+    ).join('')}`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button><button class="btn btn-g" onclick="placeBet(${id})">🎲 Plasează Pariul</button>`
+  );
+}
+function placeBet(id){
+  const q=document.querySelector('input[name="bq"]:checked')?.value;
+  if(!q){toast('Selectează o variantă','err');return}
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  p.bet={quality:q};dlgClose();renderProj();
+  toast(`Pariu plasat: „${qLabel(q)}" pentru „${p.name}"`,'ok');
+}
+
+// ═══ TENDERS ═══
+function renderTend(){
+  const el=$('tend-list');if(!el)return;
+  el.innerHTML=S.tenders.map(t=>{
+    const acts=[];
+    if(t.status==='open')acts.push(`<button class="btn btn-p btn-sm" onclick="advanceTender(${t.id})">→ Clarificări</button>`);
+    if(t.status==='clarificari')acts.push(`<button class="btn btn-p btn-sm" onclick="advanceTender(${t.id})">→ Depuneri</button>`);
+    if(t.status==='depuneri')acts.push(`<button class="btn btn-p btn-sm" onclick="advanceTender(${t.id})">→ Comisie</button>`);
+    if(t.status==='evaluation')acts.push(`<button class="btn btn-s btn-sm" onclick="advanceTender(${t.id})">Evaluează Oferte</button>`);
+    if(t.status==='awarded')acts.push(`<button class="btn btn-f btn-sm" onclick="advanceTender(${t.id})">→ Execuție</button>`);
+    if(t.status==='contested')acts.push(`<button class="btn btn-f btn-sm" onclick="dismissContest(${t.id})">Respinge Contestație</button>`);
+    const proj=t.projectId?(S.projects.find(p=>p.id===t.projectId)?.name||'necunoscut'):'—';
+    const bidsInfo=t.bids?.length?` · Oferte: ${t.bids.length}`:'';
+    const riskInfo=t.auditRisk?` · Risc audit: ${t.auditRisk}%`:'';
+    const winnerInfo=t.winner?` · Câștigător: ${t.winner}`:'';
+    const evalInfo=t.evalSummary?`<div class="tsm tmut">${t.evalSummary}</div>`:'';
+    return`<div class="lrow">
+      <span class="ri">${t.status==='awarded'?'✅':t.status==='contested'?'⚖️':t.status==='evaluation'?'🔍':t.status==='executie'?'🚧':'📋'}</span>
+      <div style="flex:1;min-width:0"><div class="rt">${t.name}</div>
+        <div class="rs">${fRON(t.budget)} · Proiect: ${proj}${winnerInfo}${bidsInfo}${riskInfo}</div>${evalInfo}</div>
+      <div class="re"><span class="badge ${tsBadge(t.status)}">${tsLabel(t.status)}</span>${acts.join('')}</div>
+    </div>`;
+  }).join('')||`<div style="text-align:center;padding:38px;color:var(--text2)"><div style="font-size:38px;margin-bottom:10px">📋</div><p>Nicio licitație înregistrată.</p></div>`;
+  const open=S.tenders.filter(t=>t.status==='open').length;
+  $('nbt') && ($('nbt').textContent=open, open>0?$('nbt').classList.remove('hid'):$('nbt').classList.add('hid'));
+}
+function advanceTender(id){
+  const t=S.tenders.find(x=>x.id===id);if(!t)return;
+  if(t.status==='evaluation'){
+    evaluateTenderNow(t);
+    renderTend();renderDash();renderJust();
+    return;
+  }
+  const next={open:'clarificari',clarificari:'depuneri',depuneri:'evaluation',awarded:'executie'}[t.status];
+  if(!next)return;
+  t.status=next;renderTend();renderDash();
+  toast(`Licitație mutată în etapa: ${tsLabel(t.status)}`,'ok');
+}
+function dismissContest(id){
+  const t=S.tenders.find(x=>x.id===id);if(!t)return;
+  if(!t.winner)evaluateTenderNow(t);
+  t.status='awarded';
+  t.auditRisk=Math.max(4,Math.round((t.auditRisk||12)*0.65));
+  t.evalSummary=`Contestație respinsă. Risc rămas ${t.auditRisk}%`;
+  renderTend();
+  toast('Contestație respinsă pe motive procedurale','ok');
+  addAct(`Contestația pentru „${t.name}" respinsă. Contractul rămâne adjudecat.`);
+}
+function openNewTendDlg(){
+  const eligible=S.projects.filter(p=>['planned','in_progress'].includes(p.status));
+  if(!eligible.length){toast('Ai nevoie de un proiect planificat sau în desfășurare înainte de a publica licitații.','warn');navigate('proj');return}
+  const inp='width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none';
+  dlgOpen('Licitație Publică Nouă','Conform Legii 98/2016 (interpretare flexibilă)',
+    `<div class="fg"><label>Denumire</label><input type="text" id="nt-n" placeholder="ex: Furnizare produse de curățat premium" style="${inp}"/></div>
+    <div class="fg"><label>Proiect asociat (obligatoriu)</label><select id="nt-pid" style="${inp}">
+      <option value="">— Selectează proiect —</option>
+      ${eligible.map(p=>`<option value="${p.id}">${p.name}</option>`).join('')}
+    </select></div>
+    <div class="fg"><label>Valoare estimată (RON)</label><input type="number" id="nt-b" placeholder="ex: 2500000" style="${inp}"/></div>
+    <div class="fg"><label>Tip procedură</label><select id="nt-type" style="${inp}">
+      <option value="open">Licitatie deschisă</option><option value="restricted">Licitatie restrânsă</option><option value="direct">Achiziție directă</option>
+    </select></div>
+    <p style="font-size:11px;color:var(--text3);margin-top:6px">Scorarea ofertelor ține cont de preț, capabilitate tehnică, conformitate și contextul proiectului.</p>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button><button class="btn btn-p" onclick="addTend()">Publică Licitația</button>`
+  );
+}
+function addTend(){
+  const n=$('nt-n')?.value?.trim(),b=parseInt($('nt-b')?.value);
+  const pid=parseInt($('nt-pid')?.value||'0',10)||null;
+  const procType=$('nt-type')?.value||'open';
+  if(!n||!b||!pid){toast('Completează câmpurile și selectează proiectul','err');return}
+  const p=S.projects.find(x=>x.id===pid);
+  if(!p){toast('Proiect invalid','err');return}
+  const complexity=clamp(Math.round((b/600000)+((p.lateS||p.lateF)?1:0)),1,5);
+  S.tenders.push({id:S.ntid++,projectId:pid,name:n,budget:b,status:'open',winner:null,bids:[],winnerScore:0,auditRisk:0,procType,complexity,evalSummary:''});
+  dlgClose();renderTend();addAct(`Licitație nouă: „${n}" (${fRON(b)})`);
+  toast(`Licitație publicată: ${n}`,'ok');renderDash();
+}
+
+// ═══ WAND ═══
+function wFactor(v){$('wf-d')&&($('wf-d').textContent=v);wPreview()}
+function wPreview(){
+  const r=parseFloat($('w-real')?.value)||0;
+  const d=parseFloat($('w-decl')?.value)||0;
+  const f=parseFloat($('w-fac')?.value||50)/100;
+  if(r>0&&d>0&&d>=r){
+    const diff=d-r,surplus=diff*f;
+    $('w-surp')&&($('w-surp').textContent=fRON(surplus));
+    $('w-brkd')&&($('w-brkd').innerHTML=[
+      ['Valoare reală proiect',fRON(r)],['Valoare declarată/bugetată',fRON(d)],
+      ['Diferență brută',fRON(diff)],['Factor de optimizare',(f*100).toFixed(0)+'%'],
+      ['Surplus maxim teoretic',fRON(surplus)],['Surplus obținut efectiv',S.activeSession?fRON(S.activeSession.dynamicSurplus||0):fRON(0)],
+      ['Rezervă neauditabilă',fRON(Math.max(0,diff-surplus))],
+    ].map(([k,v])=>`<div><span>${k}</span><span style="color:var(--yellow)">${v}</span></div>`).join(''));
+    $('w-res')?.classList.add('show');
+  }else{$('w-res')?.classList.remove('show')}
+}
+function ensureWandTimer(){
+  if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
+  if(S.activeSession)S.sessTimer=setInterval(tickSession,1000);
+}
+function updateSessQuotaHints(){
+  const el=$('sess-quota-hints');if(!el||!S.activeSession)return;
+  const elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
+  const left=wandAvailSec();
+  const q0=S.activeSession.quotaSecAtStart;
+  const capLabel=q0===Infinity||q0===-1?'nelimitat (abonament)':fSec(q0);
+  el.innerHTML=`Timp rămas din cota curentă: <strong>${fSec(left)}</strong> · Durată sesiune: <strong>${fTimer(elapsed)}</strong> · Cota la start: <strong>${capLabel}</strong>`;
+}
+function syncWandSessionUI(){
+  if(!S.activeSession){
+    $('wand-form-wrap')?.classList.remove('hid');
+    $('sess-active-card')?.classList.add('hid');
+    return;
+  }
+  $('wand-form-wrap')?.classList.add('hid');
+  $('sess-active-card')?.classList.remove('hid');
+  const as=S.activeSession;
+  const elapsed=Math.floor((nowTs()-as.startReal)/1000);
+  $('sess-timer-disp')&&($('sess-timer-disp').textContent=fTimer(elapsed));
+  $('sess-surplus-disp')&&($('sess-surplus-disp').textContent=fRON(Math.round(as.dynamicSurplus||0)));
+  $('sess-info-disp')&&($('sess-info-disp').textContent=`Proiect: ${as.projectName||'-'} · Valoare reală: ${fRON(as.realCost)} · Declarată: ${fRON(as.declCost)} · Factor: ${(as.factor*100).toFixed(0)}%`);
+  updateSessQuotaHints();
+}
+function startSession(){
+  ensureProjectForWand(()=>{
+  if(S.activeSession){toast('O sesiune de optimizare este deja activă.','warn');return}
+  const projectId=parseInt($('w-proj')?.value||'0',10);
+  if(!projectId){toast('Selectează un proiect pentru sesiune','err');return}
+  const linked=S.projects.find(p=>p.id===projectId);
+  if(!linked){toast('Proiect invalid pentru sesiune','err');return}
+  const pr=getProjectProcurementSummary(linked.id);
+  if(!pr.count||!pr.items.some(x=>['evaluation','awarded','executie','contested','clarificari','depuneri'].includes(x.status))){
+    toast('Acest proiect nu are achiziții asociate. Creează o licitație pentru integrare completă.','warn');
+    navigate('tend');
+    return;
+  }
+  // Regula strictă: valorile vin exclusiv din sistemul de proiecte publice.
+  const est=getProjectAccountingValues(linked);
+  $('w-real')&&($('w-real').value=String(est.real));
+  $('w-decl')&&($('w-decl').value=String(est.declared));
+  $('w-fac')&&($('w-fac').value=String(est.recFactor));
+  $('wf-d')&&($('wf-d').textContent=String(est.recFactor));
+  wPreview();
+  const rr=parseFloat($('w-real')?.value)||0;
+  const dd=parseFloat($('w-decl')?.value)||0;
+  if(!rr||!dd){toast('Simulatorul AI nu a putut estima valorile','err');return}
+  const f2=parseFloat($('w-fac')?.value||50)/100;
+  if(dd<rr){toast('Modelul AI a detectat inconsistență contabilă (declarat < real)','err');return}
+  const quotaSecAtStart=wandQuotaBase();
+  if(quotaSecAtStart<=0&&quotaSecAtStart!==Infinity){
+    toast('Nu ai timp disponibil pentru Bagheta Magică. Cumpără ore sau abonează-te.','err');
+    navigate('sub');return;
+  }
+  const prior=projectWandAlreadyUsed(projectId);
+  if(prior){
+    toast('Bagheta Magică a fost deja folosită pe acest proiect. O singură optimizare „profundă” per proiect.','err');
+    return;
+  }
+  S.activeSession={id:nowTs(),startReal:nowTs(),realCost:rr,declCost:dd,factor:f2,projectId,projectName:linked?.name||'Proiect necunoscut',dynamicSurplus:0,lastTickAt:nowTs(),quotaSecAtStart:quotaSecAtStart===Infinity?Infinity:quotaSecAtStart};
+  ensureWandTimer();
+  updWandChip();
+  $('wand-form-wrap')?.classList.add('hid');
+  $('sess-active-card')?.classList.remove('hid');
+  $('sess-info-disp')&&($('sess-info-disp').textContent=`Proiect: ${linked?.name||'-'} · Valoare reală: ${fRON(rr)} · Declarată: ${fRON(dd)} · Factor: ${(f2*100).toFixed(0)}%`);
+  $('sess-surplus-disp')&&($('sess-surplus-disp').textContent=fRON(0));
+  updateSessQuotaHints();
+  toast('✨ Sesiune de optimizare pornită!','ok');
+  if(f2>=0.7)setTimeout(()=>triggerDNA(),5000);
+  });
+}
+function tickSession(){
+  if(!S.activeSession)return;
+  if(!S.projects.some(p=>p.id===S.activeSession.projectId)){
+    stopSession('orphan');
+    return;
+  }
+  const elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
+  const now=nowTs();
+  const deltaSec=Math.max(1,Math.floor((now-(S.activeSession.lastTickAt||now))/1000));
+  S.activeSession.lastTickAt=now;
+  const maxSurplus=Math.max(0,(S.activeSession.declCost-S.activeSession.realCost)*S.activeSession.factor);
+  const wr=diffTune().wandRate;
+  const dynamicRate=Math.max(0.04,0.24-(elapsed/1800))*wr;
+  const increment=Math.min(maxSurplus-S.activeSession.dynamicSurplus,maxSurplus*dynamicRate*deltaSec/60);
+  S.activeSession.dynamicSurplus+=Math.max(0,increment);
+  $('sess-timer-disp')&&($('sess-timer-disp').textContent=fTimer(elapsed));
+  $('sess-surplus-disp')&&($('sess-surplus-disp').textContent=fRON(Math.round(S.activeSession.dynamicSurplus)));
+  const mins=Math.floor(elapsed/60),secs=elapsed%60;
+  $('wand-chip-timer')&&($('wand-chip-timer').textContent=`${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`);
+  updateSessQuotaHints();
+  const avail=wandAvailSec();
+  if(avail<=0&&avail!==Infinity){stopSession('time');return}
+  if(maxSurplus>0&&Math.round(S.activeSession.dynamicSurplus)>=Math.round(maxSurplus)){stopSession('surplus');return}
+}
+function stopSession(reason){
+  if(!S.activeSession)return;
+  clearInterval(S.sessTimer);S.sessTimer=null;
+  let elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
+  const q0=S.activeSession.quotaSecAtStart;
+  if(q0!==Infinity&&q0!==-1)elapsed=Math.min(elapsed,q0);
+  const {realCost,declCost,factor,projectId,projectName}=S.activeSession;
+  const surplus=Math.round(S.activeSession.dynamicSurplus||0);
+  if(S.sub){S.sub.secUsed+=elapsed}
+  else{S.purchSecUsed+=elapsed}
+  S.siphoned+=surplus;
+  S.ledger.redistributedSurplus+=surplus;
+  S.ledger.publicBudget=Math.max(0,S.ledger.publicBudget-surplus);
+  if(surplus>500000&&Math.random()<0.35){
+    const firm=(S.tenders.find(t=>t.projectId===projectId)?.winner)||'SC Intermediar Necunoscut';
+    if(!S.worldMemory.blacklistedFirms.includes(firm)&&Math.random()<0.4)S.worldMemory.blacklistedFirms.push(firm);
+  }
+  // Record session
+  const sess={id:S.activeSession.id,startReal:S.activeSession.startReal,elapsed,realCost,declCost,factor,surplus,projectId,projectName};
+  S.sessions.unshift(sess);
+  const lp=S.projects.find(x=>x.id===projectId);
+  if(lp)lp.wandUsed=true;
+  S.activeSession=null;
+  $('wand-form-wrap')?.classList.remove('hid');
+  $('sess-active-card')?.classList.add('hid');
+  $('sess-timer-disp')&&($('sess-timer-disp').textContent='00:00:00');
+  updWandChip();updWandQuota();renderSessions();renderDash();
+  updWandProjectOptions(projectId);
+  if(reason==='orphan')addAct(`Sesiune oprită: proiect inexistent. ${fTimer(elapsed)} · ${fRON(surplus)}.`);
+  else addAct(`Sesiune Bagheta Magică pe „${projectName}”: ${fTimer(elapsed)} · surplus dinamic ${fRON(surplus)}.`);
+  recalcJudiciaryPressure();
+  if(reason==='time')toast('Timp epuizat! Sesiunea s-a oprit automat.','warn');
+  else if(reason==='surplus')toast('Surplus maxim extras — nu mai rămâne nimic de optimizat pe această sesiune.','ok');
+  else if(reason==='orphan')toast('Proiectul nu mai există — sesiune oprită.','warn');
+  else toast(`✨ Sesiune finalizată! ${fRON(surplus)} „optimizați" în ${fTimer(elapsed)}.`,'ok');
+  updDebug();
+}
+function updWandChip(){
+  const chip=$('wand-chip');if(!chip)return;
+  if(S.activeSession)chip.classList.remove('hid');
+  else chip.classList.add('hid');
+}
+function updWandQuota(){
+  const avail=wandAvailSec();
+  $('wand-quota-chip')&&($('wand-quota-chip').textContent=`⏱ ${fSec(avail)} disponibile`);
+  $('wq-disp')&&($('wq-disp').textContent=fSec(avail));
+  $('wand-buy-hours-btn')?.classList.toggle('hid',!!S.sub);
+  if(S.activeSession)updateSessQuotaHints();
+  updDebug();
+}
+function renderSessions(){
+  const el=$('sessions-list');if(!el)return;
+  if(!S.sessions.length){el.innerHTML=`<div style="text-align:center;padding:28px;color:var(--text2)"><div style="font-size:32px;margin-bottom:8px">✨</div><p class="tsm">Nicio sesiune înregistrată. Pornește prima sesiune!</p></div>`;return}
+  el.innerHTML=S.sessions.map(s=>{
+    const d=new Date(s.startReal);
+    const ts=`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+    return`<div class="sess-item">
+      <span class="sess-time">${ts}</span>
+      <span>${s.projectName||'Fără proiect'} · Factor ${(s.factor*100).toFixed(0)}% · ${fRON(s.realCost)} → ${fRON(s.declCost)}</span>
+      <span class="sess-dur">${fTimer(s.elapsed)}</span>
+      <span class="sess-surplus">${fRON(s.surplus)}</span>
+    </div>`;
+  }).join('');
+}
+// ═══ EXTRA VIEWS ═══
+function renderAudit(){
+  const el=$('audit-log');if(!el)return;
+  const ledger=`<div class="card-accent-o" style="padding:10px;border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px">
+    <div class="gline"><span class="gk">Buget public</span><span class="gv">${fRON(S.ledger.publicBudget)}</span></div>
+    <div class="gline"><span class="gk">Surplus redistribuit</span><span class="gv">${fRON(S.ledger.redistributedSurplus)}</span></div>
+    <div class="gline"><span class="gk">Cheltuieli influență</span><span class="gv">${fRON(S.ledger.influenceSpend)}</span></div>
+    <div class="gline"><span class="gk">Cost reputațional</span><span class="gv">${fRON(S.ledger.reputationCost)}</span></div>
+  </div>`;
+  if(!S.actLog.length){el.innerHTML=ledger+'<p class="tmut tsm">Nu există acțiuni auditate.</p>';return}
+  el.innerHTML=ledger+S.actLog.map((a,i)=>`<div class="act-i"><span class="act-t">${a.t}</span><span>#${String(i+1).padStart(2,'0')} · ${a.txt}</span></div>`).join('');
+}
+function renderPress(){
+  const score=computePressDisplayScore();
+  const pel=$('press-score');
+  if(pel){
+    const channels=PRESS_CHANNELS.map(c=>{
+      const hostile=S.worldMemory.hostilePress.includes(c);
+      return `<div class="gline"><span class="gk">${c.replace('_',' ')}</span><span class="gv">${hostile?'ostil':'neutral/controlabil'}</span></div>`;
+    }).join('');
+    pel.innerHTML=`
+      <div class="gline"><span class="gk">Scor imagine publică</span><span class="gv">${score}/100</span></div>
+      <div class="prog mb8"><div class="pb ${score>=60?'pb-g':score>=35?'pb-o':'pb-b'}" style="width:${score}%"></div></div>
+      <div class="gline"><span class="gk">Stare narativă</span><span class="gv">${score>=65?'Control ridicat':score>=40?'Disputată':'Crisis mode'}</span></div>
+      ${channels}
+      <div class="tsm tmut" style="margin-top:4px">${score>=60?'Narațiune controlată, apariții TV pozitive.':score>=35?'Imagine mixtă, întrebări incomode în conferințe.':'Presiune mare în media de investigație.'}</div>`;
+  }
+  const headlines=[
+    `„Surse”: ${S.user.name||'Oficial local'} susține că „totul e procedural”.`,
+    `Editorial: ${S.siphoned>900000?'fluxuri financiare neobișnuit de creative':'achizițiile locale intră în atenția publică'}.`,
+    `${S.justice?'Breaking: dosar în lucru, reacții politice împărțite.':'Breaking: opoziția cere transparență totală în licitații.'}`,
+  ];
+  $('press-feed')&&($('press-feed').innerHTML=headlines.map(h=>`<div class="act-i"><span class="act-t">🗞️</span><span>${h}</span></div>`).join(''));
+  $('press-history')&&($('press-history').innerHTML=(S.pressHistory.length
+    ?S.pressHistory.slice(0,10).map(h=>`<div class="act-i"><span class="act-t">${h.t}</span><span>${h.txt}</span></div>`).join('')
+    :'<p class="tmut tsm">Nicio intervenție narativă înregistrată.</p>'));
+}
+function pressAction(type){
+  const map={
+    briefing:{delta:8,cost:0,msg:'Briefing oficial: mesaj disciplinat către presă.',channel:'tv_local'},
+    campaign:{delta:15,cost:25,msg:'Campanie pozitivă lansată pe posturi partenere.',channel:'tv_national'},
+    diversion:{delta:10,cost:12,msg:'Diversiune media: agenda publică a fost deturnată.',channel:'social'},
+    counter:{delta:18,cost:40,msg:'Contraatac: investigațiile au fost discreditate agresiv.',channel:'investigatii'},
+  };
+  const cfg=map[type];if(!cfg)return;
+  const effectiveCost=cfg.cost===0?0:Math.max(1,Math.ceil(cfg.cost*diffTune().pressCost));
+  if(S.rep<effectiveCost){toast(`Ai nevoie de ${effectiveCost} puncte reputație pentru această acțiune`,'err');return}
+  if(effectiveCost>0){chgRep(-effectiveCost,`Control narativ presă (${type})`,true);S.ledger.reputationCost+=effectiveCost;S.ledger.influenceSpend+=effectiveCost*1000}
+  const hostile=S.worldMemory.hostilePress.includes(cfg.channel)?7:0;
+  S.pressTone=Math.min(100,Math.max(0,S.pressTone+cfg.delta-hostile-((S.justice?.stage||'clean')!=='clean'?4:0)));
+  if(Math.random()<0.18&&!S.worldMemory.hostilePress.includes(cfg.channel))S.worldMemory.hostilePress.push(cfg.channel);
+  const now=nowDate();
+  const t=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  S.pressHistory.unshift({t,txt:`[${cfg.channel}] ${cfg.msg}`});
+  if(S.pressHistory.length>30)S.pressHistory.pop();
+  addAct(`Presă: ${cfg.msg}`);
+  recalcJudiciaryPressure();
+  renderPress();
+  toast('Acțiune de control narativ executată','ok');
+}
+function renderOps(){
+  const el=$('ops-state');if(!el)return;
+  const openProjects=S.projects.filter(p=>p.status==='in_progress').length;
+  const wand=S.activeSession?'ACTIVĂ':'IDLE';
+  el.innerHTML=`
+    <div class="gline"><span class="gk">Proiecte în execuție</span><span class="gv">${openProjects}</span></div>
+    <div class="gline"><span class="gk">Canal optimizare contabilă</span><span class="gv">${wand}</span></div>
+    <div class="gline"><span class="gk">Presiune juridică</span><span class="gv">${S.judiciaryRisk}%</span></div>
+    <div class="gline"><span class="gk">Etapă justiție</span><span class="gv">${S.justice.stage}</span></div>
+    <div class="gline"><span class="gk">Fereastră operațională estimată</span><span class="gv">${S.judiciaryRisk>70?'Foarte scurtă':S.judiciaryRisk>35?'Medie':'Confortabilă'}</span></div>`;
+}
+function updJudiciaryRisk(){
+  const fundRisk=Math.min(70,Math.round(S.siphoned/250000));
+  const justiceRisk=(S.justice?.stage==='clean'||S.justice?.stage==='monitorizare')?0:(S.justice?.stage==='ancheta'?25:40);
+  const sessionRisk=S.activeSession&&S.activeSession.factor>=0.7?12:0;
+  S.judiciaryRisk=Math.min(100,fundRisk+justiceRisk+sessionRisk);
+}
+
+// ═══ JUSTICE ═══
+function renderJust(){
+  updJudiciaryRisk();
+  recalcJudiciaryPressure();
+  const el=$('j-status');if(!el)return;
+  const stress=S.judiciaryRisk>70?'critic':S.judiciaryRisk>35?'ridicat':'scăzut';
+  const riskCard=`<div class="card mb14">
+    <div class="ch"><h3>Indice Presiune Judiciară</h3><p>Calculat din fonduri, evenimente DNA și comportament operațional</p></div>
+    <div class="cc">
+      <div class="gline"><span class="gk">Fonduri „optimizate” totale</span><span class="gv">${fRON(S.siphoned)}</span></div>
+      <div class="gline"><span class="gk">Nivel risc estimat</span><span class="gv">${S.judiciaryRisk}% (${stress})</span></div>
+      <div class="prog"><div class="pb ${S.judiciaryRisk>70?'pb-o':'pb-b'}" style="width:${S.judiciaryRisk}%"></div></div>
+      <p class="tsm tmut mt8">${S.siphoned>1200000?'Sumele mari atrag atenția automată a instituțiilor și a presei.':'Expunerea financiară este încă sub pragurile de panică.'}</p>
+    </div>
+  </div>`;
+  const stage=S.justice?.stage||'clean';
+  if(stage==='clean'||stage==='monitorizare'){
+    el.innerHTML=`<div class="jcard clean">
+      <div class="ji">${stage==='clean'?'😇':'🕵️'}</div><div class="jt">${stage==='clean'?'Nu ești urmărit penal':'Ești monitorizat'}</div>
+      <div class="jd">${stage==='clean'?'Momentan nu există dosare penale active. Menține un profil discret!':'Instituțiile colectează date și corelează contractele.'}</div>
+    </div>${riskCard}`;
+  }else if(stage==='ancheta'){
+    const mc=manipCost('ancheta');
+    el.innerHTML=`<div class="jcard danger">
+      <div class="ji">🔍</div><div class="jt" style="color:var(--red)">Ești în anchetă DNA!</div>
+      <div class="jd">Anchetă activă pe achiziții și fluxuri contabile.</div>
+      <div style="margin-top:14px">${S.rep>=mc
+        ?`<button class="btn btn-d" onclick="manipJust('ancheta')">⚖️ Manipulează Sistemul Judiciar (cost: ${mc} puncte)</button>`
+        :`<div class="tsm" style="color:var(--red)">Insuficiente puncte (${S.rep}/${mc} necesare).</div>`
+      }</div></div>${riskCard}`;
+  }else{
+    const mc2=manipCost('puscarie');
+    el.innerHTML=`<div class="jcard danger">
+      <div class="ji">⛓️</div><div class="jt" style="color:var(--red)">Fază juridică severă: ${stage}</div>
+      <div class="jd">Cauza a escaladat în instanță. Presiune procedurală maximă.</div>
+      <div style="margin-top:14px">${S.rep>=mc2
+        ?`<button class="btn btn-d" onclick="manipJust('puscarie')">⚖️ Manipulează Sistemul Judiciar (cost: ${mc2} puncte)</button>`
+        :`<div class="tsm" style="color:var(--red)">Insuficiente puncte (${S.rep}/${mc2} necesare).</div>`
+      }</div></div>${riskCard}
+      <div class="card"><div class="ch"><h3>Timeline dosar</h3></div><div class="cc">${(S.justice.timeline||[]).slice(0,8).map(x=>`<div class="rh-row"><span>${x.t}</span><span class="rd">${x.stage} · ${x.pressure}%</span></div>`).join('')||'<p class="tmut tsm">Fără intrări.</p>'}</div></div>`;
+  }
+  updRep();
+}
+function simAncheta(){
+  S.justice.debugPin=true;
+  S.justice.dnaEscalation=false;
+  S.justice.stage='ancheta';
+  S.justice.pressure=65;
+  $('nbj')?.classList.remove('hid');renderJust();renderOps();
+  toast('🚨 Investigație DNA declanșată!','err');
+  updDebug();
+}
+function simPuscarie(){
+  S.justice.debugPin=true;
+  S.justice.dnaEscalation=false;
+  S.justice.stage='recurs';
+  S.justice.pressure=95;
+  $('nbj')?.classList.remove('hid');renderJust();renderOps();
+  toast('⛓️ Condamnat! Ai nevoie de ajutor juridic.','err');
+  updDebug();
+}
+function manipJust(type){
+  const cost=manipCost(type==='ancheta'?'ancheta':'puscarie');
+  if(S.rep<cost){toast(`Insuficiente puncte (${S.rep}/${cost})`,'err');return}
+  dlgOpen('⚖️ Manipulare Sistem Judiciar','Acțiune satirică — complet fictivă',
+    `<div style="background:linear-gradient(135deg,#1a0000,#2d0000);border:1px solid var(--red);border-radius:var(--r);padding:13px 15px;margin-bottom:13px;color:#fff">
+      <div style="color:#ff6b6b;font-weight:700;margin-bottom:3px">⚠️ Satirizează fenomenul real</div>
+      <div style="font-size:12px;opacity:.7">Parodiază mecanisme prin care politicieni au scăpat de condamnări prin prescripție, influență sau modificări legislative. Ex: cazul Marian Vanghelie — dosar 11 ani, prescris în 2025.</div>
+    </div>
+    <p class="tsm mb14">Vei „cheltui" <strong>${cost} puncte de reputație</strong>. Dupa acțiune vei rămâne cu <strong>${S.rep-cost}</strong> puncte.</p>
+    <div style="background:var(--bg);padding:11px;border-radius:var(--r);font-size:13px">
+      <div class="flex" style="justify-content:space-between;padding:3px 0"><span>Influență politică</span><span class="tsm tmut">activată</span></div>
+      <div class="flex" style="justify-content:space-between;padding:3px 0"><span>Avocați creativi</span><span class="tsm tmut">2 echipe</span></div>
+      <div class="flex" style="justify-content:space-between;padding:3px 0"><span>Interpretare „flexibilă" Cod Penal</span><span class="tsm tmut">în curs</span></div>
+    </div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Renunț</button>
+     <button class="btn btn-d" onclick="execManip(${cost})">⚖️ Confirmă Manipularea</button>`
+  );
+}
+function execManip(cost){
+  S.rep=Math.max(0,S.rep-cost);
+  S.repH.unshift({t:`Cheltuiți ${cost} puncte — manipulare sistem judiciar`,d:-cost});
+  if(S.repH.length>20)S.repH.pop();
+  S.justice.stage='clean';S.justice.pressure=0;S.justice.debugPin=false;S.justice.dnaEscalation=false;
+  $('nbj')?.classList.add('hid');
+  dlgClose();renderJust();renderOps();updRep();
+  setTimeout(()=>{
+    dlgOpen('🎉 Dosarul a dispărut!','Sistemul judiciar a funcționat… în favoarea ta',
+      `<div style="text-align:center;padding:18px 0">
+        <div style="font-size:50px;margin-bottom:10px">🗑️</div>
+        <p class="bold" style="font-size:16px;margin-bottom:8px">Dosar închis din lipsă de probe</p>
+        <p class="tsm tmut" style="line-height:1.65">Datorită unor <em>„circumstanțe procedurale neprevăzute"</em> și a <em>„prescripției termenelor legale"</em>, dosarul a fost închis definitiv.</p>
+      </div>`,
+      `<button class="btn btn-p btn-full" onclick="dlgClose()">Am înțeles</button>`
+    );
+    addAct(`Dosar penal „închis" prin cheltuirea a ${cost} puncte de reputație.`);
+  },300);
+  updDebug();
+}
+
+// ═══ SUBSCRIPTION ═══
+function renderSub(){
+  checkSubLifecycle();
+  const d=disc();
+  const hasSub=!!S.sub;
+  $('plan-grid').innerHTML=PLANS.map(pl=>{
+    const fp=Math.round(applyDisc(pl.price));
+    const cur=S.sub?.tier===pl.id;
+    const hoursLabel=pl.secMonth<0?'Nelimitat':`${(pl.secMonth/3600).toFixed(0)}h`;
+    return`<div class="plan-card ${pl.feat?'feat':''}" style="${cur?'border-color:var(--green);background:rgba(38,162,105,.04);':''}">
+      ${cur?`<div style="position:absolute;top:8px;left:50%;transform:translateX(-50%)"><span class="badge bg">✓ ACTIV</span></div>`:''}
+      <div class="pname" style="margin-top:${cur?'20px':'0'}">${pl.name}</div>
+      <div class="pprice">
+        ${d>0?`<div style="font-size:12px;text-decoration:line-through;color:var(--text3)">${pl.price} RON</div>`:''}
+        ${fp} <small>RON/lună</small>
+      </div>
+      <ul class="pfeats">
+        ${pl.feats.map(f=>`<li>${f}</li>`).join('')}
+        <li>Bagheta Magică: ${hoursLabel}/lună</li>
+      </ul>
+      ${!cur
+        ?`<button class="btn btn-p btn-full" onclick="openSubPay('${pl.id}')">Alege Acest Plan</button>`
+        :`<button class="btn btn-f btn-full" onclick="cancelSub()">Anulează abonamentul</button>`}
+    </div>`;
+  }).join('');
+  // Hide hours purchase if subbed
+  $('hours-buy-card') && ($('hours-buy-card').classList.toggle('hid', hasSub));
+  updBuyH();
+  $('disc-rep') && ($('disc-rep').textContent=S.rep);
+  $('disc-pct') && ($('disc-pct').textContent=d.toFixed(1)+'%');
+}
+function updBuyH(){
+  const h=parseInt($('buy-h')?.value)||0,d=disc();
+  const base=h*50,dc=Math.round(base*(1-d/100));
+  $('buy-h-cost') && ($('buy-h-cost').textContent=fRON(base));
+  $('buy-h-disc') && ($('buy-h-disc').textContent=d>0?`→ ${fRON(dc)} (discount ${d.toFixed(1)}%)`:'');
+}
+function openSubPay(tid){
+  const pl=PLANS.find(p=>p.id===tid);
+  const fp=Math.round(applyDisc(pl.price));
+  dlgOpen(`Abonează-te la ${pl.name}`,`${fp} RON/lună`,
+    `<p class="tsm mb14">Alege metoda de plată:</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn btn-p" onclick="dlgClose();openCardPay('${tid}',${fp})">💳 Plată cu Cardul (SifonPay™)</button>
+      <button class="btn btn-psd" onclick="dlgClose();openPublicPay('${tid}',${fp})">🏛️ Plată cu Bani Publici (PSD Direct Connect™)</button>
+    </div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>`
+  );
+}
+function getCardBankRule(num){
+  const p=(num||'').slice(0,6);
+  return CARD_BANK_RULES.find(r=>r.prefixes.some(x=>p.startsWith(x)))||null;
+}
+function needs3DS(num){
+  const r=getCardBankRule(num);
+  if(!r)return null;
+  if(Math.random()<r.chance)return r;
+  return null;
+}
+function openCardCheckout(ctx){
+  CARD_PAY_CTX=ctx;
+  const isHours=ctx.kind==='hours';
+  const label=isHours?`${ctx.hours} ore Bagheta Magică`:(PLANS.find(p=>p.id===ctx.tid)?.name||'Abonament');
+  const cadence=isHours?'plată unică':'/lună';
+  dlgOpen('','',
+    `<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay™</div><div class="sp-tag">Plăți discrete pentru oameni cu inițiativă</div></div>
+    <div style="padding:18px">
+      <div class="tsm tmut mb14"><strong>${label}</strong> — ${ctx.amount} RON ${cadence}</div>
+      <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Număr card</label><input class="card-inp" id="cp-num" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px">
+        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Expirare</label><input class="card-inp" id="cp-exp" placeholder="MM/AA" maxlength="5" style="font-size:14px"/></div>
+        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">CVV</label><input class="card-inp" id="cp-cvv" placeholder="***" type="password" maxlength="3" style="font-size:14px"/></div>
+      </div>
+      <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Titular</label><input class="card-inp" id="cp-name" placeholder="GIGEL POPESCU" style="font-size:14px"/></div>
+      <p style="font-size:11px;color:var(--text3)">Tranzacția va apărea pe extras ca „SERVICII DIGITALE ANONIME SRL". Prefixele unor bănci pot declanșa 3D Secure fictiv.</p>
+    </div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
+     <button class="btn btn-p" onclick="procCard()">🔒 Plătește ${ctx.amount} RON</button>`
+  );
+}
+function fmtCard(inp){let v=inp.value.replace(/\D/g,'').substring(0,16);inp.value=v.replace(/(\d{4})(?=\d)/g,'$1 ')}
+function openCardPay(tid,amount){openCardCheckout({kind:'sub',tid,amount})}
+function openCardPayHours(hours,amount){openCardCheckout({kind:'hours',hours,amount})}
+function finishCardCheckout(bank3ds){
+  S.pending3DS=null;
+  const ctx=CARD_PAY_CTX;if(!ctx)return;
+  if(ctx.kind==='sub'){
+    activateSub(ctx.tid);
+    const pl=PLANS.find(p=>p.id===ctx.tid);
+    dlgClose();
+    toast(`✅ Abonament ${pl?.name||''} activat!`,'ok');
+    addAct(`Abonament ${pl?.name||ctx.tid} plătit cu cardul via SifonPay™${bank3ds?` (3D Secure ${bank3ds.bank})`:''}.`);
+    renderSub();renderDash();
+    CARD_PAY_CTX=null;
+    return;
+  }
+  if(ctx.kind==='hours'){
+    if(S.sub){dlgClose();toast('Ai abonament activ; orele extra sunt indisponibile.','warn');return}
+    S.purchSec+=ctx.hours*3600;
+    dlgClose();
+    updWandQuota();
+    toast(`✨ ${ctx.hours} ore Bagheta Magică adăugate!`,'ok');
+    addAct(`${ctx.hours} ore Bagheta Magică cumpărate cu cardul (${fRON(ctx.amount)})${bank3ds?` · 3D Secure ${bank3ds.bank}`:''}.`);
+    renderDash();updDebug();
+    CARD_PAY_CTX=null;
+  }
+}
+function show3DSChallenge(bankRule,cardNum){
+  const masked=`•••• ${cardNum.slice(-4)}`;
+  const code=String(100000+Math.floor(Math.random()*900000));
+  S.pending3DS={code,bank:bankRule.bank,tail:cardNum.slice(-4)};
+  spagafonPushSms(bankRule.bank,`Cod 3D Secure SifonPay™: ${code}. Valabilitate 5 min. Nu trimite codul către „presă" sau DNA.`,{code,is3ds:true});
+  dlgOpen(`🔐 3D Secure · ${bankRule.bank}`,'Autentificare suplimentară necesară',
+    `<p class="tsm tmut mb14">Card ${masked}. Codul a fost livrat prin SMS fictiv pe <strong>Șpagafon</strong> (bara de jos). Poți confirma și de acolo după ce închizi acest dialog.</p>
+    <p class="tsm mb10" style="font-family:var(--mono);letter-spacing:.12em">Cod (backup vizibil aici): <strong>${code}</strong></p>
+    <div class="fg"><label>Cod 3D Secure</label><input id="tds-code" maxlength="6" inputmode="numeric" pattern="[0-9]*" placeholder="000000" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:16px;letter-spacing:.18em;outline:none"/></div>`,
+    `<button class="btn btn-f" onclick="dlgClose();S.pending3DS=null">Anulează</button>
+     <button class="btn btn-p" onclick="confirm3DSecure('${bankRule.bank.replace(/'/g,"\\'")}')">Confirmă</button>`
+  );
+}
+function confirm3DSecure(bank){
+  const code=$('tds-code')?.value?.trim()||'';
+  const exp=S.pending3DS?.code;
+  if(exp){
+    if(!/^\d{6}$/.test(code)||code!==exp){toast('Cod incorect — verifică SMS-ul pe Șpagafon','err');return}
+  }else if(!/^\d{6}$/.test(code)){
+    toast('Introdu un cod valid de 6 cifre','err');return;
+  }
+  $('dlg-a').innerHTML='<span class="tsm tmut">Verificare 3D Secure...</span>';
+  setTimeout(()=>{
+    if(Math.random()<0.9){
+      finishCardCheckout({bank});
+    }else{
+      dlgClose();toast(`3D Secure respins de ${bank}. Încearcă din nou.`,`err`);
+    }
+  },1000);
+}
+function procCard(){
+  const ctx=CARD_PAY_CTX;
+  if(!ctx){toast('Nu există context de plată','err');return}
+  const num=$('cp-num')?.value?.replace(/\s/g,'');
+  if(!num||num.length<16||!$('cp-exp')?.value||!$('cp-cvv')?.value){toast('Completează datele cardului','err');return}
+  $('dlg-a').innerHTML='<span class="tsm tmut">Se procesează prin SifonPay™...</span>';
+  $('dlg-c').innerHTML=`<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay™</div></div><div style="padding:32px;text-align:center"><div class="spinner"></div><p class="tsm tmut">Procesare discretă în curs...</p></div>`;
+  setTimeout(()=>{
+    const bankRule=needs3DS(num);
+    if(bankRule){show3DSChallenge(bankRule,num);return}
+    finishCardCheckout(null);
+  },1700);
+}
+function openPublicPay(tid,amount){
+  const pl=PLANS.find(p=>p.id===tid),com=Math.round(amount*.15),total=amount+com;
+  dlgOpen('🏛️ PSD Direct Connect™','Serviciu de integrare fonduri publice',
+    `<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:var(--r);margin-bottom:13px;text-align:center">
+      <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect™</div>
+      <div style="font-size:11px;opacity:.55">Rețeaua noastră de influență la dispoziția ta</div>
+    </div>
+    <div style="background:var(--bg);padding:11px;border-radius:var(--r);font-size:13px;margin-bottom:13px">
+      <div class="flex" style="justify-content:space-between;margin-bottom:3px"><span>Abonament ${pl.name}</span><span>${amount} RON</span></div>
+      <div class="flex" style="justify-content:space-between;margin-bottom:3px;color:var(--text2)"><span>Comision intermediar (15%)</span><span>${com} RON</span></div>
+      <hr class="sep"/><div class="flex" style="justify-content:space-between;font-weight:700"><span>TOTAL DIN BUGET PUBLIC</span><span style="color:var(--red)">${total} RON</span></div>
+    </div>
+    <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
+      <select id="pp-int" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
+        <option>Partid (PSD) — Ruta standard, 3-5 zile</option>
+        <option>Rețea locală de influență — Ruta urgentă, 1-2 zile</option>
+        <option>Conexiuni ministeriale — Ruta diplomatică, 24h</option>
+        <option>Ministru de resort — Ruta VIP, 4 ore</option>
+      </select>
+    </div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
+     <button class="btn btn-psd" onclick="procPublic('${tid}',${total})">📤 Trimite Cerere</button>`
+  );
+}
+function procPublic(tid,total){
+  const int=$('pp-int')?.value?.split('—')[0].trim()||'Partid';
+  $('dlg-a').innerHTML='';
+  $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect™</div></div>
+    <div style="padding:18px;text-align:center"><div style="font-size:26px;margin-bottom:8px">📤</div><p class="tsm tmut">Cererea parcurge rețeaua de influență...</p><div id="pp-steps" style="text-align:left;margin-top:13px;font-size:12px;color:var(--text2)"></div></div>`;
+  ['📨 Cerere trimisă către intermediar...','🤝 Negociere discretă în curs...','📋 Documentație „justificativă" generată automat...','✅ Fonduri publice aprobate și transferate!'].forEach((s,i)=>
+    setTimeout(()=>{
+      $('pp-steps')&&($('pp-steps').innerHTML+=`<div style="padding:4px 0;border-bottom:1px solid var(--border)">${s}</div>`);
+      if(i===3)setTimeout(()=>{activateSub(tid);S.siphoned+=total;dlgClose();toast(`🏛️ Bani publici accesați! Abonament activat.`,'ok');addAct(`Abonament ${PLANS.find(p=>p.id===tid).name} plătit din fonduri publice via ${int}. ${fRON(total)} sifonați.`);renderSub();renderDash();},900);
+    },i*950)
+  );
+}
+function openPublicPayHours(hours,amount){
+  const com=Math.round(amount*.15),total=amount+com;
+  dlgOpen('🏛️ PSD Direct Connect™','Serviciu de integrare fonduri publice',
+    `<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:var(--r);margin-bottom:13px;text-align:center">
+      <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect™</div>
+      <div style="font-size:11px;opacity:.55">Flux operațional pentru cumpărare ore Baghetă</div>
+    </div>
+    <div style="background:var(--bg);padding:11px;border-radius:var(--r);font-size:13px;margin-bottom:13px">
+      <div class="flex" style="justify-content:space-between;margin-bottom:3px"><span>${hours}h Bagheta Magică</span><span>${amount} RON</span></div>
+      <div class="flex" style="justify-content:space-between;margin-bottom:3px;color:var(--text2)"><span>Comision intermediar (15%)</span><span>${com} RON</span></div>
+      <hr class="sep"/><div class="flex" style="justify-content:space-between;font-weight:700"><span>TOTAL DIN BUGET PUBLIC</span><span style="color:var(--red)">${total} RON</span></div>
+    </div>
+    <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
+      <select id="pp-int-h" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
+        <option>Partid (PSD) — Ruta standard, 3-5 zile</option>
+        <option>Rețea locală de influență — Ruta urgentă, 1-2 zile</option>
+        <option>Conexiuni ministeriale — Ruta diplomatică, 24h</option>
+        <option>Ministru de resort — Ruta VIP, 4 ore</option>
+      </select>
+    </div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
+     <button class="btn btn-psd" onclick="procPublicHours(${hours},${total})">📤 Trimite Cerere</button>`
+  );
+}
+function procPublicHours(hours,total){
+  if(S.sub){toast('Ai abonament activ; orele extra sunt indisponibile.','warn');dlgClose();return}
+  const int=$('pp-int-h')?.value?.split('—')[0].trim()||'Partid';
+  $('dlg-a').innerHTML='';
+  $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect™</div></div>
+    <div style="padding:18px;text-align:center"><div style="font-size:26px;margin-bottom:8px">📤</div><p class="tsm tmut">Cererea parcurge rețeaua de influență...</p><div id="pp-steps-h" style="text-align:left;margin-top:13px;font-size:12px;color:var(--text2)"></div></div>`;
+  ['📨 Cerere trimisă către intermediar...','🤝 Negociere discretă în curs...','📋 Documentație „justificativă" generată automat...','✅ Fonduri publice aprobate și transferate!'].forEach((s,i)=>
+    setTimeout(()=>{
+      $('pp-steps-h')&&($('pp-steps-h').innerHTML+=`<div style="padding:4px 0;border-bottom:1px solid var(--border)">${s}</div>`);
+      if(i===3)setTimeout(()=>{
+        S.purchSec+=hours*3600;
+        S.siphoned+=total;
+        dlgClose();
+        updWandQuota();
+        toast(`🏛️ ${hours} ore adăugate cu fonduri publice!`,'ok');
+        addAct(`${hours} ore Bagheta Magică plătite din fonduri publice via ${int}. ${fRON(total)} sifonați.`);
+        renderDash();updDebug();
+      },900);
+    },i*950)
+  );
+}
+function activateSub(tid){
+  const exp=nowDate();exp.setMonth(exp.getMonth()+1);
+  const pl=PLANS.find(p=>p.id===tid);
+  S.sub={tier:tid,exp:exp.toISOString(),secTotal:pl.secMonth,secUsed:0};
+  // Reset purchased time tracking when subscribing
+  updWandQuota();updDebug();
+}
+function cancelSub(){
+  dlgOpen('Anulează abonamentul','Ești sigur?',
+    `<p class="tsm">Vei pierde accesul la funcționalități premium. Orele Bagheta Magică nu vor fi rambursate.</p>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Mă răzgândesc</button>
+     <button class="btn btn-d" onclick="S.sub=null;dlgClose();renderSub();renderDash();updWandQuota();toast('Abonament anulat','warn')">Anulează</button>`
+  );
+}
+function openBuyHDlg(){
+  const h=parseInt($('buy-h')?.value)||5,d=disc();
+  const cost=Math.round(h*50*(1-d/100));
+  dlgOpen('Cumpără Ore Bagheta Magică','Acces per-utilizare',
+    `<div style="text-align:center;padding:14px 0">
+      <div style="font-size:30px;font-weight:700;color:var(--gold)">${h}h</div>
+      <div class="tsm tmut">${fRON(h*50)}${d>0?` → ${fRON(cost)} (discount ${d.toFixed(1)}%)`:''}  </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <button class="btn btn-p" onclick="dlgClose();openCardPayHours(${h},${cost})">💳 SifonPay™</button>
+      <button class="btn btn-psd" onclick="dlgClose();openPublicPayHours(${h},${cost})">🏛️ Bani Publici</button>
+    </div>`,
+    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>`
+  );
+}
+function procHours(h,cost,method){
+  if(method==='card'){openCardPayHours(h,cost);return}
+  openPublicPayHours(h,cost);
+}
+
+// ═══ DNA ═══
+function schedDNA(){
+  const d=50000+Math.random()*75000;
+  setTimeout(()=>{if((S.justice?.stage||'clean')==='clean')dnaToast();schedDNA();},d);
+}
+function dnaToast(){
+  const m=['🔍 DNA vă supraveghează activitatea. Fiți discreți.','📡 Activitate suspectă detectată în rețeaua de achiziții publice.','⚖️ ANAP a inițiat un control de rutină. „Nu e nimic personal."','🗄️ Curtea de Conturi verifică documentația proiectelor dvs.','🔴 PREVENT a semnalat o potențială neregulă.'];
+  toast(m[Math.floor(Math.random()*m.length)],'dna');
+}
+function triggerDNA(opts){
+  const fromDebug=opts&&opts.fromDebug;
+  const t=['Activitate cu valori mari detectată. IP-ul dvs. a fost înregistrat în PREVENT.','Factor de optimizare peste 70% a declanșat un audit automat ANAF.','Suma redistribuită depășește pragul de raportare obligatorie către DIICOT.'];
+  $('dna-alert-txt')&&($('dna-alert-txt').textContent=t[Math.floor(Math.random()*t.length)]);
+  $('dna-alert-box')?.classList.remove('hid');
+  const wouldSetAncheta=(S.justice?.stage||'clean')==='clean'&&S.siphoned>600000;
+  if(fromDebug){
+    S.justice.debugPin=true;
+    S.justice.dnaEscalation=false;
+    S.justice.stage='ancheta';
+    S.justice.pressure=65;
+    $('nbj')?.classList.remove('hid');
+  }else if(wouldSetAncheta){
+    S.justice.dnaEscalation=true;
+    S.justice.stage='ancheta';
+    $('nbj')?.classList.remove('hid');
+  }
+  navigate('dash');
+  toast('🚨 Alertă DNA! Vezi tabloul de bord.','dna');
+  renderJust();renderOps();
+}
+
+// ═══ DEBUG BAR ═══
+function isDebugUnlocked(){
+  try{
+    if(new URLSearchParams(location.search).get('debug')==='1')return true;
+    if(localStorage.getItem('sifonator_debug')==='1')return true;
+  }catch(e){}
+  return false;
+}
+function toggleDebug(){
+  if(!isDebugUnlocked()){toast('Mod debug: adaugă ?debug=1 la URL sau localStorage sifonator_debug=1.','warn');return}
+  $('debug-bar')?.classList.toggle('hid');
+}
+function updDebug(){
+  checkSubLifecycle();
+  $('db-rep')&&($('db-rep').textContent=S.rep);
+  $('db-sub')&&($('db-sub').textContent=S.sub?S.sub.tier:'none');
+  $('db-wand')&&($('db-wand').textContent=fSec(wandAvailSec()));
+  $('db-siph')&&($('db-siph').textContent=fRON(S.siphoned));
+  $('db-just')&&($('db-just').textContent=S.justice?.stage||'curat');
+  $('db-shift')&&($('db-shift').textContent=`${S.timeShiftSec<0?'-':'+'}${fSec(Math.abs(S.timeShiftSec))}`);
+}
+function dbAddRep(n){chgRep(n,`[DEBUG] +${n} puncte adăugate manual`)}
+function dbAddTime(s){
+  if(S.sub)S.sub.secUsed=Math.max(0,S.sub.secUsed-s);
+  else S.purchSec+=s;
+  updWandQuota();toast(`[DEBUG] +${fSec(s)} timp Bagheta adăugat`,'ok');
+}
+function dbActivateSub(tid){activateSub(tid);renderSub();renderDash();toast(`[DEBUG] Abonament ${tid} activat`,'ok')}
+function dbSimuleazaControlANAF(){
+  triggerDNA({fromDebug:true});
+  addAct('[DEBUG] Simulare control ANAF + alertă PREVENT');
+  toast('[DEBUG] Control ANAF simulat','warn');
+}
+function dbLeakPresa(){
+  S.pressTone=Math.max(0,S.pressTone-12);
+  addAct('[DEBUG] Leak către presă: document intern publicat');
+  renderPress();
+  toast('[DEBUG] Presa a primit un leak controlat','warn');
+}
+function dbCreateProj(){
+  const id=S.npid++;
+  const name=`[DEBUG] Proiect rapid #${id}`;
+  S.projects.push({id,name,budget:900000,realValue:540000,declaredValue:1180000,status:'in_progress',quality:null,bet:null,due:new Date(nowTs()+86400000*120).toISOString().slice(0,10),lateS:false,lateF:false});
+  updWandProjectOptions(id);
+  renderProj();renderDash();renderOps();
+  toast(`[DEBUG] Creat: ${name}`,'ok');
+}
+function dbTickWand(seconds){
+  if(!S.activeSession){toast('[DEBUG] Nu există sesiune activă','warn');return}
+  S.activeSession.startReal-=seconds*1000;
+  tickSession();
+  toast(`[DEBUG] Avansat sesiunea cu ${fSec(seconds)}`,'ok');
+}
+function dbShiftTime(seconds){
+  S.timeShiftSec+=seconds;
+  const months=Math.floor(seconds/(86400*30));
+  if(months>0)advanceSimulationMonths(months);
+  checkSubLifecycle();
+  recalcJudiciaryPressure();
+  renderAll();
+  toast(`[DEBUG] Timp virtual avansat cu ${fSec(seconds)}`,'ok');
+}
+function dbResetTimeShift(){
+  S.timeShiftSec=0;
+  renderAll();
+  toast('[DEBUG] Shift temporal resetat','ok');
+}
+function dbReset(){
+  if(!confirm('Resetezi toată starea aplicației?'))return;
+  S.rep=0;S.repH=[];S.siphoned=0;S.justice={stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false};S.sub=null;
+  S.smsInbox=[];S.pending3DS=null;S.spagafonLastSeen=0;
+  S.purchSec=0;S.purchSecUsed=0;S.activeSession=null;S.sessions=[];S.judiciaryRisk=0;S.pressTone=50;S.timeShiftSec=0;
+  if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
+  ensureWandTimer();
+  spgfAppletId=null;
+  renderAll();toast('[DEBUG] Stare resetată','warn');
+}
+
+// ═══ INIT ═══
+document.addEventListener('DOMContentLoaded',()=>{
+  $('buy-h')?.addEventListener('input',updBuyH);
+  if(isDebugUnlocked())$('debug-toggle-btn')?.classList.remove('hid');
+  window.addEventListener('beforeunload',()=>{
+    if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
+    if(S.settings.persistence==='local_storage')saveState();
+  });
+});
+</script>
+</body>
+</html>
