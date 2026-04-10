@@ -843,7 +843,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
         <div class="card mb14">
           <div class="ch"><h3>Plăți fictive: abonamente, ore &amp; SifonPay™</h3><p>Același tip de flux pentru abonament și pentru ore</p></div>
           <div class="cc">
-            <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: alegi <strong>SifonPay™</strong> (card) sau <strong>PSD Direct Connect™</strong> („bani publici”), cu pași simulați — nu există variantă „instant” care să sari peste acest flux.</p>
+            <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: alegi <strong>SifonPay™</strong> (card) sau <strong>PSD Direct Connect™</strong> („bani publici”), cu pași simulați. Nu există variantă „instant” care să sari peste acest flux.</p>
             <p class="tsm tmut mt8">Tranzacția apare narativ ca procesată de SifonPay™; datele cardului sunt fictive.</p>
             <div id="howto-sifonpay-bin" class="mt12"></div>
           </div>
@@ -1661,7 +1661,7 @@ function renderHowto(){
     const rows=CARD_BANK_RULES.flatMap(r=>r.prefixes.map(p=>({p,bank:r.bank,chance:r.chance})));
     const tbody=rows.map(x=>`<tr><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono)"><code>${x.p}</code></td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">${x.bank}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">~${Math.round(x.chance*100)}%</td></tr>`).join('');
     bin.innerHTML=`
-      <p class="tsm mt8" style="line-height:1.65"><strong>Prefix (BIN)</strong> — primele <strong>6 cifre</strong> ale numărului de card identifică în joc o <strong>bancă fictivă</strong>. Dacă introduci un număr care începe cu unul dintre prefixele de mai jos, există o <strong>probabilitate</strong> ca SifonPay™ să ceară un pas suplimentar <strong>3D Secure</strong> (cod SMS fictiv). Nu este obligatoriu la fiecare plată; alte prefixe trec direct după procesare.</p>
+      <p class="tsm mt8" style="line-height:1.65"><strong>Prefixul (BIN)</strong> sunt primele <strong>6 cifre</strong> ale numărului de card identifică în joc o <strong>bancă fictivă</strong>. Dacă introduci un număr care începe cu unul dintre prefixele de mai jos, există o <strong>probabilitate</strong> ca SifonPay™ să ceară un pas suplimentar <strong>3D Secure</strong> (cod SMS fictiv). Nu este obligatoriu la fiecare plată; alte prefixe trec direct după procesare.</p>
       <div style="overflow-x:auto;margin-top:10px">
         <table style="width:100%;font-size:12px;border-collapse:collapse">
           <thead><tr><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Prefix (6 cifre)</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Bancă fictivă</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Șansă 3DS*</th></tr></thead>
