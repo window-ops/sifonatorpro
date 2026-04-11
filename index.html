@@ -165,6 +165,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 #toasts{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none}
 .toast{background:#2d2d2d;color:#fff;padding:8px 18px;border-radius:24px;font-size:13px;box-shadow:var(--sh2);pointer-events:auto;animation:tin .2s ease-out;max-width:440px;text-align:center;line-height:1.4}
 .toast.err{background:var(--red)}.toast.ok{background:var(--green)}.toast.warn{background:var(--orange)}.toast.dna{background:#18003e;border:1px solid rgba(192,28,40,.6)}
+.toast.away{background:rgba(53,132,228,.14);color:var(--text1);border:1px solid rgba(53,132,228,.38);text-align:left;padding:10px 16px}
 @keyframes tin{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 
 /* ── WAND ── */
@@ -836,7 +837,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
         <div id="wand-form-wrap" class="wand-wrap">
           <div style="position:relative;z-index:1">
             <div class="wt">✨ Bagheta Magică Contabilă</div>
-            <div class="ws">Motorul „contabil” lucrează doar dacă proiectul are o licitație <strong>pornită dincolo de simplul anunț</strong> — minim <strong>Clarificări</strong>, sau Depuneri, evaluare etc. Dacă nu e încă cazul, apasă totuși <strong>Pornește optimizarea</strong>: se deschide un dialog ca să publici sau să avansezi achiziția pentru proiectul selectat. Valorile de mai jos vin din proiect.</div>
+            <div class="ws">Motorul „contabil” lucrează doar dacă proiectul are o licitație <strong>pornită dincolo de simplul anunț</strong>, minim <strong>Clarificări</strong>, sau Depuneri, Evaluare etc. Dacă nu e încă cazul, apasă totuși <strong>Pornește optimizarea</strong>: se deschide un dialog ca să publici sau să avansezi achiziția pentru proiectul selectat. Valorile de mai jos vin din proiect.</div>
             <div class="wg">
               <div class="wig"><label>Valoare reală proiect (RON)</label>
                 <input type="number" id="w-real" placeholder="calculat automat" readonly/></div>
@@ -873,7 +874,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 
         <!-- Queue -->
         <div class="card mb14" id="wand-queue-card">
-          <div class="ch"><h3>Coadă Bagheta (max. 5 sarcini)</h3><p>Proiecte active/planificate; același proiect nu poate fi dublat. Fiecare proiect trebuie să aibă cel puțin o licitație ajunsă la <strong>Clarificări</strong> sau mai târziu (nu e suficient doar stadiul „publicată”). Fără sesiune activă: ↑/↓ mută sarcinile <strong>în așteptare</strong> (ordinea determină următorul start automat).</p></div>
+          <div class="ch"><h3>Coadă Bagheta (max. 5 sarcini)</h3><p>Proiecte active/planificate; același proiect nu poate fi dublat. Fiecare proiect trebuie să aibă cel puțin o licitație ajunsă la <strong>Clarificări</strong> sau mai târziu (nu e suficient doar stadiul „publicată”). ↑/↓ mută doar sarcinile <strong>în așteptare</strong> între ele (ordinea stabilește următorul start după sesiunea curentă); sarcina în execuție nu se reordonează.</p></div>
           <div class="cc" id="wand-queue-list"></div>
         </div>
 
@@ -995,7 +996,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <!-- ── SETĂRI ── -->
       <div id="view-settings" class="view">
         <div class="vh">
-          <div><h2>Setări utilizator</h2><p>Control date locale, timp simulat și multiplicatori reputație</p></div>
+          <div><h2>Setări utilizator</h2><p>Control date locale, timp simulat, multiplicatori reputație și reînnoire abonament</p></div>
         </div>
         <div class="card mb14" id="settings-persist-card">
           <div class="ch"><h3>Persistență &amp; date</h3><p>Doar dacă folosești localStorage</p></div>
@@ -1017,13 +1018,23 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
             <button type="button" class="btn btn-p mt8" id="settings-shift-apply" onclick="applySettingsTimeShift()">Aplică shift temporal</button>
           </div>
         </div>
-        <div class="card" id="settings-rep-card">
+        <div class="card mb14" id="settings-rep-card">
           <div class="ch"><h3>Multiplicator reputație</h3><p>Până la 25% în plus la punctele de reputație obținute din finalizări publice (conform abonamentului)</p></div>
           <div class="cc">
             <p class="tsm tmut mb6" id="settings-rep-hint"></p>
             <div class="fg mb0"><label id="settings-rep-lbl">Intensitate bonus: <strong id="settings-rep-disp">0%</strong> din plafonul abonamentului</label>
               <input type="range" id="settings-rep-range" min="0" max="100" value="0" style="width:100%;accent-color:var(--gold)" oninput="onSettingsRepInput()"/>
             </div>
+          </div>
+        </div>
+        <div class="card" id="settings-sub-renew-card">
+          <div class="ch"><h3>Reînnoire abonament</h3><p>La fel ca la serviciile reale: alegerea ta rămâne salvată</p></div>
+          <div class="cc">
+            <p class="tsm tmut mb6" id="settings-sub-renew-hint"></p>
+            <label id="settings-sub-renew-lbl" class="tsm" style="display:flex;gap:10px;align-items:flex-start;margin:0;line-height:1.45;cursor:pointer;user-select:none;text-align:left">
+              <input type="checkbox" id="settings-sub-renew-cb" style="margin-top:3px;flex-shrink:0" onchange="toggleSubAutoRenew(this.checked)"/>
+              <span><strong>Reînnoire automată</strong> — dacă e activă, la expirare abonamentul se prelungește o lună. Dacă e oprită, la expirare revii la plan gratuit și poți plăti din nou cum preferi.</span>
+            </label>
           </div>
         </div>
       </div>
@@ -1094,10 +1105,10 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
               <li><strong>Eligibilitate:</strong> doar proiecte <strong>planificate</strong> sau <strong>în desfășurare</strong> — nu și cele <strong>finalizate</strong> (dosar închis). Exceptând demo ascuns din coadă. Este nevoie de cel puțin o licitație asociată ajunsă la <strong>Clarificări</strong> sau mai târziu: Depuneri, evaluare, adjudecată, execuție, contestată. Doar licitația încă <strong>publicată</strong> (fără avansare) nu e suficientă — „AI-ul” contabil narativ presupune că procedura a părăsit faza de simplu anunț.</li>
               <li><strong>Timp:</strong> fără abonament activ se consumă <code>purchSec</code> / <code>purchSecUsed</code>; cu abonament, secunde lunare din plan (Enterprise: cotă nelimitată simulată ca <code>Infinity</code>). Timpul scade pe durata sesiunii; <strong>pauza</strong> oprește consumul și incrementarea surplusului.</li>
               <li><strong>Valorile reale/declarate</strong> afișate în formular sunt citite din proiect (nu există apel la un API „AI” extern).</li>
-              <li><strong>Factor de optimizare (slider 20-95%):</strong> setează ce parte din diferența (declarat, real) poate deveni <strong>surplus redistribuibil</strong> în sesiune. <strong>Plafon surplus = (declarat − real) × factor</strong> (rotunjit la întregi în simulare). Creșterea efectivă în timp este <strong>asimptotică</strong> (viteza scade cu timpul și depinde de dificultate prin <code>wandRate</code>).</li>
+              <li><strong>Factor de optimizare (slider 20-95%):</strong> setează ce parte din diferența (declarat, real) poate deveni <strong>surplus redistribuibil</strong> în sesiune. <strong>Plafon surplus = (declarat - real) × factor</strong> (rotunjit la întregi în simulare). Creșterea efectivă în timp este <strong>asimptotică</strong> (viteza scade cu timpul și depinde de dificultate prin <code>wandRate</code>).</li>
               <li><strong>Vizibilitate simulată:</strong> un scor procentual (în UI) combină factorul cu etapa justiției și dificultatea; nu înlocuiește un audit real.</li>
               <li><strong>Factor ≥ 70%:</strong> după pornirea sesiunii poate declanșa o alertă narativă (banner + eventuală escaladare DNA dacă sumele sifonate și etapa „curat” permit).</li>
-              <li><strong>Coadă:</strong> maxim 5 intrări nefinalizate; fără sesiune activă poți muta sarcinile cu ↑/↓. Următoarea sarcină pornește automat când nu există sesiune activă.</li>
+              <li><strong>Coadă:</strong> maxim 5 intrări nefinalizate; poți muta sarcinile <strong>în așteptare</strong> cu ↑/↓ și pe durata unei sesiuni (nu și pe cea în execuție). Următoarea sarcină pornește automat când nu există sesiune activă.</li>
               <li><strong>Sesiune activă:</strong> formularul principal este ascuns; programările suplimentare se fac din lista „Proiecte disponibile pentru coadă”.</li>
               <li><strong>Jurnal:</strong> linii la deschiderea dosarului + la fiecare ~5 secunde de simulare (când nu e pauză). Export .txt și copiere din dosar; filtru opțional pentru linii cu mișcări în RON.</li>
               <li><strong>Istoric sesiuni:</strong> click pe rând → dialog cu export/copiere.</li>
@@ -1244,7 +1255,7 @@ const S={
   rep:0, repH:[],
   siphoned:0,
   justice:{stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false,anafAuditMessage:'',anafAuditSince:0,anafAuditShowBanner:false},
-  sub:null,            // {tier, exp, secTotal, secUsed, autoRenew?}
+  sub:null,            // {tier, exp, secTotal, secUsed, autoRenew}
   subLapsed:null,      // {tier, exp} după expirare fără auto-renew
   purchSec:0,          // purchased seconds without subscription
   purchSecUsed:0,
@@ -1372,6 +1383,54 @@ function nowTs(){return Date.now()+(S.timeShiftSec*1000)}
 function nowDate(){return new Date(nowTs())}
 let _subExpiredPromptPending=false;
 let _subExpiredDlgTimer=null;
+const LS_LAST_REAL_VISIT='sifonator_last_real_visit_ts';
+const OFFLINE_GAP_NOTIFY_HOURS=15;
+const OFFLINE_SHIFT_MAX_SEC=14*86400;
+function persistLastRealVisitTs(){
+  if(S.settings.persistence!=='local_storage')return;
+  try{localStorage.setItem(LS_LAST_REAL_VISIT,String(Date.now()));}catch(e){}
+}
+/** La revenire (timp real): dacă au trecut ≥15h, avansează simularea și notifică subtil. Returnează true dacă s-a aplicat simularea (UI trebuie reîmprospătat). */
+function processOfflineRealTimeGap(){
+  if(S.settings.persistence!=='local_storage')return false;
+  const now=Date.now();
+  let last=0;
+  try{last=parseInt(localStorage.getItem(LS_LAST_REAL_VISIT)||'0',10);}catch(e){last=0}
+  if(!last||last>now||!Number.isFinite(last)){
+    persistLastRealVisitTs();
+    return false;
+  }
+  const gapMs=now-last;
+  const needSim=gapMs>=OFFLINE_GAP_NOTIFY_HOURS*3600000;
+  if(!needSim){
+    return false;
+  }
+  const hoursAway=gapMs/3600000;
+  const projectsDoneBefore=S.projects.filter(p=>p.status==='completed').length;
+  const monthBefore=S.simClock.monthTick;
+  const shiftSec=Math.min(OFFLINE_SHIFT_MAX_SEC,Math.floor(gapMs/1000));
+  S.timeShiftSec+=shiftSec;
+  const simMonths=Math.min(8,Math.max(1,Math.ceil(hoursAway/OFFLINE_GAP_NOTIFY_HOURS)));
+  advanceSimulationMonths(simMonths);
+  if(S.activeSession){
+    if(!S.activeSession.paused)S.activeSession.startReal+=gapMs;
+    S.activeSession.lastTickAt=nowTs();
+  }
+  checkSubLifecycle();
+  const projectsDoneAfter=S.projects.filter(p=>p.status==='completed').length;
+  const monthsAdvanced=S.simClock.monthTick-monthBefore;
+  const lines=[
+    `Ai lipsit ~${hoursAway.toFixed(1)} h (ceas real). Timpul simulat a curs: +${fSec(shiftSec)} pe „axa” jocului.`,
+    `Proceduri modelate: ~${simMonths} lun${simMonths===1?'ă':'i'} narative (proiecte, licitații, presă sporadică).`,
+  ];
+  if(monthsAdvanced>0)lines.push(`Contor simulare: +${monthsAdvanced} lun${monthsAdvanced===1?'ă':'i'} în calendarul intern.`);
+  if(projectsDoneAfter>projectsDoneBefore)lines.push(`${projectsDoneAfter-projectsDoneBefore} proiect(e) marcate finalizate în simularea din absență.`);
+  if(S.activeSession)lines.push('Sesiune Baghetă: timpul petrecut cu browserul închis nu ți-a consumat cota (pauză automată).');
+  addAct(`Revenire după pauză reală (~${hoursAway.toFixed(1)} h): timp simulat +${fSec(shiftSec)}, ${simMonths} iterații lunare modelate.`);
+  toast(lines.join(' '),'away');
+  persistLastRealVisitTs();
+  return true;
+}
 function saveState(){
   if(S.settings.persistence!=='local_storage')return;
   try{
@@ -1383,6 +1442,7 @@ function saveState(){
       projects:S.projects,tenders:S.tenders,
       actLog:S.actLog,npid:S.npid,ntid:S.ntid,ledger:S.ledger,actors:S.actors,worldMemory:S.worldMemory,simClock:S.simClock
     }));
+    persistLastRealVisitTs();
   }catch(e){}
 }
 function loadState(){
@@ -1563,6 +1623,8 @@ function toggleSubAutoRenew(on){
   if(!hasPaidSubscription())return;
   S.sub.autoRenew=!!on;
   saveState();
+  renderSettings();
+  renderSub();
   toast(on?'Reînnoire automată activă — abonamentul se prelungește lunar cât timpul simulat depășește data de expirare.':'Reînnoire automată oprită — la expirare revii la gratuit și poți alege din nou cum plătești.','ok');
 }
 function advanceSimulationMonths(months){
@@ -1885,6 +1947,7 @@ function doLogin(){
   if(S.settings.persistence==='local_storage'&&loadState()){
     $('login-screen')?.classList.add('hid');
     $('app')?.classList.remove('hid');
+    processOfflineRealTimeGap();
     migrateSubState();
     ensureWandTimer();
     applyProfile();renderAll();updSpagafonBadge();toast('Autentificat automat din localStorage','ok');schedDNA();return;
@@ -1984,7 +2047,7 @@ function toast(msg,type=''){
   const el=document.createElement('div');
   el.className=`toast ${type}`;el.textContent=msg;
   $('toasts')?.appendChild(el);
-  setTimeout(()=>el.remove(),4200);
+  setTimeout(()=>el.remove(),type==='away'?7200:4200);
 }
 
 // ═══ DIALOG ═══
@@ -2360,7 +2423,7 @@ function onWandProjectChange(){
     return;
   }
   if(p.status==='completed'){
-    if(ai)ai.textContent=`Proiectul „${p.name}” este finalizat — Bagheta nu optimizează dosare închise. Alege un proiect planificat sau în desfășurare.`;
+    if(ai)ai.textContent=`Proiectul „${p.name}” este finalizat. Bagheta nu optimizează dosare închise. Alege un proiect planificat sau în desfășurare.`;
     wPreview();
     updWandFormControls();
     return;
@@ -2371,7 +2434,7 @@ function onWandProjectChange(){
   if(ai)ai.textContent=`Proiect detectat: „${p.name}” · buget ${fRON(p.budget)} · status ${st}. Valorile sunt sincronizate automat din modulul proiecte.`;
   if(ai)ai.textContent+=` Licitații asociate: ${pr.count}${pr.hasAwarded?' (există contract adjudecat)':''}.`;
   if(ai){
-    if(pr.count===0)ai.textContent+=` Bagheta: publică o licitație pe acest proiect și avanseaz-o cel puțin până la Clarificări (sau mai departe) — nu e suficient doar anunțul publicat.`;
+    if(pr.count===0)ai.textContent+=` Bagheta: publică o licitație pe acest proiect și avanseaz-o cel puțin până la Clarificări (sau mai departe). Nu e suficient doar anunțul publicat.`;
     else if(elig<1)ai.textContent+=` Bagheta: ai licitații, dar toate sunt încă doar „publicate”; din Licitații apasă → Clarificări (sau Depuneri etc.).`;
     else ai.textContent+=` Bagheta: ${elig}/${pr.count} licitație(ii) eligibile (Clarificări sau mai târziu).`;
   }
@@ -3114,7 +3177,6 @@ function cleanupWandQueueState(){
   dedupeWandQueueByProject();
 }
 function moveWandQueueEntry(id,dir){
-  if(S.activeSession){toast('Reordonarea cozii este indisponibilă pe durata unei sesiuni Bagheta.','warn');return;}
   const i=S.wandQueue.findIndex(x=>x.id===id);
   if(i<0)return;
   if(S.wandQueue[i].status!=='pending'){toast('Poți muta doar sarcinile în așteptare.','warn');return;}
@@ -3425,7 +3487,7 @@ function renderWandQueue(){
       const dosarBtn=`<button type="button" class="btn btn-f btn-sm" onclick="openWandJobDetail(${q.id})">📑 Dosar &amp; contabilitate</button>`;
       const cfgBtn=q.status==='pending'&&!S.activeSession?`<button type="button" class="btn btn-f btn-sm" onclick="openWandQueueScheduleEdit(${q.id})" title="Factor de optimizare și valorile contabile (ca în formularul principal)">⚙️ Parametri</button>`:'';
       const remBtn=q.status==='pending'?`<button type="button" class="btn btn-d btn-sm" onclick="removeWandQueueEntry(${q.id})" title="Elimină din coadă">✕ Elimină</button>`:'';
-      const reorder=q.status==='pending'&&!S.activeSession?`<button type="button" class="btn btn-f btn-sm" onclick="moveWandQueueEntry(${q.id},-1)" title="Mai sus în coadă">↑</button><button type="button" class="btn btn-f btn-sm" onclick="moveWandQueueEntry(${q.id},1)" title="Mai jos în coadă">↓</button>`:'';
+      const reorder=q.status==='pending'?`<button type="button" class="btn btn-f btn-sm" onclick="moveWandQueueEntry(${q.id},-1)" title="Mai sus în coadă (doar față de alte sarcini în așteptare)">↑</button><button type="button" class="btn btn-f btn-sm" onclick="moveWandQueueEntry(${q.id},1)" title="Mai jos în coadă (doar față de alte sarcini în așteptare)">↓</button>`:'';
       return`<div class="wand-queue-item">
         <div class="wq-top"><div><strong>${name}</strong> · factor ${fac}% · <span class="badge bb">${st}</span></div>
         <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">${dosarBtn}${cfgBtn}${reorder}${remBtn}</div></div></div>`;
@@ -3591,6 +3653,18 @@ function renderSettings(){
     rr.style.opacity=canRepMult?'':'0.45';
   }
   onSettingsRepInput();
+  const subRenewCb=$('settings-sub-renew-cb');
+  const subRenewHint=$('settings-sub-renew-hint');
+  const subRenewLbl=$('settings-sub-renew-lbl');
+  if(subRenewCb&&subRenewHint){
+    const paid=hasPaidSubscription();
+    subRenewCb.disabled=!paid;
+    subRenewCb.checked=!!(paid&&S.sub.autoRenew===true);
+    subRenewHint.textContent=paid
+      ?'Preferința ta este salvată în starea jocului (localStorage sau sesiune).'
+      :'După ce activezi un plan plătit din secțiunea Abonament, poți seta aici reînnoirea automată. La prima plată, aceasta este oprită implicit.';
+    if(subRenewLbl)subRenewLbl.style.opacity=paid?'':'0.55';
+  }
 }
 function onSettingsShiftInput(){
   const v=parseInt($('settings-shift-range')?.value||'0',10);
@@ -3634,10 +3708,17 @@ function exportLocalStorageState(){
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);
   toast('Fișier descărcat','ok');
 }
+function wipeLocalStorageAndReload(){
+  try{
+    localStorage.removeItem('sifonator_state_v3');
+    localStorage.removeItem(LS_LAST_REAL_VISIT);
+  }catch(e){}
+  location.reload();
+}
 function deleteLocalStorageAndSignOut(){
   dlgOpen('Șterge date locale','','<p class="tsm tmut">Se șterge <code>sifonator_state_v3</code> și se reîncarcă pagina. Vei fi deconectat.</p>',
     `<button type="button" class="btn btn-f" onclick="dlgClose()">Renunță</button>
-     <button type="button" class="btn btn-d" onclick="localStorage.removeItem('sifonator_state_v3');location.reload()">Șterge &amp; ieșire</button>`);
+     <button type="button" class="btn btn-d" onclick="wipeLocalStorageAndReload()">Șterge &amp; ieșire</button>`);
 }
 function searchMorePublicFunds(){
   const gain=Math.round((PERSONAS[S.settings.persona]?.budget||12e6)*0.07*(0.9+Math.random()*0.35));
@@ -3880,10 +3961,7 @@ function renderSub(){
     if(isFreeCard){
       actions=`<p class="tsm tmut" style="line-height:1.55">Se aplică automat fără „abonament activ”. Nu poți anula, treci la un plan plătit când vrei mai mult.</p>`;
     }else if(curPaid){
-      actions=`<label class="tsm" style="display:flex;gap:10px;align-items:flex-start;margin:0 0 12px;line-height:1.45;cursor:pointer;user-select:none;text-align:left">
-        <input type="checkbox" style="margin-top:3px;flex-shrink:0" ${S.sub.autoRenew!==false?'checked':''} onchange="toggleSubAutoRenew(this.checked)"/>
-        <span><strong>Reînnoire automată</strong> — dacă e bifat, la expirare abonamentul se prelungește o lună. Dacă debifezi, la expirare revii la gratuit și apare o fereastră cu opțiuni de plată.</span>
-      </label>
+      actions=`<p class="tsm tmut" style="line-height:1.5;margin:0 0 12px;text-align:left">Reînnoirea automată este <strong>${S.sub.autoRenew===true?'activă':'oprită'}</strong> — o poți schimba oricând din <strong>Setări</strong> → Reînnoire abonament.</p>
       <button type="button" class="btn btn-f btn-full" onclick="cancelSub()">Anulează abonamentul</button>`;
     }else{
       actions=`<button type="button" class="btn btn-p btn-full" onclick="openSubPay('${pl.id}')">Alege acest plan</button>`;
@@ -4145,9 +4223,7 @@ function activateSub(tid){
   if(tid==='free')return;
   const exp=nowDate();exp.setMonth(exp.getMonth()+1);
   const pl=PLANS.find(p=>p.id===tid);
-  const prev=S.sub;
-  const inheritAuto=prev&&prev.tier===tid&&prev.autoRenew===false?false:true;
-  S.sub={tier:tid,exp:exp.toISOString(),secTotal:pl.secMonth,secUsed:0,autoRenew:inheritAuto};
+  S.sub={tier:tid,exp:exp.toISOString(),secTotal:pl.secMonth,secUsed:0,autoRenew:false};
   clearSubLapsedState();
   updWandQuota();updDebug();
 }
@@ -4313,6 +4389,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   window.addEventListener('beforeunload',()=>{
     if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
     if(S.settings.persistence==='local_storage')saveState();
+  });
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState!=='visible')return;
+    if(S.settings.persistence!=='local_storage')return;
+    if($('app')?.classList.contains('hid'))return;
+    if(processOfflineRealTimeGap())renderAll();
   });
 });
 </script>
