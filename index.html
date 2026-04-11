@@ -3964,7 +3964,6 @@ const WAND_TENDER_ELIGIBLE_STATUSES=['clarificari','depuneri','evaluation','awar
 function tendersEligibleForWandCount(projectId){
   return S.tenders.filter(t=>t.projectId===projectId&&WAND_TENDER_ELIGIBLE_STATUSES.includes(t.status)).length;
 }
-/** Jurnal „Dosar & contabilitate” — pași contabili satirici (fără nume de surse reale). */
 function buildWandDossierOpenLines(name,rr,dd,f){
   const nm=String(name||'Proiect');
   const short=nm.length>58?nm.slice(0,58)+'…':nm;
