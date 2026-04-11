@@ -3572,7 +3572,7 @@ function renderSettings(){
   const isLs=S.settings.persistence==='local_storage';
   const ph=$('settings-persist-hint');if(ph)ph.textContent=isLs
     ?'Sesiunea este salvată în localStorage. Poți exporta înainte de migrare sau șterge pentru deconectare completă.'
-    :'Nu folosești localStorage — exportul/ștergerea nu se aplică sesiunii în-memory.';
+    :'Nu folosești localStorage. Exportul/ștergerea nu se aplică sesiunii in-memory.';
   document.querySelectorAll('#settings-persist-card button').forEach(b=>{b.disabled=!isLs});
   const canShift=tierAllowsTimeShift();
   const sh=$('settings-shift-hint');if(sh)sh.textContent=canShift
