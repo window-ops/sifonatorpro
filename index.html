@@ -55,6 +55,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .btn-f{background:transparent;color:var(--text1);border:1px solid var(--border)}.btn-f:hover{background:rgba(0,0,0,.05)}
 .btn-g{background:var(--gold);color:#fff}
 .btn-psd{background:var(--psd);color:#fff}
+.btn-mant{background:#5c2b70;color:#fff}.btn-mant:hover{background:#6b3485}
 .btn-full{width:100%}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
 .btn-sm{padding:5px 10px;font-size:12px}
@@ -133,6 +134,12 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .bk{background:rgba(0,0,0,.07);color:var(--text2)}
 .bgold{background:rgba(229,165,10,.14);color:#9a6600}
 .bpur{background:rgba(129,61,156,.11);color:#5c2b70}
+/* Calitate — lista Proiecte Publice (badge dedicat; evită confuzia cu alte etichete) */
+.proj-pub-qb{font-weight:800;letter-spacing:.01em}
+.proj-pub-qb-mantuiala{background:rgba(192,28,40,.13);color:#8f1018;border:1px solid rgba(192,28,40,.28)}
+.proj-pub-qb-moderata{background:rgba(230,97,0,.13);color:#7a4200;border:1px solid rgba(230,97,0,.25)}
+.proj-pub-qb-ridicata{background:rgba(38,162,105,.13);color:#14663a;border:1px solid rgba(38,162,105,.28)}
+.proj-pub-qb-mantuit{background:linear-gradient(145deg,rgba(92,43,112,.16),rgba(129,61,156,.09));color:#4a1d5c;border:1px solid rgba(92,43,112,.4);box-shadow:0 1px 0 rgba(255,255,255,.35) inset}
 
 /* ── TABS ── */
 .tabs{display:flex;gap:2px;margin-bottom:13px;background:rgba(0,0,0,.06);padding:3px;border-radius:var(--r);width:fit-content}
@@ -153,6 +160,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 #overlay.hid{display:none}
 #overlay.overlay-3ds{background:rgba(0,0,0,.35);pointer-events:none}
 #overlay.overlay-3ds #dlg{pointer-events:auto}
+#overlay.overlay-over-portal{z-index:10240!important}
 
 /* ── PSD Direct Connect ── */
 #psd-dc-portal{position:fixed;inset:0;z-index:2400;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(42,2,2,.78);backdrop-filter:blur(8px);font-family:system-ui,'Segoe UI',Roboto,sans-serif;color:#1a0808}
@@ -176,9 +184,10 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 #psd-dc-portal .psd-dc-inp{width:100%;padding:10px 12px;border:2px solid #c9a9a0;border-radius:2px;font-family:'Consolas','Courier New',monospace;font-size:15px;letter-spacing:.12em;margin-top:6px}
 #psd-dc-portal .psd-dc-keybox{font-family:'Consolas','Courier New',monospace;font-size:12px;word-break:break-all;background:#1a0a08;color:#f5e6dc;padding:12px;border-radius:2px;border:1px solid #333;margin:10px 0}
 #psd-dc-portal input[type="checkbox"]{accent-color:#8b0000;width:16px;height:16px}
-.integ-pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em}
+.integ-pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
 .integ-pill-ok{background:rgba(38,162,105,.18);color:#1a7f4b}
 .integ-pill-off{background:rgba(0,0,0,.06);color:var(--text2)}
+.integ-card-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:8px 12px}
 
 /* ── ANAF Sync ── */
 #anaf-sync-portal{position:fixed;inset:0;z-index:2410;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,22,38,.82);backdrop-filter:blur(8px);font-family:system-ui,'Segoe UI',Roboto,sans-serif;color:#0d1b2a}
@@ -197,6 +206,51 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 #anaf-sync-portal .anaf-inp{width:100%;padding:10px 11px;border:2px solid #90a4bd;border-radius:3px;font-family:var(--mono);font-size:13px;margin-top:6px}
 #anaf-sync-portal .anaf-keybox{font-family:var(--mono);font-size:11px;word-break:break-all;background:#0d1b2a;color:#e3f2fd;padding:12px;border-radius:3px;margin:10px 0;border:1px solid #003d82}
 #anaf-sync-portal .anaf-warn{border-left:4px solid #c01c28;padding:8px 10px;background:rgba(192,28,40,.08);font-size:12px;margin:10px 0}
+
+/* ── Mântuire Proiecte ── */
+#mantuire-portal{position:fixed;inset:0;z-index:2412;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(42,10,52,.82);backdrop-filter:blur(8px);font-family:var(--font);color:#2d1538}
+#mantuire-portal.hid{display:none!important}
+#mantuire-portal .mantp-shell{width:100%;max-width:560px;max-height:min(92vh,720px);display:flex;flex-direction:column;border-radius:4px;box-shadow:0 20px 56px rgba(0,0,0,.45),0 0 0 1px rgba(92,43,112,.45);overflow:hidden;border:2px solid #5c2b70;background:linear-gradient(180deg,#f8f3fb 0%,#fff 22%);color:#2d1538}
+#mantuire-portal .mantp-top{background:#5c2b70;color:#fff;padding:14px 18px 16px;border-bottom:3px solid #3d1d4a}
+#mantuire-portal .mantp-brand{font-size:19px;font-weight:700;letter-spacing:.02em}
+#mantuire-portal .mantp-sub{font-size:11px;opacity:.9;margin-top:5px;line-height:1.4}
+#mantuire-portal .mantp-body{padding:16px 18px 20px;overflow-y:auto;flex:1;font-size:13px;line-height:1.55;font-family:var(--font)}
+#mantuire-portal .mantp-seal{display:inline-block;background:#5c2b70;color:#fff;font-size:9px;font-weight:800;padding:3px 9px;border-radius:2px;letter-spacing:.08em;margin-bottom:10px}
+#mantuire-portal .mantp-bureau{font-size:11px;color:#4a3558;background:#f0e8f4;border:1px solid #d4c4dc;padding:10px 12px;border-radius:3px;margin:10px 0;max-height:100px;overflow-y:auto}
+#mantuire-portal .mantp-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#mantuire-portal .mantp-btn-pri{background:#5c2b70;color:#fff;border:none;padding:10px 16px;font-weight:800;font-size:12px;cursor:pointer;border-radius:3px;font-family:var(--font)}
+#mantuire-portal .mantp-btn-pri:hover{background:#6b3485}
+#mantuire-portal .mantp-btn-sec{background:#fff;color:#5c2b70;border:2px solid #5c2b70;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;border-radius:3px;font-family:var(--font)}
+#mantuire-portal .mantp-btn-sec:hover{background:rgba(92,43,112,.06)}
+#mantuire-portal .mantp-btn-close{background:#fff;color:#5c2b70;border:2px solid #5c2b70;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;border-radius:3px;font-family:var(--font)}
+#mantuire-portal .mantp-inp{width:100%;padding:10px 11px;border:2px solid #c9b3d4;border-radius:3px;font-family:var(--mono);font-size:13px;margin-top:6px;outline:none}
+#mantuire-portal .mantp-keybox{font-family:var(--mono);font-size:11px;word-break:break-all;background:#2d1538;color:#f3e8f8;padding:12px;border-radius:3px;margin:10px 0;border:1px solid #5c2b70}
+#mantuire-portal .mantp-warn{border-left:4px solid #c01c28;padding:8px 10px;background:rgba(192,28,40,.08);font-size:12px;margin:10px 0}
+#mantuire-portal .mantp-legal{max-height:110px;overflow-y:auto;padding:10px;background:#fff;border:1px solid #d4c4dc;font-size:11px;color:#4a3558;margin:10px 0;border-radius:3px}
+#mantuire-portal input[type="checkbox"]{accent-color:#5c2b70;width:16px;height:16px}
+
+/* ── Ecran Mântuire Proiecte (conținut integrat: carduri ca în restul aplicației) ── */
+.mant-qrow{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--border);font-size:12px}
+.mant-qrow:last-child{border-bottom:none}
+.mant-qrow-live{align-items:flex-start}
+.mant-eta{font-variant-numeric:tabular-nums;font-weight:800;color:#5c2b70;font-size:13px;line-height:1.25;min-height:1.25em}
+.mant-eta.mant-eta-hot{animation:mantEtaPulse .85s ease-in-out infinite;color:#3d1d4a}
+@keyframes mantEtaPulse{0%,100%{opacity:1}50%{opacity:.68}}
+.mant-act{font-size:11px;color:var(--text2);line-height:1.4;min-height:2.6em}
+.mant-hist-row{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:9px 0;border-bottom:1px dashed var(--border);font-size:12px;align-items:start}
+.mant-hist-row:last-child{border-bottom:none}
+.mant-hist-meta{font-size:10px;color:var(--text2);grid-column:1/-1;line-height:1.35}
+.mant-api-banner{background:linear-gradient(90deg,rgba(92,43,112,.12),rgba(129,61,156,.08));border:1px solid rgba(92,43,112,.35);border-radius:var(--r);padding:10px 12px;font-size:12px;margin-bottom:14px;line-height:1.45}
+.mant-api-banner.warn{border-color:rgba(200,120,0,.45);background:rgba(230,97,0,.1)}
+.mant-api-banner.dep{border-color:rgba(192,28,40,.35);background:rgba(192,28,40,.08)}
+.mant-api-chart{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;min-height:88px;padding:8px 0 4px}
+.mant-api-day{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.mant-api-bar{width:100%;max-width:40px;margin:0 auto;background:linear-gradient(180deg,#5c2b70,#9b6db8);border-radius:4px 4px 0 0;min-height:4px;transition:height .2s ease}
+.mant-api-day-l{font-size:9px;color:var(--text2);white-space:nowrap}
+.mant-api-log{font-size:11px}
+.mant-api-logrow{display:grid;grid-template-columns:76px minmax(0,1fr) 88px 36px;gap:6px;padding:7px 0;border-bottom:1px dashed var(--border);align-items:start}
+.mant-api-log-h{display:grid;grid-template-columns:76px minmax(0,1fr) 88px 36px;gap:6px;font-size:9px;font-weight:800;text-transform:uppercase;color:var(--text2);padding-bottom:4px}
+#mantuire-app-root .mant-api-pill,#mantuire-portal .mant-api-pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;background:rgba(92,43,112,.14);color:#5c2b70}
 .audit-anaf-ef-row{display:grid;grid-template-columns:1fr 100px 90px;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:center}
 .audit-anaf-ef-h{font-weight:800;font-size:11px;text-transform:uppercase;color:var(--text2);letter-spacing:.04em}
 .audit-anaf-detail{font-size:12px;line-height:1.5;padding:8px 0;border-bottom:1px dashed var(--border);color:var(--text1)}
@@ -789,6 +843,9 @@ body.spgf-launch-text #spgf-launcher{gap:6px}
         <span class="ni">📋</span><span>Licitații</span>
         <span class="nbdg yellow hid" id="nbt">0</span>
       </div>
+      <div id="nav-mantuire" class="nav-i hid" onclick="navigate('mantuire')" data-v="mantuire">
+        <span class="ni">⛪</span><span>Mântuire Proiecte</span>
+      </div>
       <div class="nav-sec" style="margin-top:6px">Instrumente</div>
       <div class="nav-i" onclick="navigate('wand')" data-v="wand">
         <span class="ni">✨</span><span>Bagheta Magică</span>
@@ -894,6 +951,14 @@ body.spgf-launch-text #spgf-launcher{gap:6px}
             💡 <strong>Sfat de eficiență:</strong> Asigură-te că specificațiile tehnice sunt suficient de specifice pentru a permite participarea unui singur ofertant. Criteriu recomandat: „cel mai mic preț" + „experiență similară" (definită de tine în caietul de sarcini).
           </p></div>
         </div>
+      </div>
+
+      <!-- ── MÂNTUIRE PROIECTE ── -->
+      <div id="view-mantuire" class="view">
+        <div class="vh">
+          <div><h2>Mântuire Proiecte™</h2><p>Actualizează proiectele încă „de mântuială” la stadiul <strong>Mântuit</strong>. Aici vezi creditele, coada și setările fiecărei cereri.</p></div>
+        </div>
+        <div id="mantuire-app-root"></div>
       </div>
 
       <!-- ── BAGHETA MAGICĂ ── -->
@@ -1091,6 +1156,7 @@ body.spgf-launch-text #spgf-launcher{gap:6px}
               <div class="rh-row"><span>Proiect calitate moderată finalizat</span><span class="rd pos">+2</span></div>
               <div class="rh-row"><span>Proiect calitate ridicată finalizat</span><span class="rd pos">+3</span></div>
               <div class="rh-row"><span>Pariu corect pe calitate proiect</span><span class="rd pos">+2 până la +4</span></div>
+              <div class="rh-row"><span>Proiect mântuit prin API terț (finalizat slab)</span><span class="rd pos">+5 până la +20</span></div>
               <div class="rh-row"><span>Proiect nefinalizat la termen</span><span class="rd neg">-1</span></div>
               <div class="rh-row"><span>Proiect neinceput la termen</span><span class="rd neg">-2</span></div>
             </div>
@@ -1284,7 +1350,7 @@ body.spgf-launch-text #spgf-launcher{gap:6px}
               <li><strong>Eligibilitate:</strong> doar proiecte <strong>planificate</strong> sau <strong>în desfășurare</strong>, nu și cele <strong>finalizate</strong> (dosar închis). Exceptând demo ascuns din coadă. Este nevoie de cel puțin o licitație asociată ajunsă la <strong>Clarificări</strong> sau mai târziu: Depuneri, evaluare, adjudecată, execuție, contestată. Doar licitația încă în stadiul <strong>Publicată</strong> nu e suficientă, procesul contabil presupune că procedura a părăsit faza de simplu anunț.</li>
               <li><strong>Timp:</strong> fără abonament activ se consumă orele/timpul cumpărat pentru Baghetă; cu abonament, cota lunară din plan (la planul cel mai mare, cota nelimitată este tratată ca nelimitată). Timpul scade pe durata sesiunii; <strong>pauza</strong> oprește consumul și incrementarea surplusului.</li>
               <li><strong>Valorile reale/declarate</strong> afișate în formular sunt citite din proiect (nu există legătură cu un serviciu „AI” extern).</li>
-              <li><strong>Factor de optimizare (slider 20-95%):</strong> setează ce parte din diferența (declarat, real) poate deveni <strong>surplus redistribuibil</strong> în sesiune. <strong>Plafon surplus = (declarat - real) × factor</strong> (rotunjit la întregi în simulare). Creșterea efectivă în timp este <strong>asimptotică</strong> (viteza scade cu timpul și depinde de dificultatea aleasă la login).</li>
+              <li><strong>Factor de optimizare (slider 20-95%):</strong> setează ce parte din diferența (declarat, real) poate deveni <strong>surplus redistribuibil</strong> în sesiune. <strong>Plafon surplus = (declarat - real) × factor</strong>. Creșterea efectivă în timp este <strong>asimptotică</strong> (viteza scade cu timpul și depinde de dificultatea aleasă la login).</li>
               <li><strong>Vizibilitate simulată:</strong> un scor procentual în ecran combină factorul cu etapa justiției și dificultatea; nu înlocuiește un audit real.</li>
               <li><strong>Factor ≥ 70%:</strong> după pornirea sesiunii poate declanșa o alertă narativă (banner + eventuală escaladare DNA dacă sumele sifonate și etapa „curat” permit).</li>
               <li><strong>Coadă:</strong> maxim 5 intrări nefinalizate; poți muta sarcinile <strong>în așteptare</strong> cu ↑/↓ și pe durata unei sesiuni (nu și pe cea în execuție). Următoarea sarcină pornește automat când nu există sesiune activă.</li>
@@ -1300,7 +1366,7 @@ body.spgf-launch-text #spgf-launcher{gap:6px}
           <div class="cc">
             <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: <strong>SifonPay™</strong> (card) sau <strong>PSD Direct Connect™</strong> („bani publici”), cu pași simulați. Pentru PSD Direct Connect trebuie mai întâi integrarea din <strong>Instrumente → Manager Integrări</strong> (cont verificat + cheie API). Nu există variantă „instant” care să sari peste flux.</p>
             <p class="tsm tmut mt8">Tranzacția apare narativ ca procesată de SifonPay™; datele cardului sunt fictive.</p>
-            <div id="howto-sifonpay-bin" class="mt12"></div>
+            <div id="howto-sifonpay-bin" class="mt6"></div>
           </div>
         </div>
         <div class="card mb14">
@@ -1361,7 +1427,7 @@ body.spgf-launch-text #spgf-launcher{gap:6px}
     <span class="dbk">DNA:</span><span class="dbv" id="db-just">curat</span>
     <span class="dbk">SHIFT:</span><span class="dbv" id="db-shift">0h</span>
     <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">
-      <button class="btn btn-sm" style="background:#3584e4;color:#fff" onclick="dbAddRep(50)">+50 rep</button>
+      <button class="btn btn-sm" style="background:#3584e4;color:#fff" onclick="dbAddRep(50)">+50 reputație</button>
       <button class="btn btn-sm" style="background:#e5a50a;color:#fff" onclick="dbAddTime(3600)">+1h wand</button>
       <button class="btn btn-sm" style="background:var(--psd);color:#fff" onclick="simAncheta()">DNA ancheta</button>
       <button class="btn btn-sm" style="background:#813d9c;color:#fff" onclick="simPuscarie()">DNA pușcărie</button>
@@ -1402,12 +1468,28 @@ body.spgf-launch-text #spgf-launcher{gap:6px}
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
         <div>
           <div class="anaf-brand">ANAF Sync™</div>
-          <div class="anaf-sub">Conector pentru e-Factura, SAF-T și „trasabilitate extinsă” · <strong>simulare</strong></div>
+          <div class="anaf-sub">Conector pentru e-Factura, SAF-T și „trasabilitate extinsă”</div>
         </div>
         <button type="button" class="anaf-btn-sec" onclick="closeAnafSyncPortal()" style="flex-shrink:0;margin-top:2px">Închide</button>
       </div>
     </div>
     <div class="anaf-body" id="anaf-sync-body"></div>
+  </div>
+</div>
+
+<!-- Mântuire Proiecte (portal înregistrare API) -->
+<div id="mantuire-portal" class="hid" aria-hidden="true">
+  <div class="mantp-shell">
+    <div class="mantp-top">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div>
+          <div class="mantp-brand">Mântuire Proiecte™</div>
+          <div class="mantp-sub">Portal de conectare API · proiecte finalizate slab pot fi <strong>mântuite</strong> prin API</div>
+        </div>
+        <button type="button" class="mantp-btn-close" onclick="closeMantuirePortal()" style="flex-shrink:0;margin-top:2px">Închide</button>
+      </div>
+    </div>
+    <div class="mantp-body" id="mantuire-portal-body"></div>
   </div>
 </div>
 
@@ -1508,7 +1590,8 @@ const S={
   smsInbox:[],
   pending3DS:null,
   spagafonLastSeen:0,
-  integrations:{psdDC:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''},anafSync:{linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0}},
+  integrations:{psdDC:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''},anafSync:{linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0},mantuireCloud:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:'',wizardPhase:1,registryTicks:0,keyEnv:'live',keyCreatedAt:0,lastUsedAt:0,apiTier:'parohial',registrationPaid:false}},
+  mantuire:{credits:5,serverId:'proto_iasi',queue:[],history:[],usageLog:[],usageByDay:{},stats:{ok:0,fail:0}},
 };
 
 const PERSONAS={
@@ -1557,15 +1640,15 @@ const PLANS=[
    protection:false, timeShift:false, feat:false},
   {id:'basic', name:'Corupt Basic',   price:99,   secMonth:7200,
    maxOngoing:5, maxPending:5, repMultCap:0.05,
-   feats:['Max. 5 proiecte în lucru / 5 planificate','Licitații standard',`Shift temporal (până la ${TIME_SHIFT_MAX_DAYS} zile)`,'Bonus rep. proiecte până la 5%'],
+   feats:['Max. 5 proiecte în lucru / 5 planificate','Licitații standard',`Shift temporal (până la ${TIME_SHIFT_MAX_DAYS} zile)`,'Bonus reputație la proiecte până la 5%'],
    protection:true, timeShift:true, feat:false},
   {id:'pro',   name:'Oligarh Pro',    price:499,  secMonth:36000,
    maxOngoing:20, maxPending:20, repMultCap:0.15,
-   feats:['Max. 20 proiecte în lucru / 20 planificate','Licitații prioritare','Shift temporal','Bonus rep. proiecte până la 15%'],
+   feats:['Max. 20 proiecte în lucru / 20 planificate','Licitații prioritare','Shift temporal','Bonus reputație la proiecte până la 15%'],
    protection:true, timeShift:true, feat:true},
   {id:'ent',   name:'Interlop Enterprise',price:1999,secMonth:-1,
    maxOngoing:Infinity, maxPending:Infinity, repMultCap:0.25,
-   feats:['Proiecte nelimitate','Protector DNA inclus','Shift temporal','Bonus rep. proiecte până la 25%','Bagheta nelimitată/lună'],
+   feats:['Proiecte nelimitate','Protector DNA inclus','Shift temporal','Bonus reputație la proiecte până la 25%','Bagheta nelimitată/lună'],
    protection:true, timeShift:true, feat:false},
 ];
 
@@ -1676,7 +1759,7 @@ function saveState(){
       settings:S.settings,user:S.user,rep:S.rep,repH:S.repH,siphoned:S.siphoned,justice:S.justice,smsInbox:S.smsInbox,spagafonLastSeen:S.spagafonLastSeen,sub:S.sub,subLapsed:S.subLapsed,
       purchSec:S.purchSec,purchSecUsed:S.purchSecUsed,sessions:S.sessions,activeSession:activeSer,judiciaryRisk:S.judiciaryRisk,
       pressTone:S.pressTone,pressHistory:S.pressHistory,timeShiftSec:S.timeShiftSec,userControls:S.userControls,wandQueue:S.wandQueue,
-      projects:S.projects,tenders:S.tenders,integrations:S.integrations,
+      projects:S.projects,tenders:S.tenders,integrations:S.integrations,mantuire:S.mantuire,
       actLog:S.actLog,npid:S.npid,ntid:S.ntid,ledger:S.ledger,actors:S.actors,worldMemory:S.worldMemory,simClock:S.simClock
     }));
     persistLastRealVisitTs();
@@ -1706,6 +1789,8 @@ function loadState(){
     if(typeof S._wandLogMoneyFilter!=='boolean')S._wandLogMoneyFilter=false;
     if(typeof S.subLapsed!=='object')S.subLapsed=null;
     ensureIntegrations();
+    ensureMantuireState();
+    ensureMantuireIntegration();
     migrateSubState();
     normalizeSpagafonSettings();
     if(typeof S.settings.skipProjectFinalizeConfirm!=='boolean')S.settings.skipProjectFinalizeConfirm=false;
@@ -1829,8 +1914,7 @@ function openSubExpiredDialog(){
   const name=pl?.name||tid;
   const safeName=escapeHtml(name);
   dlgOpen('Abonament expirat','Reînnoire automată dezactivată',
-    `<p class="tsm tmut" style="line-height:1.65">Perioada pentru <strong>${safeName}</strong> s-a încheiat (expirare: ${new Date(S.subLapsed.exp).toLocaleDateString('ro-RO')}). Beneficiile planului plătit nu mai sunt active.</p>
-     <p class="tsm mb0" style="line-height:1.55">Poți plăti din nou același plan, poți alege alt nivel, sau poți continua pe <strong>Starter Gratuit</strong>.</p>`,
+    `<p class="tsm mb0" style="line-height:1.55">Perioada pentru <strong>${safeName}</strong> s-a încheiat (expirare: ${new Date(S.subLapsed.exp).toLocaleDateString('ro-RO')}). Beneficiile planului plătit nu mai sunt active. Poți plăti din nou același plan, poți alege alt nivel, sau poți continua pe <strong>Starter Gratuit</strong>.</p>`,
     `<button type="button" class="btn btn-f" onclick="subExpiredChooseFree()">Continuă gratuit</button>
      <button type="button" class="btn btn-p" onclick="subExpiredRenewSame('${tid}')">Reînnoiește același plan</button>
      <button type="button" class="btn btn-s" onclick="subExpiredChooseOther()">Alt plan</button>`
@@ -1866,7 +1950,7 @@ function toggleSubAutoRenew(on){
   saveState();
   renderSettings();
   renderSub();
-  toast(on?'Reînnoire automată activă — abonamentul se prelungește lunar cât timpul simulat depășește data de expirare.':'Reînnoire automată oprită — la expirare revii la gratuit și poți alege din nou cum plătești.','ok');
+  toast(on?'Reînnoire automată activă. Abonamentul se prelungește lunar cât timpul simulat depășește data de expirare.':'Reînnoire automată oprită. La expirare revii la gratuit și poți alege din nou cum plătești.','ok');
 }
 function advanceSimulationMonths(months){
   for(let i=0;i<months;i++){
@@ -1880,7 +1964,7 @@ function advanceSimulationMonths(months){
         if(Math.random()<0.28){p.monthly.changeOrders++;p.declaredValue+=Math.round(p.declaredValue*0.03);p.budget=p.declaredValue;addAct(`Modificare suplimentară (contract) pe „${p.name}”: +3% valoare declarată.`)}
         if(p.monthly.progress>=100){
           p.status='completed';
-          if(p.bet){addAct(`Pariu pe „${p.name}" anulat (finalizare automată în simulare).`);p.bet=null}
+          if(p.bet){addAct(`Pariu pe „${p.name}" anulat (finalizare automată).`);p.bet=null}
           p.quality=rollProjectQuality(p);
           addAct(`Proiect „${p.name}” finalizat prin avans lunar — ${qLabel(p.quality)}.`);
         }
@@ -1975,10 +2059,14 @@ function recalcJudiciaryPressure(skipTimelineLog){
 function normalizeProjectAccounting(){
   S.sessions=S.sessions.filter(s=>S.projects.some(p=>p.id===s.projectId));
   S.projects.forEach(p=>{
+    if(p.quality==='salvat')p.quality='mantuit';
     if(!p.projCategory||!PROJECT_CATEGORIES[p.projCategory])p.projCategory='diverse';
     ensureProjectDossier(p);
     if(!p.wandUsed&&S.sessions.some(s=>s.projectId===p.id))p.wandUsed=true;
-    if(p.status==='completed')return;
+    if(p.status==='completed'){
+      if(p.bet)p.bet=null;
+      return;
+    }
     if(!p.realValue)p.realValue=Math.round((p.budget||1)*0.68);
     if(!p.declaredValue||p.declaredValue<=p.realValue)p.declaredValue=Math.round((p.budget||1)*1.2);
     p.budget=p.declaredValue;
@@ -2007,8 +2095,11 @@ function repLevel(r){
   if(r<100)return'Politician cu Inițiativă';if(r<150)return'Oligarh Regional';
   if(r<200)return'Baron Local';return'Interlop de Elită';
 }
-function qLabel(q){return{mantuiala:'De mântuială',moderata:'Calitate moderată',ridicata:'Calitate ridicată'}[q]||'—'}
-function qBadge(q){return{mantuiala:'br',moderata:'bo',ridicata:'bg'}[q]||'bk'}
+function qLabel(q){return{mantuiala:'De mântuială',moderata:'Calitate moderată',ridicata:'Calitate ridicată',mantuit:'Mântuit',salvat:'Mântuit'}[q]||'—'}
+/** Badge calitate doar pentru lista Proiecte Publice (#proj-list) */
+function projPublicQualityBadgeClass(q){
+  return{mantuiala:'proj-pub-qb proj-pub-qb-mantuiala',moderata:'proj-pub-qb proj-pub-qb-moderata',ridicata:'proj-pub-qb proj-pub-qb-ridicata',mantuit:'proj-pub-qb proj-pub-qb-mantuit',salvat:'proj-pub-qb proj-pub-qb-mantuit'}[q]||'bk';
+}
 /** Categorii proiect: fiecare are ponderi pentru extragerea calității finale */
 const PROJECT_CATEGORIES={
   constructii:{label:'Lucrări de construcții / execuție',short:'Construcții',hint:'Șantiere, clădiri, amenajări — risc mare de „mântuială”.',p:{mantuiala:.84,moderata:.14,ridicata:.02}},
@@ -2257,7 +2348,7 @@ function doLogin(){
     processOfflineRealTimeGap();
     migrateSubState();
     ensureWandTimer();
-    applyProfile();renderAll();updSpagafonBadge();toast('Autentificat automat din localStorage','ok');schedDNA();return;
+    applyProfile();renderAll();updSpagafonBadge();toast('Autentificat automat din localStorage','ok');return;
   }
   const name=$('l-name')?.value?.trim();
   if(!name){toast('Introdu numele tău','err');return}
@@ -2290,7 +2381,6 @@ function doLogin(){
   renderAll();
   saveState();
   toast(`Autentificat cu succes, ${name}! 🏛️`,'ok');
-  schedDNA();
 }
 function applyProfile(){
   $('hb-name') && ($('hb-name').textContent=S.user.name);
@@ -2298,7 +2388,12 @@ function applyProfile(){
   $('hb-fn') && ($('hb-fn').textContent=`${S.user.fn} · ${S.user.jud}`);
   $('dash-greet') && ($('dash-greet').textContent=`Bună ziua, ${S.user.name}! Ce sifonăm azi?`);
 }
-function renderAll(){normalizeProjectAccounting();normalizeTenderData();checkSubLifecycle();updateFundsLockUI();renderDash();renderProj();renderTend();renderJust();renderSub();renderAudit();renderPress();renderOps();renderInteg();renderHowto();renderSettings();updRep();updWandChip();updWandQuota();renderSessions();renderWandQueue();updWandProjectOptions();syncWandSessionUI();renderWandJobView();saveState();syncMobileMenuToggleUi();applySpagafonDisplaySettings();}
+function syncMantuireAccessUi(){
+  ensureMantuireIntegration();
+  $('nav-mantuire')?.classList.toggle('hid',!isMantuireLinked());
+  if(!isMantuireLinked()&&$('view-mantuire')?.classList.contains('active'))navigate('integ');
+}
+function renderAll(){normalizeProjectAccounting();normalizeTenderData();checkSubLifecycle();updateFundsLockUI();processMantuireQueue();syncMantuireAccessUi();renderDash();renderProj();renderTend();renderJust();renderSub();renderAudit();renderPress();renderOps();renderInteg();renderMantuire();renderHowto();renderSettings();updRep();updWandChip();updWandQuota();renderSessions();renderWandQueue();updWandProjectOptions();syncWandSessionUI();renderWandJobView();saveState();syncMobileMenuToggleUi();applySpagafonDisplaySettings();scheduleMantuireDrainTick();}
 
 // ═══ MANAGER INTEGRĂRI ═══
 function ensureIntegrations(){
@@ -2324,6 +2419,987 @@ function ensureIntegrations(){
   if(typeof a.dosarTicks!=='number'||a.dosarTicks<0)a.dosarTicks=0;
   if(a.linked){a.draftKey='';a.pendingCertCode='';}
   else if(a.apiKey&&!a.draftKey){a.draftKey=a.apiKey;a.apiKey='';}
+  ensureMantuireIntegration();
+}
+const MANTUIRE_SERVERS=[
+  {id:'mit_buc',name:'Mitropolie, nod București',hint:'Cozi mari; dosare și cereri raportate în presă încetinesc rutarea',minMs:14000,maxMs:32000},
+  {id:'proto_iasi',name:'Protopopiat regional',hint:'Trafic moderat pe magistrala canonică',minMs:6000,maxMs:15000},
+  {id:'manastire_cdn',name:'Mănăstire CDN',hint:'Serii scurte, rută optimizată',minMs:3200,maxMs:9000},
+  {id:'arhiva_vest',name:'Nod arhivistic Vest',hint:'Procesare rapidă pe serie dedicată',minMs:700,maxMs:2600},
+];
+function ensureMantuireState(){
+  if(!S.mantuire||typeof S.mantuire!=='object')S.mantuire={credits:5,serverId:'proto_iasi',queue:[],history:[],usageLog:[],usageByDay:{},stats:{ok:0,fail:0}};
+  if(typeof S.mantuire.credits!=='number'||!Number.isFinite(S.mantuire.credits)){
+    const t=S.mantuire.tokens;
+    S.mantuire.credits=(typeof t==='number'&&Number.isFinite(t))?t:5;
+  }
+  try{delete S.mantuire.tokens}catch(e){S.mantuire.tokens=undefined}
+  if(S.mantuire.credits<0)S.mantuire.credits=0;
+  if(!Array.isArray(S.mantuire.queue))S.mantuire.queue=[];
+  if(!Array.isArray(S.mantuire.history))S.mantuire.history=[];
+  if(S.mantuire.history.length>40)S.mantuire.history.length=40;
+  if(!Array.isArray(S.mantuire.usageLog))S.mantuire.usageLog=[];
+  if(S.mantuire.usageLog.length>80)S.mantuire.usageLog.length=80;
+  if(!S.mantuire.usageByDay||typeof S.mantuire.usageByDay!=='object')S.mantuire.usageByDay={};
+  if(!S.mantuire.stats||typeof S.mantuire.stats!=='object')S.mantuire.stats={ok:0,fail:0};
+  if(typeof S.mantuire.stats.ok!=='number')S.mantuire.stats.ok=0;
+  if(typeof S.mantuire.stats.fail!=='number')S.mantuire.stats.fail=0;
+  try{delete S.mantuire.rateMinuteStart;delete S.mantuire.requestsThisMinute;delete S.mantuire.idempotentDone}catch(e){}
+  const sids=MANTUIRE_SERVERS.map(x=>x.id);
+  if(!S.mantuire.serverId||!sids.includes(S.mantuire.serverId))S.mantuire.serverId=MANTUIRE_SERVERS[1].id;
+  for(const j of S.mantuire.queue){
+    if(!j.id)j.id='mnt_'+j.projectId+'_'+String(j.endTs);
+    if(typeof j.startedAt!=='number'||!Number.isFinite(j.startedAt))j.startedAt=Math.max(0,j.endTs-20000);
+    if(typeof j.durationMs!=='number'||!Number.isFinite(j.durationMs)||j.durationMs<500)j.durationMs=Math.max(800,j.endTs-j.startedAt);
+    if(typeof j.umCost!=='number'||!Number.isFinite(j.umCost)||j.umCost<1){
+      const tid=j.apiTier==='solemn'?'solemn':j.apiTier==='expedit'?'expedit':'parohial';
+      j.umCost=tid==='solemn'?3:tid==='expedit'?1:2;
+    }
+  }
+}
+function ensureMantuireIntegration(){
+  if(!S.integrations||typeof S.integrations!=='object')S.integrations={};
+  let m=S.integrations.mantuireCloud;
+  if(!m||typeof m!=='object'){
+    S.integrations.mantuireCloud={linked:false,apiKey:'',draftKey:'',pendingVerifyCode:'',wizardPhase:1,registryTicks:0,keyEnv:'live',keyCreatedAt:0,lastUsedAt:0,apiTier:'parohial',registrationPaid:false};
+    m=S.integrations.mantuireCloud;
+  }
+  if(typeof m.linked!=='boolean')m.linked=false;
+  if(typeof m.apiKey!=='string')m.apiKey='';
+  if(typeof m.draftKey!=='string')m.draftKey='';
+  if(typeof m.pendingVerifyCode!=='string')m.pendingVerifyCode='';
+  if(typeof m.wizardPhase!=='number'||m.wizardPhase<1)m.wizardPhase=1;
+  if(typeof m.registryTicks!=='number'||m.registryTicks<0)m.registryTicks=0;
+  if(typeof m.keyEnv!=='string'||!['live','test'].includes(m.keyEnv))m.keyEnv='live';
+  if(typeof m.keyCreatedAt!=='number')m.keyCreatedAt=0;
+  if(typeof m.lastUsedAt!=='number')m.lastUsedAt=0;
+  const _mantTiers={solemn:1,parohial:1,expedit:1};
+  if(typeof m.apiTier!=='string'||!_mantTiers[m.apiTier])m.apiTier='parohial';
+  if(typeof m.registrationPaid!=='boolean')m.registrationPaid=false;
+  if(m.linked)m.registrationPaid=true;
+  if(String(m.pendingVerifyCode||'').length>=6)m.registrationPaid=true;
+  if(m.wizardPhase>=4&&m.draftKey)m.registrationPaid=true;
+  try{delete m.apiVersion;delete m.deprecated;delete m.draftPublishableKey;delete m.publishableKey;delete m.keyKind}catch(e){}
+  if(m.apiKey&&m.apiKey.startsWith('mnt_live_')&&!/^mnt_sk_/i.test(m.apiKey))m.apiKey='mnt_sk_live_'+m.apiKey.slice(9);
+  if(m.linked){m.draftKey='';m.pendingVerifyCode='';}
+  else if(m.apiKey&&!m.draftKey){m.draftKey=m.apiKey;m.apiKey='';}
+  ensureMantuireState();
+  mantuireSyncKeyMetaFromApiKey();
+}
+const MANTUIRE_MAX_CONCURRENT=3;
+const MANTUIRE_API_TIERS={
+  solemn:{label:'Rit solemn',hint:'Multe puncte de reputație, timp de așteptare mai lung · cost: 3 unități',repMin:14,repMax:20,delayMult:1.65,umCost:3},
+  parohial:{label:'Rit parohial',hint:'Reputație și viteză echilibrate · cost: 2 unități',repMin:8,repMax:13,delayMult:1,umCost:2},
+  expedit:{label:'Rit expeditiv',hint:'Procesare rapidă, mai puține puncte de reputație · cost: 1 unitate',repMin:5,repMax:8,delayMult:0.52,umCost:1},
+};
+const MANTUIRE_API_TIER_ORDER=['solemn','parohial','expedit'];
+function mantuireTierMeta(id){return MANTUIRE_API_TIERS[id]||MANTUIRE_API_TIERS.parohial;}
+function mantuireUmCostForTier(tierId){
+  const t=MANTUIRE_API_TIERS[tierId];
+  return t&&typeof t.umCost==='number'?t.umCost:2;
+}
+const MANTUIRE_API_REGISTRATION_FEE_RON=149;
+function mantuireRegistrationFeeAmount(){
+  return Math.round(applyDisc(MANTUIRE_API_REGISTRATION_FEE_RON));
+}
+function mantuireRegistrationFeeBreakdown(){
+  const list=MANTUIRE_API_REGISTRATION_FEE_RON;
+  const pct=disc();
+  const fee=mantuireRegistrationFeeAmount();
+  const saved=list-fee;
+  return{list,fee,pct,saved};
+}
+function mantuireRandomRepForTier(tierId){
+  const t=mantuireTierMeta(tierId);
+  return t.repMin+Math.floor(Math.random()*(t.repMax-t.repMin+1));
+}
+let _mantuirePortalKeyEnv='live';
+function mantuireRandomKeySuffix(n){
+  return Array.from({length:n||24},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random()*36)]).join('');
+}
+function mantuireEnvPillLabel(env){
+  return env==='test'?'Cheie test':'Cheie live';
+}
+function mantuireSyncKeyMetaFromApiKey(){
+  if(!S.integrations||typeof S.integrations!=='object')return;
+  const m=S.integrations.mantuireCloud;
+  if(!m||typeof m!=='object')return;
+  const k=String(m.apiKey||'');
+  if(/^mnt_sk_test_/i.test(k))m.keyEnv='test';
+  else if(/^mnt_sk_live_/i.test(k))m.keyEnv='live';
+  else m.keyEnv='live';
+}
+/** Live key: reputation gain + press/judiciary side effects. Test key: no rep, no those effects. */
+function mantuireApplyLiveKeyConsequences(pts,projectName,tierId){
+  if(!S.worldMemory)S.worldMemory={blacklistedFirms:[],hostilePress:[],magistrateHeat:0,lastSpilloverMonth:-1};
+  if(!Array.isArray(S.worldMemory.hostilePress))S.worldMemory.hostilePress=[];
+  const baseDrop=5+Math.min(9,Math.floor((pts||0)/2));
+  const tierExtra=(tierId==='solemn')?4:(tierId==='expedit'?1:2);
+  const drop=Math.min(24,baseDrop+tierExtra);
+  S.pressTone=Math.max(0,S.pressTone-drop);
+  S.worldMemory.magistrateHeat=Math.min(50,(S.worldMemory.magistrateHeat||0)+2+Math.floor((pts||8)/7));
+  if(Math.random()<0.28&&!S.worldMemory.hostilePress.includes('investigatii'))S.worldMemory.hostilePress.push('investigatii');
+  const now=nowDate();
+  const t=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const shortN=String(projectName||'Proiect').slice(0,42);
+  if(!Array.isArray(S.pressHistory))S.pressHistory=[];
+  S.pressHistory.unshift({t,txt:`Presă / investigații: eticheta „Mântuit” pe „${shortN}” (cheie live) ridică întrebări — ton imagine publică -${drop}.`});
+  if(S.pressHistory.length>30)S.pressHistory.pop();
+  recalcJudiciaryPressure(true);
+  justiceTimelinePush({
+    ts:nowTs(),
+    stage:S.justice.stage,
+    pressure:S.justice.pressure,
+    detail:`Mântuire Proiecte™ (cheie live): „${escapeHtml(shortN)}” — presă mai rece, urmă investigativă accentuată (simulare).`
+  });
+  addAct(`Presă / justiție: mântuire cu cheie live pe „${shortN}” — imagine publică mai slabă, interes crescut al investigațiilor.`);
+}
+function mantuireUsageDayKey(ts){
+  const d=new Date(ts);
+  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function mantuirePushUsageLog(row){
+  ensureMantuireState();
+  S.mantuire.usageLog.unshift(row);
+  if(S.mantuire.usageLog.length>80)S.mantuire.usageLog.length=80;
+  const dk=mantuireUsageDayKey(row.ts||Date.now());
+  const uAdd=(typeof row.um==='number')?row.um:mantuireUmCostForTier(row.tier||'parohial');
+  S.mantuire.usageByDay[dk]=(S.mantuire.usageByDay[dk]||0)+uAdd;
+  const keys=Object.keys(S.mantuire.usageByDay).sort();
+  if(keys.length>32)keys.slice(0,keys.length-28).forEach(k=>{delete S.mantuire.usageByDay[k]});
+}
+function mantuireTouchKeyUsed(){
+  ensureMantuireIntegration();
+  S.integrations.mantuireCloud.lastUsedAt=Date.now();
+}
+function mantuirePortalSetEnv(env){
+  _mantuirePortalKeyEnv=(env==='test')?'test':'live';
+}
+function mantuirePortalRegenDraftKeys(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  const env=$('mant-portal-env')?.value||_mantuirePortalKeyEnv||'live';
+  _mantuirePortalKeyEnv=env;
+  m.draftKey=generateMantuireApiKey(env);
+  saveState();
+  renderMantuirePortalBody();
+}
+function mantuireSetApiTier(v){
+  ensureMantuireIntegration();
+  const id=(v==='solemn'||v==='expedit')?v:'parohial';
+  S.integrations.mantuireCloud.apiTier=id;
+  saveState();renderMantuire();renderInteg();
+}
+function mantuireBuildUsageChartHtml(){
+  ensureMantuireState();
+  const days=Object.keys(S.mantuire.usageByDay||{}).sort().slice(-7);
+  if(!days.length)return'<p class="tsm tmut" style="margin:0">Nicio cerere înregistrată încă — barele de volum apar după trafic API.</p>';
+  const vals=days.map(d=>S.mantuire.usageByDay[d]||0);
+  const max=Math.max(1,...vals);
+  return`<div class="mant-api-chart">${days.map((d,i)=>{
+    const n=vals[i];
+    const h=Math.round((n/max)*100);
+    return`<div class="mant-api-day" title="${d}: ${n} unități consumate"><div class="mant-api-bar" style="height:${Math.max(8,h)}px"></div><span class="mant-api-day-l">${d.slice(8)}</span></div>`;
+  }).join('')}</div>`;
+}
+function mantuireBuildUsageTableHtml(){
+  ensureMantuireState();
+  const rows=S.mantuire.usageLog.slice(0,14);
+  if(!rows.length)return'<p class="tsm tmut" style="margin:0">Log gol.</p>';
+  const head=`<div class="mant-api-log-h"><span>Timp</span><span>Cerere / proiect</span><span>Mediu / rit</span><span>Stat</span></div>`;
+  const body=rows.map(r=>{
+    const d=new Date(r.ts);
+    const ts=`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
+    const st=r.status==='ok'?'ok':r.status==='err'?'err':r.status==='queued'?'…':'—';
+    const tr=r.tier&&MANTUIRE_API_TIERS[r.tier]?r.tier:'parohial';
+    const envRit=`${escapeHtml(mantuireEnvPillLabel(r.env==='test'?'test':'live'))} · ${escapeHtml(tr)}`;
+    return`<div class="mant-api-logrow"><span class="tmut">${ts}</span><span style="word-break:break-word">${escapeHtml(String(r.requestId||'—').slice(0,22))} · ${escapeHtml(r.projectName||'—')}</span><span class="tmut">${envRit}</span><span style="font-weight:800">${st}</span></div>`;
+  }).join('');
+  return`<div class="mant-api-log">${head}${body}</div>`;
+}
+let _mantuirePortalStep=1;
+let _mantuirePayPane='methods';
+let _mantuirePsdAnim=null;
+function openMantuirePortal(){
+  ensureMantuireIntegration();
+  const el=$('mantuire-portal');
+  if(!el)return;
+  const m=S.integrations.mantuireCloud;
+  if(m.linked)_mantuirePortalStep='admin';
+  else if(m.draftKey&&m.wizardPhase>=4)_mantuirePortalStep=4;
+  else if(m.pendingVerifyCode)_mantuirePortalStep=3;
+  else if(m.wizardPhase>=2&&!m.registrationPaid){_mantuirePortalStep=2;_mantuirePayPane='methods';}
+  else if(m.registrationPaid)_mantuirePortalStep=2;
+  else _mantuirePortalStep=1;
+  el.classList.remove('hid');
+  el.setAttribute('aria-hidden','false');
+  renderMantuirePortalBody();
+}
+function closeMantuirePortal(){
+  $('mantuire-portal')?.classList.add('hid');
+  $('mantuire-portal')?.setAttribute('aria-hidden','true');
+}
+function renderMantuirePortalBody(){
+  const body=$('mantuire-portal-body');
+  if(!body)return;
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  const u=S.user;
+  if(_mantuirePortalStep==='admin'&&m.linked){
+    const envLab=mantuireEnvPillLabel(/mnt_sk_test_/i.test(m.apiKey||'')?'test':'live');
+    const cAt=m.keyCreatedAt?new Date(m.keyCreatedAt).toLocaleString('ro-RO'):'—';
+    const uAt=m.lastUsedAt?new Date(m.lastUsedAt).toLocaleString('ro-RO'):'niciodată';
+    body.innerHTML=`<span class="mantp-seal">Cont API activ</span>
+      <p><span class="mant-api-pill">${escapeHtml(envLab)}</span> <span class="mant-api-pill">${escapeHtml(mantuireTierMeta(m.apiTier||'parohial').label)}</span></p>
+      <p class="tsm" style="margin:8px 0">Cheie <strong>secretă</strong> API (<code>mnt_sk_…</code>):</p>
+      <div class="mantp-keybox">${escapeHtml(m.apiKey)}</div>
+      <p class="tsm tmut">Creată: ${escapeHtml(cAt)} · Ultima folosire simulată: ${escapeHtml(uAt)}</p>
+      <div class="mantp-actions">
+        <button type="button" class="mantp-btn-pri" onclick="copyMantuirePortalKey(true)">Copiază cheia secretă</button>
+        <button type="button" class="mantp-btn-sec" onclick="regenerateMantuireApiKey()">Emite cheie nouă (deconectează platforma)</button>
+        <button type="button" class="mantp-btn-sec" onclick="revokeMantuireCloud();closeMantuirePortal()">Revocă integrarea</button>
+      </div>
+      <p class="tsm" style="margin-top:12px;opacity:.85">Tipul cheii ales la emitere (test sau live) se regăsește în aplicație. Efectele concrete apar în panoul <strong>Mântuire Proiecte</strong> după conectare.</p>`;
+    return;
+  }
+  const regFee=mantuireRegistrationFeeAmount();
+  const regBr=mantuireRegistrationFeeBreakdown();
+  if(_mantuirePortalStep===1){
+    body.innerHTML=`<span class="mantp-seal">Înregistrare furnizor</span>
+      <p>Înregistrarea folosește datele din profilul SifonatorPRO. Serviciul <strong>Mântuire Proiecte™</strong> percepe consum pe cerere în <strong>unități de mântuire (UM)</strong> și limitează câte cereri pot rula în același timp. La final alegi dacă cheia este pentru încercări sau pentru utilizare obișnuită.</p>
+      <div class="mantp-bureau">După acceptarea termenilor urmează <strong>plata taxei de înregistrare</strong> (${regFee} RON, plată unică — <strong>SifonPay™</strong> sau <strong>PSD Direct Connect™</strong>), apoi codul pe <strong>Șpagafon</strong> și emiterea cheii. Poți lipi cheia în Manager Integrări sau folosi <strong>Trimite în SifonatorPRO</strong>.</div>
+      <div style="display:grid;gap:8px;margin:12px 0;padding:12px;background:#fff;border:1px solid #d4c4de;border-radius:4px">
+        <div style="display:flex;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px dashed #e8e0ef;padding-bottom:6px"><span style="font-weight:600;color:#5c3d6e">Nume</span><span style="font-weight:700;text-align:right">${escapeHtml(u.name||'—')}</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px dashed #e8e0ef;padding-bottom:6px"><span style="font-weight:600;color:#5c3d6e">Funcție</span><span style="font-weight:700;text-align:right">${escapeHtml(u.fn||'—')}</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px;font-size:12px"><span style="font-weight:600;color:#5c3d6e">Județ</span><span style="font-weight:700;text-align:right">${escapeHtml(u.jud||'—')}</span></div>
+      </div>
+      <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
+        <input type="checkbox" id="mant-terms"/>
+        <span>Accept <strong>Termenii și condițiile</strong> <strong>Mântuire Proiecte™</strong> pentru utilizarea API, a cheii secrete și a consumului de unități de mântuire (UM).</span>
+      </label>
+      <div class="mantp-legal">„Utilizatorul declară că solicitările de schimbare a statutului proiectelor se fac în cadrul fluxului simulat. Furnizorul nu garantează efecte în afara aplicației.”</div>
+      <div class="mantp-actions">
+        <button type="button" class="mantp-btn-pri" onclick="mantuirePortalStep1Continue()">Continuă</button>
+      </div>`;
+    return;
+  }
+  if(_mantuirePortalStep===2){
+    const comPsd=Math.round(regFee*.15),totalPsd=regFee+comPsd;
+    const comPsdList=Math.round(regBr.list*.15),totalPsdList=regBr.list+comPsdList;
+    const pane=(['methods','card','psd','psd_wait'].includes(_mantuirePayPane))?_mantuirePayPane:'methods';
+    const discRow=regBr.pct>0&&regBr.saved>0?`<div style="display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:6px 0;border-bottom:1px dashed #e8e0ef"><span>Reducere reputație (${regBr.pct.toFixed(1)}%)</span><span style="color:#1a6b2e;font-weight:700">-${regBr.saved} RON</span></div>`:'';
+    const orderSummaryBlock=`<div style="background:#fff;border:1px solid #d4c4de;border-radius:4px;padding:12px;margin:12px 0">
+          <div style="font-size:11px;font-weight:800;color:#5c2b70;letter-spacing:.06em;margin-bottom:8px">REZUMAT COMANDĂ</div>
+          <div style="display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:6px 0;border-bottom:1px dashed #e8e0ef"><span>Preț de referință (taxă API)</span><span>${regBr.list} RON</span></div>
+          ${discRow}
+          <div style="display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:800;margin-top:10px"><span>Total de plată</span><span style="color:#5c2b70">${regFee} RON</span></div>
+        </div>`;
+    let checkout='';
+    if(!m.registrationPaid){
+      if(pane==='methods'){
+        checkout=`${orderSummaryBlock}
+        <p class="tsm tmut">Alege metoda (ca la abonament sau ore Baghetă). PSD necesită integrare activă în Manager Integrări.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+          <button type="button" class="mantp-btn-pri" onclick="mantuirePayPaneNav('card')">💳 Plată cu cardul (SifonPay™)</button>
+          <button type="button" class="mantp-btn-pri" style="background:linear-gradient(180deg,#7a0000,#a40000);border:none" onclick="mantuirePortalTryPsdInline()">🏛️ Plată cu bani publici (PSD Direct Connect™)</button>
+        </div>
+        <div class="mantp-actions"><button type="button" class="mantp-btn-sec" onclick="mantuirePortalPaymentBack()">Înapoi</button></div>`;
+      }else if(pane==='card'){
+        checkout=`<div style="background:#fff;border:1px solid #d4c4de;border-radius:4px;padding:12px;margin:10px 0;font-size:12px">
+          <div style="font-weight:800;color:#5c2b70;margin-bottom:8px">SifonPay™ · Înregistrare API</div>
+          <div style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed #e8e0ef;padding-bottom:6px;margin-bottom:6px"><span>Preț referință</span><span>${regBr.list} RON</span></div>
+          ${regBr.pct>0&&regBr.saved>0?`<div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:6px"><span>Reducere reputație (${regBr.pct.toFixed(1)}%)</span><span style="color:#1a6b2e;font-weight:700">-${regBr.saved} RON</span></div>`:''}
+          <div style="display:flex;justify-content:space-between;gap:8px;font-weight:800"><span>Total de încasat</span><span style="color:#5c2b70">${regFee} RON</span></div>
+        </div>
+        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Număr card</label><input class="card-inp mantp-inp" id="mantpay-num" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)" style="margin-top:4px"/></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:8px">
+          <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Expirare</label><input class="card-inp mantp-inp" id="mantpay-exp" placeholder="MM/AA" maxlength="5" style="margin-top:4px"/></div>
+          <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">CVV</label><input class="card-inp mantp-inp" id="mantpay-cvv" placeholder="***" type="password" maxlength="3" style="margin-top:4px"/></div>
+        </div>
+        <div class="fg" style="margin-top:8px"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Titular</label><input class="card-inp mantp-inp" id="mantpay-name" placeholder="GIGEL POPESCU" style="margin-top:4px"/></div>
+        <p style="font-size:11px;color:var(--text3);margin-top:8px">Tranzacția va apărea pe extras ca „SERVICII DIGITALE ANONIME SRL". Unele bănci pot declanșa 3D Secure fictiv (fereastra apare deasupra portalului).</p>
+        <div id="mant-pay-card-status"></div>
+        <div class="mantp-actions">
+          <button type="button" class="mantp-btn-sec" onclick="mantuirePayPaneNav('methods')">Înapoi</button>
+          <button type="button" class="mantp-btn-pri" onclick="mantuirePortalProcCardInline()">🔒 Plătește ${regFee} RON</button>
+        </div>`;
+      }else if(pane==='psd'){
+        checkout=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:4px;margin:10px 0;text-align:center">
+          <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect™</div>
+          <div style="font-size:11px;opacity:.75">Înregistrare acces API Mântuire Proiecte™</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d4c4de;padding:11px;border-radius:4px;font-size:13px;margin-bottom:12px">
+          <div class="flex" style="justify-content:space-between;margin-bottom:3px;font-size:11px;color:#6b5a72"><span>Preț referință taxă (înainte de reducere)</span><span>${regBr.list} RON</span></div>
+          ${regBr.pct>0&&regBr.saved>0?`<div class="flex" style="justify-content:space-between;margin-bottom:3px;color:#1a6b2e;font-size:12px"><span>Reducere reputație (${regBr.pct.toFixed(1)}%)</span><span>-${regBr.saved} RON</span></div>`:''}
+          <div class="flex" style="justify-content:space-between;margin-bottom:3px"><span>Taxă înregistrare API (după reducere)</span><span>${regFee} RON</span></div>
+          <div class="flex" style="justify-content:space-between;margin-bottom:3px;color:#5c4a62"><span>Comision intermediar (15% din taxă)</span><span>${comPsd} RON</span></div>
+          ${regBr.pct>0&&regBr.saved>0?`<p class="tsm tmut" style="margin:6px 0 8px;font-size:11px">Fără reducere, total estimat ar fi fi fost <strong>${totalPsdList} RON</strong> (taxă ${regBr.list} + comision).</p>`:''}
+          <hr class="sep"/><div class="flex" style="justify-content:space-between;font-weight:700"><span>TOTAL DIN BUGET PUBLIC</span><span style="color:#a40000">${totalPsd} RON</span></div>
+        </div>
+        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
+          <select id="mantpay-psd-int" class="mantp-inp" style="margin-top:4px">
+            <option>Partid (PSD) — Ruta standard, 3-5 zile</option>
+            <option>Rețea locală de influență — Ruta urgentă, 1-2 zile</option>
+            <option>Conexiuni ministeriale — Ruta diplomatică, 24h</option>
+            <option>Ministru de resort — Ruta VIP, 4 ore</option>
+          </select>
+        </div>
+        <div class="mantp-actions">
+          <button type="button" class="mantp-btn-sec" onclick="mantuirePayPaneNav('methods')">Înapoi</button>
+          <button type="button" class="mantp-btn-pri" style="background:linear-gradient(180deg,#7a0000,#a40000);border:none" onclick="mantuirePortalPsdSubmit()">📤 Trimite cerere</button>
+        </div>`;
+      }else if(pane==='psd_wait'){
+        checkout=`<div style="text-align:center;padding:16px 8px">
+          <div style="font-size:28px;margin-bottom:8px">📤</div>
+          <p class="tsm tmut">Cererea parcurge rețeaua de influență…</p>
+          <div id="mant-psd-steps" style="text-align:left;margin-top:14px;font-size:12px;color:#4a3558"></div>
+        </div>
+        <p class="tsm tmut">Nu închide portalul până la confirmare.</p>`;
+      }
+    }
+    const regIntroExtra=regBr.pct>0&&regBr.saved>0
+      ? `, cu <strong>reducere reputație ${regBr.pct.toFixed(1)}%</strong> (-${regBr.saved} RON), plătești <strong>${regFee} RON</strong>`
+      : ` — acum fără reducere reputație (0,1% per punct, max 25%, ca la abonamente)`;
+    body.innerHTML=`<span class="mantp-seal">Taxă înregistrare</span>
+      <p>Taxă unică pentru deschiderea accesului API <strong>Mântuire Proiecte™</strong>: preț de referință <strong>${regBr.list} RON</strong>${regIntroExtra}.</p>
+      ${m.registrationPaid?`<p class="tsm" style="color:#2d7a3e;font-weight:700">Plată înregistrată.</p>
+      <p class="tsm tmut">Următorul pas este codul de verificare pe Șpagafon.</p>
+      <div class="mantp-actions">
+        <button type="button" class="mantp-btn-pri" onclick="mantuirePortalSendVerifySms()">Trimite cod pe Șpagafon</button>
+        <button type="button" class="mantp-btn-sec" onclick="mantuirePortalPaymentBack()">Înapoi</button>
+      </div>`:checkout}
+      <p class="tsm tmut" style="margin-top:10px">După plată vei primi automat solicitarea de verificare prin SMS.</p>`;
+    return;
+  }
+  if(_mantuirePortalStep===3){
+    body.innerHTML=`<span class="mantp-seal">Verificare</span>
+      <p>Ți-am trimis pe <strong>Șpagafon</strong> un cod unic. Confirmă înregistrarea pentru a deschide consola cheii API.</p>
+      <label style="display:block;font-weight:700;margin-top:8px">Cod din mesaj</label>
+      <input type="text" class="mantp-inp verif-code-inp" id="mant-verify-inp" maxlength="6" placeholder="000000" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/\\D/g,'').slice(0,6)"/>
+      <div class="mantp-actions">
+        <button type="button" class="mantp-btn-pri" onclick="mantuirePortalVerifyCode()">Confirmă</button>
+        <button type="button" class="mantp-btn-sec" onclick="mantuirePortalSmsBack()">Înapoi</button>
+      </div>
+      <p class="tsm tmut" style="margin-top:10px">Dacă nu vezi mesajul, deschide Șpagafon și folosește butonul din SMS.</p>`;
+    return;
+  }
+  if(_mantuirePortalStep===4){
+    if(!m.draftKey)m.draftKey=generateMantuireApiKey(_mantuirePortalKeyEnv);
+    saveState();
+    const envSel=_mantuirePortalKeyEnv==='test'?'test':'live';
+    body.innerHTML=`<span class="mantp-seal">Cheie API</span>
+      <div class="fg mb0" style="margin-bottom:10px">
+        <label for="mant-portal-env">Tip cheie</label>
+        <select id="mant-portal-env" class="mantp-inp" style="margin-top:4px" onchange="mantuirePortalRegenDraftKeys()">
+          <option value="live"${envSel==='live'?' selected':''}>Cheie live — pentru utilizare obișnuită</option>
+          <option value="test"${envSel==='test'?' selected':''}>Cheie test — pentru încercări</option>
+        </select>
+      </div>
+      <p>Înregistrarea <strong>Mântuire Proiecte™</strong> este gata. Copiază <strong>cheia secretă</strong> (<code>mnt_sk_…</code>) în Manager Integrări.</p>
+      <p class="tsm tmut" style="margin:6px 0 4px">Cheie secretă</p>
+      <div class="mantp-keybox">${escapeHtml(m.draftKey)}</div>
+      <div class="mantp-actions">
+        <button type="button" class="mantp-btn-pri" onclick="copyMantuirePortalKey(false)">Copiază cheia secretă</button>
+        <button type="button" class="mantp-btn-pri" onclick="finalizeMantuireIntegration()">Trimite în SifonatorPRO</button>
+      </div>
+      <p class="tsm" style="opacity:.85;margin-top:10px">Schimbarea tipului de cheie regenerează secretul.</p>`;
+    return;
+  }
+  body.innerHTML=`<span class="mantp-seal">Reîncărcare</span><p class="tsm">Stare portal neprevăzută — reîncepeți deschiderea.</p><div class="mantp-actions"><button type="button" class="mantp-btn-pri" onclick="openMantuirePortal()">Reîncarcă portalul</button></div>`;
+}
+function mantuirePortalPaymentBack(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  m.wizardPhase=1;
+  _mantuirePortalStep=1;
+  _mantuirePayPane='methods';
+  saveState();
+  renderMantuirePortalBody();
+}
+function mantuirePayPaneNav(p){
+  _mantuirePayPane=(p==='card'||p==='psd'||p==='psd_wait'||p==='methods')?p:'methods';
+  renderMantuirePortalBody();
+}
+function mantuirePortalTryPsdInline(){
+  ensureIntegrations();
+  if(!isPsdDcLinked()){
+    dlgOpen('Continuare · taxă înregistrare','PSD Direct Connect™',
+      `<p class="tsm" style="line-height:1.65">Pentru plata cu <strong>bani publici</strong> prin PSD Direct Connect™ este nevoie de cont verificat și cheie API în <strong>Manager Integrări</strong>. Poți plăti acum cu <strong>SifonPay™</strong> (card) sau să închizi portalul și să configurezi integrarea PSD, apoi revii la plată.</p>
+     <p class="tsm tmut" style="margin-top:12px;font-weight:700">Alege cum continui:</p>
+     <ul class="tsm" style="margin:8px 0 0 18px;line-height:1.55;padding:0">
+       <li><strong>Plătesc cu SifonPay™</strong>: rămâi în acest portal și completezi cardul.</li>
+       <li><strong>Închid portalul · Manager Integrări</strong>: configurezi PSD Direct Connect™, apoi deschizi din nou <strong>Mântuire Proiecte™</strong> pentru plată.</li>
+     </ul>
+     <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+       <button type="button" class="btn btn-p" onclick="dlgClose();mantuirePayPaneNav('card')">Plătesc cu SifonPay™</button>
+       <button type="button" class="btn btn-psd" onclick="dlgClose();closeMantuirePortal();navigate('integ')">Închid portalul · Manager Integrări</button>
+       <button type="button" class="btn btn-f" onclick="dlgClose()">Închide</button>
+     </div>`,
+      ''
+    );
+    return;
+  }
+  mantuirePayPaneNav('psd');
+}
+function mantuirePortalProcCardInline(){
+  const ctx={kind:'mantuire_reg',amount:mantuireRegistrationFeeAmount()};
+  CARD_PAY_CTX=ctx;
+  const num=$('mantpay-num')?.value?.replace(/\s/g,'');
+  if(!num||num.length<16||!$('mantpay-exp')?.value||!$('mantpay-cvv')?.value){toast('Completează datele cardului','err');return}
+  const st=$('mant-pay-card-status');
+  if(st)st.innerHTML='<p class="tsm tmut" style="text-align:center;margin:12px 0">Se procesează prin SifonPay™…</p>';
+  setTimeout(()=>{
+    const bankRule=needs3DS(num);
+    if(bankRule){show3DSChallenge(bankRule,num);return}
+    finishCardCheckout(null);
+  },1700);
+}
+function mantuirePortalPsdSubmit(){
+  const amount=mantuireRegistrationFeeAmount();
+  const com=Math.round(amount*.15),total=amount+com;
+  const raw=$('mantpay-psd-int')?.value||'';
+  const int=raw.split('—')[0].trim()||'Partid';
+  _mantuirePsdAnim={intLabel:int,total};
+  _mantuirePayPane='psd_wait';
+  renderMantuirePortalBody();
+  queueMicrotask(()=>mantuirePortalStartPsdAnim());
+}
+function mantuirePortalStartPsdAnim(){
+  const int=_mantuirePsdAnim?.intLabel||'Partid';
+  const total=_mantuirePsdAnim?.total||0;
+  const stepsEl=$('mant-psd-steps');
+  if(!stepsEl)return;
+  ['📨 Cerere trimisă către intermediar…','🤝 Negociere discretă în curs…','📋 Documentație „justificativă" generată automat…','✅ Fonduri publice aprobate și transferate!'].forEach((s,i)=>
+    setTimeout(()=>{
+      const el=$('mant-psd-steps');
+      if(!el)return;
+      el.innerHTML+=`<div style="padding:4px 0;border-bottom:1px solid #d4c4dc">${s}</div>`;
+      if(i===3)setTimeout(()=>{
+        const ps=S.siphoned;
+        S.siphoned+=total;
+        maybeTriggerInvestigationOnSiphonCross(ps);
+        _mantuirePayPane='methods';
+        _mantuirePsdAnim=null;
+        mantuireMarkRegistrationPaidAndSendSms();
+        toast('Taxă înregistrată. Verifică mesajul pe Șpagafon.','ok');
+        addAct(`Mântuire Proiecte™: taxă înregistrare API plătită din fonduri publice (${int}). ${fRON(total)} sifonați.`);
+        saveState();
+      },900);
+    },i*950)
+  );
+}
+function mantuirePortalSmsBack(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  m.pendingVerifyCode='';
+  _mantuirePortalStep=2;
+  _mantuirePayPane='methods';
+  saveState();
+  renderMantuirePortalBody();
+}
+function mantuirePortalSendVerifySms(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  if(!m.registrationPaid){toast('Plătește mai întâi taxa de înregistrare.','warn');return}
+  const code=String(100000+Math.floor(Math.random()*900000));
+  m.pendingVerifyCode=code;
+  m.draftKey='';
+  m.registryTicks=0;
+  m.wizardPhase=3;
+  saveState();
+  spagafonPushSms('Mântuire Proiecte™',`Cod verificare API Mântuire Proiecte: ${code}. Valabil 15 minute. Introduceți-l în portalul furnizorului.`,{code,isMantuireVerify:true});
+  addAct('Mântuire Proiecte™: cod de verificare trimis pe Șpagafon.');
+  _mantuirePortalStep=3;
+  renderMantuirePortalBody();
+  toast('Verifică mesajul pe Șpagafon','ok');
+}
+function mantuireMarkRegistrationPaidAndSendSms(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  m.registrationPaid=true;
+  saveState();
+  mantuirePortalSendVerifySms();
+}
+function mantuirePortalStep1Continue(){
+  if(!$('mant-terms')?.checked){toast('Trebuie să accepți termenii furnizorului.','warn');return}
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  m.registryTicks=0;
+  m.wizardPhase=Math.max(m.wizardPhase||1,2);
+  if(!m.registrationPaid){
+    _mantuirePortalStep=2;
+    _mantuirePayPane='methods';
+    saveState();
+    renderMantuirePortalBody();
+    return;
+  }
+  mantuirePortalSendVerifySms();
+}
+function mantuirePortalVerifyCode(){
+  const inp=sanitizeVerifCodeDigits($('mant-verify-inp')?.value,6);
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  if(inp!==m.pendingVerifyCode){toast('Cod incorect.','err');return}
+  invalidateVerifiedSpagafonCode('mantuire',inp);
+  m.pendingVerifyCode='';
+  m.registryTicks=0;
+  m.wizardPhase=4;
+  if(!m.draftKey)m.draftKey=generateMantuireApiKey(_mantuirePortalKeyEnv);
+  saveState();
+  _mantuirePortalStep=4;
+  renderMantuirePortalBody();
+  addAct('Mântuire Proiecte™: verificare confirmată; consolă cheie API deschisă.');
+  toast('Cod acceptat. Copiază cheia sau trimite în aplicație','ok');
+}
+function fillMantuireVerifyFromSpagafon(code){
+  const inp=$('mant-verify-inp');
+  if(!inp){toast('Deschide portalul Mântuire Proiecte™ la pasul de verificare.','warn');return}
+  inp.value=sanitizeVerifCodeDigits(code,6);
+  inp.focus();
+  try{inp.select()}catch(e){}
+  toggleSpagafon(false);
+  toast('Cod completat din Șpagafon','ok');
+}
+function copyMantuirePortalKey(fromActive){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  const k=fromActive&&m.linked?m.apiKey:((!fromActive&&_mantuirePortalStep===4&&m.draftKey)?m.draftKey:'');
+  if(!k){toast('Nu există cheie de copiat.','warn');return}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(k).then(()=>toast('Cheie secretă copiată','ok')).catch(()=>toast(k,'ok'));
+  }else toast(k,'ok');
+}
+function finalizeMantuireIntegration(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  if(!m.draftKey){toast('Finalizează în portal: cod SMS, apoi cheia API.','warn');return}
+  const sk=m.draftKey;
+  m.apiKey=sk;
+  m.linked=true;
+  m.registrationPaid=true;
+  m.draftKey='';
+  m.pendingVerifyCode='';
+  m.wizardPhase=1;
+  m.registryTicks=0;
+  m.keyCreatedAt=Date.now();
+  m.lastUsedAt=0;
+  mantuireSyncKeyMetaFromApiKey();
+  ensureMantuireState();
+  S.mantuire.queue=[];
+  S.mantuire.credits=5;
+  clearMantuireDrainTimer();
+  mantuireStopLiveTicker();
+  saveState();
+  closeMantuirePortal();
+  syncMantuireAccessUi();
+  renderInteg();
+  renderMantuire();
+  addAct('Mântuire Proiecte™: integrare activată în SifonatorPRO.');
+  toast('Mântuire Proiecte™ conectat la platformă','ok');
+}
+function regenerateMantuireApiKey(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  m.apiKey='';
+  m.linked=false;
+  m.pendingVerifyCode='';
+  const env='live';
+  m.draftKey=generateMantuireApiKey(env);
+  m.wizardPhase=4;
+  m.registrationPaid=true;
+  m.registryTicks=0;
+  saveState();
+  _mantuirePortalStep=4;
+  renderMantuirePortalBody();
+  syncMantuireAccessUi();
+  renderInteg();
+  renderMantuire();
+  toast('Cheie nouă emisă. Dezactivat în SifonatorPRO. Lipește cheia curentă în Manager integrări.','warn');
+}
+function isMantuireLinked(){
+  ensureMantuireIntegration();
+  const m=S.integrations.mantuireCloud;
+  return m.linked===true&&!!String(m.apiKey||'').trim()&&/^mnt_sk_/i.test(String(m.apiKey||''));
+}
+function generateMantuireApiKey(env){
+  const e=(env==='test')?'test':'live';
+  return`mnt_sk_${e}_${mantuireRandomKeySuffix(22)}`;
+}
+function mantuireServerById(id){return MANTUIRE_SERVERS.find(s=>s.id===id)||MANTUIRE_SERVERS[1];}
+function mantuireSampleDelayMs(srv){
+  const lo=Math.min(srv.minMs,srv.maxMs),hi=Math.max(srv.minMs,srv.maxMs);
+  return lo+Math.floor(Math.random()*(hi-lo+1));
+}
+let _mantuireUiTimer=null;
+function mantuireStopLiveTicker(){
+  if(_mantuireUiTimer){clearInterval(_mantuireUiTimer);_mantuireUiTimer=null;}
+}
+const MANTUIRE_ACTIVITY_BASE=[
+  'Handshake TLS cu nodul selectat…',
+  'Rutare cerere pe magistrala API…',
+  'Validare meta-etiquetă calitate (pas intermediar)…',
+  'Blocare optimistică în registrul public simulat…',
+  'Reconciliere răspuns ↔ cache etichetă…',
+  'Propagare stadiu „Mântuit” spre Proiecte Publice…',
+  'Coerență SEAP (simulare): verificare finală…',
+];
+const MANTUIRE_ACTIVITY_SRV={
+  mit_buc:['Nod capitală: coadă lungă — re-sortare…','Presă: jitter rută marcat în log…'],
+  proto_iasi:['Nod regional: cuplare serie canonică…'],
+  manastire_cdn:['CDN „latency”: invalidare margină…'],
+  arhiva_vest:['Arhivă: slot rapid, serie dedicată…'],
+};
+function mantuireActivityPoolForJob(j){
+  const base=MANTUIRE_ACTIVITY_BASE.slice();
+  const ex=MANTUIRE_ACTIVITY_SRV[j.srvId];
+  if(ex)base.push(...ex);
+  return base;
+}
+function mantuireActivityLineForJob(j,now){
+  const pool=mantuireActivityPoolForJob(j);
+  const t0=j.startedAt||now;
+  const step=Math.floor((now-t0)/2100);
+  const ix=(step+j.projectId*7+(String(j.id||'').length%5))%pool.length;
+  const pulse=1+(Math.floor(now/650)%4);
+  const dots=pulse>=3?'···':pulse===2?'··':pulse===1?'·':'';
+  return pool[ix]+(dots?' '+dots:'');
+}
+function mantuireFormatApproxEta(j,now){
+  const R=Math.max(0,j.endTs-now);
+  if(R<420)return'Finalizare iminentă…';
+  const sec=R/1000;
+  const t0=j.startedAt||now-R;
+  const pulse=0.09*Math.sin((now-t0)/1600)+0.07*Math.cos((now-t0)/2300);
+  const spread=0.17+0.11*Math.sin((now-t0)/3100);
+  let center=sec*(1+pulse*0.07);
+  let lo=Math.max(0,Math.floor(center*(1-spread*0.88)));
+  let hi=Math.ceil(center*(1+spread*0.92));
+  if(sec<=8){
+    lo=Math.max(0,Math.floor(sec*0.92));
+    hi=Math.max(lo+1,Math.ceil(sec*1.12)+1);
+  }
+  if(hi<=lo)hi=lo+1;
+  if(sec<4)return`≈ ${lo}–${hi} s (finețe)`;
+  return`ETA aprox. ${lo}–${hi} s`;
+}
+function mantuireRefreshLivePanels(){
+  ensureMantuireState();
+  if(!$('view-mantuire')?.classList.contains('active')){mantuireStopLiveTicker();return;}
+  if(!isMantuireLinked()||!S.mantuire.queue.length){mantuireStopLiveTicker();return;}
+  const now=Date.now();
+  for(const j of S.mantuire.queue){
+    const etaEl=document.querySelector(`[data-mant-eta="${j.id}"]`);
+    const actEl=document.querySelector(`[data-mant-act="${j.id}"]`);
+    if(etaEl){
+      etaEl.textContent=mantuireFormatApproxEta(j,now);
+      const R=j.endTs-now;
+      etaEl.classList.toggle('mant-eta-hot',R>0&&R<4200);
+    }
+    if(actEl)actEl.textContent=mantuireActivityLineForJob(j,now);
+  }
+}
+function mantuireMaybeStartLiveTicker(){
+  mantuireStopLiveTicker();
+  ensureMantuireState();
+  if(!isMantuireLinked()||!S.mantuire.queue.length)return;
+  if(!$('view-mantuire')?.classList.contains('active'))return;
+  mantuireRefreshLivePanels();
+  _mantuireUiTimer=setInterval(mantuireRefreshLivePanels,820);
+}
+function connectMantuireCloudKey(){
+  ensureMantuireIntegration();
+  const v=$('integ-mant-paste')?.value?.trim()||'';
+  const m=S.integrations.mantuireCloud;
+  if(m.linked){toast('Integrarea este deja activă.','warn');return;}
+  if(!v){toast('Introdu sau lipește cheia din portalul Mântuire Proiecte™.','warn');return;}
+  if(/^mnt_pk_/i.test(v)){toast('Cheile vechi mnt_pk_… nu mai sunt folosite — lipește doar cheia secretă mnt_sk_live_… sau mnt_sk_test_….','warn');return;}
+  if(!/^mnt_sk_(live|test)_/i.test(v)){toast('Format așteptat: mnt_sk_live_… sau mnt_sk_test_…','warn');return;}
+  if(!m.draftKey){toast('Deschide portalul Mântuire Proiecte™, confirmă codul din Șpagafon, apoi copiază cheia secretă emisă.','warn');return;}
+  if(v!==m.draftKey){toast('Cheia nu se potrivește cu cea din portal.','err');return;}
+  m.apiKey=m.draftKey;
+  m.linked=true;
+  m.registrationPaid=true;
+  m.draftKey='';
+  m.pendingVerifyCode='';
+  m.wizardPhase=1;
+  m.registryTicks=0;
+  m.keyCreatedAt=Date.now();
+  m.lastUsedAt=0;
+  mantuireSyncKeyMetaFromApiKey();
+  ensureMantuireState();
+  S.mantuire.queue=[];
+  S.mantuire.credits=5;
+  clearMantuireDrainTimer();
+  mantuireStopLiveTicker();
+  saveState();syncMantuireAccessUi();renderInteg();renderMantuire();
+  addAct('Mântuire Proiecte™: cheie secretă introdusă în Manager Integrări (5 unități de mântuire la start, coadă resetată).');
+  toast('Mântuire Proiecte™ este conectat — ai 5 unități de mântuire pentru început','ok');
+}
+function revokeMantuireCloud(){
+  ensureMantuireIntegration();
+  S.integrations.mantuireCloud={linked:false,apiKey:'',draftKey:'',pendingVerifyCode:'',wizardPhase:1,registryTicks:0,keyEnv:'live',keyCreatedAt:0,lastUsedAt:0,apiTier:'parohial',registrationPaid:false};
+  _mantuirePortalStep=1;
+  ensureMantuireState();
+  S.mantuire.queue=[];S.mantuire.credits=5;
+  clearMantuireDrainTimer();
+  mantuireStopLiveTicker();
+  saveState();syncMantuireAccessUi();renderInteg();renderMantuire();
+  if($('mantuire-portal')&&!$('mantuire-portal').classList.contains('hid'))renderMantuirePortalBody();
+  addAct('Mântuire Proiecte™: integrare revocată.');
+  toast('Integrarea Mântuire Proiecte™ a fost revocată','warn');
+}
+function toggleIntegMantKeyReveal(){
+  const inp=$('integ-mant-paste'),btn=$('integ-mant-reveal');
+  if(!inp||!btn)return;
+  const hide=inp.type==='text';
+  inp.type=hide?'password':'text';
+  btn.textContent=hide?'Afișează':'Ascunde';
+  btn.setAttribute('aria-pressed',hide?'false':'true');
+}
+function processMantuireQueue(){
+  ensureMantuireState();
+  if(!isMantuireLinked())return;
+  const now=Date.now();
+  const kept=[];
+  let changed=false;
+  let simRefresh=false;
+  for(const j of S.mantuire.queue){
+    if(now>=j.endTs){
+      const p=S.projects.find(x=>x.id===j.projectId);
+      const apiEnv=j.apiEnv||'live';
+      const apiTier=j.apiTier&&MANTUIRE_API_TIERS[j.apiTier]?j.apiTier:'parohial';
+      const reqId=j.requestId||j.id||'';
+      if(p&&p.status==='completed'&&p.quality==='mantuiala'){
+        const pts=typeof j.pts==='number'?j.pts:mantuireRandomRepForTier(apiTier);
+        p.quality='mantuit';
+        seedDossierIfEmpty(p,'');
+        if(apiEnv==='test'){
+          p.dossier.push({t:nowDate().toLocaleString('ro-RO'),txt:'Mântuire Proiecte™ (cheie test): cerere de probă; etichetă „Mântuit” plasată pentru demonstrație.'});
+          addAct(`Mântuire Proiecte™: „${p.name}” mântuit prin API cu cheie test, fără acumulare de puncte de reputație.`);
+        }else{
+          p.dossier.push({t:nowDate().toLocaleString('ro-RO'),txt:'Mântuire Proiecte™ (cheie live): proiect mântuit prin API; etichetă „Mântuit” plasată. Pot apărea și alte consecințe (presă, urmăriri).'});
+          chgRep(pts,`Mântuire Proiecte™ — „${p.name}” (mântuit)`,false,{raw:true});
+          addAct(`Mântuire Proiecte™: „${p.name}” mântuit prin API cu cheie live (+${pts} puncte de reputație).`);
+          mantuireApplyLiveKeyConsequences(pts,p.name,apiTier);
+          simRefresh=true;
+        }
+        ensureMantuireState();
+        S.mantuire.history.unshift({ts:now,projectId:p.id,projectName:p.name,srvId:j.srvId,pts:apiEnv==='test'?0:pts,ok:true,jobId:j.id||'',requestId:reqId,env:apiEnv,apiTier});
+        if(S.mantuire.history.length>40)S.mantuire.history.length=40;
+        S.mantuire.stats.ok=(S.mantuire.stats.ok||0)+1;
+        const umUsed=typeof j.umCost==='number'&&j.umCost>0?j.umCost:mantuireUmCostForTier(apiTier);
+        mantuirePushUsageLog({ts:now,requestId:reqId,projectName:p.name,status:'ok',env:apiEnv,um:umUsed,tier:apiTier});
+        changed=true;
+      }else{
+        const refund=typeof j.umCost==='number'&&j.umCost>0?j.umCost:mantuireUmCostForTier(apiTier);
+        S.mantuire.credits+=refund;
+        toast(refund===1?'Cerere anulată: proiectul nu mai este eligibil, ți-am returnat 1 unitate.':`Cerere anulată: proiectul nu mai este eligibil, ți-am returnat ${refund} unități.`,'warn');
+        ensureMantuireState();
+        const pfail=S.projects.find(x=>x.id===j.projectId);
+        S.mantuire.history.unshift({ts:now,projectId:j.projectId,projectName:pfail?.name||'Proiect',srvId:j.srvId,ok:false,reason:'ineligibil',requestId:reqId,env:apiEnv,apiTier});
+        if(S.mantuire.history.length>40)S.mantuire.history.length=40;
+        S.mantuire.stats.fail=(S.mantuire.stats.fail||0)+1;
+        mantuirePushUsageLog({ts:now,requestId:reqId,projectName:pfail?.name||'—',status:'err',env:apiEnv,um:0,tier:apiTier});
+        changed=true;
+      }
+    }else kept.push(j);
+  }
+  if(kept.length!==S.mantuire.queue.length){S.mantuire.queue=kept;changed=true;}
+  if(changed){
+    saveState();
+    renderProj();
+    if(simRefresh){renderPress();renderJust();renderOps();}
+  }
+}
+let _mantuireDrainTimer=null;
+function clearMantuireDrainTimer(){
+  if(_mantuireDrainTimer){clearTimeout(_mantuireDrainTimer);_mantuireDrainTimer=null;}
+}
+function scheduleMantuireDrainTick(){
+  clearMantuireDrainTimer();
+  ensureMantuireState();
+  if(!isMantuireLinked()||!S.mantuire.queue.length)return;
+  const nextTs=Math.min(...S.mantuire.queue.map(q=>q.endTs));
+  const ms=Math.max(80,nextTs-Date.now()+120);
+  _mantuireDrainTimer=setTimeout(()=>{
+    _mantuireDrainTimer=null;
+    processMantuireQueue();
+    renderProj();
+    renderMantuire();
+    saveState();
+    scheduleMantuireDrainTick();
+  },ms);
+}
+function mantuirePurchaseTokens(){
+  ensureMantuireState();
+  if(S.mantuire.credits>0){toast('Poți cumpăra un pachet de credite doar când soldul este zero.','warn');return;}
+  const base=5+Math.floor(Math.random()*6);
+  const bonus=base>=8?Math.max(1,Math.floor(base*0.1)):0;
+  const add=base+bonus;
+  S.mantuire.credits=add;
+  addAct(`Mântuire Proiecte™: achiziționat pachet — +${add} unități de mântuire${bonus>0?` (inclus ${bonus} bonus la volum)`:''}.`);
+  toast(`Pachet activat: +${add} unități de mântuire`,'ok');
+  saveState();renderMantuire();renderInteg();
+}
+function mantuireSetServer(v){
+  ensureMantuireState();
+  S.mantuire.serverId=v;
+  saveState();
+}
+function mantuireEnqueueFromUi(){
+  ensureMantuireState();ensureMantuireIntegration();
+  if(!isMantuireLinked()){toast('Conectează API-ul din Manager Integrări.','warn');navigate('integ');return;}
+  const mc=S.integrations.mantuireCloud;
+  mantuireSyncKeyMetaFromApiKey();
+  if(S.mantuire.queue.length>=MANTUIRE_MAX_CONCURRENT){toast(`Nu poți avea mai mult de ${MANTUIRE_MAX_CONCURRENT} cereri simultane în coadă.`,'warn');return;}
+  const tierSel0=$('mant-api-tier')?.value||mc.apiTier||'parohial';
+  const apiTier0=(tierSel0==='solemn'||tierSel0==='expedit')?tierSel0:'parohial';
+  const umCost=mantuireUmCostForTier(apiTier0);
+  if(S.mantuire.credits<umCost){
+    toast(umCost===1?'Nu mai ai destule credite pentru această cerere. Cumpără un pachet când soldul este zero.':`Ai nevoie de ${umCost} unități pentru ritul selectat; soldul tău este insuficient.`,'warn');
+    return;
+  }
+  const selSrv=$('mant-srv-sel');
+  if(selSrv)mantuireSetServer(selSrv.value);
+  const sel=$('mant-proj-sel');
+  const pid=sel?parseInt(sel.value,10):NaN;
+  if(!pid||Number.isNaN(pid)){toast('Selectează un proiect eligibil.','warn');return;}
+  const p=S.projects.find(x=>x.id===pid);
+  if(!p||p.status!=='completed'||p.quality!=='mantuiala'){toast('Doar proiecte finalizate, încă „de mântuială”, sunt eligibile.','warn');return;}
+  if(S.mantuire.queue.some(q=>q.projectId===pid)){toast('Există deja o cerere în curs pentru acest proiect.','warn');return;}
+  const apiEnv=mc.keyEnv||'live';
+  const apiTier=apiTier0;
+  mc.apiTier=apiTier;
+  const srv=mantuireServerById(S.mantuire.serverId);
+  const tMeta=mantuireTierMeta(apiTier);
+  let delay=Math.round(mantuireSampleDelayMs(srv)*tMeta.delayMult);
+  if(apiEnv==='test')delay=Math.max(400,Math.round(delay*0.35));
+  const pts=apiEnv==='test'?0:mantuireRandomRepForTier(apiTier);
+  const t0=Date.now();
+  const jid='mnt_'+t0+'_'+Math.random().toString(36).slice(2,8);
+  const requestId=`req_${t0}_${Math.random().toString(36).slice(2,10)}`;
+  S.mantuire.credits-=umCost;
+  mantuireTouchKeyUsed();
+  S.mantuire.queue.push({id:jid,requestId,projectId:pid,endTs:t0+delay,startedAt:t0,durationMs:delay,pts,srvId:srv.id,apiEnv,apiTier,umCost:umCost});
+  addAct(`Mântuire Proiecte™: cerere ${requestId} pentru „${p.name}” (${srv.name}, ${mantuireEnvPillLabel(apiEnv)}).`);
+  toast(`Cerere acceptată (${mantuireEnvPillLabel(apiEnv)}). ETA ~${Math.round(delay/1000)}s`,'ok');
+  saveState();renderMantuire();renderProj();updRep();scheduleMantuireDrainTick();
+}
+function renderMantuire(){
+  processMantuireQueue();
+  mantuireStopLiveTicker();
+  const root=$('mantuire-app-root');if(!root)return;
+  ensureMantuireState();ensureMantuireIntegration();
+  if(!isMantuireLinked()){root.innerHTML='';return;}
+  const mc=S.integrations.mantuireCloud;
+  const conc=S.mantuire.queue.length;
+  const curTier=mc.apiTier&&MANTUIRE_API_TIERS[mc.apiTier]?mc.apiTier:'parohial';
+  const costNow=mantuireUmCostForTier(curTier);
+  const tierOpts=MANTUIRE_API_TIER_ORDER.map(tid=>{
+    const tm=MANTUIRE_API_TIERS[tid];
+    return`<option value="${tid}" title="${escapeHtml(tm.hint)}"${tid===curTier?' selected':''}>${escapeHtml(tm.label)}</option>`;
+  }).join('');
+  const chartHtml=mantuireBuildUsageChartHtml();
+  const logHtml=mantuireBuildUsageTableHtml();
+  let srvList=[...MANTUIRE_SERVERS];
+  const curId=S.mantuire.serverId;
+  if(!srvList.some(s=>s.id===curId)){
+    const curS=mantuireServerById(curId);
+    srvList=[curS,...srvList.filter(s=>s.id!==curS.id)];
+  }
+  const srvOpts=srvList.map(sv=>`<option value="${sv.id}"${sv.id===S.mantuire.serverId?' selected':''}>${escapeHtml(sv.name)}</option>`).join('');
+  const curSrv=mantuireServerById(S.mantuire.serverId);
+  const eligible=S.projects.filter(p=>p.status==='completed'&&p.quality==='mantuiala'&&!S.mantuire.queue.some(j=>j.projectId===p.id));
+  const projOpts=eligible.length
+    ?eligible.map(p=>`<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('')
+    :`<option value="">— Niciun proiect eligibil —</option>`;
+  const selStyle='width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;background:var(--card);color:var(--text1);outline:none';
+  const now=Date.now();
+  const queueRows=S.mantuire.queue.length
+    ?S.mantuire.queue.map(j=>{
+        const p=S.projects.find(x=>x.id===j.projectId);
+        const sn=mantuireServerById(j.srvId).name;
+        const jid=j.id||('mnt_'+j.projectId+'_'+j.endTs);
+        const eta0=mantuireFormatApproxEta({...j,id:jid},now);
+        const act0=mantuireActivityLineForJob({...j,id:jid},now);
+        const hot=j.endTs-now>0&&j.endTs-now<4200;
+        const envTag=mantuireEnvPillLabel(j.apiEnv==='test'?'test':'live');
+        const tierId=j.apiTier&&MANTUIRE_API_TIERS[j.apiTier]?j.apiTier:'parohial';
+        const tierLab=mantuireTierMeta(tierId).label;
+        return`<div class="mant-qrow mant-qrow-live" data-mant-job="${escapeHtml(jid)}">
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700">${escapeHtml(p?.name||'Proiect')} <span class="mant-api-pill">${escapeHtml(envTag)}</span> <span class="mant-api-pill">${escapeHtml(tierLab)}</span></div>
+        <div class="mant-act tsm" data-mant-act="${escapeHtml(jid)}">${escapeHtml(act0)}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;max-width:48%">
+        <div class="mant-eta${hot?' mant-eta-hot':''}" data-mant-eta="${escapeHtml(jid)}">${escapeHtml(eta0)}</div>
+        <div class="tmut" style="margin-top:3px;font-size:10px;line-height:1.3">${escapeHtml(sn)}</div>
+      </div>
+    </div>`;
+      }).join('')
+    :'<div class="mant-qrow"><span class="tmut">Nicio cerere în așteptare</span><span></span></div>';
+  const hist=S.mantuire.history.slice(0,20);
+  const histRows=hist.length
+    ?hist.map(h=>{
+        const d=new Date(h.ts);
+        const ts=`${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+        const srv=mantuireServerById(h.srvId||'proto_iasi');
+        const ht=h.apiTier&&MANTUIRE_API_TIERS[h.apiTier]?h.apiTier:'parohial';
+        if(h.ok===false)return`<div class="mant-hist-row"><div><span style="opacity:.88">${escapeHtml(h.projectName||'—')}</span> — <span style="color:var(--orange);font-weight:700">anulat</span></div><span class="tmut">${ts}</span><div class="mant-hist-meta">${escapeHtml(srv.name)} · ${escapeHtml(ht)} · credit returnat</div></div>`;
+        const repLab=h.env==='test'?'Cheie test (fără puncte de reputație)':`+${typeof h.pts==='number'?h.pts:'—'} puncte de reputație`;
+        return`<div class="mant-hist-row"><div><strong>${escapeHtml(h.projectName||'—')}</strong> — <span style="color:var(--green);font-weight:800">${repLab}</span></div><span class="tmut">${ts}</span><div class="mant-hist-meta">${escapeHtml(srv.name)} · ${escapeHtml(ht)} · ${h.env==='test'?'Cheie test':'Cheie live / „Mântuit”'}</div></div>`;
+      }).join('')
+    :'<p class="tsm tmut" style="margin:0">Nicio intrare încă. După procesare API, evenimentele apar aici.</p>';
+  root.innerHTML=`
+    <div class="sg" style="margin-bottom:14px">
+      <div class="sc"><div class="si">🎟</div><div class="sv">${S.mantuire.credits}</div><div class="sl">Credite</div><div class="sd tsm tmut">Rit expeditiv: 1 · parohial: 2 · solemn: 3 unități per cerere</div></div>
+      <div class="sc"><div class="si">📚</div><div class="sv">${conc}/${MANTUIRE_MAX_CONCURRENT}</div><div class="sl">Cereri simultane</div><div class="sd tsm tmut">A doua limită: max. ${MANTUIRE_MAX_CONCURRENT} în coadă</div></div>
+      <div class="sc"><div class="si">✓</div><div class="sv">${S.mantuire.stats.ok||0}/${S.mantuire.stats.fail||0}</div><div class="sl">Reușite / eșecuri</div><div class="sd tsm tmut">În jurnalul de mai jos</div></div>
+    </div>
+    <div class="card mb14">
+      <div class="ch"><h3>Cerere nouă</h3><p>Proiect finalizat încă „de mântuială”, serverul de procesare și <strong>ritul</strong> cererii. Ritul stabilește timpul de așteptare, punctele de reputație la succes și <strong>costul curent: ${costNow} ${costNow===1?'unitate':'unități'}</strong>.</p></div>
+      <div class="cc">
+        <div class="two-col">
+          <div class="fg mb0">
+            <label for="mant-srv-sel">Nod / server</label>
+            <select id="mant-srv-sel" style="${selStyle}" onchange="mantuireSetServer(this.value);renderMantuire();">${srvOpts}</select>
+            <p class="tsm tmut mt6" style="line-height:1.45">${escapeHtml(curSrv.hint)}</p>
+          </div>
+          <div class="fg mb0">
+            <label for="mant-proj-sel">Proiect</label>
+            <select id="mant-proj-sel" style="${selStyle}">${projOpts}</select>
+          </div>
+        </div>
+        <div class="fg mb0 mt8">
+          <label for="mant-api-tier">Rit cerere</label>
+          <select id="mant-api-tier" style="${selStyle}" onchange="mantuireSetApiTier(this.value)">${tierOpts}</select>
+          <p class="tsm tmut mt6" style="line-height:1.45">${escapeHtml(mantuireTierMeta(curTier).hint)}</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;padding-top:12px;border-top:1px solid var(--border)">
+          <span class="mant-api-pill">${escapeHtml(mantuireEnvPillLabel(mc.keyEnv==='test'?'test':'live'))}</span>
+          <span class="tsm tmut">Identificatorul intern al cererii se generează singur după trimitere.</span>
+        </div>
+        <p class="tsm tmut mt8">${mc.keyEnv==='test'?'<strong>Cheie test</strong>: de probă; nu produce puncte de reputație și nu schimbă starea presei sau justiției; timpul de așteptare este mai scurt.':'<strong>Cheie live</strong>: la succes primești puncte de reputație după ritul ales. Pot apărea și alte efecte în simulare, pe lângă reputație.'}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center">
+          <button type="button" class="btn btn-mant" onclick="mantuireEnqueueFromUi()" ${!eligible.length||S.mantuire.credits<costNow?'disabled':''}>Trimite cererea</button>
+          <button type="button" class="btn btn-f" onclick="mantuirePurchaseTokens()" ${S.mantuire.credits>0?'disabled':''}>Cumpără credite (sold zero)</button>
+        </div>
+      </div>
+    </div>
+    <div class="card mb14">
+      <div class="ch"><h3>Consum recent</h3><p>Credite pe zi și ultimele cereri</p></div>
+      <div class="cc">${chartHtml}<div style="margin-top:12px">${logHtml}</div></div>
+    </div>
+    <div class="card mb14">
+      <div class="ch"><h3>În procesare</h3><p>ETA aproximativă</p></div>
+      <div class="cc">${queueRows}</div>
+    </div>
+    <div class="card">
+      <div class="ch"><h3>Istoric</h3><p>Ultimele rezultate</p></div>
+      <div class="cc">${histRows}</div>
+    </div>
+    <p class="tsm tmut mt6" style="line-height:1.5">Când soldul este zero poți cumpăra un pachet de credite (uneori cu bonus). Diferența dintre <strong>cheia test</strong> și <strong>cheia live</strong> este descrisă în caseta de mai sus.</p>`;
+  mantuireMaybeStartLiveTicker();
 }
 function isPsdDcLinked(){ensureIntegrations();return S.integrations.psdDC.linked===true;}
 function isAnafSyncLinked(){ensureIntegrations();return S.integrations.anafSync.linked===true;}
@@ -2402,7 +3478,7 @@ function renderPsdDcPortalBody(){
     body.innerHTML=`<span class="psd-dc-seal">Verificare</span>
       <p>Ți-am trimis pe <strong>Șpagafon</strong> un cod unic. Confirmă autentificarea pentru a deschide consola cheii API.</p>
       <label style="display:block;font-weight:700;margin-top:8px">Cod din mesaj</label>
-      <input type="text" class="psd-dc-inp" id="psd-dc-code-inp" maxlength="8" placeholder="000000" autocomplete="one-time-code"/>
+      <input type="text" class="psd-dc-inp verif-code-inp" id="psd-dc-code-inp" maxlength="6" placeholder="000000" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/\\D/g,'').slice(0,6)"/>
       <div class="psd-dc-actions">
         <button type="button" class="psd-dc-btn-psd" onclick="psdDcPortalVerifyCode()">Confirmă</button>
         <button type="button" class="psd-dc-btn-ghost" onclick="_psdDcPortalStep=1;S.integrations.psdDC.pendingVerifyCode='';S.integrations.psdDC.draftKey='';saveState();renderPsdDcPortalBody()">Înapoi</button>
@@ -2436,7 +3512,7 @@ function psdDcPortalStep1Continue(){
   toast('Verifică mesajul pe Șpagafon','ok');
 }
 function psdDcPortalVerifyCode(){
-  const inp=$('psd-dc-code-inp')?.value?.replace(/\s/g,'')||'';
+  const inp=sanitizeVerifCodeDigits($('psd-dc-code-inp')?.value,6);
   ensureIntegrations();
   if(inp!==S.integrations.psdDC.pendingVerifyCode){toast('Cod incorect.','err');return}
   invalidateVerifiedSpagafonCode('psd',inp);
@@ -2623,7 +3699,7 @@ function renderAnafSyncPortalBody(){
     body.innerHTML=`<span class="anaf-seal">Certificat provizoriu (Șpagafon)</span>
       <p>Am expediat un <strong>PIN de depunere</strong> pe linia Șpagafon. Valabilitate: 30 de minute. Introduceți codul pentru a deschide dosarul electronic.</p>
       <label style="display:block;font-weight:700;margin-top:8px">PIN certificat</label>
-      <input type="text" class="anaf-inp" id="anaf-sync-cert-inp" maxlength="8" placeholder="000000" autocomplete="one-time-code"/>
+      <input type="text" class="anaf-inp verif-code-inp" id="anaf-sync-cert-inp" maxlength="6" placeholder="000000" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/\\D/g,'').slice(0,6)"/>
       <div class="anaf-actions">
         <button type="button" class="anaf-btn-pri" onclick="anafSyncPortalVerifyCert()">Validează certificatul</button>
         <button type="button" class="anaf-btn-sec" onclick="_anafSyncPortalStep=1;ensureIntegrations();S.integrations.anafSync.pendingCertCode='';S.integrations.anafSync.draftKey='';S.integrations.anafSync.wizardPhase=1;S.integrations.anafSync.dosarTicks=0;saveState();renderAnafSyncPortalBody()">Renunță la cerere</button>
@@ -2690,7 +3766,7 @@ function anafSyncPortalStep1Continue(){
   toast('Verifică Șpagafon pentru PIN-ul de certificat','ok');
 }
 function anafSyncPortalVerifyCert(){
-  const inp=$('anaf-sync-cert-inp')?.value?.replace(/\s/g,'')||'';
+  const inp=sanitizeVerifCodeDigits($('anaf-sync-cert-inp')?.value,6);
   ensureIntegrations();
   const a=S.integrations.anafSync;
   if(inp!==a.pendingCertCode){toast('PIN incorect sau expirat narativ.','err');return}
@@ -2820,16 +3896,16 @@ function anafSyncRevokeFinalize(){
 function fillAnafCertFromSpagafon(code){
   const inp=$('anaf-sync-cert-inp');
   if(!inp){toast('Deschide portalul ANAF Sync la pasul cu PIN-ul certificat.','warn');return}
-  inp.value=String(code||'');
+  inp.value=sanitizeVerifCodeDigits(code,6);
   inp.focus();
   try{inp.select()}catch(e){}
   toggleSpagafon(false);
-  toast('PIN completat — apasă Validează în portalul ANAF Sync','ok');
+  toast('PIN completat. pasă Validează în portalul ANAF Sync','ok');
 }
 function fillPsdDcCodeFromSpagafon(code){
   const inp=$('psd-dc-code-inp');
   if(!inp){toast('Deschide PSD Direct Connect la pasul de verificare cu codul din SMS.','warn');return}
-  inp.value=String(code||'');
+  inp.value=sanitizeVerifCodeDigits(code,6);
   inp.focus();
   try{inp.select()}catch(e){}
   toggleSpagafon(false);
@@ -2863,15 +3939,19 @@ function renderInteg(){
   const box=$('integ-list');
   if(!box)return;
   ensureIntegrations();
+  ensureMantuireIntegration();
   const dc=S.integrations.psdDC;
   const an=S.integrations.anafSync;
+  const mc=S.integrations.mantuireCloud;
   const ok=isPsdDcLinked();
   const hasStored=ok&&!!dc.apiKey;
   const anOk=isAnafSyncLinked();
   const anHas=anOk&&!!an.apiKey;
+  const mtOk=isMantuireLinked();
+  const mtHas=mtOk&&!!mc.apiKey;
   box.innerHTML=`
     <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;background:var(--card)">
-      <div class="flex" style="justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+      <div class="integ-card-head">
         <div>
           <div style="font-weight:800;font-size:16px">PSD Direct Connect™</div>
           <p class="tsm tmut" style="margin-top:4px;line-height:1.5">Endpoint-uri pentru cereri de fonduri publice și plăți „Bani publici” din SifonatorPRO.</p>
@@ -2894,7 +3974,7 @@ function renderInteg(){
       </div>
     </div>
     <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;background:var(--card)">
-      <div class="flex" style="justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+      <div class="integ-card-head">
         <div>
           <div style="font-weight:800;font-size:16px">ANAF Sync™</div>
           <p class="tsm tmut" style="margin-top:4px;line-height:1.5">E-Factura și flux detaliat în aplicație. Înregistrarea necesită <strong>absența unei investigații DNA active</strong> în starea curentă a jocului. Fluxul include certificat pe Șpagafon, dosar procedural și emitere token.</p>
@@ -2914,6 +3994,29 @@ function renderInteg(){
               <button type="button" class="btn btn-s" onclick="connectAnafSyncManualKey()">Conectează</button>`}
         </div>
         <p class="tsm tmut mt6" style="line-height:1.45">${anOk?'Regenerarea sau revocarea din portal dezactivează legătura până lipești noul token.':an.draftKey?'Tokenul activ este în portalul ANAF Sync — finalizează dosarul dacă încă e deschis, apoi copiază cheia.':'Deschide portalul: declarație de integritate (fără DNA activ), PIN pe Șpagafon, dosar cu verificări repetate, apoi emitere token.'}</p>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;background:var(--card)">
+      <div class="integ-card-head">
+        <div>
+          <div style="font-weight:800;font-size:16px">Mântuire Proiecte™</div>
+          <p class="tsm tmut" style="margin-top:6px;line-height:1.5">În <strong>portalul</strong> furnizorului plătești o taxă unică de înregistrare, apoi primești cheia secretă (<code>mnt_sk_…</code>). După activare în aplicație, folosește panoul <strong>Mântuire Proiecte</strong> pentru cereri pentru a dobândi, potențial, puncte de reputație adiționale pe proiecte de mântuială.</p>
+        </div>
+        <span class="integ-pill ${mtOk?'integ-pill-ok':'integ-pill-off'}">${mtOk?'Conectat':'Neconectat'}</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+        <button type="button" class="btn btn-mant" onclick="openMantuirePortal()">Deschide portalul Mântuire Proiecte™</button>
+      </div>
+      <div class="fg mt14 mb0">
+        <label style="font-size:12px">${mtHas?'Cheie secretă stocată':'Lipește cheia secretă mnt_sk_live_… sau mnt_sk_test_…'}</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;align-items:stretch">
+          ${mtHas
+            ?`<input type="password" readonly id="integ-mant-paste" autocomplete="off" spellcheck="false" value="${escapeHtml(mc.apiKey)}" aria-label="Cheie API Mântuire Proiecte™" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
+              <button type="button" class="btn btn-f" id="integ-mant-reveal" onclick="toggleIntegMantKeyReveal()" aria-pressed="false" title="Arată sau ascunde cheia">Afișează</button>`
+            :`<input type="text" id="integ-mant-paste" placeholder="mnt_sk_live_…" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
+              <button type="button" class="btn btn-s" onclick="connectMantuireCloudKey()">Conectează</button>`}
+        </div>
+        <p class="tsm tmut mt6" style="line-height:1.45">${mtOk?'După o cheie nouă în portal, integrarea se dezactivează până lipești cheia curentă sau folosești „Trimite în SifonatorPRO”. La prima conectare primești <strong>5 unități de mântuire</strong> (credite); poți cumpăra un pachet nou doar când soldul este zero.':mc.draftKey?'Cheia activă este în portalul Mântuire Proiecte™ — copiază <strong>cheia secretă</strong>.':'Deschide portalul: termeni, cod pe Șpagafon, apoi cheia secretă.'}</p>
       </div>
     </div>`;
 }
@@ -2949,6 +4052,14 @@ function syncLayoutForViewport(){
   syncMobileMenuToggleUi();
 }
 function navigate(v){
+  if(v!=='mantuire')mantuireStopLiveTicker();
+  if(v==='mantuire'){
+    ensureMantuireIntegration();
+    if(!isMantuireLinked()){
+      toast('Conectează mai întâi API-ul Mântuire Proiecte™ din Manager Integrări (Instrumente).','warn');
+      v='integ';
+    }
+  }
   if(isMobileLayout())$('layout')?.classList.remove('mobile-menu-mode');
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));
@@ -2961,6 +4072,8 @@ function navigate(v){
   if(v==='press')renderPress();
   if(v==='ops')renderOps();
   if(v==='integ')renderInteg();
+  if(v==='proj'){processMantuireQueue();renderProj();scheduleMantuireDrainTick();}
+  if(v==='mantuire'){processMantuireQueue();renderMantuire();scheduleMantuireDrainTick();}
   if(v==='wand'){updWandQuota();renderSessions();renderWandQueue();syncWandSessionUI();}
   if(v==='howto')renderHowto();
   if(v==='settings')renderSettings();
@@ -2982,16 +4095,21 @@ function dlgOpen(title,sub,content,actions,opts){
   $('dlg-h').innerHTML=`<h3>${title}</h3>${sub?`<p>${sub}</p>`:''}`;
   $('dlg-c').innerHTML=content;
   $('dlg-a').innerHTML=actions;
-  $('overlay')?.classList.toggle('overlay-3ds',!!o.tdsPassthrough);
-  $('overlay')?.classList.remove('hid');
+  const ov=$('overlay');
+  ov?.classList.toggle('overlay-3ds',!!o.tdsPassthrough);
+  const mantuireOpen=$('mantuire-portal')&&!$('mantuire-portal').classList.contains('hid');
+  ov?.classList.toggle('overlay-over-portal',!!o.forceOverPortal||mantuireOpen);
+  ov?.classList.remove('hid');
 }
 function spagafonPinFor3DS(on){
   $('spagafon-root')?.classList.toggle('spgf-pinned-3ds',!!on);
   if(on)toggleSpagafon(true);
 }
 function dlgClose(){
-  $('overlay')?.classList.remove('overlay-3ds');
-  $('overlay')?.classList.add('hid');
+  const ov=$('overlay');
+  ov?.classList.remove('overlay-3ds');
+  ov?.classList.remove('overlay-over-portal');
+  ov?.classList.add('hid');
   spagafonPinFor3DS(false);
 }
 
@@ -3038,7 +4156,7 @@ function updSpagafonBadge(){
 function spagafonPushSms(from,body,opts){
   const o=opts||{};
   const ts=Date.now();
-  S.smsInbox.unshift({id:ts,ts,from,body,t:new Date(ts).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}),code:o.code||null,codeConsumed:false,is3ds:!!o.is3ds,isPsdDcVerify:!!o.isPsdDcVerify,isAnafCert:!!o.isAnafCert});
+  S.smsInbox.unshift({id:ts,ts,from,body,t:new Date(ts).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}),code:o.code||null,codeConsumed:false,is3ds:!!o.is3ds,isPsdDcVerify:!!o.isPsdDcVerify,isAnafCert:!!o.isAnafCert,isMantuireVerify:!!o.isMantuireVerify});
   if(S.smsInbox.length>50)S.smsInbox.pop();
   updSpagafonBadge();
   if($('spagafon-root')?.classList.contains('open')){renderSpagafon();renderSpagafonAppletUI();}
@@ -3048,8 +4166,8 @@ function invalidateVerifiedSpagafonCode(kind,code){
   const v=String(code||'');
   if(!v||!Array.isArray(S.smsInbox))return;
   S.smsInbox.forEach(m=>{
-    const k3=kind==='3ds'&&m.is3ds,kP=kind==='psd'&&m.isPsdDcVerify,kA=kind==='anaf'&&m.isAnafCert;
-    if((k3||kP||kA)&&String(m.code||'')===v){m.code=null;m.codeConsumed=true}
+    const k3=kind==='3ds'&&m.is3ds,kP=kind==='psd'&&m.isPsdDcVerify,kA=kind==='anaf'&&m.isAnafCert,kM=kind==='mantuire'&&m.isMantuireVerify;
+    if((k3||kP||kA||kM)&&String(m.code||'')===v){m.code=null;m.codeConsumed=true}
   });
   if($('spagafon-root')?.classList.contains('open')){renderSpagafon();renderSpagafonAppletUI();}
 }
@@ -3057,20 +4175,26 @@ function renderSpagafon(){
   const box=$('spgf-msgs');
   if(!box)return;
   if(!S.smsInbox.length){
-    box.innerHTML='<p class="spgf-empty">Niciun SMS încă.<br/>Codurile 3D Secure (SifonPay™), verificările PSD Direct Connect™ și certificatele ANAF Sync™ apar aici.</p>';
+    box.innerHTML='<p class="spgf-empty">Niciun SMS încă.<br/>Codurile 3D Secure (SifonPay™), verificările PSD Direct Connect™, certificatele ANAF Sync™ și codurile Mântuire Proiecte™ apar aici.</p>';
     return;
   }
   box.innerHTML=S.smsInbox.map(m=>{
     let actions='';
-    if(m.codeConsumed&&(m.is3ds||m.isPsdDcVerify||m.isAnafCert))actions+=`<div class="sm-actions"><span class="tsm tmut" style="display:block;opacity:.72">Cod folosit și invalidat după verificare.</span></div>`;
+    if(m.codeConsumed&&(m.is3ds||m.isPsdDcVerify||m.isAnafCert||m.isMantuireVerify))actions+=`<div class="sm-actions"><span class="tsm tmut" style="display:block;opacity:.72">Cod folosit și invalidat după verificare.</span></div>`;
     else{
       if(m.is3ds&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillTdsFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în plată</button></div>`;
       if(m.isPsdDcVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:var(--psd)" onclick='fillPsdDcCodeFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în PSD DC</button></div>`;
       if(m.isAnafCert&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillAnafCertFromSpagafon(${JSON.stringify(String(m.code))})'>Completează certificat ANAF Sync</button></div>`;
+      if(m.isMantuireVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:#5c2b70;color:#fff" onclick='fillMantuireVerifyFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în Mântuire Proiecte™</button></div>`;
     }
-    const extra=m.is3ds||m.isPsdDcVerify||m.isAnafCert?' sm-code':'';
+    const extra=m.is3ds||m.isPsdDcVerify||m.isAnafCert||m.isMantuireVerify?' sm-code':'';
     return`<div class="spgf-msg${extra}"><div class="sm-from">${escapeHtml(m.from)}</div><div class="sm-body">${escapeHtml(m.body)}</div><div class="sm-time">${m.t||''}</div>${actions}</div>`;
   }).join('');
+}
+function sanitizeVerifCodeDigits(s,maxLen){
+  let v=String(s||'').replace(/\D/g,'');
+  if(maxLen!=null&&maxLen>=0)v=v.slice(0,maxLen);
+  return v;
 }
 function escapeHtml(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -3101,7 +4225,7 @@ function seedDossierIfEmpty(p,customTxt){
 function fillTdsFromSpagafon(code){
   const inp=$('tds-code');
   if(inp){
-    inp.value=String(code||'');
+    inp.value=sanitizeVerifCodeDigits(code,12);
     inp.focus();
     try{inp.select()}catch(e){}
   }else{
@@ -3373,7 +4497,7 @@ function renderDash(){
         <div class="tsm tmut mt8">Timp utilizat: ${usedH}h / ${totalH}h luna aceasta</div>
         <div class="tsm tmut">Expiră: ${new Date(S.sub.exp).toLocaleDateString('ro-RO')}</div>`;
     }else{
-      sc.innerHTML=`<p class="tmut tsm">Fără abonament plătit — limitele <strong>Starter Gratuit</strong> (2/2 proiecte) se aplică implicit.</p><button class="btn btn-p mt8" style="width:100%" onclick="navigate('sub')">Upgrade la plan plătit</button>`;
+      sc.innerHTML=`<p class="tmut tsm">Fără abonament plătit. Limitele <strong>Starter Gratuit</strong> (2/2 proiecte) se aplică implicit.</p><button class="btn btn-p mt8" style="width:100%" onclick="navigate('sub')">Upgrade la plan plătit</button>`;
     }
   }
 }
@@ -3553,8 +4677,8 @@ function renderProj(){
     const late=p.lateF||p.lateS;
     const bdgs=[
       late?`<span class="badge br">⏰ Întârziat</span>`:'',
-      p.quality?`<span class="badge ${qBadge(p.quality)}">${qLabel(p.quality)}</span>`:'',
-      p.bet?`<span class="badge bgold">🎲 Pariu activ</span>`:'',
+      p.quality?`<span class="badge ${projPublicQualityBadgeClass(p.quality)}">${qLabel(p.quality)}</span>`:'',
+      p.status==='in_progress'&&p.bet?`<span class="badge bgold">🎲 Pariu activ</span>`:'',
       `<span class="badge bk" title="Categorie proiect">📁 ${escapeHtml(projectCategoryLabel(p))}</span>`,
     ].filter(Boolean);
     const acts=[];
@@ -3709,7 +4833,7 @@ function openProjDossier(id){
     ?`<div class="dyn-tablewrap"><table class="dyn-table" role="grid" aria-label="Registru electronic proiect"><thead><tr><th scope="col" class="dyn-nowrap" style="width:30%">Data</th><th scope="col">Notă / eveniment</th></tr></thead><tbody>${docRows}</tbody></table></div>`
     :`<div class="dyn-empty" role="status">Încă nu există linii în registru. Ele se adaugă la <strong>avansarea simulării lunare</strong>, din acțiuni automate sau cu formularul de mai jos.</div>`;
   const addForm=!projectIsFinalized(p)
-    ?`<div class="fg mt12 mb0"><label for="dos-custom-date">Dată afișată în registru (opțional)</label>
+    ?`<div class="fg mt6 mb0"><label for="dos-custom-date">Dată afișată în registru (opțional)</label>
         <input type="date" id="dos-custom-date" class="card-inp" style="font-size:14px;width:100%;max-width:280px"/>
       </div>
       <div class="fg mb0"><label for="dos-custom-txt">Adaugă notă / element în registru</label>
@@ -3790,9 +4914,9 @@ function compProj(id){
   if(projectIsFinalized(p)||p.status!=='in_progress'){toast('Proiectul nu mai poate fi finalizat din această acțiune.','warn');dlgClose();return}
   const q=rollProjectQuality(p);
   p.status='completed';
-  dlgClose();renderProj();
+  dlgClose();
   applyProjectCompletionRepAndBet(p,q);
-  renderDash();saveState();
+  renderProj();renderDash();saveState();
 }
 function openBetDlg(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
@@ -4038,7 +5162,7 @@ function refreshWandFactorHint(){
   const el=$('w-fac-hint');if(!el)return;
   const f=parseFloat($('w-fac')?.value||50)/100;
   const exp=wandExposurePercentFromFactor(f);
-  el.innerHTML=`Factorul <strong>${(f*100).toFixed(0)}%</strong> înmulțește doar diferența (declarat − real): plafonul de surplus extras în sesiune este <strong>(declarat − real) × factor</strong>. În sesiune, surplusul crește treptat până la acest plafon (viteza depinde de timp și de dificultate). „Vizibilitate simulată” (control): <strong>${exp}%</strong> — crește cu factorul și cu severitatea etapei juridice; la <strong>≥70%</strong> factor, după start se poate declanșa o alertă narativă (ANAF/DNA).`;
+  el.innerHTML=`Factorul <strong>${(f*100).toFixed(0)}%</strong> înmulțește doar diferența (declarat - real): plafonul de surplus extras în sesiune este <strong>(declarat - real) × factor</strong>. În sesiune, surplusul crește treptat până la acest plafon (viteza depinde de timp și de dificultate). „Vizibilitate simulată” (control): <strong>${exp}%</strong> — crește cu factorul și cu severitatea etapei juridice; la <strong>≥70%</strong> factor, după start se poate declanșa o alertă narativă (ANAF/DNA).`;
 }
 function updateSessSurplusUI(){
   if(!S.activeSession)return;
@@ -4067,7 +5191,7 @@ function wPreview(){
     $('w-surp')&&($('w-surp').textContent=fRON(surplus));
     $('w-brkd')&&($('w-brkd').innerHTML=[
       ['Valoare reală proiect',fRON(r)],['Valoare declarată/bugetată',fRON(d)],
-      ['Diferență brută (declarat − real)',fRON(diff)],['Factor ales',(f*100).toFixed(0)+'%'],
+      ['Diferență brută (declarat - real)',fRON(diff)],['Factor ales',(f*100).toFixed(0)+'%'],
       ['Plafon surplus (formulă)',fRON(surplus)],
       ['Acumulat în sesiunea curentă',S.activeSession?fRON(Math.round(S.activeSession.dynamicSurplus||0)):'—'],
       ['Rest până la plafon',S.activeSession?fRON(Math.max(0,Math.round(surplus-(S.activeSession.dynamicSurplus||0)))):'— (începe sesiunea)'],
@@ -4229,7 +5353,6 @@ function startSession(){
   updateSessSurplusUI();
   wandDossierOpen(linked?.name||'Proiect',rr,dd,f2);
   toast('✨ Sesiune de optimizare pornită!','ok');
-  if(f2>=0.7)setTimeout(()=>triggerDNA(),5000);
   });
 }
 function activeWandProjects(){
@@ -4493,6 +5616,7 @@ function stopSession(reason){
   wandDossierClose(reason,surplus,projectName,elapsed);
   if(hasPaidSubscription()){S.sub.secUsed+=elapsed}
   else{S.purchSecUsed+=elapsed}
+  const siphBefore=S.siphoned;
   S.siphoned+=surplus;
   S.ledger.redistributedSurplus+=surplus;
   S.ledger.publicBudget=Math.max(0,S.ledger.publicBudget-surplus);
@@ -4525,6 +5649,7 @@ function stopSession(reason){
   else if(reason==='surplus')toast('Surplus maxim extras — nu mai rămâne nimic de optimizat pe această sesiune.','ok');
   else if(reason==='orphan')toast('Proiectul nu mai există — sesiune oprită.','warn');
   else toast(`✨ Sesiune finalizată! ${fRON(surplus)} „optimizați" în ${fTimer(elapsed)}.`,'ok');
+  maybeTriggerInvestigationOnSiphonCross(siphBefore);
   updDebug();
   setTimeout(()=>{tryStartNextQueuedWand();renderWandQueue();saveState();},400);
 }
@@ -5134,7 +6259,7 @@ function renderSub(){
         ${pl.feats.map(f=>`<li>${f}</li>`).join('')}
         <li>Proiecte în lucru / planificate: max. ${limO} / ${limP}</li>
         <li>Bagheta Magică: ${hoursLabel}/lună</li>
-        <li>Bonus rep. proiecte publice: până la ${Math.round(pl.repMultCap*100)}%</li>
+        <li>Bonus reputație la proiecte publice: până la ${Math.round(pl.repMultCap*100)}%</li>
       </ul>
       </div>
       <div class="plan-card-actions">
@@ -5183,8 +6308,9 @@ function needs3DS(num){
 function openCardCheckout(ctx){
   CARD_PAY_CTX=ctx;
   const isHours=ctx.kind==='hours';
-  const label=isHours?`${ctx.hours} ore Bagheta Magică`:(PLANS.find(p=>p.id===ctx.tid)?.name||'Abonament');
-  const cadence=isHours?'plată unică':'/lună';
+  const isMant=ctx.kind==='mantuire_reg';
+  const label=isHours?`${ctx.hours} ore Bagheta Magică`:isMant?'Înregistrare API Mântuire Proiecte™':(PLANS.find(p=>p.id===ctx.tid)?.name||'Abonament');
+  const cadence=isHours||isMant?'plată unică':'/lună';
   dlgOpen('','',
     `<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay™</div><div class="sp-tag">Plăți discrete pentru oameni cu inițiativă</div></div>
     <div style="padding:18px">
@@ -5216,6 +6342,14 @@ function finishCardCheckout(bank3ds){
     toast(`✅ Abonament ${pl?.name||''} activat!`,'ok');
     addAct(`Abonament ${pl?.name||ctx.tid} plătit cu cardul via SifonPay™${bank3ds?` (3D Secure ${bank3ds.bank})`:''}.`);
     renderSub();renderDash();
+    CARD_PAY_CTX=null;
+    saveState();
+    return;
+  }
+  if(ctx.kind==='mantuire_reg'){
+    dlgClose();
+    addAct(`Mântuire Proiecte™: taxă înregistrare API plătită cu cardul (${fRON(ctx.amount)})${bank3ds?` · 3D Secure ${bank3ds.bank}`:''}.`);
+    mantuireMarkRegistrationPaidAndSendSms();
     CARD_PAY_CTX=null;
     saveState();
     return;
@@ -5252,7 +6386,7 @@ function show3DSChallenge(bankRule,cardNum){
   S.pending3DS={code:'__TDS10__',bank:bankRule.bank,tail:cardNum.slice(-4),mode:'timed_3ds',reserveCode};
   spagafonPushSms(bankRule.bank,smsBody,{code:reserveCode,is3ds:true});
   spagafonPinFor3DS(true);
-  const codeRow=reserveCode!=null?`<div class="fg mt14"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Cod rezervă (din Șpagafon)</label><input class="card-inp" id="tds-code" type="text" inputmode="numeric" maxlength="12" placeholder="000000" autocomplete="one-time-code" style="font-size:15px;letter-spacing:.12em"/></div><p class="tsm tmut mt8">Folosește butonul <strong>Completează în plată</strong> din mesajul SMS pe Șpagafon ca să lipească codul aici, apoi confirmă.</p>`:'';
+  const codeRow=reserveCode!=null?`<div class="fg mt14"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Cod rezervă (din Șpagafon)</label><input class="card-inp verif-code-inp" id="tds-code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="12" placeholder="000000" autocomplete="one-time-code" style="font-size:15px;letter-spacing:.12em" oninput="this.value=this.value.replace(/\\D/g,'').slice(0,12)"/></div><p class="tsm tmut mt8">Folosește butonul <strong>Completează în plată</strong> din mesajul SMS pe Șpagafon ca să lipească codul aici, apoi confirmă.</p>`:'';
   const inner=`<p class="tsm tmut mb14">Card <strong>${masked}</strong> · <strong>${bankRule.bank}</strong> solicită <strong>3D Secure</strong> (simulare SifonPay™). Ai exact <strong>${TDS_MINUTES} minute</strong>; detaliile și orice cod de rezervă sunt pe <strong>Șpagafon</strong> (deschis automat deasupra acestei ferestre).</p>
     <div style="background:var(--bg);padding:12px;border-radius:var(--r);font-size:13px;text-align:center"><span id="tds-timer" style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--orange)">${String(TDS_MINUTES).padStart(2,'0')}:00</span><div class="tsm tmut mt6">Timp rămas</div></div>
     ${codeRow}
@@ -5276,7 +6410,7 @@ function confirm3DSecure(bank){
   if(!S.pending3DS||S.pending3DS.code!=='__TDS10__'){toast('Sesiune 3D Secure expirată sau invalidă','warn');return}
   const want=S.pending3DS.reserveCode;
   if(want!=null&&String(want).length){
-    const got=$('tds-code')?.value?.replace(/\s/g,'')||'';
+    const got=sanitizeVerifCodeDigits($('tds-code')?.value,12);
     if(got!==String(want)){toast('Introdu codul din Șpagafon (sau butonul din SMS) înainte de confirmare.','warn');return}
   }
   clearInterval(window.__tdsTimerIv);
@@ -5332,7 +6466,7 @@ function procPublic(tid,total){
   ['📨 Cerere trimisă către intermediar...','🤝 Negociere discretă în curs...','📋 Documentație „justificativă" generată automat...','✅ Fonduri publice aprobate și transferate!'].forEach((s,i)=>
     setTimeout(()=>{
       $('pp-steps')&&($('pp-steps').innerHTML+=`<div style="padding:4px 0;border-bottom:1px solid var(--border)">${s}</div>`);
-      if(i===3)setTimeout(()=>{activateSub(tid);S.siphoned+=total;dlgClose();toast(`🏛️ Bani publici accesați! Abonament activat.`,'ok');addAct(`Abonament ${PLANS.find(p=>p.id===tid).name} plătit din fonduri publice via ${int}. ${fRON(total)} sifonați.`);renderSub();renderDash();},900);
+      if(i===3)setTimeout(()=>{const ps=S.siphoned;activateSub(tid);S.siphoned+=total;maybeTriggerInvestigationOnSiphonCross(ps);dlgClose();toast(`🏛️ Bani publici accesați! Abonament activat.`,'ok');addAct(`Abonament ${PLANS.find(p=>p.id===tid).name} plătit din fonduri publice via ${int}. ${fRON(total)} sifonați.`);renderSub();renderDash();},900);
     },i*950)
   );
 }
@@ -5371,8 +6505,10 @@ function procPublicHours(hours,total){
     setTimeout(()=>{
       $('pp-steps-h')&&($('pp-steps-h').innerHTML+=`<div style="padding:4px 0;border-bottom:1px solid var(--border)">${s}</div>`);
       if(i===3)setTimeout(()=>{
+        const ps=S.siphoned;
         S.purchSec+=hours*3600;
         S.siphoned+=total;
+        maybeTriggerInvestigationOnSiphonCross(ps);
         dlgClose();
         updWandQuota();
         toast(`🏛️ ${hours} ore adăugate cu fonduri publice!`,'ok');
@@ -5418,25 +6554,24 @@ function procHours(h,cost,method){
 }
 
 // ═══ DNA ═══
-function schedDNA(){
-  const d=50000+Math.random()*75000;
-  setTimeout(()=>{if((S.justice?.stage||'clean')==='clean')dnaToast();schedDNA();},d);
-}
-function dnaToast(){
-  const m=['🔍 DNA vă supraveghează activitatea. Fiți discreți.','📡 Activitate suspectă detectată în rețeaua de achiziții publice.','⚖️ ANAP a inițiat un control de rutină. „Nu e nimic personal."','🗄️ Curtea de Conturi verifică documentația proiectelor dvs.','🔴 PREVENT a semnalat o potențială neregulă.'];
-  toast(m[Math.floor(Math.random()*m.length)],'dna');
-}
 function triggerDNA(opts){
   const fromDebug=opts&&opts.fromDebug;
-  const t=['Activitate cu valori mari detectată. IP-ul dvs. a fost înregistrat în PREVENT.','Factor de optimizare peste 70% a declanșat un audit automat ANAF.','Suma redistribuită depășește pragul de raportare obligatorie către DIICOT.'];
-  const msg=t[Math.floor(Math.random()*t.length)];
+  if(!S.justice)S.justice={stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false,anafAuditMessage:'',anafAuditSince:0,anafAuditShowBanner:false};
+  const wouldSetAncheta=(S.justice?.stage||'clean')==='clean'&&S.siphoned>600000;
+  if(!fromDebug&&!wouldSetAncheta)return;
+  const tDebug=[
+    '[DEBUG] Scenariu: factor ridicat și fluxuri atipice — control ANAF simulat.',
+    '[DEBUG] Scenariu: optimizare peste prag — audit automat.',
+    '[DEBUG] Scenariu: redistribuire mare — dosar deschis în modul test.'
+  ];
+  const msg=fromDebug
+    ?tDebug[Math.floor(Math.random()*tDebug.length)]
+    :'Redistribuirea cumulată a depășit pragul critic. Cazul intră în investigație (Sistem Judiciar).';
   $('dna-alert-txt')&&($('dna-alert-txt').textContent=msg);
   $('dna-alert-box')?.classList.remove('hid');
-  if(!S.justice)S.justice={stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false,anafAuditMessage:'',anafAuditSince:0,anafAuditShowBanner:false};
   S.justice.anafAuditMessage=msg;
   S.justice.anafAuditSince=nowTs();
   S.justice.anafAuditShowBanner=true;
-  const wouldSetAncheta=(S.justice?.stage||'clean')==='clean'&&S.siphoned>600000;
   if(fromDebug){
     S.justice.debugPin=true;
     S.justice.dnaEscalation=false;
@@ -5454,8 +6589,12 @@ function triggerDNA(opts){
   }
   saveState();
   navigate('dash');
-  toast('🚨 Alertă DNA / ANAF! Deschide tabloul de bord și secțiunea Sistem Judiciar.','dna');
+  toast('🚨 Situație judiciară gravă: vezi tabloul de bord → Sistem Judiciar.','dna');
   renderJust();renderOps();renderDash();
+}
+function maybeTriggerInvestigationOnSiphonCross(prevSiphoned){
+  if(prevSiphoned<=600000&&S.siphoned>600000&&(S.justice?.stage||'clean')==='clean')
+    setTimeout(()=>triggerDNA(),900);
 }
 
 // ═══ DEBUG BAR ═══
@@ -5488,7 +6627,7 @@ function dbAddTime(s){
 function dbActivateSub(tid){activateSub(tid);renderSub();renderDash();toast(`[DEBUG] Abonament ${tid} activat`,'ok')}
 function dbSimuleazaControlANAF(){
   triggerDNA({fromDebug:true});
-  addAct('[DEBUG] Simulare control ANAF + alertă PREVENT');
+  addAct('[DEBUG] Simulare control ANAF / escaladare judiciară');
   toast('[DEBUG] Control ANAF simulat','warn');
 }
 function dbLeakPresa(){
@@ -5532,7 +6671,8 @@ function dbReset(){
   S.rep=0;S.repH=[];S.siphoned=0;S.justice={stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false,anafAuditMessage:'',anafAuditSince:0,anafAuditShowBanner:false};S.sub=null;S.subLapsed=null;
   _subExpiredPromptPending=false;if(_subExpiredDlgTimer){clearTimeout(_subExpiredDlgTimer);_subExpiredDlgTimer=null}
   S.smsInbox=[];S.pending3DS=null;S.spagafonLastSeen=0;
-  S.integrations={psdDC:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''},anafSync:{linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0}};
+  S.integrations={psdDC:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''},anafSync:{linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0},mantuireCloud:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:'',wizardPhase:1,registryTicks:0,keyEnv:'live',keyCreatedAt:0,lastUsedAt:0,apiTier:'parohial',registrationPaid:false}};
+  S.mantuire={credits:5,serverId:'proto_iasi',queue:[],history:[],usageLog:[],usageByDay:{},stats:{ok:0,fail:0}};
   S.purchSec=0;S.purchSecUsed=0;S.activeSession=null;S.sessions=[];S.judiciaryRisk=0;S.pressTone=50;S.timeShiftSec=0;
   S.userControls={repPublicSlider:0};S.wandQueue=[];S.wandJobDetailId=null;
   S.worldMemory={blacklistedFirms:[],hostilePress:[],magistrateHeat:0,lastSpilloverMonth:-1};
