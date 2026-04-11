@@ -151,7 +151,9 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 /* ── DIALOG ── */
 #overlay{position:fixed;inset:0;background:rgba(0,0,0,.48);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
 #overlay.hid{display:none}
-#dlg{background:var(--card);border-radius:var(--rl);box-shadow:0 20px 60px rgba(0,0,0,.26);max-width:560px;width:100%;max-height:90vh;overflow-y:auto;animation:din .17s ease-out}
+#overlay.overlay-3ds{background:rgba(0,0,0,.35);pointer-events:none}
+#overlay.overlay-3ds #dlg{pointer-events:auto}
+#dlg{background:var(--card);border-radius:var(--rl);box-shadow:0 20px 60px rgba(0,0,0,.26);max-width:560px;width:100%;max-height:90vh;overflow-y:auto;animation:din .17s ease-out;position:relative;z-index:1150}
 @keyframes din{from{opacity:0;transform:scale(.95) translateY(-8px)}to{opacity:1;transform:none}}
 .dh{padding:20px 22px 0}
 .dh h3{font-size:18px;font-weight:700}
@@ -190,23 +192,31 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .session-timer{font-size:36px;font-weight:700;font-family:var(--mono);color:var(--yellow);letter-spacing:.05em}
 .session-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px solid var(--border)}
 .session-row:last-child{border-bottom:none}
-.sessions-list .sess-item{display:flex;align-items:center;gap:10px;padding:9px 17px;border-bottom:1px solid var(--border);font-size:13px}
+.sessions-list .sess-item{display:flex;align-items:center;gap:10px;padding:9px 17px;border-bottom:1px solid var(--border);font-size:13px;cursor:pointer;transition:background .12s}
 .sessions-list .sess-item:last-child{border-bottom:none}
+.sessions-list .sess-item:hover,.sessions-list .sess-item:focus{background:var(--bg)}
 .sess-time{font-family:var(--mono);font-size:11px;color:var(--text3);min-width:40px}
 .sess-surplus{font-weight:700;color:var(--green);margin-left:auto}
 .sess-dur{font-size:11px;color:var(--text2);font-family:var(--mono)}
+.wand-exposure-bar{height:8px;border-radius:4px;background:var(--border);overflow:hidden;margin-top:4px}
+.wand-exposure-fill{height:100%;border-radius:4px;transition:width .2s,background .2s}
+.wand-exposure-fill.low{background:var(--green)}
+.wand-exposure-fill.mid{background:var(--orange)}
+.wand-exposure-fill.high{background:var(--red)}
 
 /* ── PLANS ── */
-.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:20px}
-@media(max-width:680px){.plan-grid{grid-template-columns:1fr}}
-.plan-card{border:2px solid var(--border);border-radius:var(--rl);padding:20px;text-align:center;transition:all .15s;background:var(--card);position:relative;overflow:hidden;cursor:pointer}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px;margin-bottom:20px;align-items:stretch}
+@media(max-width:900px){.plan-grid{grid-template-columns:1fr}}
+.plan-card{border:2px solid var(--border);border-radius:var(--rl);padding:0;text-align:center;transition:all .15s;background:var(--card);position:relative;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;min-height:420px}
 .plan-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:var(--sh2)}
 .plan-card.feat{border-color:var(--gold)}
 .plan-card.feat::after{content:'RECOMANDAT';position:absolute;top:22px;right:-36px;background:var(--gold);color:#fff;font-size:9px;font-weight:700;padding:3px 36px;transform:rotate(45deg)}
-.pname{font-size:16px;font-weight:700;margin-bottom:3px}
-.pprice{font-size:28px;font-weight:700;color:var(--blue);margin:10px 0}
+.plan-card-inner{padding:20px 20px 16px;flex:1;display:flex;flex-direction:column;text-align:left}
+.plan-card .plan-card-actions{padding:0 20px 20px;margin-top:auto}
+.pname{font-size:16px;font-weight:700;margin-bottom:3px;text-align:center}
+.pprice{font-size:28px;font-weight:700;color:var(--blue);margin:10px 0;text-align:center}
 .pprice small{font-size:13px;color:var(--text2)}
-.pfeats{text-align:left;font-size:12px;list-style:none;margin:13px 0}
+.pfeats{text-align:left;font-size:12px;list-style:none;margin:13px 0;flex:1}
 .pfeats li{padding:3px 0;color:var(--text2)}
 .pfeats li::before{content:'✓ ';color:var(--green);font-weight:700}
 
@@ -251,6 +261,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 
 /* ── ȘPAGAFON — colț dreapta-jos, „telefon” rotunjit, HUD non-modal ── */
 #spagafon-root{position:fixed;inset:0;z-index:950;pointer-events:none}
+#spagafon-root.spgf-pinned-3ds{z-index:1250}
 .spgf-dock{
   position:absolute;
   right:max(12px,env(safe-area-inset-right,0px));
@@ -365,6 +376,160 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .hid{display:none!important}
 .sep{border:none;border-top:1px solid var(--border);margin:12px 0}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(0,0,0,.13);border-radius:3px}
+
+/* ── FUNDS LOCK ── */
+#app.funds-locked #layout{pointer-events:none;opacity:.42;filter:grayscale(.35)}
+#app.funds-locked #hbar{opacity:1;filter:none;pointer-events:auto}
+#funds-lock-banner{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:900;max-width:420px;width:calc(100% - 40px);background:var(--card);border:2px solid var(--orange);border-radius:var(--rl);box-shadow:var(--sh2);padding:22px;text-align:center}
+#app:not(.funds-locked) #funds-lock-banner{display:none!important}
+
+/* ── MOBILE APP SHELL (≤680px) ── */
+#hb-mobile-spag{display:none}
+.mobile-nav-toggle{
+  display:none;
+  box-sizing:border-box;
+  align-items:center;justify-content:center;
+  width:44px;height:44px;min-width:44px;min-height:44px;
+  margin:0;padding:0;border:none;border-radius:var(--r);
+  background:rgba(255,255,255,.12);color:#fff;
+  font-family:var(--font);font-size:22px;font-weight:600;line-height:1;
+  cursor:pointer;flex-shrink:0;
+  transition:background .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.mobile-nav-toggle:active{background:rgba(255,255,255,.2)}
+@media(max-width:680px){
+  /* Spațiu față de marginile ecranului + notch; ~6px față de chenarul antetului */
+  #hbar{
+    height:auto;
+    min-height:0;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-left:calc(14px + env(safe-area-inset-left, 0px));
+    padding-right:calc(14px + env(safe-area-inset-right, 0px));
+    gap:10px;
+    align-items:center;
+  }
+  .hb-left{align-items:center}
+  .hb-left > span{display:inline-flex;align-items:center;line-height:1;max-height:100%}
+  .mobile-nav-toggle{
+    display:inline-flex;align-self:center;
+    width:40px;height:40px;min-width:40px;min-height:40px;
+  }
+  .mobile-nav-toggle .mnav-svg{
+    display:block;width:22px;height:22px;margin:0;flex-shrink:0;
+    pointer-events:none;
+  }
+  #spgf-launcher{display:none!important}
+  #hb-mobile-spag{
+    display:inline-flex!important;
+    align-items:center;justify-content:center;align-self:center;
+    box-sizing:border-box;
+    min-width:40px;min-height:40px;padding:0 10px;
+    border-radius:var(--rm);
+    background:linear-gradient(180deg,rgba(229,165,10,.32),rgba(229,165,10,.14));
+    border:1px solid rgba(245,194,17,.5);
+    color:#fff;font-size:20px;line-height:1;
+    box-shadow:0 1px 4px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.14);
+    flex-shrink:0;
+  }
+  #hb-mobile-spag:active{background:linear-gradient(180deg,rgba(229,165,10,.45),rgba(229,165,10,.22))}
+  .wand-wrap .wg{grid-template-columns:1fr}
+  /* O singură „pagină”: fie meniul vertical, fie conținutul */
+  #layout{position:relative;flex-direction:column;flex:1;min-height:0}
+  #layout.mobile-menu-mode #content{display:none!important}
+  #layout.mobile-menu-mode #sidebar{
+    display:flex!important;flex-direction:column;flex:1;min-height:0;width:100%!important;max-height:none!important;
+    border-right:none;border-bottom:none;padding:0 0 env(safe-area-inset-bottom,0);overflow-y:auto;-webkit-overflow-scrolling:touch;
+    background:var(--sidebar);
+  }
+  #layout.mobile-menu-mode #sidebar .sid-foot{margin-top:auto}
+  #layout:not(.mobile-menu-mode) #sidebar{display:none!important}
+  #layout:not(.mobile-menu-mode) #content{
+    flex:1;min-height:0;max-height:none!important;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  }
+  #sidebar .nav-i{
+    padding:14px 16px;margin:0 10px 4px;border-radius:var(--rm);font-size:15px;
+    min-height:48px;align-items:center;
+  }
+  #sidebar .nav-sec{padding:16px 18px 6px;font-size:11px}
+  /* Antet compact: brand stânga (flex:1), profil lipit de acțiuni la dreapta — fără coloană centrală lată */
+  .hb-left{min-width:0}
+  .hb-mid{
+    flex:0 1 auto;
+    min-width:0;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:5px;
+  }
+  .hb-right{flex-shrink:0;gap:6px}
+  #hb-name{max-width:min(36vw,120px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom}
+  .hb-fn{display:none}
+  /* Conținut: padding mai aerisit pentru thumb */
+  #content .view{padding:14px 12px calc(14px + env(safe-area-inset-bottom,0))}
+  /* Proiecte & Licitații — layout tip listă mobilă */
+  #view-proj .vh,#view-tend .vh{
+    flex-direction:column;align-items:stretch;gap:12px;margin-bottom:14px;
+  }
+  #view-proj .vh-actions,#view-tend .vh-actions{width:100%;justify-content:stretch}
+  #view-proj .vh-actions .btn,#view-tend .vh-actions .btn{width:100%;min-height:46px;font-size:15px}
+  #view-proj h2,#view-tend h2{font-size:19px}
+  #view-proj .vh>p,#view-tend .vh>p{font-size:13px;line-height:1.45}
+  /* Tab-uri filtru — scroll orizontal */
+  #view-proj .tabs{
+    display:flex;flex-wrap:nowrap;gap:4px;width:100%;max-width:100%;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;
+    padding:4px 2px 10px;margin-bottom:10px;
+    scrollbar-width:thin;
+  }
+  #view-proj .tabs .tab{
+    flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;padding:8px 14px;font-size:13px;
+    min-height:40px;display:inline-flex;align-items:center;
+  }
+  /* Rânduri listă — coloană, acțiuni jos */
+  #proj-list .lrow,#tend-list .lrow{
+    flex-direction:column;align-items:stretch;gap:10px;padding:14px 12px;
+    border-radius:var(--r);margin-bottom:8px;border:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  #proj-list .lrow:last-child,#tend-list .lrow:last-child{margin-bottom:0}
+  #proj-list .lrow .ri,#tend-list .lrow .ri{align-self:flex-start;font-size:24px;width:auto}
+  #proj-list .lrow .rt,#tend-list .lrow .rt{
+    font-size:15px;line-height:1.35;word-break:break-word;
+  }
+  #proj-list .lrow .rs,#tend-list .lrow .rs{font-size:12px;line-height:1.5}
+  #proj-list .lrow .re{
+    margin-left:0;width:100%;flex-wrap:wrap;gap:8px;justify-content:flex-start;
+    padding-top:6px;border-top:1px solid rgba(0,0,0,.06);
+  }
+  #tend-list .lrow .re{
+    margin-left:0;width:100%;flex-direction:column;align-items:stretch;gap:8px;
+    padding-top:8px;border-top:1px solid rgba(0,0,0,.06);
+  }
+  #tend-list .lrow .re .badge{align-self:flex-start}
+  #proj-list .lrow .re .btn,#tend-list .lrow .re .btn{
+    min-height:42px;font-size:12px;
+  }
+  #proj-list .lrow .re .btn{
+    flex:1 1 calc(50% - 4px);min-width:min(140px,100%);
+  }
+  #tend-list .lrow .re .btn{width:100%;flex:0 0 auto}
+  /* Card container fără dublu chenar pe mobil */
+  #proj-list.card,#tend-list.card{border:none;background:transparent;box-shadow:none}
+  #proj-list.card .lrow:first-child,#tend-list.card .lrow:first-child{border-top-left-radius:var(--rm);border-top-right-radius:var(--rm)}
+  #proj-list.card .lrow:last-child,#tend-list.card .lrow:last-child{border-bottom-left-radius:var(--rm);border-bottom-right-radius:var(--rm)}
+  /* Licitații — coloană text */
+  #tend-list .lrow>div:nth-child(2){min-width:0}
+  #view-tend .card-accent-o .cc p{font-size:12px;line-height:1.55}
+}
+.wand-queue-item{border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;margin-bottom:8px;font-size:13px;background:var(--bg)}
+.wand-queue-item .wq-top{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+#wand-queue-list .wand-queue-block{border:1px solid var(--border);border-radius:var(--rm);padding:12px 14px;margin-bottom:12px;background:var(--card)}
+#wand-queue-list .wand-queue-block:last-of-type{margin-bottom:0}
+#wand-queue-list .wand-queue-block-avail{background:rgba(0,0,0,.025);margin-top:14px}
+#wand-queue-list .wand-queue-block > p:first-child{margin-top:0}
 </style>
 </head>
 <body>
@@ -484,6 +649,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 <div id="app" class="hid">
   <header id="hbar">
     <div class="hb-left">
+      <button type="button" id="mobile-nav-toggle" class="mobile-nav-toggle hid" onclick="toggleMobileMenuShell()" aria-label="Meniu" aria-expanded="false" title="Meniu"><svg class="mnav-svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 7h16v2H4V7zm0 6h16v2H4v-2zm0 6h16v2H4v-2z"/></svg></button>
       <span style="font-size:19px">🏛️</span>
       <span>SifonatorPRO</span>
     </div>
@@ -493,6 +659,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <span class="hb-fn" id="hb-fn">Primar · Teleorman</span>
     </div>
     <div class="hb-right">
+      <button type="button" id="hb-mobile-spag" class="btn btn-f btn-sm" onclick="toggleSpagafon()" title="Șpagafon — mesaje">📱</button>
       <div id="wand-chip" class="wand-active-chip hid">⚡ <span id="wand-chip-timer">00:00</span></div>
       <div class="rep-chip" onclick="navigate('just')" title="Puncte de reputație">
         <span style="color:var(--yellow)">⭐</span>
@@ -542,6 +709,9 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       </div>
       <div class="nav-i" onclick="navigate('howto')" data-v="howto">
         <span class="ni">📖</span><span>Ghid &amp; reguli</span>
+      </div>
+      <div class="nav-i" onclick="navigate('settings')" data-v="settings">
+        <span class="ni">⚙️</span><span>Setări utilizator</span>
       </div>
       <div class="sid-foot">
         SifonatorPRO v2.0<br>
@@ -630,16 +800,23 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 
         <!-- Active session display -->
         <div id="sess-active-card" class="session-active hid">
-          <div class="flex aic g12 mb8">
+            <div class="flex aic g12 mb8">
             <span style="font-size:20px">⚡</span>
             <div class="bold" style="font-size:15px">Sesiune activă</div>
-            <button class="btn btn-d btn-sm mla" onclick="stopSession()">■ Oprește Sesiunea</button>
+            <button type="button" class="btn btn-f btn-sm mla" onclick="toggleWandPause()" id="wand-pause-btn">⏸ Pauză</button>
+            <button type="button" class="btn btn-d btn-sm" onclick="stopSession()">■ Oprește</button>
           </div>
           <div class="session-timer" id="sess-timer-disp">00:00:00</div>
           <div style="font-size:12px;opacity:.6;margin-top:4px" id="sess-info-disp"></div>
           <div style="font-size:11px;opacity:.75;margin-top:8px;line-height:1.55" id="sess-quota-hints"></div>
           <div style="margin-top:10px;font-size:13px">
             Surplus acumulat: <strong id="sess-surplus-disp" style="color:var(--green)">0 RON</strong>
+          </div>
+          <div id="sess-exposure-wrap" class="tsm" style="margin-top:12px;line-height:1.5"></div>
+          <div style="margin-top:10px">
+            <div class="tsm tmut" style="margin-bottom:4px">Progres spre plafon surplus (teoretic max. din sesiune)</div>
+            <div class="wand-exposure-bar"><div id="sess-surplus-bar" class="wand-exposure-fill low" style="width:0%"></div></div>
+            <div id="sess-surplus-pct" class="tsm tmut" style="margin-top:4px"></div>
           </div>
         </div>
 
@@ -657,10 +834,11 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
                 <select id="w-proj" onchange="onWandProjectChange()" style="width:100%;padding:9px 11px;border-radius:var(--r);border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.08);color:#fff;font-family:var(--font);font-size:14px;outline:none"></select>
               </div>
               <div class="wig wsl">
-                <label>Factor de Optimizare: <strong id="wf-d">50</strong>%
-                  <span style="font-size:10px;opacity:.4">(recomandat: sub 70% pentru a evita auditul ANAF)</span>
+                <label>Factor de optimizare (reglabil): <strong id="wf-d">50</strong>%
+                  <span style="font-size:10px;opacity:.45">20–85% practic util; plafonul de surplus crește cu factorul.</span>
                 </label>
-                <input type="range" id="w-fac" min="0" max="95" value="50" disabled/>
+                <input type="range" id="w-fac" min="20" max="95" value="50" oninput="wFactor(this.value)"/>
+                <p id="w-fac-hint" class="tsm" style="margin-top:8px;opacity:.82;line-height:1.5;color:rgba(255,255,255,.88)"></p>
               </div>
             </div>
             <div class="wres" id="w-res">
@@ -669,21 +847,48 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
               <div class="wbr" id="w-brkd"></div>
             </div>
             <div class="wres show" id="w-ai-box" style="margin-top:-8px">
-              <div style="font-size:11px;opacity:.5;margin-bottom:6px">SIMULATOR AI CONTABIL</div>
-              <div id="w-ai-insight" class="tsm">Selectează un proiect pentru estimare automată.</div>
+              <div style="font-size:11px;opacity:.5;margin-bottom:6px">ESTIMARE DIN DATELE PROIECTULUI</div>
+              <div id="w-ai-insight" class="tsm">Selectează un proiect: valorile reale/declarate provin din modulul Proiecte; nu există apel extern la un serviciu AI.</div>
             </div>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-              <button class="btn btn-g" id="wand-start-btn" onclick="startSession()">✨ Pornește Sesiunea de Optimizare</button>
-              <span style="font-size:11px;opacity:.38">Fără abonament: 50 RON/oră</span>
-              <button class="btn btn-f btn-sm" id="wand-buy-hours-btn" style="color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.17);margin-left:auto" onclick="navigate('sub')">+ Cumpără ore</button>
+              <button type="button" class="btn btn-g" id="wand-start-btn" onclick="startSession()">✨ Pornește optimizarea</button>
+              <button type="button" class="btn btn-f" style="color:#fff;border-color:rgba(255,255,255,.25)" onclick="addToWandQueue()">📋 Programează în coadă</button>
+              <span style="font-size:11px;opacity:.38">Fără abonament: 50 RON/oră · max. 5 în coadă</span>
+              <button type="button" class="btn btn-f btn-sm" id="wand-buy-hours-btn" style="color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.17);margin-left:auto" title="Deschide pagina Abonament &amp; plăți — secțiunea „Cumpără Ore Bagheta Magică” (disponibil fără abonament activ)" onclick="navigate('sub')">+ Cumpără ore</button>
             </div>
           </div>
         </div>
 
+        <!-- Queue -->
+        <div class="card mb14" id="wand-queue-card">
+          <div class="ch"><h3>Coadă Bagheta (max. 5 sarcini)</h3><p>Proiecte active/planificate; același proiect nu poate fi dublat. Fără sesiune activă: ↑/↓ mută sarcinile <strong>în așteptare</strong> (ordinea determină următorul start automat).</p></div>
+          <div class="cc" id="wand-queue-list"></div>
+        </div>
+
         <!-- Sessions history -->
         <div class="card">
-          <div class="ch"><h3>Istoric Sesiuni</h3><p>Toate sesiunile de optimizare contabilă</p></div>
+          <div class="ch"><h3>Istoric sesiuni</h3><p>Click pe un rând pentru dosar (export .txt, copiere jurnal)</p></div>
           <div id="sessions-list" class="sessions-list"></div>
+        </div>
+      </div>
+
+      <!-- ── DOSAR BAGHETĂ (coadă) ── -->
+      <div id="view-wandjob" class="view">
+        <div class="vh">
+          <div><h2 id="wandjob-title">Dosar optimizare</h2><p id="wandjob-sub">—</p></div>
+          <div class="vh-actions"><button type="button" class="btn btn-f" onclick="navigate('wand')">← Înapoi la Baghetă</button></div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Stare &amp; control</h3></div>
+          <div class="cc" id="wandjob-status"></div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Jurnal contabil live</h3><p>Linii simulate în timp real cât timp sesiunea rulează (nu în pauză)</p></div>
+          <div class="cc" id="wandjob-toolbar"></div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3>Conținut jurnal</h3></div>
+          <div class="cc" id="wandjob-log" style="font-family:var(--mono);font-size:12px;line-height:1.55;max-height:360px;overflow-y:auto"></div>
         </div>
       </div>
 
@@ -775,6 +980,42 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
         </div>
       </div>
 
+      <!-- ── SETĂRI ── -->
+      <div id="view-settings" class="view">
+        <div class="vh">
+          <div><h2>Setări utilizator</h2><p>Control date locale, timp simulat și multiplicatori reputație</p></div>
+        </div>
+        <div class="card mb14" id="settings-persist-card">
+          <div class="ch"><h3>Persistență &amp; date</h3><p>Doar dacă folosești localStorage</p></div>
+          <div class="cc">
+            <p class="tsm tmut mb10" id="settings-persist-hint">—</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button type="button" class="btn btn-p" onclick="exportLocalStorageState()">⬇ Exportă date locale</button>
+              <button type="button" class="btn btn-d" onclick="deleteLocalStorageAndSignOut()">🗑 Șterge datele &amp; deconectare</button>
+            </div>
+          </div>
+        </div>
+        <div class="card mb14" id="settings-shift-card">
+          <div class="ch"><h3>Shift temporal (simulare)</h3><p>Avansează timpul virtual până la 29 zile înainte de reînnoirea abonamentului</p></div>
+          <div class="cc">
+            <p class="tsm tmut mb10" id="settings-shift-hint"></p>
+            <div class="fg"><label id="settings-shift-lbl">Zile de avansat: <strong id="settings-shift-disp">0</strong></label>
+              <input type="range" id="settings-shift-range" min="0" max="29" value="0" style="width:100%;accent-color:var(--blue)" oninput="onSettingsShiftInput()"/>
+            </div>
+            <button type="button" class="btn btn-p mt8" id="settings-shift-apply" onclick="applySettingsTimeShift()">Aplică shift temporal</button>
+          </div>
+        </div>
+        <div class="card" id="settings-rep-card">
+          <div class="ch"><h3>Multiplicator reputație — proiecte publice</h3><p>Până la 25% în plus la punctele din finalizări publice (conform abonamentului)</p></div>
+          <div class="cc">
+            <p class="tsm tmut mb10" id="settings-rep-hint"></p>
+            <div class="fg"><label id="settings-rep-lbl">Intensitate bonus: <strong id="settings-rep-disp">0%</strong> din plafonul abonamentului</label>
+              <input type="range" id="settings-rep-range" min="0" max="100" value="0" style="width:100%;accent-color:var(--gold)" oninput="onSettingsRepInput()"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ── ABONAMENT ── -->
       <div id="view-sub" class="view">
         <div class="vh">
@@ -805,19 +1046,25 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <div id="view-howto" class="view">
         <div class="vh">
           <div><h2>Ghid &amp; reguli</h2><p id="howto-meta" class="tsm tmut">—</p>
-            <p class="tsm tmut mt8" style="max-width:820px;line-height:1.65"><strong>SifonatorPRO</strong> este o simulare satirică în stadiu de beta unde nu toate mecanismele funcționează. Nicio plată nu este reală; mecanismele (licitații, DNA, SifonPay™) imită proceduri publice și bancare doar în scop narativ.</p>
+            <p class="tsm tmut mt8" style="max-width:820px;line-height:1.65"><strong>SifonatorPRO</strong> rulează integral în browser (un singur fișier HTML + CSS + JS). Este o simulare satirică cu reguli explicite în cod: fără server, fără plăți reale. Licitațiile, DNA/SifonPay™ și fluxurile financiare sunt <strong>modele deterministe</strong> pentru narativ, nu servicii externe.</p>
           </div>
         </div>
         <div class="card mb14">
           <div class="ch"><h3>Structura jocului</h3><p>Module principale și cum se leagă</p></div>
           <div class="cc">
             <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
-              <li><strong>Proiecte</strong> — buget declarat vs. valoare reală; calitate la finalizare; întârzieri; dosar lunar.</li>
-              <li><strong>Licitații</strong> — legate de un proiect; oferte simulate, scor, câștigător, risc de contestație legat de context.</li>
-              <li><strong>Bagheta Magică</strong> — consumă timp din abonament sau din ore cumpărate; o singură sesiune „profundă” per proiect.</li>
-              <li><strong>Presă &amp; reputație</strong> — imagine publică și puncte cheltuite pe acțiuni narative.</li>
-              <li><strong>Justiție / DNA</strong> — presiune din fonduri, licitații, presă; etape de risc.</li>
-              <li><strong>Abonament &amp; plăți</strong> — planuri lunare sau ore pentru Baghetă; checkout fictiv (card sau „bani publici”).</li>
+              <li><strong>Tablou de bord</strong> — indicatori agregați, jurnal scurt de activități, stare abonament.</li>
+              <li><strong>Proiecte</strong> — buget, valori reale/declarate, status, pariuri pe calitate, finalizare cu puncte reputație.</li>
+              <li><strong>Licitații</strong> — proceduri pe etape, oferte simulate, evaluare, adjudecare, contestații.</li>
+              <li><strong>Bagheta Magică</strong> — sesiuni de „optimizare” pe timp cotă, surplus redistribuit, coadă, dosar jurnal.</li>
+              <li><strong>Centru operațional</strong> — indicatori tactici legați de proiecte și sesiunea Bagheta.</li>
+              <li><strong>Justiție / DNA</strong> — etape (curat, monitorizare, anchetă etc.), manipulare pe cost reputație (unde planul permite).</li>
+              <li><strong>Presă</strong> — scor ton, canale, istoric intervenții.</li>
+              <li><strong>Audit</strong> — buget public, surplus redistribuit, cheltuieli influență, cost reputațional, jurnal activități.</li>
+              <li><strong>Abonament &amp; plăți</strong> — planuri, ore Bagheta (fără abonament activ), checkout simulat.</li>
+              <li><strong>Setări</strong> — persistență, export JSON, shift temporal, multiplicator reputație proiecte publice, dificultate, persona.</li>
+              <li><strong>Șpagafon</strong> — SMS fictive (ex. 3DS), badge ne-citite.</li>
+              <li><strong>Ghid</strong> — acest ecran; conținutul reflectă comportamentul clientului.</li>
             </ul>
           </div>
         </div>
@@ -829,14 +1076,20 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Bagheta Magică</h3><p>Timp, surplus, o sesiune per proiect</p></div>
+          <div class="ch"><h3>Bagheta Magică — reguli implementate</h3><p>Timp, factor, surplus, coadă, jurnal, risc narativ</p></div>
           <div class="cc">
-            <ul style="font-size:13px;line-height:1.65;color:var(--text2);padding-left:18px">
-              <li>Timpul vine din <strong>ore cumpărate</strong> sau din <strong>cota lunară</strong> a abonamentului (nelimitat doar pe planul Enterprise).</li>
-              <li>În sesiune, cota <strong>scade în timp real</strong>; la zero, sesiunea se oprește singură.</li>
-              <li>Fiecare proiect: <strong>o singură</strong> optimizare profundă (Bagheta deja folosită).</li>
-              <li>Surplusul crește până la plafonul teoretic; la plafon, sesiunea se încheie automat.</li>
-              <li>Dificultatea modifică viteza de acumulare a surplusului (Bagheta).</li>
+            <ul style="font-size:13px;line-height:1.68;color:var(--text2);padding-left:18px">
+              <li><strong>Eligibilitate:</strong> proiecte planificate sau în lucru (exceptând proiectele marcate ascuns din coadă, ex. demo). Este nevoie de cel puțin o licitație asociată în etapă eligibilă (clarificări, depuneri, evaluare, adjudecată, execuție, contestată).</li>
+              <li><strong>Timp:</strong> fără abonament activ se consumă <code>purchSec</code> / <code>purchSecUsed</code>; cu abonament, secunde lunare din plan (Enterprise: cotă nelimitată simulată ca <code>Infinity</code>). Timpul scade pe durata sesiunii; <strong>pauza</strong> oprește consumul și incrementarea surplusului.</li>
+              <li><strong>Valorile reale/declarate</strong> afișate în formular sunt citite din proiect (nu există apel la un API „AI” extern).</li>
+              <li><strong>Factor de optimizare (slider 20–95%):</strong> setează ce parte din diferența (declarat − real) poate deveni <strong>surplus redistribuibil</strong> în sesiune. <strong>Plafon surplus = (declarat − real) × factor</strong> (rotunjit la întregi în simulare). Creșterea efectivă în timp este <strong>asimptotică</strong> (viteza scade cu timpul și depinde de dificultate prin <code>wandRate</code>).</li>
+              <li><strong>Vizibilitate simulată:</strong> un scor procentual (în UI) combină factorul cu etapa justiției și dificultatea; nu înlocuiește un audit real.</li>
+              <li><strong>Factor ≥ 70%:</strong> după pornirea sesiunii poate declanșa o alertă narativă (banner + eventuală escaladare DNA dacă sumele sifonate și etapa „curat” permit — vezi <code>triggerDNA</code>).</li>
+              <li><strong>Coadă:</strong> maxim 5 intrări nefinalizate (pending/running); fără sesiune activă poți muta sarcinile <strong>pending</strong> cu ↑/↓. Următoarea sarcină pornește automat când nu există sesiune activă.</li>
+              <li><strong>Sesiune activă:</strong> formularul principal este ascuns; programările suplimentare se fac din lista „Proiecte disponibile pentru coadă”.</li>
+              <li><strong>Jurnal:</strong> linii la deschiderea dosarului + la fiecare ~5 secunde de simulare (când nu e pauză). Export .txt și copiere din dosar; filtru opțional pentru linii cu mișcări în RON.</li>
+              <li><strong>Istoric sesiuni:</strong> click pe rând → dialog cu export/copiere.</li>
+              <li><strong>Oprire:</strong> surplusul se adaugă la totalul sifonat, la surplusul contabil din ledger, scade bugetul public; proiectul este marcat <code>wandUsed</code>.</li>
             </ul>
           </div>
         </div>
@@ -852,13 +1105,14 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
           <div class="ch"><h3>Reputație &amp; dificultate</h3></div>
           <div class="cc">
             <p class="tsm" style="line-height:1.65">Dificultatea (Ușor / Normal / Greu) influențează presiunea DNA, costurile la presă, surplusul Baghetei, licitațiile, plafonul de puncte și costurile de „manipulare” judiciară. Reputația se câștigă la finalizare proiect / pariuri; se cheltuie la presă și în anumite acțiuni.</p>
-            <p class="tsm tmut mt8">Discount la prețul afișat al abonamentelor/orilor: <strong>0,1%</strong> per punct reputație, maximum <strong>25%</strong>.</p>
+            <p class="tsm tmut mt8">Discount la prețul afișat al abonamentelor/orilor: <strong>0,1%</strong> per punct reputație, maximum <strong>25%</strong>. În Setări, multiplicatorul pentru <strong>proiecte publice</strong> (reputație la finalizare) este limitat de plan și de sliderul utilizatorului.</p>
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Persistență &amp; sesiune</h3></div>
+          <div class="ch"><h3>Persistență &amp; date salvate</h3></div>
           <div class="cc">
-            <p class="tsm" style="line-height:1.65">La login poți alege <strong>localStorage</strong> pentru a continua progresul între reîncărcări. O sesiune Bagheta activă poate fi restaurată; timpul este simulat conform regulilor din ghid.</p>
+            <p class="tsm" style="line-height:1.65">Cu <strong>localStorage</strong> activ, starea este salvată în cheia <code>sifonator_state_v3</code> (setări, utilizator, reputație, proiecte, licitații, ledger, justiție, presă, abonament, timp cumpărat, <strong>sesiune Bagheta activă</strong>, coadă Bagheta, istoric sesiuni, etc.). Fără localStorage, totul rămâne în memorie până la reîncărcare.</p>
+            <p class="tsm tmut mt8">Exportul JSON din Setări descarcă exact obiectul persistat (când localStorage este activ).</p>
           </div>
         </div>
         <div class="card">
@@ -870,6 +1124,13 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       </div>
 
     </main>
+  </div>
+
+  <div id="funds-lock-banner" aria-live="polite">
+    <div style="font-size:36px;margin-bottom:8px">🏦</div>
+    <div class="bold" style="margin-bottom:6px">Buget public epuizat</div>
+    <p class="tsm tmut" style="line-height:1.55;margin-bottom:14px">Nu mai poți opera până identifici noi surse de fonduri de sifonat.</p>
+    <button type="button" class="btn btn-p btn-full" onclick="searchMorePublicFunds()">🔍 Caută surse noi de fonduri publice</button>
   </div>
 
   <!-- DEBUG BAR -->
@@ -981,6 +1242,10 @@ const S={
   pressTone:50,
   pressHistory:[],
   timeShiftSec:0,
+  userControls:{repPublicSlider:0},
+  wandQueue:[],
+  wandJobDetailId:null,
+  _wandLogMoneyFilter:false,
   projFilter:'all',
   projects:[],
   tenders:[],
@@ -1023,23 +1288,34 @@ const TENDER_CONTRACTORS=[
   {name:'SC Auditabil Teoretic SRL',tech:69,compliance:83,price:1.05,network:0.25},
 ];
 const CARD_BANK_RULES=[
-  {prefixes:['451900','451901'],bank:'Banca Poporului Unită SA',chance:0.58},
-  {prefixes:['527410','527411'],bank:'Creditul Carpatin IFN',chance:0.52},
-  {prefixes:['601188','601189'],bank:'Dunărea Digital Bank',chance:0.64},
-  {prefixes:['379421','379422'],bank:'Imperial Trust România',chance:0.71},
+  {prefixes:['451900','451901'],bank:'Banca Poporului Unită SA',chance:0.58,tdsMode:'sms_code',tdsMinutes:10},
+  {prefixes:['527410','527411'],bank:'Creditul Carpatin IFN',chance:0.52,tdsMode:'sms_code',tdsMinutes:10},
+  {prefixes:['601188','601189'],bank:'Dunărea Digital Bank',chance:0.64,tdsMode:'push_timer',tdsMinutes:10},
+  {prefixes:['379421','379422'],bank:'Imperial Trust România',chance:0.71,tdsMode:'otp_email',tdsMinutes:10},
+  {prefixes:['400012','400013'],bank:'Bancă Acvatică Digitală SA',chance:0.62,tdsMode:'bank_app',tdsMinutes:10},
 ];
 
 const PLANS=[
+  {id:'free', name:'Starter Gratuit', price:0, secMonth:0,
+   maxOngoing:2, maxPending:2, repMultCap:0,
+   feats:['Max. 2 proiecte în desfășurare','Max. 2 proiecte planificate','Fără protecție judiciară plătită','Fără shift temporal','Bagheta: doar ore cumpărate'],
+   protection:false, timeShift:false, feat:false},
   {id:'basic', name:'Corupt Basic',   price:99,   secMonth:7200,
-   feats:['5 proiecte active','Licitații standard','Suport 9-17'],feat:false},
+   maxOngoing:5, maxPending:5, repMultCap:0.05,
+   feats:['Max. 5 proiecte în lucru / 5 planificate','Licitații standard','Shift temporal (până la 29 zile)','Bonus rep. proiecte până la 5%'],
+   protection:true, timeShift:true, feat:false},
   {id:'pro',   name:'Oligarh Pro',    price:499,  secMonth:36000,
-   feats:['20 proiecte active','Licitații prioritare','Suport 24/7 discret'],feat:true},
+   maxOngoing:20, maxPending:20, repMultCap:0.15,
+   feats:['Max. 20 proiecte în lucru / 20 planificate','Licitații prioritare','Shift temporal','Bonus rep. proiecte până la 15%'],
+   protection:true, timeShift:true, feat:true},
   {id:'ent',   name:'Interlop Enterprise',price:1999,secMonth:-1,
-   feats:['Proiecte nelimitate','Protector DNA inclus','Avocat dedicat','Consilier imagine premium'],feat:false},
+   maxOngoing:Infinity, maxPending:Infinity, repMultCap:0.25,
+   feats:['Proiecte nelimitate','Protector DNA inclus','Shift temporal','Bonus rep. proiecte până la 25%','Bagheta nelimitată/lună'],
+   protection:true, timeShift:true, feat:false},
 ];
 
 const DEMO_PROJ=[
-  {id:1,name:'Reabilitare DJ-404 Not Found',budget:2300000,realValue:1420000,declaredValue:2680000,status:'in_progress',quality:null,bet:null,due:'2025-06-30',lateS:false,lateF:false},
+  {id:1,name:'Reabilitare DJ-404 Not Found',budget:2300000,realValue:1420000,declaredValue:2680000,status:'in_progress',quality:null,bet:null,due:'2025-06-30',lateS:false,lateF:false,hideFromWandQueue:true},
   {id:2,name:'Modernizare iluminat public Alibaba Edition',budget:850000,realValue:520000,declaredValue:1010000,status:'completed',quality:'mantuiala',bet:null,due:'2024-12-01',lateS:false,lateF:false},
   {id:3,name:'Sală de sport — Etapa 1: studiu de fezabilitate, fără execuție',budget:5200000,realValue:2980000,declaredValue:6400000,status:'planned',quality:null,bet:null,due:'2026-12-31',lateS:true,lateF:false},
   {id:4,name:'Copaci artificiali UV anti-vandalism rezistenți la întreținere',budget:1200000,realValue:760000,declaredValue:1490000,status:'in_progress',quality:null,bet:null,due:'2025-03-31',lateS:false,lateF:true},
@@ -1083,11 +1359,12 @@ function nowDate(){return new Date(nowTs())}
 function saveState(){
   if(S.settings.persistence!=='local_storage')return;
   try{
-    const activeSer=S.activeSession?{...S.activeSession,quotaSecAtStart:S.activeSession.quotaSecAtStart===Infinity?-1:S.activeSession.quotaSecAtStart}:null;
+    const activeSer=S.activeSession?{...S.activeSession,quotaSecAtStart:S.activeSession.quotaSecAtStart===Infinity?-1:S.activeSession.quotaSecAtStart,pausedMsTotal:S.activeSession.pausedMsTotal||0,_pauseAt:S.activeSession._pauseAt||0}:null;
     localStorage.setItem('sifonator_state_v3',JSON.stringify({
       settings:S.settings,user:S.user,rep:S.rep,repH:S.repH,siphoned:S.siphoned,justice:S.justice,smsInbox:S.smsInbox,spagafonLastSeen:S.spagafonLastSeen,sub:S.sub,
       purchSec:S.purchSec,purchSecUsed:S.purchSecUsed,sessions:S.sessions,activeSession:activeSer,judiciaryRisk:S.judiciaryRisk,
-      pressTone:S.pressTone,pressHistory:S.pressHistory,timeShiftSec:S.timeShiftSec,projects:S.projects,tenders:S.tenders,
+      pressTone:S.pressTone,pressHistory:S.pressHistory,timeShiftSec:S.timeShiftSec,userControls:S.userControls,wandQueue:S.wandQueue,
+      projects:S.projects,tenders:S.tenders,
       actLog:S.actLog,npid:S.npid,ntid:S.ntid,ledger:S.ledger,actors:S.actors,worldMemory:S.worldMemory,simClock:S.simClock
     }));
   }catch(e){}
@@ -1103,9 +1380,56 @@ function loadState(){
     if(!Array.isArray(S.smsInbox))S.smsInbox=[];
     if(typeof S.spagafonLastSeen!=='number')S.spagafonLastSeen=0;
     S.pending3DS=null;
+    if(!S.userControls||typeof S.userControls!=='object')S.userControls={repPublicSlider:0};
+    if(!Array.isArray(S.wandQueue))S.wandQueue=[];
+    if(typeof S._wandLogMoneyFilter!=='boolean')S._wandLogMoneyFilter=false;
+    migrateSubState();
     fixLoadedActiveSession();
     return true;
   }catch(e){return false}
+}
+function hasPaidSubscription(){
+  return!!(S.sub&&S.sub.tier&&S.sub.tier!=='free');
+}
+function migrateSubState(){
+  if(S.sub&&S.sub.tier==='free')S.sub=null;
+}
+function getPlanByTier(tid){return PLANS.find(p=>p.id===tid)||PLANS[0]}
+function getSubscriptionCaps(){
+  const pl=getPlanByTier(S.sub?.tier||'free');
+  return{ongoing:pl.maxOngoing,pending:pl.maxPending}
+}
+function countProjSlots(){
+  return{
+    ongoing:S.projects.filter(p=>p.status==='in_progress').length,
+    pending:S.projects.filter(p=>p.status==='planned').length,
+  }
+}
+function tierAllowsTimeShift(){return!!getPlanByTier(S.sub?.tier||'free').timeShift}
+function tierAllowsJudicialProtection(){return!!getPlanByTier(S.sub?.tier||'free').protection}
+function repPublicMultCap(){return getPlanByTier(S.sub?.tier||'free').repMultCap||0}
+function effectivePublicRepMultiplier(){
+  const cap=repPublicMultCap();
+  const slide=(S.userControls?.repPublicSlider??0)/100;
+  return 1+cap*slide;
+}
+function maxTimeShiftDaysRemaining(){
+  if(!S.sub?.exp)return 29;
+  const daysToRenew=Math.ceil((new Date(S.sub.exp).getTime()-nowTs())/86400000);
+  return clamp(Math.min(29,Math.max(0,daysToRenew-1)),0,29);
+}
+/** mode: 'purchase' = fără abonament plătit (cumpără); 'upgrade' = ai deja plan plătit (treci la nivel superior). Dacă lipsește, se deduce din hasPaidSubscription(). */
+function openLimitDlg(title,body,mode){
+  const m=mode||(hasPaidSubscription()?'upgrade':'purchase');
+  const isPurchase=m==='purchase';
+  const sub=isPurchase
+    ?`<p class="tsm mt8" style="line-height:1.65">Ești pe <strong>limitele gratuite</strong>. Poți <strong>cumpăra un abonament</strong> (plan plătit) pentru a mări plafonul, a obține timp Baghetă inclus, protecție judiciară, shift temporal etc.</p>`
+    :`<p class="tsm mt8" style="line-height:1.65">Ai atins limita <strong>planului tău plătit curent</strong>. Poți <strong>face upgrade</strong> la un nivel superior pentru plafon mai mare și beneficii suplimentare.</p>`;
+  dlgOpen(title||(isPurchase?'Limită plan gratuit':'Limită plan curent'),'',
+    `<p class="tsm tmut" style="line-height:1.65">${body||'Această acțiune depășește limita permisă.'}</p>${sub}`,
+    `<button type="button" class="btn btn-f" onclick="dlgClose()">Închide</button>
+     <button type="button" class="btn btn-p" onclick="dlgClose();navigate('sub')">${isPurchase?'💳 Cumpără abonament':'⬆ Upgrade plan'}</button>`
+  );
 }
 function addLedger(kind,amount,reason){
   if(!S.ledger[kind]&&S.ledger[kind]!==0)return;
@@ -1123,7 +1447,7 @@ function initActors(){
   ];
 }
 function checkSubLifecycle(){
-  if(!S.sub)return;
+  if(!hasPaidSubscription())return;
   const now=nowTs();
   const pl=PLANS.find(p=>p.id===S.sub.tier);
   if(!pl){S.sub=null;return}
@@ -1194,6 +1518,9 @@ function normalizeProjectAccounting(){
 function fixLoadedActiveSession(){
   if(!S.activeSession)return;
   if(S.activeSession.quotaSecAtStart===-1||S.activeSession.quotaSecAtStart===null)S.activeSession.quotaSecAtStart=Infinity;
+  if(typeof S.activeSession.pausedMsTotal!=='number')S.activeSession.pausedMsTotal=0;
+  if(typeof S.activeSession._pauseAt!=='number')S.activeSession._pauseAt=0;
+  if(!S.activeSession.logLines)S.activeSession.logLines=[];
   if(!S.projects.some(p=>p.id===S.activeSession.projectId)){
     S.activeSession=null;
   }
@@ -1299,14 +1626,17 @@ function evaluateTenderNow(t){
 }
 function wandQuotaBase(){
   checkSubLifecycle();
-  if(S.sub){if(S.sub.secTotal<0)return Infinity;return Math.max(0,S.sub.secTotal-S.sub.secUsed)}
+  if(hasPaidSubscription()){
+    if(S.sub.secTotal<0)return Infinity;
+    return Math.max(0,S.sub.secTotal-S.sub.secUsed);
+  }
   return Math.max(0,S.purchSec-S.purchSecUsed);
 }
 function wandAvailSec(){
   const base=wandQuotaBase();
   if(!S.activeSession)return base===Infinity?Infinity:base;
   if(base===Infinity)return Infinity;
-  const elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
+  const elapsed=Math.max(0,Math.floor((nowTs()-S.activeSession.startReal)/1000)-wandPauseOffsetSec());
   const q0=S.activeSession.quotaSecAtStart;
   const startAvail=(q0===Infinity||q0===-1)?base:Math.min(base,q0);
   return Math.max(0,startAvail-elapsed);
@@ -1331,8 +1661,9 @@ function doLogin(){
   if(S.settings.persistence==='local_storage'&&loadState()){
     $('login-screen')?.classList.add('hid');
     $('app')?.classList.remove('hid');
+    migrateSubState();
     ensureWandTimer();
-    applyProfile();renderAll();updSpagafonBadge();toast('Sesiune restaurată din localStorage','ok');schedDNA();return;
+    applyProfile();renderAll();updSpagafonBadge();toast('Autentificat automat din localStorage','ok');schedDNA();return;
   }
   const name=$('l-name')?.value?.trim();
   if(!name){toast('Introdu numele tău','err');return}
@@ -1356,6 +1687,7 @@ function doLogin(){
   }
   initActors();
   recalcJudiciaryPressure();
+  migrateSubState();
   $('login-screen')?.classList.add('hid');
   $('app')?.classList.remove('hid');
   applyProfile();
@@ -1372,10 +1704,40 @@ function applyProfile(){
   $('hb-fn') && ($('hb-fn').textContent=`${S.user.fn} · ${S.user.jud}`);
   $('dash-greet') && ($('dash-greet').textContent=`Bună ziua, ${S.user.name}! Ce sifonăm azi?`);
 }
-function renderAll(){normalizeProjectAccounting();normalizeTenderData();checkSubLifecycle();renderDash();renderProj();renderTend();renderJust();renderSub();renderAudit();renderPress();renderOps();renderHowto();updRep();updWandChip();updWandQuota();renderSessions();updWandProjectOptions();syncWandSessionUI();saveState();}
+function renderAll(){normalizeProjectAccounting();normalizeTenderData();checkSubLifecycle();updateFundsLockUI();renderDash();renderProj();renderTend();renderJust();renderSub();renderAudit();renderPress();renderOps();renderHowto();renderSettings();updRep();updWandChip();updWandQuota();renderSessions();renderWandQueue();updWandProjectOptions();syncWandSessionUI();renderWandJobView();saveState();syncMobileMenuToggleUi();}
 
 // ═══ NAV ═══
+function isMobileLayout(){
+  try{return window.matchMedia('(max-width:680px)').matches}catch(e){return false}
+}
+function syncMobileMenuToggleUi(){
+  const btn=$('mobile-nav-toggle'),lay=$('layout');
+  if(!btn)return;
+  const narrow=isMobileLayout();
+  btn.classList.toggle('hid',!narrow);
+  if(!narrow)return;
+  const menu=!!(lay&&lay.classList.contains('mobile-menu-mode'));
+  btn.setAttribute('aria-expanded',menu?'true':'false');
+  btn.setAttribute('aria-label',menu?'Înapoi la ecran':'Meniu principal');
+  btn.title=menu?'Înapoi la ecranul curent':'Deschide meniul principal';
+  const svgBurger='<svg class="mnav-svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 7h16v2H4V7zm0 6h16v2H4v-2zm0 6h16v2H4v-2z"/></svg>';
+  const svgBack='<svg class="mnav-svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 12l8-8v5h8v6h-8v5l-8-8z"/></svg>';
+  btn.innerHTML=menu?svgBack:svgBurger;
+}
+function toggleMobileMenuShell(){
+  const lay=$('layout');
+  if(!lay||!isMobileLayout())return;
+  lay.classList.toggle('mobile-menu-mode');
+  syncMobileMenuToggleUi();
+}
+function syncLayoutForViewport(){
+  const lay=$('layout');
+  if(!lay)return;
+  if(!isMobileLayout())lay.classList.remove('mobile-menu-mode');
+  syncMobileMenuToggleUi();
+}
 function navigate(v){
+  if(isMobileLayout())$('layout')?.classList.remove('mobile-menu-mode');
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));
   $(`view-${v}`)?.classList.add('active');
@@ -1386,8 +1748,11 @@ function navigate(v){
   if(v==='audit')renderAudit();
   if(v==='press')renderPress();
   if(v==='ops')renderOps();
-  if(v==='wand'){updWandQuota();renderSessions();syncWandSessionUI();}
+  if(v==='wand'){updWandQuota();renderSessions();renderWandQueue();syncWandSessionUI();}
   if(v==='howto')renderHowto();
+  if(v==='settings')renderSettings();
+  if(v==='wandjob')renderWandJobView();
+  syncMobileMenuToggleUi();
 }
 
 // ═══ TOAST ═══
@@ -1399,13 +1764,23 @@ function toast(msg,type=''){
 }
 
 // ═══ DIALOG ═══
-function dlgOpen(title,sub,content,actions){
+function dlgOpen(title,sub,content,actions,opts){
+  const o=opts||{};
   $('dlg-h').innerHTML=`<h3>${title}</h3>${sub?`<p>${sub}</p>`:''}`;
   $('dlg-c').innerHTML=content;
   $('dlg-a').innerHTML=actions;
+  $('overlay')?.classList.toggle('overlay-3ds',!!o.tdsPassthrough);
   $('overlay')?.classList.remove('hid');
 }
-function dlgClose(){$('overlay')?.classList.add('hid')}
+function spagafonPinFor3DS(on){
+  $('spagafon-root')?.classList.toggle('spgf-pinned-3ds',!!on);
+  if(on)toggleSpagafon(true);
+}
+function dlgClose(){
+  $('overlay')?.classList.remove('overlay-3ds');
+  $('overlay')?.classList.add('hid');
+  spagafonPinFor3DS(false);
+}
 
 // ═══ ȘPAGAFON ═══
 function spagafonUnreadCount(){
@@ -1563,8 +1938,8 @@ function buildSpagafonAppletHtml(id){
       ${desk('just')}`;
   }
   if(id==='sub'){
-    const pl=S.sub?PLANS.find(p=>p.id===S.sub.tier):null;
-    const line=pl?`${pl.name} · exp. ${(S.sub.exp||'').slice(0,10)}`:'Fără abonament activ';
+    const pl=hasPaidSubscription()?PLANS.find(p=>p.id===S.sub.tier):null;
+    const line=pl?`${pl.name} · exp. ${(S.sub.exp||'').slice(0,10)}`:'Fără abonament plătit (limite gratuite)';
     return`<div class="spgf-ap-title">SifonPay™ mobil</div>
       ${spgfApRow('Status',line)}
       ${spgfApRow('Discount rep',disc().toFixed(1)+'%')}
@@ -1637,19 +2012,35 @@ function updRep(){
     :'<p class="tmut tsm">Niciun eveniment înregistrat.</p>';
   updDebug();
 }
-function chgRep(delta,reason,raw){
-  let d=delta;
-  if(!raw){
-    if(d>0)d*=diffTune().repGain;
-    else if(d<0)d*=diffTune().repLoss;
+function chgRep(delta,reason,raw,opts){
+  let d=Number(delta);
+  const o=opts||{};
+  let multPublic=1;
+  let multDiff=1;
+  if(o.publicProject&&d>0){
+    multPublic=effectivePublicRepMultiplier();
+    d*=multPublic;
   }
-  d=Math.round(d*100)/100;
+  if(!raw){
+    if(d>0){multDiff=diffTune().repGain;d*=multDiff;}
+    else if(d<0){multDiff=diffTune().repLoss;d*=multDiff;}
+  }
+  d=Math.round(d);
   const mx=repMax();
   S.rep=Math.max(0,Math.min(mx,S.rep+d));
-  S.repH.unshift({t:reason,d:delta});
+  let histReason=reason;
+  let toastPts=`${d>0?'+'+d:d}`;
+  if(o.publicProject&&Number(delta)>0&&d>0){
+    const parts=[`Multiplicator reputație — proiecte publice: ×${multPublic.toFixed(2)}`];
+    if(!raw&&Math.abs(multDiff-1)>1e-6)parts.push(`dificultate ×${multDiff.toFixed(2)}`);
+    const detail=parts.join(' · ');
+    histReason=`${reason} (${detail})`;
+    toastPts+=` (${detail})`;
+  }
+  S.repH.unshift({t:histReason,d:d});
   if(S.repH.length>20)S.repH.pop();
   updRep();
-  toast(`${delta>0?'+'+delta:delta} puncte reputație: ${reason}`,delta>0?'ok':'err');
+  toast(`${toastPts} puncte reputație: ${reason}`,d>0?'ok':'err');
 }
 
 // ═══ DASHBOARD ═══
@@ -1661,7 +2052,7 @@ function renderHowto(){
     const rows=CARD_BANK_RULES.flatMap(r=>r.prefixes.map(p=>({p,bank:r.bank,chance:r.chance})));
     const tbody=rows.map(x=>`<tr><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono)"><code>${x.p}</code></td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">${x.bank}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">~${Math.round(x.chance*100)}%</td></tr>`).join('');
     bin.innerHTML=`
-      <p class="tsm mt8" style="line-height:1.65"><strong>Prefixul (BIN)</strong> sunt primele <strong>6 cifre</strong> ale numărului de card identifică în joc o <strong>bancă fictivă</strong>. Dacă introduci un număr care începe cu unul dintre prefixele de mai jos, există o <strong>probabilitate</strong> ca SifonPay™ să ceară un pas suplimentar <strong>3D Secure</strong> (cod SMS fictiv). Nu este obligatoriu la fiecare plată; alte prefixe trec direct după procesare.</p>
+      <p class="tsm mt8" style="line-height:1.65"><strong>Prefixul (BIN)</strong> — primele <strong>6 cifre</strong> identifică o <strong>bancă fictivă</strong>. Pentru anumite prefixe există o <strong>șansă</strong> ca SifonPay™ să deschidă <strong>3D Secure</strong>: o fereastră cu <strong>timer fix de 10 minute</strong> și mesaje pe <strong>Șpagafon</strong> (telefonul HUD se ridică deasupra dialogului). Nu există introducere de cod în fereastra de plată; confirmarea este un singur pas după ce ai „parcurs” pașii narativi. Alte prefixe pot trece direct.</p>
       <div style="overflow-x:auto;margin-top:10px">
         <table style="width:100%;font-size:12px;border-collapse:collapse">
           <thead><tr><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Prefix (6 cifre)</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Bancă fictivă</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Șansă 3DS*</th></tr></thead>
@@ -1688,7 +2079,7 @@ function renderDash(){
   ).join('')||'<p class="tmut tsm">Nicio activitate.</p>';
   const sc=$('sub-status-dash');
   if(sc){
-    if(S.sub){
+    if(hasPaidSubscription()){
       const pl=PLANS.find(p=>p.id===S.sub.tier);
       const usedH=(S.sub.secUsed/3600).toFixed(1);
       const totalH=S.sub.secTotal<0?'∞':(S.sub.secTotal/3600).toFixed(0);
@@ -1696,7 +2087,7 @@ function renderDash(){
         <div class="tsm tmut mt8">Timp utilizat: ${usedH}h / ${totalH}h luna aceasta</div>
         <div class="tsm tmut">Expiră: ${new Date(S.sub.exp).toLocaleDateString('ro-RO')}</div>`;
     }else{
-      sc.innerHTML=`<p class="tmut tsm">Nu ai un abonament activ.</p><button class="btn btn-p mt8" style="width:100%" onclick="navigate('sub')">Alege un plan</button>`;
+      sc.innerHTML=`<p class="tmut tsm">Fără abonament plătit — limitele <strong>Starter Gratuit</strong> (2/2 proiecte) se aplică implicit.</p><button class="btn btn-p mt8" style="width:100%" onclick="navigate('sub')">Upgrade la plan plătit</button>`;
     }
   }
 }
@@ -1710,16 +2101,16 @@ function updWandProjectOptions(prefId){
   const sel=$('w-proj');if(!sel)return;
   const previous=prefId!=null&&prefId!==undefined?String(prefId):sel.value;
   const opts=['<option value="">— Selectează proiect —</option>'].concat(
-    S.projects.map(p=>{
+    S.projects.filter(p=>!p.hideFromWandQueue).map(p=>{
       const used=projectWandAlreadyUsed(p.id);
       return`<option value="${p.id}"${used?' disabled':''}>${p.name}${used?' · ✓ Bagheta folosită':''} · ${sLabel(p.status)}</option>`;
     })
   );
   sel.innerHTML=opts.join('');
   let next='';
-  if(previous&&S.projects.some(p=>String(p.id)===previous)&&!projectWandAlreadyUsed(parseInt(previous,10)))next=previous;
+  if(previous&&S.projects.some(p=>String(p.id)===previous)&&!projectWandAlreadyUsed(parseInt(previous,10))&&!S.projects.find(p=>String(p.id)===previous)?.hideFromWandQueue)next=previous;
   else{
-    const first=S.projects.find(p=>!projectWandAlreadyUsed(p.id));
+    const first=S.projects.find(p=>!projectWandAlreadyUsed(p.id)&&!p.hideFromWandQueue);
     next=first?String(first.id):'';
   }
   sel.value=next;
@@ -1763,7 +2154,7 @@ function syncWandFromProject(){
   $('w-fac')&&($('w-fac').value=String(est.recFactor));
   $('wf-d')&&($('wf-d').textContent=String(est.recFactor));
   const ai=$('w-ai-insight');
-  if(ai)ai.textContent=`AI contabil: sincronizat din proiect „${p.name}” → real ${fRON(est.real)}, declarat ${fRON(est.declared)}, factor ${est.recFactor}%.`;
+  if(ai)ai.textContent=`Estimare din proiect „${p.name}": real ${fRON(est.real)}, declarat ${fRON(est.declared)}; factor implicit recomandat ${est.recFactor}% (modificabil înainte de start).`;
   wPreview();
 }
 function ensureProjectForWand(cb){
@@ -1782,6 +2173,11 @@ function createQuickProjForWand(){
   const budget=parseInt($('wand-ap-budget')?.value||'0',10);
   const due=$('wand-ap-due')?.value||new Date(nowTs()+1000*60*60*24*90).toISOString().slice(0,10);
   if(!name||!budget){toast('Completează datele proiectului','err');return}
+  const caps=getSubscriptionCaps(),cnt=countProjSlots();
+  if(cnt.ongoing>=caps.ongoing){
+    openLimitDlg('Limită proiecte active',`Nu poți crea încă un proiect în lucru: limita este ${caps.ongoing}.`);
+    return;
+  }
   const id=S.npid++;
   S.projects.push({id,name,budget,realValue:Math.round(budget*0.66),declaredValue:Math.round(budget*1.22),status:'in_progress',quality:null,bet:null,due,lateS:false,lateF:false});
   dlgClose();
@@ -1876,6 +2272,11 @@ function filterProj(f,el){
 }
 function startProj(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
+  const caps=getSubscriptionCaps(),cnt=countProjSlots();
+  if(cnt.ongoing>=caps.ongoing){
+    openLimitDlg('Limită proiecte active',`Nu poți începe alt proiect: limita este ${caps.ongoing} în desfășurare pentru planul curent.`);
+    return;
+  }
   p.status='in_progress';renderProj();addAct(`Proiect „${p.name}" a început.`);renderDash();
   toast(`Proiect început: ${p.name}`,'ok');
 }
@@ -1967,6 +2368,15 @@ function addProj(){
   const rv=parseInt($('np-rv')?.value||'0',10),dv=parseInt($('np-dv')?.value||'0',10);
   if(!n||!d||!rv||!dv){toast('Completează toate câmpurile','err');return}
   if(dv<rv){toast('Valoarea declarată nu poate fi mai mică decât valoarea reală','err');return}
+  const caps=getSubscriptionCaps(),cnt=countProjSlots();
+  if(s==='planned'&&cnt.pending>=caps.pending){
+    openLimitDlg('Limită proiecte planificate',`Abonamentul curent permite maximum ${caps.pending} proiecte în starea „planificat".`);
+    return;
+  }
+  if(s==='in_progress'&&cnt.ongoing>=caps.ongoing){
+    openLimitDlg('Limită proiecte în desfășurare',`Abonamentul curent permite maximum ${caps.ongoing} proiecte „în desfășurare".`);
+    return;
+  }
   const b=dv;
   S.projects.push({id:S.npid++,name:n,budget:b,realValue:rv,declaredValue:dv,status:s,quality:null,bet:null,due:d,lateS:false,lateF:false});
   dlgClose();renderProj();renderDash();updWandProjectOptions();addAct(`Proiect nou adăugat: „${n}" (${fRON(dv)} declarat / ${fRON(rv)} real).`);
@@ -1995,7 +2405,7 @@ function compProj(id){
   }
   p.status='completed';p.quality=q;p.bet=null;
   dlgClose();renderProj();
-  chgRep(bp+bonPts,`Proiect „${p.name}" finalizat (${qLabel(q)})`);
+  chgRep(bp+bonPts,`Proiect „${p.name}" finalizat (${qLabel(q)})`,false,{publicProject:true});
   addAct(`Proiect „${p.name}" finalizat.${betMsg}`);
   renderDash();
 }
@@ -2097,7 +2507,101 @@ function addTend(){
 }
 
 // ═══ WAND ═══
-function wFactor(v){$('wf-d')&&($('wf-d').textContent=v);wPreview()}
+/** Jurnal „Dosar & contabilitate” — pași contabili satirici (fără nume de surse reale). */
+function buildWandDossierOpenLines(name,rr,dd,f){
+  const nm=String(name||'Proiect');
+  const short=nm.length>58?nm.slice(0,58)+'…':nm;
+  return[
+    `DESCHIDERE DOSAR · „${short}" — poz. 4.02 / lucrări în curs; legătură simulată cu fluxul SEAP–contabilitate primară.`,
+    `Pas 01 — Reconciliere: declarat ${fRON(dd)} vs. „realitate tehnică” ${fRON(rr)}; diferența intră pe algoritmul de absorbție progresivă (fără PV la fiecare mișcare).`,
+    `Pas 02 — Coeficient ${(f*100).toFixed(0)}% aplicat pe diferență; aprobare tacită în modul satiric „merge și așa".`,
+    `Pas 03 — Mapare sursă: buget local + capitole tip studii / utilități / urgență — schema obișnuită a mutărilor fără nouă licitație la fiecare pas.`,
+    `Pas 04 — Caiet de sarcini: parametri retroactiv compatibili cu oferta câștigătoare (simulare); devizul rămâne „elastic".`,
+    `Pas 05 — Lanț subcontractare 2→3: marje agregate ascunse în capitole subevaluate și „prestări conexe".`,
+    `Pas 06 — Jurnal în loturi la ~5s: vizibilitate redusă pentru spectatori și pentru „auditul de formă".`,
+  ];
+}
+const WAND_DOSSIER_TICK=[
+  (inc,cum)=>`Înregistrare: „studii & expertize" +${fRON(Math.round(inc))} (cumul ${fRON(Math.round(cum))}) — livrabile tip PDF, factură pe etapă.`,
+  (inc,cum)=>`Rectificare buget / HCL suport: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — mutare între articole, același volum de „lucrare".`,
+  (inc,cum)=>`Lucrări suplimentare & diferențe cantitate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — deviz complementar aprobat pe flux intern.`,
+  (inc,cum)=>`Rezervă tehnică → execuție: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — fără relansare procedură în simulare.`,
+  (inc,cum)=>`Achiziție directă motivată (urgență / „unic furnizor”): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Antemăsurători reîncărcate pe capitole subevaluate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Coordonare proiect + dirigenție de șantier (ore în bloc): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Marjă pe lanț subcontractanți (TVA/profit la nivel final): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`„Soluții tehnice neprevăzute" post-factum: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — încadrare utilități.`,
+  (inc,cum)=>`Penalități negociate la zero contra acceptării suplimentului: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Avansuri raportate ca progres fizic: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — situație de șantier cosmetizată.`,
+  (inc,cum)=>`Consultanță „management proiect" (intangibil): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Dotări cu specificații copiate din catalogul câștigătorului: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Închidere parțială pe loturi pentru grăbire decontare: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Actualizare indici materiale & „scumpiri neprevăzute": +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Protocol adițional la contract (preț unitar majorat): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`„Organizare de șantier" și logistă inventată: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Delegare către firmă abonată la același ONG ca și consultantul: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — conflict de interese ignorat în simulare.`,
+  (inc,cum)=>`Factură pe „inventar patrimoniu" fără inventar fizic: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`„Verificare tehnică" facturată înainte de începerea lucrărilor: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Majorare onorariu proiectant fără schimbare de tema proiectului: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`„Asistență tehnică pe durata execuției" (tarif orar nelimitat simulat): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Transfer discret către capitol „cheltuieli neeligibile re-clasificate": +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+];
+function wandDossierOpen(name,rr,dd,f){
+  buildWandDossierOpenLines(name,rr,dd,f).forEach(wandPushLog);
+}
+function wandDossierTickLine(inc,cum){
+  return WAND_DOSSIER_TICK[Math.floor(Math.random()*WAND_DOSSIER_TICK.length)](inc,cum);
+}
+function wandDossierClose(reason,surplus,pname,elapsed){
+  wandPushLog(`Pas FINAL — închidere sesiune (${reason}): „redistribuit" ${fRON(surplus)} în ${fTimer(elapsed)}.`);
+  if(reason==='surplus')wandPushLog('Motiv: plafon absorbție atins — nu mai există diferență declarat–real de valorificat în simulare.');
+  else if(reason==='time')wandPushLog('Motiv: cotă timp epuizată — restul rămâne teoretic în „rezervă etapa a II-a".');
+  else if(reason==='orphan')wandPushLog('Motiv: proiect dispărut din evidență — linii de jurnal anulate retroactiv (simulare).');
+  else wandPushLog('Motiv: oprire manuală — notă de reconciliere pentru registrul public (fictiv).');
+  const pn=String(pname||'Proiect');
+  wandPushLog(`Închidere DOSAR · „${pn.length>52?pn.slice(0,52)+'…':pn}" — sumă propagată la surplus redistribuit / buget public (conform regulilor jocului).`);
+}
+function wFactor(v){$('wf-d')&&($('wf-d').textContent=v);wPreview();refreshWandFactorHint()}
+function wandMaxSurplusTheoretical(real,decl,factor){
+  const r=+real||0,dd=+decl||0,f=typeof factor==='number'?factor:parseFloat($('w-fac')?.value||50)/100;
+  if(r<=0||dd<=0||dd<r)return 0;
+  return Math.max(0,(dd-r)*f);
+}
+function wandExposurePercentFromFactor(f){
+  const fac=typeof f==='number'?f:parseFloat($('w-fac')?.value||50)/100;
+  const stage=S.justice?.stage||'clean';
+  let pct=Math.round(Math.min(95,Math.max(6,16+fac*78)));
+  if(stage==='ancheta')pct=Math.min(100,pct+14);
+  else if(stage&&stage!=='clean'&&stage!=='monitorizare')pct=Math.min(100,pct+10);
+  const diff=S.settings.difficulty||'normal';
+  if(diff==='hard')pct=Math.min(100,pct+6);
+  if(diff==='easy')pct=Math.max(5,pct-5);
+  return Math.min(100,Math.max(5,pct));
+}
+function refreshWandFactorHint(){
+  const el=$('w-fac-hint');if(!el)return;
+  const f=parseFloat($('w-fac')?.value||50)/100;
+  const exp=wandExposurePercentFromFactor(f);
+  el.innerHTML=`Factorul <strong>${(f*100).toFixed(0)}%</strong> înmulțește doar diferența (declarat − real): plafonul de surplus extras în sesiune este <strong>(declarat − real) × factor</strong>. În sesiune, surplusul crește treptat până la acest plafon (viteza depinde de timp și de dificultate). „Vizibilitate simulată” (control): <strong>${exp}%</strong> — crește cu factorul și cu severitatea etapei juridice; la <strong>≥70%</strong> factor, după start se poate declanșa o alertă narativă (ANAF/DNA).`;
+}
+function updateSessSurplusUI(){
+  if(!S.activeSession)return;
+  const as=S.activeSession;
+  const max=Math.max(0,Math.round((as.declCost-as.realCost)*as.factor));
+  const cur=Math.round(as.dynamicSurplus||0);
+  const pct=max>0?Math.min(100,Math.round((cur/max)*100)):0;
+  const exp=wandExposurePercentFromFactor(as.factor);
+  const fill=$('sess-surplus-bar');
+  if(fill){
+    fill.style.width=pct+'%';
+    fill.classList.remove('low','mid','high');
+    fill.classList.add(pct>=90?'high':pct>=50?'mid':'low');
+  }
+  const ptxt=$('sess-surplus-pct');
+  if(ptxt)ptxt.textContent=max>0?`${pct}% din plafon (${fRON(cur)} / ${fRON(max)})`:`Plafon 0 RON (verifică valori proiect)`;
+  const ex=$('sess-exposure-wrap');
+  if(ex)ex.innerHTML=`Vizibilitate simulată (control fiscal narativ): <strong>${exp}%</strong> · Factor sesiune <strong>${(as.factor*100).toFixed(0)}%</strong>${as.factor>=0.7?' · <span style="color:var(--orange)">Factor ridicat: risc de alertă ANAF/DNA post-start</span>':''}`;
+}
 function wPreview(){
   const r=parseFloat($('w-real')?.value)||0;
   const d=parseFloat($('w-decl')?.value)||0;
@@ -2107,12 +2611,14 @@ function wPreview(){
     $('w-surp')&&($('w-surp').textContent=fRON(surplus));
     $('w-brkd')&&($('w-brkd').innerHTML=[
       ['Valoare reală proiect',fRON(r)],['Valoare declarată/bugetată',fRON(d)],
-      ['Diferență brută',fRON(diff)],['Factor de optimizare',(f*100).toFixed(0)+'%'],
-      ['Surplus maxim teoretic',fRON(surplus)],['Surplus obținut efectiv',S.activeSession?fRON(S.activeSession.dynamicSurplus||0):fRON(0)],
-      ['Rezervă neauditabilă',fRON(Math.max(0,diff-surplus))],
+      ['Diferență brută (declarat − real)',fRON(diff)],['Factor ales',(f*100).toFixed(0)+'%'],
+      ['Plafon surplus (formulă)',fRON(surplus)],
+      ['Acumulat în sesiunea curentă',S.activeSession?fRON(Math.round(S.activeSession.dynamicSurplus||0)):'—'],
+      ['Rest până la plafon',S.activeSession?fRON(Math.max(0,Math.round(surplus-(S.activeSession.dynamicSurplus||0)))):'— (începe sesiunea)'],
     ].map(([k,v])=>`<div><span>${k}</span><span style="color:var(--yellow)">${v}</span></div>`).join(''));
     $('w-res')?.classList.add('show');
   }else{$('w-res')?.classList.remove('show')}
+  refreshWandFactorHint();
 }
 function ensureWandTimer(){
   if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
@@ -2120,13 +2626,23 @@ function ensureWandTimer(){
 }
 function updateSessQuotaHints(){
   const el=$('sess-quota-hints');if(!el||!S.activeSession)return;
-  const elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
+  const elapsed=Math.max(0,Math.floor((nowTs()-S.activeSession.startReal)/1000)-wandPauseOffsetSec());
   const left=wandAvailSec();
   const q0=S.activeSession.quotaSecAtStart;
   const capLabel=q0===Infinity||q0===-1?'nelimitat (abonament)':fSec(q0);
-  el.innerHTML=`Timp rămas din cota curentă: <strong>${fSec(left)}</strong> · Durată sesiune: <strong>${fTimer(elapsed)}</strong> · Cota la start: <strong>${capLabel}</strong>`;
+  const pz=S.activeSession.paused?' <strong>(PAUZĂ — timpul nu curge)</strong>':'';
+  el.innerHTML=`Timp rămas din cota curentă: <strong>${fSec(left)}</strong> · Durată sesiune: <strong>${fTimer(elapsed)}</strong> · Cota la start: <strong>${capLabel}</strong>${pz}`;
+  const pb=$('wand-pause-btn');if(pb)pb.textContent=S.activeSession.paused?'▶ Continuă':'⏸ Pauză';
+}
+function updWandFormControls(){
+  const btn=$('wand-start-btn');
+  if(btn){
+    btn.disabled=!!S.activeSession;
+    btn.title=S.activeSession?'Sesiune activă: poți doar „Programează în coadă” (sarcina nouă merge la coadă, ultima poziție).':'';
+  }
 }
 function syncWandSessionUI(){
+  updWandFormControls();
   if(!S.activeSession){
     $('wand-form-wrap')?.classList.remove('hid');
     $('sess-active-card')?.classList.add('hid');
@@ -2135,48 +2651,83 @@ function syncWandSessionUI(){
   $('wand-form-wrap')?.classList.add('hid');
   $('sess-active-card')?.classList.remove('hid');
   const as=S.activeSession;
-  const elapsed=Math.floor((nowTs()-as.startReal)/1000);
-  $('sess-timer-disp')&&($('sess-timer-disp').textContent=fTimer(elapsed));
+  const elapsed=Math.max(0,Math.floor((nowTs()-as.startReal)/1000)-wandPauseOffsetSec());
+  $('sess-timer-disp')&&($('sess-timer-disp').textContent=fTimer(elapsed)+(as.paused?' PAUZĂ':''));
   $('sess-surplus-disp')&&($('sess-surplus-disp').textContent=fRON(Math.round(as.dynamicSurplus||0)));
   $('sess-info-disp')&&($('sess-info-disp').textContent=`Proiect: ${as.projectName||'-'} · Valoare reală: ${fRON(as.realCost)} · Declarată: ${fRON(as.declCost)} · Factor: ${(as.factor*100).toFixed(0)}%`);
   updateSessQuotaHints();
+  updateSessSurplusUI();
+  const pb=$('wand-pause-btn');if(pb)pb.textContent=as.paused?'▶ Continuă':'⏸ Pauză';
+}
+function validateWandStart(projectId){
+  const linked=S.projects.find(p=>p.id===projectId);
+  if(!linked)return{err:'Proiect invalid pentru sesiune'};
+  if(linked.hideFromWandQueue)return{err:'Proiect indisponibil pentru Bagheta (exemplu demo).'};
+  const pr=getProjectProcurementSummary(linked.id);
+  if(!pr.count||!pr.items.some(x=>['evaluation','awarded','executie','contested','clarificari','depuneri'].includes(x.status))){
+    return{err:'Acest proiect nu are achiziții asociate. Publică o licitație.'};
+  }
+  const quotaSecAtStart=wandQuotaBase();
+  if(quotaSecAtStart<=0&&quotaSecAtStart!==Infinity){
+    return{err:'Nu ai timp disponibil pentru Bagheta Magică. Cumpără ore sau abonează-te.'};
+  }
+  if(projectWandAlreadyUsed(projectId)){
+    return{err:'Bagheta Magică a fost deja folosită pe acest proiect.'};
+  }
+  return{err:null};
 }
 function startSession(){
   ensureProjectForWand(()=>{
   if(S.activeSession){toast('O sesiune de optimizare este deja activă.','warn');return}
+  const queueJobFromRef=S._wandQueueJobRef;
+  S._wandQueueJobRef=null;
   const projectId=parseInt($('w-proj')?.value||'0',10);
   if(!projectId){toast('Selectează un proiect pentru sesiune','err');return}
   const linked=S.projects.find(p=>p.id===projectId);
   if(!linked){toast('Proiect invalid pentru sesiune','err');return}
-  const pr=getProjectProcurementSummary(linked.id);
-  if(!pr.count||!pr.items.some(x=>['evaluation','awarded','executie','contested','clarificari','depuneri'].includes(x.status))){
-    toast('Acest proiect nu are achiziții asociate. Creează o licitație pentru integrare completă.','warn');
-    navigate('tend');
-    return;
-  }
-  // Regula strictă: valorile vin exclusiv din sistemul de proiecte publice.
+  const v=validateWandStart(projectId);
+  if(v.err){toast(v.err,v.err.includes('licitație')||v.err.includes('indisponibil')?'warn':'err');if(v.err.includes('licitație'))navigate('tend');return}
   const est=getProjectAccountingValues(linked);
   $('w-real')&&($('w-real').value=String(est.real));
   $('w-decl')&&($('w-decl').value=String(est.declared));
-  $('w-fac')&&($('w-fac').value=String(est.recFactor));
-  $('wf-d')&&($('wf-d').textContent=String(est.recFactor));
   wPreview();
   const rr=parseFloat($('w-real')?.value)||0;
   const dd=parseFloat($('w-decl')?.value)||0;
-  if(!rr||!dd){toast('Simulatorul AI nu a putut estima valorile','err');return}
-  const f2=parseFloat($('w-fac')?.value||50)/100;
-  if(dd<rr){toast('Modelul AI a detectat inconsistență contabilă (declarat < real)','err');return}
+  if(!rr||!dd){toast('Valorile contabile nu sunt disponibile pentru acest proiect.','err');return}
+  const f2=Math.max(0.2,Math.min(0.95,parseFloat($('w-fac')?.value||50)/100));
+  if(dd<rr){toast('Inconsistență: valoarea declarată este mai mică decât cea reală.','err');return}
   const quotaSecAtStart=wandQuotaBase();
-  if(quotaSecAtStart<=0&&quotaSecAtStart!==Infinity){
-    toast('Nu ai timp disponibil pentru Bagheta Magică. Cumpără ore sau abonează-te.','err');
-    navigate('sub');return;
+  let qJob=queueJobFromRef;
+  let qLogs=[];
+  if(qJob){
+    qLogs=Array.isArray(qJob.logLines)?qJob.logLines.slice():[];
+    qJob.status='running';
+    qJob.factor=f2;
+    qJob.projectName=linked?.name||qJob.projectName;
+  }else{
+    const existing=S.wandQueue.find(x=>x.projectId===projectId&&(x.status==='pending'||x.status==='running'));
+    if(existing){
+      if(existing.status==='running'&&(!S.activeSession||S.activeSession.queueJobId!==existing.id)){
+        existing.status='pending';
+      }
+      if(existing.status==='pending'){
+        qJob=existing;
+        qJob.status='running';
+        qJob.factor=f2;
+        qJob.projectName=linked?.name||qJob.projectName;
+        qLogs=Array.isArray(qJob.logLines)?qJob.logLines.slice():[];
+      }else if(existing.status==='running'){
+        toast('Proiectul e deja marcat în execuție în coadă — reîncarcă pagina dacă e o eroare.','err');return;
+      }
+    }
+    if(!qJob){
+      if(wandNonDoneQueueCount()>=5){toast('Coadă plină (max. 5 sarcini). Elimină una din listă sau finalizează o sesiune.','warn');return;}
+      qJob={id:nowTs(),projectId,factor:f2,status:'running',logLines:[],projectName:linked?.name||'Proiect'};
+      S.wandQueue.push(qJob);
+    }
   }
-  const prior=projectWandAlreadyUsed(projectId);
-  if(prior){
-    toast('Bagheta Magică a fost deja folosită pe acest proiect. O singură optimizare „profundă” per proiect.','err');
-    return;
-  }
-  S.activeSession={id:nowTs(),startReal:nowTs(),realCost:rr,declCost:dd,factor:f2,projectId,projectName:linked?.name||'Proiect necunoscut',dynamicSurplus:0,lastTickAt:nowTs(),quotaSecAtStart:quotaSecAtStart===Infinity?Infinity:quotaSecAtStart};
+  S.activeSession={id:nowTs(),startReal:nowTs(),realCost:rr,declCost:dd,factor:f2,projectId,projectName:linked?.name||'Proiect necunoscut',dynamicSurplus:0,lastTickAt:nowTs(),quotaSecAtStart:quotaSecAtStart===Infinity?Infinity:quotaSecAtStart,paused:false,pausedMsTotal:0,_pauseAt:0,queueJobId:qJob?qJob.id:null,logLines:qLogs};
+  renderWandQueue();
   ensureWandTimer();
   updWandChip();
   $('wand-form-wrap')?.classList.add('hid');
@@ -2184,9 +2735,152 @@ function startSession(){
   $('sess-info-disp')&&($('sess-info-disp').textContent=`Proiect: ${linked?.name||'-'} · Valoare reală: ${fRON(rr)} · Declarată: ${fRON(dd)} · Factor: ${(f2*100).toFixed(0)}%`);
   $('sess-surplus-disp')&&($('sess-surplus-disp').textContent=fRON(0));
   updateSessQuotaHints();
+  updateSessSurplusUI();
+  wandDossierOpen(linked?.name||'Proiect',rr,dd,f2);
   toast('✨ Sesiune de optimizare pornită!','ok');
   if(f2>=0.7)setTimeout(()=>triggerDNA(),5000);
   });
+}
+function activeWandProjects(){
+  return S.projects.filter(p=>(p.status==='in_progress'||p.status==='planned')&&!p.hideFromWandQueue);
+}
+function wandNonDoneQueueCount(){
+  return S.wandQueue.filter(q=>q.status==='pending'||q.status==='running').length;
+}
+function dedupeWandQueueByProject(){
+  const seen=new Set();
+  S.wandQueue=S.wandQueue.slice().reverse().filter(q=>{
+    if(seen.has(q.projectId))return false;
+    seen.add(q.projectId);return true;
+  }).reverse();
+}
+function cleanupWandQueueState(){
+  S.wandQueue=S.wandQueue.filter(q=>q.status!=='done');
+  S.wandQueue=S.wandQueue.filter(q=>{
+    const p=S.projects.find(x=>x.id===q.projectId);
+    if(!p)return false;
+    if(p.hideFromWandQueue){
+      if(S.activeSession&&S.activeSession.queueJobId===q.id)return true;
+      return false;
+    }
+    if(p.status!=='in_progress'&&p.status!=='planned'){
+      if(S.activeSession&&S.activeSession.queueJobId===q.id)return true;
+      return false;
+    }
+    if(q.status==='running'&&(!S.activeSession||S.activeSession.queueJobId!==q.id))q.status='pending';
+    return true;
+  });
+  dedupeWandQueueByProject();
+}
+function moveWandQueueEntry(id,dir){
+  if(S.activeSession){toast('Reordonarea cozii este indisponibilă pe durata unei sesiuni Bagheta.','warn');return;}
+  const i=S.wandQueue.findIndex(x=>x.id===id);
+  if(i<0)return;
+  if(S.wandQueue[i].status!=='pending'){toast('Poți muta doar sarcinile în așteptare.','warn');return;}
+  let j=i+dir;
+  while(j>=0&&j<S.wandQueue.length&&S.wandQueue[j].status!=='pending')j+=dir;
+  if(j<0||j>=S.wandQueue.length){toast('Nu se poate muta în această direcție.','warn');return;}
+  const t=S.wandQueue[i];S.wandQueue[i]=S.wandQueue[j];S.wandQueue[j]=t;
+  renderWandQueue();saveState();toast('Ordinea cozii a fost actualizată','ok');
+}
+function removeWandQueueEntry(id){
+  const q=S.wandQueue.find(x=>x.id===id);
+  if(!q||q.status!=='pending'){toast('Poți elimina doar sarcinile în așteptare (nu pe cele în execuție).','warn');return;}
+  S.wandQueue=S.wandQueue.filter(x=>x.id!==id);
+  if(S.wandJobDetailId===id){
+    S.wandJobDetailId=null;
+    if($('view-wandjob')?.classList.contains('active'))navigate('wand');
+  }
+  renderWandQueue();saveState();toast('Eliminat din coadă','ok');
+  if(!S.activeSession)tryStartNextQueuedWand();
+}
+function wandQuickSchedule(projectId){
+  if(S.activeSession&&S.activeSession.projectId===projectId){toast('Există deja o sesiune activă pe acest proiect.','warn');return;}
+  if(S.wandQueue.some(q=>q.projectId===projectId&&(q.status==='pending'||q.status==='running'))){
+    toast('Proiectul este deja în coadă sau în execuție.','warn');return;
+  }
+  if(wandNonDoneQueueCount()>=5){toast('Coadă plină (max. 5 sarcini nefinalizate).','warn');return;}
+  const linked=S.projects.find(p=>p.id===projectId);
+  if(!linked){toast('Proiect invalid','err');return;}
+  const v=validateWandStart(projectId);
+  if(v.err){toast(v.err,v.err.includes('licitație')||v.err.includes('indisponibil')?'warn':'err');return;}
+  $('w-proj')&&($('w-proj').value=String(projectId));
+  onWandProjectChange();
+  const f2=Math.max(0.2,Math.min(0.95,parseFloat($('w-fac')?.value||50)/100));
+  S.wandQueue.push({id:nowTs(),projectId,factor:f2,status:'pending',logLines:[],projectName:linked.name||'Proiect'});
+  if(S.wandQueue.length>32)S.wandQueue=S.wandQueue.slice(-32);
+  renderWandQueue();saveState();toast('Adăugat în coadă','ok');
+  if(!S.activeSession)tryStartNextQueuedWand();
+}
+function addToWandQueue(){
+  if(S.activeSession){toast('Sesiune activă: programează alte proiecte din „Proiecte disponibile pentru coadă” (ultima poziție în coadă).','warn');return}
+  const projectId=parseInt($('w-proj')?.value||'0',10);
+  if(!projectId){toast('Selectează un proiect','err');return}
+  if(S.activeSession&&S.activeSession.projectId===projectId){toast('Sesiune activă deja pe acest proiect — nu îl poți adăuga din nou în coadă.','warn');return;}
+  if(S.wandQueue.some(q=>q.projectId===projectId&&(q.status==='pending'||q.status==='running'))){
+    toast('Acest proiect este deja în coadă sau marcat în execuție.','warn');return;
+  }
+  if(wandNonDoneQueueCount()>=5){toast('Coadă plină (max. 5 sarcini nefinalizate). Elimină una din listă.','warn');return;}
+  const linked=S.projects.find(p=>p.id===projectId);
+  const v=validateWandStart(projectId);
+  if(v.err){toast(v.err,v.err.includes('licitație')||v.err.includes('indisponibil')?'warn':'err');return}
+  const f2=Math.max(0.2,Math.min(0.95,parseFloat($('w-fac')?.value||50)/100));
+  S.wandQueue.push({id:nowTs(),projectId,factor:f2,status:'pending',logLines:[],projectName:linked?.name||'Proiect'});
+  if(S.wandQueue.length>32)S.wandQueue=S.wandQueue.slice(-32);
+  renderWandQueue();saveState();toast('Optimizare programată în coadă','ok');
+  if(!S.activeSession)tryStartNextQueuedWand();
+}
+function tryStartNextQueuedWand(depth){
+  const d=depth||0;
+  if(d>8)return;
+  if(S.activeSession)return;
+  const next=S.wandQueue.find(q=>q.status==='pending');
+  if(!next)return;
+  const v=validateWandStart(next.projectId);
+  if(v.err){
+    S.wandQueue=S.wandQueue.filter(x=>x.id!==next.id);
+    addAct(`Coadă Baghetă: eliminat proiect ${next.projectId} (${v.err})`);
+    renderWandQueue();saveState();
+    tryStartNextQueuedWand(d+1);return;
+  }
+  $('w-proj')&&($('w-proj').value=String(next.projectId));
+  onWandProjectChange();
+  const nf=Math.max(20,Math.min(95,Math.round(next.factor*100)));
+  $('w-fac')&&($('w-fac').value=String(nf));
+  $('wf-d')&&($('wf-d').textContent=String(nf));
+  wPreview();
+  S._wandQueueJobRef=next;
+  startSession();
+}
+function wandPauseOffsetSec(){
+  if(!S.activeSession)return 0;
+  let ms=S.activeSession.pausedMsTotal||0;
+  if(S.activeSession.paused&&S.activeSession._pauseAt)ms+=nowTs()-S.activeSession._pauseAt;
+  return Math.floor(ms/1000);
+}
+function toggleWandPause(){
+  if(!S.activeSession)return;
+  if(!S.activeSession.paused){
+    S.activeSession.paused=true;
+    S.activeSession._pauseAt=nowTs();
+  }else{
+    S.activeSession.paused=false;
+    if(S.activeSession._pauseAt)S.activeSession.pausedMsTotal=(S.activeSession.pausedMsTotal||0)+(nowTs()-S.activeSession._pauseAt);
+    S.activeSession._pauseAt=0;
+  }
+  toast(S.activeSession.paused?'Optimizare în pauză':'Optimizare reluată',S.activeSession.paused?'warn':'ok');
+  syncWandSessionUI();
+  if(S.wandJobDetailId&&S.activeSession&&(S.activeSession.queueJobId===S.wandJobDetailId||S.wandJobDetailId===S.activeSession.id))renderWandJobView();
+}
+function wandPushLog(line){
+  if(!S.activeSession)return;
+  if(!S.activeSession.logLines)S.activeSession.logLines=[];
+  const t=nowDate().toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  S.activeSession.logLines.push(`[${t}] ${line}`);
+  if(S.activeSession.logLines.length>120)S.activeSession.logLines.shift();
+  const qj=S.wandQueue.find(q=>q.id===S.activeSession.queueJobId);
+  if(qj){qj.logLines=S.activeSession.logLines.slice();}
+  if(S.wandJobDetailId&&(S.activeSession.queueJobId===S.wandJobDetailId||S.wandJobDetailId===S.activeSession.id))renderWandJobView();
 }
 function tickSession(){
   if(!S.activeSession)return;
@@ -2194,8 +2888,16 @@ function tickSession(){
     stopSession('orphan');
     return;
   }
-  const elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
-  const now=nowTs();
+  const now0=nowTs();
+  if(S.activeSession.paused){
+    S.activeSession.lastTickAt=now0;
+    const eff=Math.max(0,Math.floor((now0-S.activeSession.startReal)/1000)-wandPauseOffsetSec());
+    $('sess-timer-disp')&&($('sess-timer-disp').textContent=fTimer(eff)+' PAUZĂ');
+    updateSessSurplusUI();
+    return;
+  }
+  const elapsed=Math.max(0,Math.floor((now0-S.activeSession.startReal)/1000)-wandPauseOffsetSec());
+  const now=now0;
   const deltaSec=Math.max(1,Math.floor((now-(S.activeSession.lastTickAt||now))/1000));
   S.activeSession.lastTickAt=now;
   const maxSurplus=Math.max(0,(S.activeSession.declCost-S.activeSession.realCost)*S.activeSession.factor);
@@ -2203,24 +2905,38 @@ function tickSession(){
   const dynamicRate=Math.max(0.04,0.24-(elapsed/1800))*wr;
   const increment=Math.min(maxSurplus-S.activeSession.dynamicSurplus,maxSurplus*dynamicRate*deltaSec/60);
   S.activeSession.dynamicSurplus+=Math.max(0,increment);
+  if(!S.activeSession._logEvery)S.activeSession._logEvery=0;
+  S.activeSession._logEvery+=deltaSec;
+  if(S.activeSession._logEvery>=5){
+    S.activeSession._logEvery=0;
+    wandPushLog(wandDossierTickLine(increment,S.activeSession.dynamicSurplus));
+  }
   $('sess-timer-disp')&&($('sess-timer-disp').textContent=fTimer(elapsed));
   $('sess-surplus-disp')&&($('sess-surplus-disp').textContent=fRON(Math.round(S.activeSession.dynamicSurplus)));
   const mins=Math.floor(elapsed/60),secs=elapsed%60;
   $('wand-chip-timer')&&($('wand-chip-timer').textContent=`${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`);
   updateSessQuotaHints();
+  updateSessSurplusUI();
   const avail=wandAvailSec();
   if(avail<=0&&avail!==Infinity){stopSession('time');return}
   if(maxSurplus>0&&Math.round(S.activeSession.dynamicSurplus)>=Math.round(maxSurplus)){stopSession('surplus');return}
 }
 function stopSession(reason){
+  reason=reason||'manual';
   if(!S.activeSession)return;
+  if(S.activeSession.paused&&S.activeSession._pauseAt){
+    S.activeSession.pausedMsTotal=(S.activeSession.pausedMsTotal||0)+(nowTs()-S.activeSession._pauseAt);
+    S.activeSession._pauseAt=0;
+    S.activeSession.paused=false;
+  }
   clearInterval(S.sessTimer);S.sessTimer=null;
-  let elapsed=Math.floor((nowTs()-S.activeSession.startReal)/1000);
+  let elapsed=Math.max(0,Math.floor((nowTs()-S.activeSession.startReal)/1000)-wandPauseOffsetSec());
   const q0=S.activeSession.quotaSecAtStart;
   if(q0!==Infinity&&q0!==-1)elapsed=Math.min(elapsed,q0);
   const {realCost,declCost,factor,projectId,projectName}=S.activeSession;
   const surplus=Math.round(S.activeSession.dynamicSurplus||0);
-  if(S.sub){S.sub.secUsed+=elapsed}
+  wandDossierClose(reason,surplus,projectName,elapsed);
+  if(hasPaidSubscription()){S.sub.secUsed+=elapsed}
   else{S.purchSecUsed+=elapsed}
   S.siphoned+=surplus;
   S.ledger.redistributedSurplus+=surplus;
@@ -2230,8 +2946,15 @@ function stopSession(reason){
     if(!S.worldMemory.blacklistedFirms.includes(firm)&&Math.random()<0.4)S.worldMemory.blacklistedFirms.push(firm);
   }
   // Record session
-  const sess={id:S.activeSession.id,startReal:S.activeSession.startReal,elapsed,realCost,declCost,factor,surplus,projectId,projectName};
+  const sess={id:S.activeSession.id,startReal:S.activeSession.startReal,elapsed,realCost,declCost,factor,surplus,projectId,projectName,logLines:(S.activeSession.logLines||[]).slice()};
   S.sessions.unshift(sess);
+  const qid=S.activeSession.queueJobId;
+  const detailWas=qid&&S.wandJobDetailId===qid;
+  if(qid)S.wandQueue=S.wandQueue.filter(x=>x.id!==qid);
+  if(detailWas){
+    S.wandJobDetailId=null;
+    if($('view-wandjob')?.classList.contains('active'))navigate('wand');
+  }
   const lp=S.projects.find(x=>x.id===projectId);
   if(lp)lp.wandUsed=true;
   S.activeSession=null;
@@ -2248,6 +2971,7 @@ function stopSession(reason){
   else if(reason==='orphan')toast('Proiectul nu mai există — sesiune oprită.','warn');
   else toast(`✨ Sesiune finalizată! ${fRON(surplus)} „optimizați" în ${fTimer(elapsed)}.`,'ok');
   updDebug();
+  setTimeout(()=>{tryStartNextQueuedWand();renderWandQueue();saveState();},400);
 }
 function updWandChip(){
   const chip=$('wand-chip');if(!chip)return;
@@ -2258,7 +2982,7 @@ function updWandQuota(){
   const avail=wandAvailSec();
   $('wand-quota-chip')&&($('wand-quota-chip').textContent=`⏱ ${fSec(avail)} disponibile`);
   $('wq-disp')&&($('wq-disp').textContent=fSec(avail));
-  $('wand-buy-hours-btn')?.classList.toggle('hid',!!S.sub);
+  $('wand-buy-hours-btn')?.classList.toggle('hid',hasPaidSubscription());
   if(S.activeSession)updateSessQuotaHints();
   updDebug();
 }
@@ -2268,13 +2992,246 @@ function renderSessions(){
   el.innerHTML=S.sessions.map(s=>{
     const d=new Date(s.startReal);
     const ts=`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-    return`<div class="sess-item">
+    return`<div class="sess-item" role="button" tabindex="0" onclick="openSessionHistoryDetail(${s.id})" title="Deschide dosarul sesiunii">
       <span class="sess-time">${ts}</span>
-      <span>${s.projectName||'Fără proiect'} · Factor ${(s.factor*100).toFixed(0)}% · ${fRON(s.realCost)} → ${fRON(s.declCost)}</span>
+      <span>${escapeHtml(s.projectName||'Fără proiect')} · Factor ${(s.factor*100).toFixed(0)}% · ${fRON(s.realCost)} → ${fRON(s.declCost)}</span>
       <span class="sess-dur">${fTimer(s.elapsed)}</span>
       <span class="sess-surplus">${fRON(s.surplus)}</span>
     </div>`;
   }).join('');
+}
+function renderWandQueue(){
+  const el=$('wand-queue-list');if(!el)return;
+  cleanupWandQueueState();
+  updWandFormControls();
+  const qRows=S.wandQueue.filter(q=>q.status==='pending'||q.status==='running');
+  const act=activeWandProjects();
+  const parts=[];
+  parts.push('<div class="wand-queue-block"><p class="tsm bold mb8">Sarcini în coadă</p>');
+  if(qRows.length){
+    parts.push(qRows.map(q=>{
+      const p=S.projects.find(x=>x.id===q.projectId);
+      const name=escapeHtml(p?.name||q.projectName||'Proiect');
+      const st=q.status==='pending'?'În așteptare':'În execuție';
+      const fac=(q.factor*100).toFixed(0);
+      const dosarBtn=`<button type="button" class="btn btn-f btn-sm" onclick="openWandJobDetail(${q.id})">📑 Dosar &amp; contabilitate</button>`;
+      const remBtn=q.status==='pending'?`<button type="button" class="btn btn-d btn-sm" onclick="removeWandQueueEntry(${q.id})" title="Elimină din coadă">✕ Elimină</button>`:'';
+      const reorder=q.status==='pending'&&!S.activeSession?`<button type="button" class="btn btn-f btn-sm" onclick="moveWandQueueEntry(${q.id},-1)" title="Mai sus în coadă">↑</button><button type="button" class="btn btn-f btn-sm" onclick="moveWandQueueEntry(${q.id},1)" title="Mai jos în coadă">↓</button>`:'';
+      return`<div class="wand-queue-item">
+        <div class="wq-top"><div><strong>${name}</strong> · factor ${fac}% · <span class="badge bb">${st}</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">${dosarBtn}${reorder}${remBtn}</div></div></div>`;
+    }).join(''));
+  }else{
+    parts.push('<p class="tsm tmut mb0">Nicio sarcină în coadă. Adaugă din secțiunea de mai jos sau cu „Programează în coadă” din formular.</p>');
+  }
+  parts.push('</div>');
+  const avail=act.filter(p=>!qRows.some(q=>q.projectId===p.id));
+  if(avail.length){
+    parts.push('<div class="wand-queue-block wand-queue-block-avail"><p class="tsm bold mb8">Proiecte disponibile pentru coadă</p>');
+    parts.push(avail.map(p=>{
+      const used=projectWandAlreadyUsed(p.id);
+      const vErr=used?{err:null}:validateWandStart(p.id);
+      const canSchedule=!used&&!vErr.err&&!(S.activeSession&&S.activeSession.projectId===p.id)&&wandNonDoneQueueCount()<5;
+      const schBtn=canSchedule?`<button type="button" class="btn btn-s btn-sm" onclick="wandQuickSchedule(${p.id})">📋 Programează</button>`:'';
+      const hint=used?'<span class="tsm tmut">Bagheta Magică a fost deja folosită pe acest proiect.</span>':
+        vErr.err?`<span class="tsm tmut">${escapeHtml(vErr.err)}</span>`:'';
+      return`<div class="wand-queue-item" style="opacity:.95">
+        <div class="wq-top"><div><strong>${escapeHtml(p.name)}</strong> · ${sLabel(p.status)}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">${schBtn}</div></div>
+        ${hint?`<div class="mt6">${hint}</div>`:''}
+      </div>`;
+    }).join(''));
+    parts.push('</div>');
+  }else if(!qRows.length&&!act.length){
+    el.innerHTML='<p class="tsm tmut">Nu ai proiecte în desfășurare sau planificate eligibile pentru Bagheta. Creează un proiect nou.</p><div class="mt10"><button type="button" class="btn btn-p btn-sm" onclick="tryStartNextQueuedWand()" disabled>▶ Pornește următoarea din coadă</button></div>';
+    return;
+  }
+  parts.push(`<div class="mt10"><button type="button" class="btn btn-p btn-sm" onclick="tryStartNextQueuedWand()" ${S.activeSession?'disabled':''}>▶ Pornește următoarea din coadă</button></div>`);
+  el.innerHTML=parts.join('');
+  if(!S.activeSession)tryStartNextQueuedWand();
+}
+function wandJournalLineIsMoneyTick(line){
+  const s=String(line||'');
+  return s.includes('RON')&&(s.includes('cumul')||/\+\s*[0-9]/.test(s)||/[+＋][0-9]/.test(s));
+}
+function wandJournalFilterLines(lines){
+  if(!S._wandLogMoneyFilter)return lines.slice();
+  return lines.filter(wandJournalLineIsMoneyTick);
+}
+function toggleWandLogMoneyFilter(on){
+  S._wandLogMoneyFilter=!!on;
+  renderWandJobView();
+}
+function wandGetJobDetailRawLines(id){
+  if(S.activeSession&&S.activeSession.queueJobId===id)return(S.activeSession.logLines||[]).slice();
+  const q=S.wandQueue.find(x=>x.id===id);
+  return q&&(q.logLines||[]).slice();
+}
+function wandDownloadText(filename,text){
+  const blob=new Blob([text||''],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  toast('Fișier descărcat','ok');
+}
+function wandCopyPlain(text){
+  if(!text){toast('Nimic de copiat','warn');return;}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>toast('Copiat în clipboard','ok')).catch(()=>toast('Copierea a eșuat','err'));
+    return;
+  }
+  toast('Clipboard indisponibil în acest context','warn');
+}
+function wandExportJobJournal(){
+  const id=S.wandJobDetailId;if(!id)return;
+  const lines=wandGetJobDetailRawLines(id);
+  const q=S.wandQueue.find(x=>x.id===id);
+  const name=(q?.projectName||'dosar').replace(/[^\w\-ăâîșțĂÂÎȘȚa-zA-Z0-9]+/g,'_').slice(0,48);
+  wandDownloadText(`jurnal-bagheta-${name}-${id}.txt`,lines.join('\n'));
+}
+function wandCopyJobRaw(){
+  const id=S.wandJobDetailId;if(!id)return;
+  wandCopyPlain(wandGetJobDetailRawLines(id).join('\n'));
+}
+function wandCopyJobJournalFiltered(){
+  const id=S.wandJobDetailId;if(!id)return;
+  const lines=wandJournalFilterLines(wandGetJobDetailRawLines(id));
+  wandCopyPlain(lines.join('\n'));
+}
+function sessionLogText(sid){
+  const sess=S.sessions.find(x=>x.id===sid);
+  return sess&&(sess.logLines||[]).join('\n')||'';
+}
+function openSessionHistoryDetail(sid){
+  const sess=S.sessions.find(x=>x.id===sid);
+  if(!sess){toast('Sesiune indisponibilă','warn');return;}
+  const logs=sess.logLines&&sess.logLines.length?sess.logLines.map(l=>escapeHtml(l)).join('<br/>'):'<span class="tmut">Nicio linie de jurnal salvată pentru această sesiune.</span>';
+  const body=`<div class="tsm mb10">Proiect: <strong>${escapeHtml(sess.projectName||'—')}</strong> · Durată ${fTimer(sess.elapsed)} · Surplus ${fRON(sess.surplus)} · Factor ${(sess.factor*100).toFixed(0)}%</div>
+  <div style="font-family:var(--mono);font-size:12px;line-height:1.55;max-height:50vh;overflow:auto">${logs}</div>`;
+  dlgOpen('Dosar sesiune (istoric)',escapeHtml(sess.projectName||'Sesiune'),body,
+    `<button type="button" class="btn btn-f btn-sm" onclick="wandDownloadText('jurnal-sesiune-${sid}.txt',sessionLogText(${sid}))">Export .txt</button>
+     <button type="button" class="btn btn-f btn-sm" onclick="wandCopyPlain(sessionLogText(${sid}))">Copiază jurnal</button>
+     <button type="button" class="btn btn-p" onclick="dlgClose()">Închide</button>`);
+}
+function openWandJobDetail(id){
+  S.wandJobDetailId=id;navigate('wandjob');
+}
+function renderWandJobView(){
+  const id=S.wandJobDetailId;
+  const title=$('wandjob-title'),sub=$('wandjob-sub'),st=$('wandjob-status'),log=$('wandjob-log'),tb=$('wandjob-toolbar');
+  if(!title)return;
+  if(!id){
+    title.textContent='Dosar optimizare';
+    if(sub)sub.textContent='Deschide din coada Bagheta → „Dosar & contabilitate”.';
+    if(st)st.innerHTML='';
+    if(tb)tb.innerHTML='';
+    if(log)log.innerHTML='<span class="tmut">—</span>';
+    return;
+  }
+  const q=S.wandQueue.find(x=>x.id===id);
+  if(!q){
+    title.textContent='Dosar indisponibil';
+    if(sub)sub.textContent='Intrarea nu mai există în coadă.';
+    if(st)st.innerHTML='';
+    if(tb)tb.innerHTML='';
+    if(log)log.innerHTML='';
+    return;
+  }
+  const active=S.activeSession&&S.activeSession.queueJobId===id;
+  const raw=wandGetJobDetailRawLines(id);
+  const lines=wandJournalFilterLines(raw);
+  title.textContent=`Dosar: ${q.projectName}`;
+  sub.textContent=active?'Sesiune activă — contabilitate live (liniile cresc la ~5s când nu e pauză)':(q?`Stare: ${q.status}`:'—');
+  if(st)st.innerHTML=active
+    ?`<p class="mb8"><button type="button" class="btn btn-f btn-sm" onclick="toggleWandPause()">${S.activeSession.paused?'▶ Continuă':'⏸ Pauză'}</button> <button type="button" class="btn btn-d btn-sm" onclick="stopSession()">■ Oprește sesiunea</button></p>`
+    :'<p class="tsm tmut">Această intrare din coadă nu mai este activă sau nu are jurnal.</p>';
+  if(tb){
+    const hasAny=raw.length>0;
+    tb.innerHTML=hasAny?`<div class="flex" style="flex-wrap:wrap;gap:8px;align-items:center">
+      <label class="tsm" style="display:flex;gap:6px;align-items:center;cursor:pointer;user-select:none"><input type="checkbox" ${S._wandLogMoneyFilter?'checked':''} onchange="toggleWandLogMoneyFilter(this.checked)"/> Doar linii cu mișcări în RON (ascunde deschiderea dosarului)</label>
+      <button type="button" class="btn btn-f btn-sm" onclick="wandExportJobJournal()" title="Tot jurnalul brut (inclusiv deschidere)">Export .txt</button>
+      <button type="button" class="btn btn-f btn-sm" onclick="wandCopyJobRaw()" title="Tot jurnalul brut">Copiază tot</button>
+      <button type="button" class="btn btn-f btn-sm" onclick="wandCopyJobJournalFiltered()" title="Respectă filtrul RON">Copiază filtrat</button>
+    </div>`:'<span class="tsm tmut">Nu există încă linii de exportat.</span>';
+  }
+  if(log)log.innerHTML=lines&&lines.length?lines.map(l=>escapeHtml(l)).join('<br/>'):'<span class="tmut">Nicio linie (activează/dezactivează filtrul sau așteaptă înregistrări).</span>';
+  if(active)updateSessSurplusUI();
+}
+function renderSettings(){
+  const isLs=S.settings.persistence==='local_storage';
+  const ph=$('settings-persist-hint');if(ph)ph.textContent=isLs
+    ?'Sesiunea este salvată în localStorage. Poți exporta înainte de migrare sau șterge pentru deconectare completă.'
+    :'Nu folosești localStorage — exportul/ștergerea nu se aplică sesiunii în-memory.';
+  document.querySelectorAll('#settings-persist-card button').forEach(b=>{b.disabled=!isLs});
+  const canShift=tierAllowsTimeShift();
+  const sh=$('settings-shift-hint');if(sh)sh.textContent=canShift
+    ?`Maxim ${Math.min(29,maxTimeShiftDaysRemaining())} zile disponibile acum (până la ziua 29 din ciclu; ziua 30 = reînnoire abonament).`
+    :'Starter Gratuit: shift temporal indisponibil — treci la Basic sau superior.';
+  const sr=$('settings-shift-range');if(sr){sr.disabled=!canShift;sr.max=String(Math.min(29,Math.max(0,maxTimeShiftDaysRemaining())));}
+  $('settings-shift-apply')&&($('settings-shift-apply').disabled=!canShift);
+  onSettingsShiftInput();
+  if($('settings-rep-hint'))$('settings-rep-hint').textContent=`Abonament curent: bonus maxim ${Math.round(repPublicMultCap()*100)}% aplicat punctelor pozitive din finalizarea proiectelor publice.`;
+  if($('settings-rep-range'))$('settings-rep-range').value=String(S.userControls?.repPublicSlider??0);
+  onSettingsRepInput();
+}
+function onSettingsShiftInput(){
+  const v=parseInt($('settings-shift-range')?.value||'0',10);
+  $('settings-shift-disp')&&($('settings-shift-disp').textContent=String(v));
+}
+function onSettingsRepInput(){
+  const v=parseInt($('settings-rep-range')?.value||'0',10);
+  if(!S.userControls)S.userControls={};
+  S.userControls.repPublicSlider=v;
+  const cap=repPublicMultCap()*100;
+  $('settings-rep-disp')&&($('settings-rep-disp').textContent=`${(cap*v/100).toFixed(1)}% efectiv din puncte (plafon abonament ${cap.toFixed(0)}%)`);
+  saveState();
+}
+function applySettingsTimeShift(){
+  if(!tierAllowsTimeShift()){toast('Shift temporal indisponibil pe plan gratuit.','err');return}
+  const days=parseInt($('settings-shift-range')?.value||'0',10);
+  const maxD=Math.min(29,Math.max(0,maxTimeShiftDaysRemaining()));
+  if(days>maxD){toast(`Poți avansa maximum ${maxD} zile în acest ciclu.`,'warn');return}
+  if(days<=0){toast('Selectează cel puțin o zi.','warn');return}
+  S.timeShiftSec+=days*86400;
+  const months=Math.floor(days*86400/(86400*30));
+  if(months>0)advanceSimulationMonths(months);
+  checkSubLifecycle();
+  recalcJudiciaryPressure();
+  renderAll();
+  toast(`Timp simulat: +${days} zile`,'ok');
+}
+function exportLocalStorageState(){
+  if(S.settings.persistence!=='local_storage'){toast('Exportul necesită persistență localStorage (setată la login).','warn');return}
+  saveState();
+  const raw=localStorage.getItem('sifonator_state_v3')||'{}';
+  const blob=new Blob([raw],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='sifonator_state_v3.json';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  toast('Fișier descărcat','ok');
+}
+function deleteLocalStorageAndSignOut(){
+  dlgOpen('Șterge date locale','','<p class="tsm tmut">Se șterge <code>sifonator_state_v3</code> și se reîncarcă pagina. Vei fi deconectat.</p>',
+    `<button type="button" class="btn btn-f" onclick="dlgClose()">Renunță</button>
+     <button type="button" class="btn btn-d" onclick="localStorage.removeItem('sifonator_state_v3');location.reload()">Șterge &amp; ieșire</button>`);
+}
+function searchMorePublicFunds(){
+  const gain=Math.round((PERSONAS[S.settings.persona]?.budget||12e6)*0.07*(0.9+Math.random()*0.35));
+  S.ledger.publicBudget+=gain;
+  addAct(`Căutare surse publice: identificat flux fictiv de ${fRON(gain)}.`);
+  updateFundsLockUI();
+  renderDash();
+  renderAudit();
+  toast('Surse noi „identificate” — buget replenizat (simulare)','ok');
+  saveState();
+}
+function updateFundsLockUI(){
+  const broke=S.ledger.publicBudget<=0;
+  $('app')?.classList.toggle('funds-locked',broke);
 }
 // ═══ EXTRA VIEWS ═══
 function renderAudit(){
@@ -2416,12 +3373,16 @@ function simPuscarie(){
   updDebug();
 }
 function manipJust(type){
+  if(!tierAllowsJudicialProtection()){
+    openLimitDlg('Protecție indisponibilă','Manipularea sistemului judiciar nu este inclusă în limitele gratuite. Un abonament plătit (ex. Basic) o poate include.','purchase');
+    return;
+  }
   const cost=manipCost(type==='ancheta'?'ancheta':'puscarie');
   if(S.rep<cost){toast(`Insuficiente puncte (${S.rep}/${cost})`,'err');return}
-  dlgOpen('⚖️ Manipulare Sistem Judiciar','Acțiune satirică — complet fictivă',
+  dlgOpen('⚖️ Manipulare Sistem Judiciar',
     `<div style="background:linear-gradient(135deg,#1a0000,#2d0000);border:1px solid var(--red);border-radius:var(--r);padding:13px 15px;margin-bottom:13px;color:#fff">
       <div style="color:#ff6b6b;font-weight:700;margin-bottom:3px">⚠️ Satirizează fenomenul real</div>
-      <div style="font-size:12px;opacity:.7">Parodiază mecanisme prin care politicieni au scăpat de condamnări prin prescripție, influență sau modificări legislative. Ex: cazul Marian Vanghelie — dosar 11 ani, prescris în 2025.</div>
+      <div style="font-size:12px;opacity:.7">Parodiază mecanisme prin care politicieni au scăpat de condamnări prin prescripție, influență sau modificări legislative. Ex: cazul Marian Vanghelie, dosar 11 ani, prescris în 2025.</div>
     </div>
     <p class="tsm mb14">Vei „cheltui" <strong>${cost} puncte de reputație</strong>. Dupa acțiune vei rămâne cu <strong>${S.rep-cost}</strong> puncte.</p>
     <div style="background:var(--bg);padding:11px;border-radius:var(--r);font-size:13px">
@@ -2458,29 +3419,49 @@ function execManip(cost){
 function renderSub(){
   checkSubLifecycle();
   const d=disc();
-  const hasSub=!!S.sub;
+  const paid=hasPaidSubscription();
   $('plan-grid').innerHTML=PLANS.map(pl=>{
     const fp=Math.round(applyDisc(pl.price));
-    const cur=S.sub?.tier===pl.id;
-    const hoursLabel=pl.secMonth<0?'Nelimitat':`${(pl.secMonth/3600).toFixed(0)}h`;
-    return`<div class="plan-card ${pl.feat?'feat':''}" style="${cur?'border-color:var(--green);background:rgba(38,162,105,.04);':''}">
-      ${cur?`<div style="position:absolute;top:8px;left:50%;transform:translateX(-50%)"><span class="badge bg">✓ ACTIV</span></div>`:''}
-      <div class="pname" style="margin-top:${cur?'20px':'0'}">${pl.name}</div>
+    const curPaid=paid&&S.sub.tier===pl.id;
+    const isFreeCard=pl.id==='free';
+    const hoursLabel=pl.secMonth<0?'Nelimitat':pl.secMonth===0?'0h (doar ore cumpărate)':`${(pl.secMonth/3600).toFixed(0)}h`;
+    const limO=pl.maxOngoing===Infinity?'nelimitat':String(pl.maxOngoing);
+    const limP=pl.maxPending===Infinity?'nelimitat':String(pl.maxPending);
+    let actions='';
+    if(isFreeCard){
+      actions=`<p class="tsm tmut" style="line-height:1.55">Se aplică automat fără „abonament activ”. Nu poți anula, treci la un plan plătit când vrei mai mult.</p>`;
+    }else if(curPaid){
+      actions=`<button type="button" class="btn btn-f btn-full" onclick="cancelSub()">Anulează abonamentul</button>`;
+    }else{
+      actions=`<button type="button" class="btn btn-p btn-full" onclick="openSubPay('${pl.id}')">Alege acest plan</button>`;
+    }
+    let badge='';
+    if(isFreeCard){
+      badge=`<div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:2"><span class="badge bk">Implicit</span></div>`;
+    }else if(curPaid){
+      badge=`<div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:2"><span class="badge bg">✓ ACTIV</span></div>`;
+    }
+    return`<div class="plan-card ${pl.feat?'feat':''}" style="${curPaid?'border-color:var(--green);background:rgba(38,162,105,.04);':''}">
+      ${badge}
+      <div class="plan-card-inner" style="padding-top:${badge?'36px':'20px'}">
+      <div class="pname">${pl.name}</div>
       <div class="pprice">
-        ${d>0?`<div style="font-size:12px;text-decoration:line-through;color:var(--text3)">${pl.price} RON</div>`:''}
-        ${fp} <small>RON/lună</small>
+        ${d>0&&pl.price>0?`<div style="font-size:12px;text-decoration:line-through;color:var(--text3)">${pl.price} RON</div>`:''}
+        ${pl.price===0?`<span>0</span>`:fp} <small>${pl.price===0?'RON · fără plată':'RON/lună'}</small>
       </div>
       <ul class="pfeats">
         ${pl.feats.map(f=>`<li>${f}</li>`).join('')}
+        <li>Proiecte în lucru / planificate: max. ${limO} / ${limP}</li>
         <li>Bagheta Magică: ${hoursLabel}/lună</li>
+        <li>Bonus rep. proiecte publice: până la ${Math.round(pl.repMultCap*100)}%</li>
       </ul>
-      ${!cur
-        ?`<button class="btn btn-p btn-full" onclick="openSubPay('${pl.id}')">Alege Acest Plan</button>`
-        :`<button class="btn btn-f btn-full" onclick="cancelSub()">Anulează abonamentul</button>`}
+      </div>
+      <div class="plan-card-actions">
+      ${actions}
+      </div>
     </div>`;
   }).join('');
-  // Hide hours purchase if subbed
-  $('hours-buy-card') && ($('hours-buy-card').classList.toggle('hid', hasSub));
+  $('hours-buy-card') && ($('hours-buy-card').classList.toggle('hid', paid));
   updBuyH();
   $('disc-rep') && ($('disc-rep').textContent=S.rep);
   $('disc-pct') && ($('disc-pct').textContent=d.toFixed(1)+'%');
@@ -2493,6 +3474,11 @@ function updBuyH(){
 }
 function openSubPay(tid){
   const pl=PLANS.find(p=>p.id===tid);
+  if(!pl)return;
+  if(pl.price===0){
+    toast('Limitele gratuite sunt deja active implicit — nu trebuie „activate”. Alege un plan plătit pentru ore incluse și beneficii extra.','warn');
+    return;
+  }
   const fp=Math.round(applyDisc(pl.price));
   dlgOpen(`Abonează-te la ${pl.name}`,`${fp} RON/lună`,
     `<p class="tsm mb14">Alege metoda de plată:</p>
@@ -2551,7 +3537,7 @@ function finishCardCheckout(bank3ds){
     return;
   }
   if(ctx.kind==='hours'){
-    if(S.sub){dlgClose();toast('Ai abonament activ; orele extra sunt indisponibile.','warn');return}
+    if(hasPaidSubscription()){dlgClose();toast('Ai abonament plătit activ; orele extra sunt indisponibile (folosește cota lunară).','warn');return}
     S.purchSec+=ctx.hours*3600;
     dlgClose();
     updWandQuota();
@@ -2562,34 +3548,51 @@ function finishCardCheckout(bank3ds){
   }
 }
 function show3DSChallenge(bankRule,cardNum){
+  const TDS_MINUTES=10;
   const masked=`•••• ${cardNum.slice(-4)}`;
-  const code=String(100000+Math.floor(Math.random()*900000));
-  S.pending3DS={code,bank:bankRule.bank,tail:cardNum.slice(-4)};
-  spagafonPushSms(bankRule.bank,`Cod 3D Secure SifonPay™: ${code}. Valabilitate 5 min. Nu trimite codul către „presă" sau DNA.`,{code,is3ds:true});
-  dlgOpen(`🔐 3D Secure · ${bankRule.bank}`,'Autentificare suplimentară necesară',
-    `<p class="tsm tmut mb14">Card ${masked}. Codul a fost livrat prin SMS fictiv pe <strong>Șpagafon</strong> (bara de jos). Poți confirma și de acolo după ce închizi acest dialog.</p>
-    <p class="tsm mb10" style="font-family:var(--mono);letter-spacing:.12em">Cod (backup vizibil aici): <strong>${code}</strong></p>
-    <div class="fg"><label>Cod 3D Secure</label><input id="tds-code" maxlength="6" inputmode="numeric" pattern="[0-9]*" placeholder="000000" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:16px;letter-spacing:.18em;outline:none"/></div>`,
-    `<button class="btn btn-f" onclick="dlgClose();S.pending3DS=null">Anulează</button>
-     <button class="btn btn-p" onclick="confirm3DSecure('${bankRule.bank.replace(/'/g,"\\'")}')">Confirmă</button>`
+  const mode=bankRule.tdsMode||'sms_code';
+  let reserveCode=null;
+  let smsBody='';
+  if(mode==='sms_code'){
+    reserveCode=String(100000+Math.floor(Math.random()*900000));
+    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): cod rezervă ${reserveCode}. Fereastra de confirmare: ${TDS_MINUTES} minute. Detalii pe Șpagafon.`;
+  }else if(mode==='otp_email'){
+    reserveCode=String(100000+Math.floor(Math.random()*900000));
+    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): cod e-mail/SMS rezervă ${reserveCode}. Timp limită desktop: ${TDS_MINUTES} minute.`;
+  }else if(mode==='push_timer'||mode==='bank_app'){
+    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): confirmă în aplicația băncii sau urmează pașii din mesaj. Timp disponibil: ${TDS_MINUTES} minute.`;
+  }else{
+    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): autentificare suplimentară. ${TDS_MINUTES} minute.`;
+  }
+  S.pending3DS={code:'__TDS10__',bank:bankRule.bank,tail:cardNum.slice(-4),mode:'timed_3ds',reserveCode};
+  spagafonPushSms(bankRule.bank,smsBody,{code:reserveCode,is3ds:true});
+  spagafonPinFor3DS(true);
+  const inner=`<p class="tsm tmut mb14">Card <strong>${masked}</strong> · <strong>${bankRule.bank}</strong> solicită <strong>3D Secure</strong> (simulare SifonPay™). Ai exact <strong>${TDS_MINUTES} minute</strong>; detaliile și orice cod de rezervă sunt pe <strong>Șpagafon</strong> (deschis automat deasupra acestei ferestre).</p>
+    <div style="background:var(--bg);padding:12px;border-radius:var(--r);font-size:13px;text-align:center"><span id="tds-timer" style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--orange)">${String(TDS_MINUTES).padStart(2,'0')}:00</span><div class="tsm tmut mt6">Timp rămas</div></div>
+    <p class="tsm tmut mt10">După expirare, reîncearcă plata. Butonul de mai jos confirmă că ai finalizat pașii în timpul alocat.</p>`;
+  const endMs=Date.now()+TDS_MINUTES*60000;
+  clearInterval(window.__tdsTimerIv);
+  window.__tdsTimerIv=setInterval(()=>{
+    const el=$('tds-timer');if(!el){clearInterval(window.__tdsTimerIv);return}
+    const ms=Math.max(0,endMs-Date.now());
+    const mm=Math.floor(ms/60000),ss=Math.floor((ms%60000)/1000);
+    el.textContent=`${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+    if(ms<=0)clearInterval(window.__tdsTimerIv);
+  },500);
+  dlgOpen(`🔐 3D Secure · ${bankRule.bank}`,'Autentificare suplimentară (10 minute)',inner,
+    `<button class="btn btn-f" onclick="clearInterval(window.__tdsTimerIv);dlgClose();S.pending3DS=null">Anulează</button>
+     <button class="btn btn-p" onclick="confirm3DSecure('${bankRule.bank.replace(/'/g,"\\'")}')">Confirm autentificarea</button>`,
+    {tdsPassthrough:true}
   );
 }
 function confirm3DSecure(bank){
-  const code=$('tds-code')?.value?.trim()||'';
-  const exp=S.pending3DS?.code;
-  if(exp){
-    if(!/^\d{6}$/.test(code)||code!==exp){toast('Cod incorect — verifică SMS-ul pe Șpagafon','err');return}
-  }else if(!/^\d{6}$/.test(code)){
-    toast('Introdu un cod valid de 6 cifre','err');return;
-  }
+  if(!S.pending3DS||S.pending3DS.code!=='__TDS10__'){toast('Sesiune 3D Secure expirată sau invalidă','warn');return}
+  clearInterval(window.__tdsTimerIv);
   $('dlg-a').innerHTML='<span class="tsm tmut">Verificare 3D Secure...</span>';
   setTimeout(()=>{
-    if(Math.random()<0.9){
-      finishCardCheckout({bank});
-    }else{
-      dlgClose();toast(`3D Secure respins de ${bank}. Încearcă din nou.`,`err`);
-    }
-  },1000);
+    if(Math.random()<0.92)finishCardCheckout({bank});
+    else{dlgClose();toast(`3D Secure respins de ${bank}. Încearcă din nou.`,`err`);}
+  },900);
 }
 function procCard(){
   const ctx=CARD_PAY_CTX;
@@ -2665,7 +3668,7 @@ function openPublicPayHours(hours,amount){
   );
 }
 function procPublicHours(hours,total){
-  if(S.sub){toast('Ai abonament activ; orele extra sunt indisponibile.','warn');dlgClose();return}
+  if(hasPaidSubscription()){toast('Ai abonament plătit activ; orele extra sunt indisponibile.','warn');dlgClose();return}
   const int=$('pp-int-h')?.value?.split('—')[0].trim()||'Partid';
   $('dlg-a').innerHTML='';
   $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect™</div></div>
@@ -2686,17 +3689,17 @@ function procPublicHours(hours,total){
   );
 }
 function activateSub(tid){
+  if(tid==='free')return;
   const exp=nowDate();exp.setMonth(exp.getMonth()+1);
   const pl=PLANS.find(p=>p.id===tid);
   S.sub={tier:tid,exp:exp.toISOString(),secTotal:pl.secMonth,secUsed:0};
-  // Reset purchased time tracking when subscribing
   updWandQuota();updDebug();
 }
 function cancelSub(){
   dlgOpen('Anulează abonamentul','Ești sigur?',
-    `<p class="tsm">Vei pierde accesul la funcționalități premium. Orele Bagheta Magică nu vor fi rambursate.</p>`,
-    `<button class="btn btn-f" onclick="dlgClose()">Mă răzgândesc</button>
-     <button class="btn btn-d" onclick="S.sub=null;dlgClose();renderSub();renderDash();updWandQuota();toast('Abonament anulat','warn')">Anulează</button>`
+    `<p class="tsm">Vei reveni la limitele Starter Gratuit (fără abonament plătit). Orele Bagheta Magică nu sunt rambursate.</p>`,
+    `<button type="button" class="btn btn-f" onclick="dlgClose()">Mă răzgândesc</button>
+     <button type="button" class="btn btn-d" onclick="S.sub=null;dlgClose();renderSub();renderDash();updWandQuota();toast('Abonament anulat — limite gratuite','warn')">Anulează</button>`
   );
 }
 function openBuyHDlg(){
@@ -2765,7 +3768,7 @@ function toggleDebug(){
 function updDebug(){
   checkSubLifecycle();
   $('db-rep')&&($('db-rep').textContent=S.rep);
-  $('db-sub')&&($('db-sub').textContent=S.sub?S.sub.tier:'none');
+  $('db-sub')&&($('db-sub').textContent=hasPaidSubscription()?S.sub.tier:'none (gratuit)');
   $('db-wand')&&($('db-wand').textContent=fSec(wandAvailSec()));
   $('db-siph')&&($('db-siph').textContent=fRON(S.siphoned));
   $('db-just')&&($('db-just').textContent=S.justice?.stage||'curat');
@@ -2773,7 +3776,7 @@ function updDebug(){
 }
 function dbAddRep(n){chgRep(n,`[DEBUG] +${n} puncte adăugate manual`)}
 function dbAddTime(s){
-  if(S.sub)S.sub.secUsed=Math.max(0,S.sub.secUsed-s);
+  if(hasPaidSubscription())S.sub.secUsed=Math.max(0,S.sub.secUsed-s);
   else S.purchSec+=s;
   updWandQuota();toast(`[DEBUG] +${fSec(s)} timp Bagheta adăugat`,'ok');
 }
@@ -2822,6 +3825,7 @@ function dbReset(){
   S.rep=0;S.repH=[];S.siphoned=0;S.justice={stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false};S.sub=null;
   S.smsInbox=[];S.pending3DS=null;S.spagafonLastSeen=0;
   S.purchSec=0;S.purchSecUsed=0;S.activeSession=null;S.sessions=[];S.judiciaryRisk=0;S.pressTone=50;S.timeShiftSec=0;
+  S.userControls={repPublicSlider:0};S.wandQueue=[];S.wandJobDetailId=null;
   if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
   ensureWandTimer();
   spgfAppletId=null;
@@ -2832,6 +3836,12 @@ function dbReset(){
 document.addEventListener('DOMContentLoaded',()=>{
   $('buy-h')?.addEventListener('input',updBuyH);
   if(isDebugUnlocked())$('debug-toggle-btn')?.classList.remove('hid');
+  let resizeT=0;
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeT);
+    resizeT=setTimeout(syncLayoutForViewport,120);
+  });
+  syncLayoutForViewport();
   window.addEventListener('beforeunload',()=>{
     if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
     if(S.settings.persistence==='local_storage')saveState();
