@@ -153,6 +153,56 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 #overlay.hid{display:none}
 #overlay.overlay-3ds{background:rgba(0,0,0,.35);pointer-events:none}
 #overlay.overlay-3ds #dlg{pointer-events:auto}
+
+/* ── PSD Direct Connect ── */
+#psd-dc-portal{position:fixed;inset:0;z-index:2400;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(42,2,2,.78);backdrop-filter:blur(8px);font-family:system-ui,'Segoe UI',Roboto,sans-serif;color:#1a0808}
+#psd-dc-portal.hid{display:none!important}
+#psd-dc-portal .psd-dc-shell{width:100%;max-width:540px;max-height:min(90vh,700px);display:flex;flex-direction:column;border-radius:2px;box-shadow:0 24px 64px rgba(0,0,0,.5),0 0 0 1px rgba(139,0,0,.6);overflow:hidden;border:3px solid #7a0000;background:#faf6f3}
+#psd-dc-portal .psd-dc-top{background:linear-gradient(180deg,#5c0000 0%,#8b0000 55%,#a40000 100%);color:#fff;padding:12px 18px 14px;border-bottom:2px solid #4a0000}
+#psd-dc-portal .psd-dc-top .psd-dc-brand{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:700;letter-spacing:.02em;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+#psd-dc-portal .psd-dc-top .psd-dc-sub{font-size:11px;opacity:.88;margin-top:4px;line-height:1.35}
+#psd-dc-portal .psd-dc-body{padding:18px 20px 22px;overflow-y:auto;flex:1;font-size:13px;line-height:1.55}
+#psd-dc-portal .psd-dc-seal{display:inline-block;background:#5c0000;color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:2px;letter-spacing:.06em;margin-bottom:10px}
+#psd-dc-portal .psd-dc-grid{display:grid;gap:8px;margin:12px 0;padding:12px;background:#fff;border:1px solid #d4c4be;border-radius:2px}
+#psd-dc-portal .psd-dc-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px dashed #e8ddd8;padding-bottom:6px}
+#psd-dc-portal .psd-dc-row:last-child{border-bottom:none;padding-bottom:0}
+#psd-dc-portal .psd-dc-k{color:#6b4a44;font-weight:600}
+#psd-dc-portal .psd-dc-v{color:#1a0808;font-weight:700;text-align:right}
+#psd-dc-portal .psd-dc-legal{max-height:120px;overflow-y:auto;padding:10px;background:#fff;border:1px solid #c9a9a0;font-size:11px;color:#4a3028;margin:10px 0;border-radius:2px}
+#psd-dc-portal .psd-dc-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#psd-dc-portal .psd-dc-btn-psd{background:linear-gradient(180deg,#b01010,#8b0000);color:#fff;border:none;padding:10px 16px;font-weight:800;font-size:12px;cursor:pointer;border-radius:2px;letter-spacing:.03em}
+#psd-dc-portal .psd-dc-btn-psd:hover{filter:brightness(1.06)}
+#psd-dc-portal .psd-dc-btn-ghost{background:#fff;color:#5c0000;border:2px solid #8b0000;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;border-radius:2px}
+#psd-dc-portal .psd-dc-inp{width:100%;padding:10px 12px;border:2px solid #c9a9a0;border-radius:2px;font-family:'Consolas','Courier New',monospace;font-size:15px;letter-spacing:.12em;margin-top:6px}
+#psd-dc-portal .psd-dc-keybox{font-family:'Consolas','Courier New',monospace;font-size:12px;word-break:break-all;background:#1a0a08;color:#f5e6dc;padding:12px;border-radius:2px;border:1px solid #333;margin:10px 0}
+#psd-dc-portal input[type="checkbox"]{accent-color:#8b0000;width:16px;height:16px}
+.integ-pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em}
+.integ-pill-ok{background:rgba(38,162,105,.18);color:#1a7f4b}
+.integ-pill-off{background:rgba(0,0,0,.06);color:var(--text2)}
+
+/* ── ANAF Sync ── */
+#anaf-sync-portal{position:fixed;inset:0;z-index:2410;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,22,38,.82);backdrop-filter:blur(8px);font-family:system-ui,'Segoe UI',Roboto,sans-serif;color:#0d1b2a}
+#anaf-sync-portal.hid{display:none!important}
+#anaf-sync-portal .anaf-shell{width:100%;max-width:560px;max-height:min(92vh,720px);display:flex;flex-direction:column;border-radius:4px;box-shadow:0 20px 56px rgba(0,0,0,.45),0 0 0 1px rgba(0,86,179,.35);overflow:hidden;border:2px solid #0056b3;background:linear-gradient(180deg,#f0f5fa 0%,#fff 22%);color:#0d1b2a}
+#anaf-sync-portal .anaf-top{background:linear-gradient(90deg,#003d82 0%,#0056b3 50%,#1a6ec4 100%);color:#fff;padding:14px 18px 16px;border-bottom:3px solid #002a5c}
+#anaf-sync-portal .anaf-brand{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:700;letter-spacing:.02em}
+#anaf-sync-portal .anaf-sub{font-size:11px;opacity:.9;margin-top:5px;line-height:1.4}
+#anaf-sync-portal .anaf-body{padding:16px 18px 20px;overflow-y:auto;flex:1;font-size:13px;line-height:1.55}
+#anaf-sync-portal .anaf-seal{display:inline-block;background:#003d82;color:#fff;font-size:9px;font-weight:800;padding:3px 9px;border-radius:2px;letter-spacing:.08em;margin-bottom:10px}
+#anaf-sync-portal .anaf-bureau{font-size:11px;color:#415a77;background:#e8eef4;border:1px solid #b8c9db;padding:10px 12px;border-radius:3px;margin:10px 0;max-height:100px;overflow-y:auto}
+#anaf-sync-portal .anaf-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#anaf-sync-portal .anaf-btn-pri{background:linear-gradient(180deg,#1a6ec4,#0056b3);color:#fff;border:none;padding:10px 16px;font-weight:800;font-size:12px;cursor:pointer;border-radius:3px}
+#anaf-sync-portal .anaf-btn-pri:hover{filter:brightness(1.05)}
+#anaf-sync-portal .anaf-btn-sec{background:#fff;color:#003d82;border:2px solid #0056b3;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;border-radius:3px}
+#anaf-sync-portal .anaf-inp{width:100%;padding:10px 11px;border:2px solid #90a4bd;border-radius:3px;font-family:var(--mono);font-size:13px;margin-top:6px}
+#anaf-sync-portal .anaf-keybox{font-family:var(--mono);font-size:11px;word-break:break-all;background:#0d1b2a;color:#e3f2fd;padding:12px;border-radius:3px;margin:10px 0;border:1px solid #003d82}
+#anaf-sync-portal .anaf-warn{border-left:4px solid #c01c28;padding:8px 10px;background:rgba(192,28,40,.08);font-size:12px;margin:10px 0}
+.audit-anaf-ef-row{display:grid;grid-template-columns:1fr 100px 90px;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:center}
+.audit-anaf-ef-h{font-weight:800;font-size:11px;text-transform:uppercase;color:var(--text2);letter-spacing:.04em}
+.audit-anaf-detail{font-size:12px;line-height:1.5;padding:8px 0;border-bottom:1px dashed var(--border);color:var(--text1)}
+.audit-anaf-detail .ad-sev{font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-right:8px}
+.audit-anaf-detail .ad-sev.inf{background:rgba(53,132,228,.15);color:var(--blue-h)}
+.audit-anaf-detail .ad-sev.at{background:rgba(230,97,0,.15);color:var(--orange)}
 #dlg{background:var(--card);border-radius:var(--rl);box-shadow:0 20px 60px rgba(0,0,0,.26);max-width:560px;width:100%;max-height:90vh;overflow-y:auto;animation:din .17s ease-out;position:relative;z-index:1150}
 @keyframes din{from{opacity:0;transform:scale(.95) translateY(-8px)}to{opacity:1;transform:none}}
 .dh{padding:20px 22px 0}
@@ -162,7 +212,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .da{padding:10px 22px 18px;display:flex;gap:8px;justify-content:flex-end}
 
 /* ── TOASTS ── */
-#toasts{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none}
+#toasts{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:10070;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none}
 .toast{background:#2d2d2d;color:#fff;padding:8px 18px;border-radius:24px;font-size:13px;box-shadow:var(--sh2);pointer-events:auto;animation:tin .2s ease-out;max-width:440px;text-align:center;line-height:1.4}
 .toast.err{background:var(--red)}.toast.ok{background:var(--green)}.toast.warn{background:var(--orange)}.toast.dna{background:#18003e;border:1px solid rgba(192,28,40,.6)}
 .toast.away{background:rgba(53,132,228,.14);color:var(--text1);border:1px solid rgba(53,132,228,.38);text-align:left;padding:10px 16px}
@@ -250,6 +300,23 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .gk{color:var(--text2)}
 .gv{font-weight:700}
 
+/* ── Tabele dinamice ── */
+.dyn-stack{display:flex;flex-direction:column;gap:18px}
+.dyn-section{margin:0}
+.dyn-section-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.055em;color:var(--text3);margin:0 0 8px}
+.dyn-sumcard{border:1px solid var(--border);border-radius:var(--r);background:var(--card);padding:4px 12px;overflow:hidden}
+.dyn-sumcard .gline:last-child{border-bottom:none}
+.dyn-tablewrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);background:var(--card);max-height:min(52vh,420px);overflow-y:auto}
+.dyn-table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.45}
+.dyn-table th,.dyn-table td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+.dyn-table th{background:var(--sidebar);font-weight:600;color:var(--text2);font-size:11px;position:sticky;top:0;z-index:1;box-shadow:0 1px 0 var(--border)}
+.dyn-table tbody tr:last-child td{border-bottom:none}
+.dyn-table tbody tr:hover td{background:rgba(0,0,0,.025)}
+.dyn-table .dyn-num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dyn-table .dyn-muted{color:var(--text3);font-size:11px}
+.dyn-table .dyn-nowrap{white-space:nowrap}
+.dyn-empty{margin:0;padding:16px 14px;text-align:center;color:var(--text3);font-size:13px;line-height:1.55;background:var(--bg);border:1px dashed var(--border);border-radius:var(--r)}
+
 /* ── PROFILE ── */
 .profile-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;flex-shrink:0}
 
@@ -260,9 +327,11 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .dbv{color:#f5c211;font-weight:700}
 #debug-bar .btn-sm{font-size:10px;padding:3px 8px;border-radius:4px}
 
-/* ── ȘPAGAFON — colț dreapta-jos, „telefon” rotunjit, HUD non-modal ── */
-#spagafon-root{position:fixed;inset:0;z-index:950;pointer-events:none}
-#spagafon-root.spgf-pinned-3ds{z-index:1250}
+/* ── ȘPAGAFON ── */
+#spagafon-root{position:fixed;inset:0;z-index:10050;pointer-events:none}
+#spagafon-root.spgf-pinned-3ds{z-index:10060}
+body:has(#app.hid) #spagafon-root,
+body:has(#app.hid) #hb-mobile-spag{display:none!important;visibility:hidden;pointer-events:none}
 .spgf-dock{
   position:absolute;
   right:max(12px,env(safe-area-inset-right,0px));
@@ -309,6 +378,10 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
   background:var(--red);color:#fff;font-size:10px;font-weight:800;line-height:18px;display:none;
 }
 #spgf-launcher.has-unread .spgf-badge{display:inline-flex;align-items:center;justify-content:center}
+body.spgf-launch-icon #spgf-launcher .spgf-lbl{display:none!important}
+body.spgf-launch-icon #spgf-launcher{gap:0;padding:13px 16px}
+body.spgf-launch-text #spgf-launcher .spgf-ico{display:none!important}
+body.spgf-launch-text #spgf-launcher{gap:6px}
 #spagafon-root.open #spgf-launcher{display:none}
 #spgf-sheet{
   display:none;flex-direction:column;flex:1;min-height:0;width:100%;
@@ -359,6 +432,19 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .spgf-pane{display:none}
 .spgf-pane.on{display:block}
 
+/* Setări Șpagafon: forțare doar pe ecrane înguste; Mod afișare pe mobil doar după bifare */
+#settings-spgf-force-mobile-wrap{display:none!important}
+@media(max-width:680px){
+  #settings-spgf-force-mobile-wrap{display:block!important}
+}
+#settings-spgf-mode-wrap{display:block}
+#settings-spgf-mode-wrap>.fg{margin-top:0}
+@media(max-width:680px){
+  #settings-spgf-mode-wrap{display:none!important}
+  body.spgf-mobile-full #settings-spgf-mode-wrap{display:block!important}
+  body.spgf-mobile-full #settings-spgf-mode-wrap>.fg{margin-top:14px}
+}
+
 /* ── OPT ROW ── */
 .opt-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;transition:background .1s;margin-bottom:7px}
 .opt-row:hover{background:var(--bg)}
@@ -369,7 +455,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── UTILS ── */
-.mt8{margin-top:8px}.mt14{margin-top:14px}.mt20{margin-top:20px}
+.mt6{margin-top:6px}.mt8{margin-top:8px}.mt14{margin-top:14px}.mt20{margin-top:20px}
 .mb0{margin-bottom:0}.mb6{margin-bottom:6px}.mb8{margin-bottom:8px}.mb14{margin-bottom:14px}
 .tsm{font-size:12px}.tmut{color:var(--text2)}.tc{text-align:center}.bold{font-weight:700}
 .flex{display:flex}.aic{align-items:center}.g8{gap:8px}.g12{gap:12px}.mla{margin-left:auto}
@@ -399,7 +485,6 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 }
 .mobile-nav-toggle:active{background:rgba(255,255,255,.2)}
 @media(max-width:680px){
-  /* Spațiu față de marginile ecranului + notch; ~6px față de chenarul antetului */
   #hbar{
     height:auto;
     min-height:0;
@@ -421,20 +506,29 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
     pointer-events:none;
   }
   #spgf-launcher{display:none!important}
+  body.spgf-mobile-full #spgf-launcher{display:flex!important}
+  body.spgf-mobile-full #hb-mobile-spag{display:none!important}
   #hb-mobile-spag{
+    position:fixed;
+    z-index:10055;
+    top:auto;
+    bottom:max(12px,env(safe-area-inset-bottom,0px));
+    right:max(12px,env(safe-area-inset-right,0px));
     display:inline-flex!important;
-    align-items:center;justify-content:center;align-self:center;
+    align-items:center;justify-content:center;
     box-sizing:border-box;
     min-width:40px;min-height:40px;padding:0 10px;
     border-radius:var(--rm);
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.18);
+    background:rgba(61,56,70,.94);
+    border:1px solid rgba(255,255,255,.22);
     color:rgba(255,255,255,.92);font-size:20px;line-height:1;
-    flex-shrink:0;
+    box-shadow:0 4px 18px rgba(0,0,0,.35);
     transition:background .15s,border-color .15s;
     -webkit-tap-highlight-color:transparent;
   }
-  #hb-mobile-spag:active{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.26)}
+  #hb-mobile-spag:active{background:rgba(80,74,92,.98);border-color:rgba(255,255,255,.3)}
+  #toasts{bottom:max(72px,calc(14px + env(safe-area-inset-bottom,0px)))}
+  body.spgf-mobile-full #toasts{bottom:max(88px,calc(14px + env(safe-area-inset-bottom,0px)))}
   .wand-wrap .wg{grid-template-columns:1fr}
   /* O singură „pagină”: fie meniul vertical, fie conținutul */
   #layout{position:relative;flex-direction:column;flex:1;min-height:0}
@@ -473,9 +567,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
   #hbar .hb-right{flex-shrink:0;gap:6px}
   #hb-name{max-width:min(36vw,120px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom}
   .hb-fn{display:none}
-  /* Conținut: padding mai aerisit pentru thumb */
   #content .view{padding:14px 12px calc(14px + env(safe-area-inset-bottom,0))}
-  /* Proiecte & Licitații — layout tip listă mobilă */
   #view-proj .vh,#view-tend .vh{
     flex-direction:column;align-items:stretch;gap:12px;margin-bottom:14px;
   }
@@ -678,7 +770,6 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
         <span id="hb-rep">0</span>
         <span id="hb-rep-cap" style="opacity:.45;font-size:11px">/250</span>
       </div>
-      <button type="button" id="hb-mobile-spag" class="btn btn-f btn-sm" onclick="toggleSpagafon()" title="Șpagafon — mesaje">📱</button>
       <button type="button" class="debug-btn hid" id="debug-toggle-btn" onclick="toggleDebug()" title="Panou de depanare (activează cu ?debug=1)">🐛</button>
     </div>
   </header>
@@ -701,6 +792,9 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <div class="nav-sec" style="margin-top:6px">Instrumente</div>
       <div class="nav-i" onclick="navigate('wand')" data-v="wand">
         <span class="ni">✨</span><span>Bagheta Magică</span>
+      </div>
+      <div class="nav-i" onclick="navigate('integ')" data-v="integ">
+        <span class="ni">🔗</span><span>Manager Integrări</span>
       </div>
       <div class="nav-sec" style="margin-top:6px">Monitorizare</div>
       <div class="nav-i" onclick="navigate('audit')" data-v="audit">
@@ -776,7 +870,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <!-- ── PROIECTE ── -->
       <div id="view-proj" class="view">
         <div class="vh">
-          <div><h2>Proiecte Publice</h2><p>Gestionează, finalizează și pariază pe calitatea proiectelor tale</p></div>
+          <div><h2>Proiecte Publice</h2><p>Gestionează proiecte, categorii, pariuri și finalizare</p></div>
           <div class="vh-actions"><button class="btn btn-p" onclick="openNewProjDlg()">+ Proiect Nou</button></div>
         </div>
         <div class="tabs">
@@ -910,6 +1004,10 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
         <div class="vh">
           <div><h2>Audit &amp; Trasabilitate</h2><p>Timeline procedural pentru când „totul e în regulă” pe hârtie</p></div>
         </div>
+        <div id="audit-anaf-sync-card" class="card mb14 hid" aria-hidden="true">
+          <div class="ch"><h3>ANAF Sync · E-Factura &amp; flux detaliat</h3><p>Apare doar când integrarea este activă și o cheie API este stocată în SifonatorPRO.</p></div>
+          <div class="cc" id="audit-anaf-sync-pane"></div>
+        </div>
         <div class="card">
           <div class="ch"><h3>Jurnal Complet Activitate</h3></div>
           <div class="cc" id="audit-log"></div>
@@ -957,6 +1055,18 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
         </div>
       </div>
 
+      <!-- ── MANAGER INTEGRĂRI ── -->
+      <div id="view-integ" class="view">
+        <div class="vh">
+          <div><h2>Manager Integrări</h2><p>Servicii externe, API-uri </p></div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Catalog integrări</h3><p>Conectează SifonatorPRO la platforme terțe simulate</p></div>
+          <div class="cc" id="integ-list"></div>
+        </div>
+        <p class="tsm tmut" style="line-height:1.65">Plata abonamentelor și a orelor Bagheta cu <strong>Bani publici (PSD Direct Connect™)</strong> este disponibilă doar după ce integrezi acest serviciu și validezi cheia API aici.</p>
+      </div>
+
       <!-- ── SISTEM JUDICIAR ── -->
       <div id="view-just" class="view">
         <div class="vh">
@@ -996,7 +1106,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <!-- ── SETĂRI ── -->
       <div id="view-settings" class="view">
         <div class="vh">
-          <div><h2>Setări utilizator</h2><p>Control date locale, timp simulat, multiplicatori reputație și reînnoire abonament</p></div>
+          <div><h2>Setări utilizator</h2><p>Control date locale, timp simulat, multiplicator reputație și reînnoire abonament</p></div>
         </div>
         <div class="card mb14" id="settings-persist-card">
           <div class="ch"><h3>Persistență &amp; date</h3><p>Doar dacă folosești localStorage</p></div>
@@ -1006,6 +1116,28 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
               <button type="button" class="btn btn-p" onclick="exportLocalStorageState()">⬇ Exportă date locale</button>
               <button type="button" class="btn btn-d" onclick="deleteLocalStorageAndSignOut()">🗑 Șterge datele &amp; deconectare</button>
             </div>
+          </div>
+        </div>
+        <div class="card mb14" id="settings-spagafon-card">
+          <div class="ch"><h3>Șpagafon — lansator</h3></div>
+          <div class="cc">
+            <div id="settings-spgf-force-mobile-wrap">
+              <label class="tsm" style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;user-select:none;line-height:1.45;text-align:left">
+                <input type="checkbox" id="settings-spgf-mobile-full" style="margin-top:3px;flex-shrink:0" onchange="onSpagafonMobileFullChange()"/>
+                <span><strong>Forțează afișare completă pe ecrane mici</strong> (≤680px): înlocuiește butonul compact 📱 cu lansatorul ca pe desktop. După bifare apare <strong>Mod afișare</strong> pentru acest lansator.</span>
+              </label>
+            </div>
+            <div id="settings-spgf-mode-wrap">
+              <div class="fg mb0">
+                <label for="settings-spgf-mode">Mod afișare</label>
+                <select id="settings-spgf-mode" style="width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:13px;background:var(--card);color:var(--text1)" onchange="onSpagafonLauncherModeChange()">
+                  <option value="both">Pictogramă și text „Șpagafon” (implicit)</option>
+                  <option value="icon">Numai pictogramă</option>
+                  <option value="text">Numai text „Șpagafon”</option>
+                </select>
+              </div>
+            </div>
+            <p class="tsm tmut mt6" id="settings-spgf-mode-hint"></p>
           </div>
         </div>
         <div class="card mb14" id="settings-shift-card">
@@ -1027,13 +1159,22 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
             </div>
           </div>
         </div>
+        <div class="card mb14" id="settings-proj-card">
+          <div class="ch"><h3>Proiecte publice</h3><p>Comportament în listă</p></div>
+          <div class="cc">
+            <label class="tsm" style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;user-select:none;line-height:1.45;text-align:left;margin:0">
+              <input type="checkbox" id="settings-skip-proj-final-confirm" style="margin-top:3px;flex-shrink:0" onchange="onSettingsSkipProjFinalizeConfirmChange()"/>
+              <span><strong>Fără confirmare la finalizare</strong>: „Finalizează” aplică direct rezultatul (calitate extrasă, puncte), fără dialog de confirmare.</span>
+            </label>
+          </div>
+        </div>
         <div class="card" id="settings-sub-renew-card">
-          <div class="ch"><h3>Reînnoire abonament</h3><p>La fel ca la serviciile reale: alegerea ta rămâne salvată</p></div>
+          <div class="ch"><h3>Reînnoire abonament</h3></div>
           <div class="cc">
             <p class="tsm tmut mb6" id="settings-sub-renew-hint"></p>
             <label id="settings-sub-renew-lbl" class="tsm" style="display:flex;gap:10px;align-items:flex-start;margin:0;line-height:1.45;cursor:pointer;user-select:none;text-align:left">
               <input type="checkbox" id="settings-sub-renew-cb" style="margin-top:3px;flex-shrink:0" onchange="toggleSubAutoRenew(this.checked)"/>
-              <span><strong>Reînnoire automată</strong> — dacă e activă, la expirare abonamentul se prelungește o lună. Dacă e oprită, la expirare revii la plan gratuit și poți plăti din nou cum preferi.</span>
+              <span><strong>Reînnoire automată</strong>: dacă e activă, la expirare abonamentul se prelungește o lună. Dacă e oprită, la expirare revii la plan gratuit și poți plăti din nou cum preferi.</span>
             </label>
           </div>
         </div>
@@ -1069,79 +1210,135 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <div id="view-howto" class="view">
         <div class="vh">
           <div><h2>Ghid &amp; reguli</h2><p id="howto-meta" class="tsm tmut">—</p>
-            <p class="tsm tmut mt8" style="max-width:820px;line-height:1.65"><strong>SifonatorPRO</strong> rulează integral în browser (un singur fișier HTML + CSS + JS). Este o simulare satirică cu reguli explicite în cod: fără server, fără plăți reale. Licitațiile, DNA/SifonPay™ și fluxurile financiare sunt <strong>modele deterministe</strong> pentru narativ, nu servicii externe.</p>
+            <p class="tsm tmut mt8" style="max-width:820px;line-height:1.65"><strong>SifonatorPRO</strong> este livrat ca un singur fișier care rulează în browserul tău. Nu există server de aplicație inclus; plățile, integrările și mesageria sunt <strong>simulări</strong> în pagină (narativ satiric, fără efecte în lumea reală).</p>
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Structura jocului</h3><p>Module principale și cum se leagă</p></div>
+          <div class="ch"><h3>Interfață și navigare</h3><p>Meniu lateral, antet, mobil</p></div>
           <div class="cc">
             <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
-              <li><strong>Tablou de bord</strong> — indicatori agregați, jurnal scurt de activități, stare abonament.</li>
-              <li><strong>Proiecte</strong> — buget, valori reale/declarate, status, pariuri pe calitate, finalizare cu puncte reputație.</li>
-              <li><strong>Licitații</strong> — proceduri pe etape, oferte simulate, evaluare, adjudecare, contestații.</li>
-              <li><strong>Bagheta Magică</strong> — sesiuni de „optimizare” pe timp cotă, surplus redistribuit, coadă, dosar jurnal.</li>
-              <li><strong>Centru operațional</strong> — indicatori tactici legați de proiecte și sesiunea Bagheta.</li>
-              <li><strong>Justiție / DNA</strong> — etape (curat, monitorizare, anchetă etc.), manipulare pe cost reputație (unde planul permite).</li>
-              <li><strong>Presă</strong> — scor ton, canale, istoric intervenții.</li>
-              <li><strong>Audit</strong> — buget public, surplus redistribuit, cheltuieli influență, cost reputațional, jurnal activități.</li>
-              <li><strong>Abonament &amp; plăți</strong> — planuri, ore Bagheta (fără abonament activ), checkout simulat.</li>
-              <li><strong>Setări</strong> — persistență, export JSON, shift temporal, multiplicator reputație proiecte publice, dificultate, persona.</li>
-              <li><strong>Șpagafon</strong> — SMS fictive (ex. 3DS), badge ne-citite.</li>
-              <li><strong>Ghid</strong> — acest ecran; conținutul reflectă comportamentul clientului.</li>
+              <li><strong>Meniu lateral</strong> grupează ecranele: <em>Principal</em> — Tablou de Bord, Proiecte Publice, Licitații; <em>Instrumente</em> — Bagheta Magică, Manager Integrări; <em>Monitorizare</em> — Audit &amp; Trasabilitate, Presa &amp; Percepție, Centrul Operațional; <em>Juridic &amp; Financiar</em> — Sistem Judiciar, Abonament &amp; Plăți, Ghid &amp; reguli, Setări utilizator. În subsol apare versiunea afișată (v2.0) și textul de subsol din interfață.</li>
+              <li><strong>Antet:</strong> nume utilizator (deschide dialog profil), badge partid, cip reputație (navigare la Sistem Judiciar).</li>
+              <li><strong>Ecrane înguste:</strong> apare butonul de meniu tip hamburger; meniul lateral se deschide și se închide din antet.</li>
+              <li><strong>Ecrane suplimentare (nu au intrare separată în meniu):</strong> detaliul unei sesiuni Bagheta (dosar + jurnal) se deschide din istoricul sesiunilor; portalele <strong>PSD Direct Connect™</strong> și <strong>ANAF Sync™</strong> se deschid ca ferestre peste restul aplicației; mesajele scurte (toast) și dialogurile apar deasupra conținutului obișnuit.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>La pornire</h3><p>Disclaimer și autentificare</p></div>
+          <div class="cc">
+            <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
+              <li><strong>Popup disclaimer:</strong> text despre natura fictivă a programului; butonul „Am înțeles — Continuă” închide fereastra și lasă accesul la ecranul de autentificare.</li>
+              <li><strong>Ecran login:</strong> Nume și prenume; Partid; Funcție; Județ; alegere <strong>Date demonstrative</strong> sau <strong>Cont gol</strong>; Profil instituție (Primărie mică / Consiliu Județean / Minister); Dificultate (Ușor / Normală / Greu); Persistență sesiune (în memorie, se pierde la reîncărcarea paginii / cu stocarea locală în browser, continuă după ce închizi fila); <strong>Canal briefing implicit</strong> pentru presă (TV local, TV național, Social media, Presa investigații) — se folosește la autentificare pentru presă și <strong>nu</strong> este inclus în exportul JSON al progresului salvat local (vezi mai jos).</li>
+              <li>Butonul <strong>Autentificare prin SEAP</strong> este etichetă în stilul jocului; nu există legătură reală către SEAP.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Modulele aplicației</h3><p>Ce face fiecare ecran principal</p></div>
+          <div class="cc">
+            <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
+              <li><strong>Tablou de Bord:</strong> cărți cu total „optimizat”, buget public disponibil, număr proiecte în execuție, licitații (inclusiv câte sunt încă doar publicate / „deschise”), proiecte cu probleme; ultimele înregistrări din jurnalul de activitate (până la 20 de evenimente păstrate); bloc stare abonament (activ cu ore folosite sau mesaj plan gratuit implicit).</li>
+              <li><strong>Proiecte Publice:</strong> listă proiecte cu buget, valori declarate vs reale, status, <strong>categorie</strong> (tip achiziție), pariu opțional pe calitatea finală și buton de finalizare; punctele de reputație țin de rezultatul extras. Orientări despre ce înseamnă categoriile în termeni reali sunt în secțiunea dedicată din acest ghid.</li>
+              <li><strong>Licitații:</strong> listă proceduri, avansare manuală pe etape, creare licitație legată obligatoriu de proiect planificat sau în desfășurare.</li>
+              <li><strong>Bagheta Magică:</strong> formular sesiune, coadă, istoric sesiuni; reguli detaliate într-o secțiune dedicată mai jos.</li>
+              <li><strong>Manager Integrări:</strong> catalog cu <strong>PSD Direct Connect™</strong> și <strong>ANAF Sync™</strong>; deschidere portal simulat; câmp lipire cheie API în platformă după fluxul portalului.</li>
+              <li><strong>Audit &amp; Trasabilitate:</strong> sumar contabil (buget public, surplus redistribuit, cheltuieli influență, cost reputațional) și jurnal complet de activitate numerotat; secțiunea <strong>ANAF Sync · E-Factura &amp; flux detaliat</strong> apare doar după ce integrarea ANAF este conectată <strong>și</strong> ai o cheie API salvată în Manager integrări; conținutul combină proiecte, ultimele evenimente din jurnal și, dacă există, mesajul de alertă ANAF din Sistemul judiciar.</li>
+              <li><strong>Presa &amp; Percepție:</strong> acțiuni cu cost reputație (unde e cazul), scor imagine, canale ostile/neutre, titluri simulate, istoric intervenții.</li>
+              <li><strong>Centrul Operațional:</strong> proiecte în execuție, sesiune Bagheta activă/inactivă, presiune juridică procentuală, etapă justiție, etichetă narativă pentru „fereastră operațională”.</li>
+              <li><strong>Sistem Judiciar:</strong> stare etape (inclusiv alertă ANAF / fiscal în etichete), costuri manipulare afișate dinamic, istoric puncte reputație.</li>
+              <li><strong>Abonament &amp; Plăți:</strong> grilă planuri, discount din reputație, simulare plată; secțiune <strong>Cumpără Ore Bagheta Magică</strong> vizibilă doar fără abonament plătit activ (50 RON/oră în textul interfeței).</li>
+              <li><strong>Setări utilizator:</strong> export/ștergere date locale; Șpagafon (lansator); shift temporal (în funcție de plan); multiplicator reputație la finalizări publice (în funcție de plan); reînnoire automată abonament (disponibilă din bifă când ai abonament plătit — după fiecare plată simulată a unui plan, reînnoirea automată pleacă de la <strong>oprită</strong> până o activezi manual aici).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Manager Integrări</h3><p>PSD Direct Connect™ și ANAF Sync™</p></div>
+          <div class="cc">
+            <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
+              <li><strong>PSD Direct Connect™:</strong> portal în mai mulți pași (termeni, verificare cont prin cod trimis ca SMS fictiv pe Șpagafon, emitere cheie provizorie care începe cu <strong>sdc_live_</strong>, lipire sau buton „Trimite” în Manager). Urmărești dacă contul e verificat și dacă există cheie activă sau cod în așteptare. Fără integrare activă, plata cu „bani publici” (PSD) la abonament sau ore nu apare în fluxul de plată.</li>
+              <li><strong>ANAF Sync™:</strong> la început, dacă justiția este în <strong>anchetă</strong>, <strong>audiere</strong>, <strong>recurs</strong> sau există <strong>escaladare DNA</strong>, portalul afișează blocare și nu permite depunerea cererii; în rest: declarație de integritate și termeni, PIN certificat pe Șpagafon, dosar cu <strong>patru</strong> actualizări successive de stare, apoi cheie provizorie care începe cu <strong>asf_live_</strong>, de lipit sau trimisă în Manager ca la PSD. După conectare: copiere cheie, regenerare (cheia veche nu mai e valabilă până nu lipești una nouă), revocare în doi pași (trebuie tastat exact textul indicat pe ecran, apoi confirmare cu bifă).</li>
+              <li>Ambele integrări se salvează împreună cu restul progresului când folosești stocarea locală în browser.</li>
             </ul>
           </div>
         </div>
         <div class="card mb14">
           <div class="ch"><h3>Licitații (achiziții)</h3><p>Integrare cu proiectele</p></div>
           <div class="cc">
-            <p class="tsm" style="line-height:1.65">O licitație nouă <strong>trebuie</strong> asociată unui proiect în curs sau planificat. Etapele parcurg clarificări → depuneri → comisie → <strong>evaluare</strong> (oferte generate și punctate) → adjudecare sau contestație. Scorul combină preț, tehnologie, conformitate documente și „rețea”; riscul de contestație ține cont de diferența declarat/real a proiectului, întârzieri și presiunea curentă.</p>
-            <p class="tsm tmut mt8">Progresul automat lunar poate avansa licitațiile; la etapa de evaluare se folosește același motor ca la „Evaluează Oferte”.</p>
+            <p class="tsm" style="line-height:1.65">Publicarea cere un proiect <strong>planificat</strong> sau <strong>în desfășurare</strong>. O licitație nouă începe ca <strong>Publicată</strong>. Lanțul manual este: <strong>Publicată → Clarificări → Depuneri → Comisie de evaluare</strong>; în faza de comisie, butonul „Evaluează Oferte” folosește aceeași logică ca progresul lunar automat când o licitație rămâne la evaluare. După evaluare: fie <strong>Adjudecată</strong>, fie <strong>Contestată</strong> (șansa ține de riscul de audit al licitației, de dificultate și de hazard); din stadiul adjudecat poți merge la <strong>Execuție contract</strong>. Contestația poate fi respinsă procedural (revenire la adjudecat).</p>
+            <p class="tsm tmut mt8">Progresul lunar automat poate închide evaluări și poate readuce unele contestații spre re-evaluare. Ofertele sunt punctate după preț, tehnologie, conformitate, „rețea” și contextul proiectului.</p>
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Bagheta Magică — reguli implementate</h3><p>Timp, factor, surplus, coadă, jurnal, risc narativ</p></div>
+          <div class="ch"><h3>Proiecte: categorie și calitate la finalizare</h3><p>Orientări în stil real (nu statistici oficiale)</p></div>
+          <div class="cc">
+            <p class="tsm" style="line-height:1.65">În dezbaterea publică din România, achizițiile sunt adesea discutate în termeni de <strong>corupție și calitate slabă pe șantiere</strong>, în timp ce <strong>livrări simple</strong> (consumabile, birotică, rechizite) tind să fie percepute ca mai ușor de verificat și mai frecvent conforme. <strong>Lucrări de construcții, infrastructură și amenajări mari</strong> apar în mod repetat în presă și rapoarte ca zone cu risc ridicat de execuție sub standard sau cu devieri. <strong>IT, digitalizare, studii și consultanță</strong> stau de obicei la mijloc: multă documentație „în regulă”, iar rezultatul pe teren sau în utilizare variază.</p>
+            <p class="tsm tmut mt8" style="line-height:1.65">O mare parte din proiectele cu <strong>profil mixt sau neclasificat ușor</strong> se încadrează tot în zona „merge și așa” sau calitate slabă; rezultate exemplare sunt excepția, nu regula.</p>
+            <p class="tsm mt8" style="line-height:1.65">În SifonatorPRO, fiecare proiect are o <strong>categorie</strong> aleasă la creare (sau din gestionare). La <strong>Finalizează</strong>, calitatea finală (de mântuială / moderată / ridicată) este <strong>extrasă aleator</strong>, cu ponderi care urmăresc această logică. Te poți ghida după experiență, intuiție și paragrafele de mai sus pentru a plasa un <strong>pariu opțional</strong> pe rezultat. Dacă anticipezi corect, primești puncte bonus. Dacă proiectul are <strong>întârziere la finalizare</strong> marcată în sistem, simularea înclină spre rezultate mai slabe.</p>
+            <p class="tsm tmut mt8" style="line-height:1.55">Valorile din joc nu reproduc un studiu statistic; sunt un model narativ coerent cu clișeele și temele recurente despre achiziții publice și corupție.</p>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Bagheta Magică</h3><p>Timp, factor, surplus, coadă, jurnal, risc</p></div>
           <div class="cc">
             <ul style="font-size:13px;line-height:1.68;color:var(--text2);padding-left:18px">
-              <li><strong>Eligibilitate:</strong> doar proiecte <strong>planificate</strong> sau <strong>în desfășurare</strong> — nu și cele <strong>finalizate</strong> (dosar închis). Exceptând demo ascuns din coadă. Este nevoie de cel puțin o licitație asociată ajunsă la <strong>Clarificări</strong> sau mai târziu: Depuneri, evaluare, adjudecată, execuție, contestată. Doar licitația încă <strong>publicată</strong> (fără avansare) nu e suficientă — „AI-ul” contabil narativ presupune că procedura a părăsit faza de simplu anunț.</li>
-              <li><strong>Timp:</strong> fără abonament activ se consumă <code>purchSec</code> / <code>purchSecUsed</code>; cu abonament, secunde lunare din plan (Enterprise: cotă nelimitată simulată ca <code>Infinity</code>). Timpul scade pe durata sesiunii; <strong>pauza</strong> oprește consumul și incrementarea surplusului.</li>
-              <li><strong>Valorile reale/declarate</strong> afișate în formular sunt citite din proiect (nu există apel la un API „AI” extern).</li>
-              <li><strong>Factor de optimizare (slider 20-95%):</strong> setează ce parte din diferența (declarat, real) poate deveni <strong>surplus redistribuibil</strong> în sesiune. <strong>Plafon surplus = (declarat - real) × factor</strong> (rotunjit la întregi în simulare). Creșterea efectivă în timp este <strong>asimptotică</strong> (viteza scade cu timpul și depinde de dificultate prin <code>wandRate</code>).</li>
-              <li><strong>Vizibilitate simulată:</strong> un scor procentual (în UI) combină factorul cu etapa justiției și dificultatea; nu înlocuiește un audit real.</li>
+              <li><strong>Eligibilitate:</strong> doar proiecte <strong>planificate</strong> sau <strong>în desfășurare</strong>, nu și cele <strong>finalizate</strong> (dosar închis). Exceptând demo ascuns din coadă. Este nevoie de cel puțin o licitație asociată ajunsă la <strong>Clarificări</strong> sau mai târziu: Depuneri, evaluare, adjudecată, execuție, contestată. Doar licitația încă în stadiul <strong>Publicată</strong> nu e suficientă, procesul contabil presupune că procedura a părăsit faza de simplu anunț.</li>
+              <li><strong>Timp:</strong> fără abonament activ se consumă orele/timpul cumpărat pentru Baghetă; cu abonament, cota lunară din plan (la planul cel mai mare, cota nelimitată este tratată ca nelimitată). Timpul scade pe durata sesiunii; <strong>pauza</strong> oprește consumul și incrementarea surplusului.</li>
+              <li><strong>Valorile reale/declarate</strong> afișate în formular sunt citite din proiect (nu există legătură cu un serviciu „AI” extern).</li>
+              <li><strong>Factor de optimizare (slider 20-95%):</strong> setează ce parte din diferența (declarat, real) poate deveni <strong>surplus redistribuibil</strong> în sesiune. <strong>Plafon surplus = (declarat - real) × factor</strong> (rotunjit la întregi în simulare). Creșterea efectivă în timp este <strong>asimptotică</strong> (viteza scade cu timpul și depinde de dificultatea aleasă la login).</li>
+              <li><strong>Vizibilitate simulată:</strong> un scor procentual în ecran combină factorul cu etapa justiției și dificultatea; nu înlocuiește un audit real.</li>
               <li><strong>Factor ≥ 70%:</strong> după pornirea sesiunii poate declanșa o alertă narativă (banner + eventuală escaladare DNA dacă sumele sifonate și etapa „curat” permit).</li>
               <li><strong>Coadă:</strong> maxim 5 intrări nefinalizate; poți muta sarcinile <strong>în așteptare</strong> cu ↑/↓ și pe durata unei sesiuni (nu și pe cea în execuție). Următoarea sarcină pornește automat când nu există sesiune activă.</li>
               <li><strong>Sesiune activă:</strong> formularul principal este ascuns; programările suplimentare se fac din lista „Proiecte disponibile pentru coadă”.</li>
               <li><strong>Jurnal:</strong> linii la deschiderea dosarului + la fiecare ~5 secunde de simulare (când nu e pauză). Export .txt și copiere din dosar; filtru opțional pentru linii cu mișcări în RON.</li>
               <li><strong>Istoric sesiuni:</strong> click pe rând → dialog cu export/copiere.</li>
-              <li><strong>Oprire:</strong> surplusul se adaugă la totalul sifonat, la surplusul contabil din ledger, scade bugetul public; proiectul este marcat <code>wandUsed</code>.</li>
+              <li><strong>Oprire:</strong> surplusul se adaugă la totalul sifonat, la surplusul contabil, scade bugetul public; proiectul este marcat ca folosit deja cu Bagheta.</li>
             </ul>
           </div>
         </div>
         <div class="card mb14">
           <div class="ch"><h3>Plăți fictive: abonamente, ore &amp; SifonPay™</h3><p>Același tip de flux pentru abonament și pentru ore</p></div>
           <div class="cc">
-            <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: alegi <strong>SifonPay™</strong> (card) sau <strong>PSD Direct Connect™</strong> („bani publici”), cu pași simulați. Nu există variantă „instant” care să sari peste acest flux.</p>
+            <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: <strong>SifonPay™</strong> (card) sau <strong>PSD Direct Connect™</strong> („bani publici”), cu pași simulați. Pentru PSD Direct Connect trebuie mai întâi integrarea din <strong>Instrumente → Manager Integrări</strong> (cont verificat + cheie API). Nu există variantă „instant” care să sari peste flux.</p>
             <p class="tsm tmut mt8">Tranzacția apare narativ ca procesată de SifonPay™; datele cardului sunt fictive.</p>
             <div id="howto-sifonpay-bin" class="mt12"></div>
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Reputație &amp; dificultate</h3></div>
+          <div class="ch"><h3>Reputație, dificultate, presă, justiție</h3></div>
           <div class="cc">
-            <p class="tsm" style="line-height:1.65">Dificultatea (Ușor / Normal / Greu) influențează presiunea DNA, costurile la presă, surplusul Baghetei, licitațiile, plafonul de puncte și costurile de „manipulare” judiciară. Reputația se câștigă la finalizare proiect / pariuri; se cheltuie la presă și în anumite acțiuni.</p>
-            <p class="tsm tmut mt8">Discount la prețul afișat al abonamentelor/orilor: <strong>0,1%</strong> per punct reputație, maximum <strong>25%</strong>. În Setări, multiplicatorul pentru <strong>proiecte publice</strong> (reputație la finalizare) este limitat de plan și de sliderul utilizatorului.</p>
+            <p class="tsm" style="line-height:1.65">Dificultatea (Ușor / Normal / Greu) influențează presiunea DNA, costurile la presă (acțiunile cu cost folosesc un multiplicator rotunjit), surplusul Baghetei, norocul la licitații, plafonul de puncte reputație și cât de mult câștigi sau pierzi la o acțiune, înainte de bonusul pentru proiecte publice.</p>
+            <p class="tsm tmut mt8">Discount la prețul afișat al abonamentelor și orelor: <strong>0,1%</strong> per punct reputație, maximum <strong>25%</strong>. În Setări, multiplicatorul pentru <strong>proiecte publice</strong> la finalizare respectă plafonul abonamentului și poziția sliderului de intensitate. În Sistem Judiciar, costurile afișate pentru manipulări se scalează cu dificultatea.</p>
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Persistență &amp; date salvate</h3></div>
+          <div class="ch"><h3>Șpagafon</h3><p>Mesaje, portal rapid, poziționare</p></div>
           <div class="cc">
-            <p class="tsm" style="line-height:1.65">Cu <strong>localStorage</strong> activ, starea este salvată în cheia <code>sifonator_state_v3</code> (setări, utilizator, reputație, proiecte, licitații, ledger, justiție, presă, abonament, timp cumpărat, <strong>sesiune Bagheta activă</strong>, coadă Bagheta, istoric sesiuni, etc.). Fără localStorage, totul rămâne în memorie până la reîncărcare.</p>
-            <p class="tsm tmut mt8">Exportul JSON din Setări descarcă exact obiectul persistat (când localStorage este activ).</p>
+            <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
+              <li><strong>Mesaje:</strong> inbox SMS fictiv (până la 50 de mesaje păstrate); coduri pentru SifonPay™ 3DS, verificare PSD, certificat ANAF; butoane care copiază codul în câmpul din dialogul deschis. Contorul de necitite ține minte ultima dată la care ai văzut mesajele.</li>
+              <li><strong>Portal rapid:</strong> tab cu mini-aplicații care deschid ecranele Tablou, Proiecte, Licitații, Bagheta, Sistem Judiciar, Abonament, Presă, Centrul Operațional; varianta „ecran mare” închide Șpagafonul și duce la acel ecran în aplicația principală.</li>
+              <li><strong>Mobil:</strong> în colțul din dreapta-jos există un buton compact (📱). În Setări, <strong>Forțează afișare completă pe ecrane mici (lățime până la 680px)</strong> înlocuiește butonul compact cu același lansator din colț ca pe ecranul lat și îți permite să alegi <strong>Mod afișare</strong> (pictogramă și text, doar pictogramă sau doar text); preferința se salvează cu restul setărilor.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Buget public epuizat</h3><p>Blocare interfață</p></div>
+          <div class="cc">
+            <p class="tsm" style="line-height:1.65">Când bugetul public ajunge la zero sau sub zero, restul interfeței se blochează și apare un ecran cu mesajul de buget epuizat și butonul „Caută surse noi de fonduri publice”. Acest buton adaugă la buget o sumă aleatoare în jur de 7% din bugetul de referință al profilului de instituție (ex. primărie mică ~12 milioane RON), cu o mică variație aleatoare; evenimentul apare în jurnal, iar Tabloul de bord și Auditul se actualizează.</p>
+          </div>
+        </div>
+        <div class="card mb14">
+          <div class="ch"><h3>Persistență &amp; revenire după absență</h3></div>
+          <div class="cc">
+            <p class="tsm" style="line-height:1.65">Cu <strong>stocarea locală în browser</strong> (opțiunea aleasă la login), progresul este salvat automat sub cheia <strong>sifonator_state_v3</strong>. În fișierul exportat se regăsesc într-o singură structură: setările, profilul, reputația și istoricul ei, sumarul contabil și jurnalul de activitate, proiectele și licitațiile, integrările PSD și ANAF, mesajele Șpagafon, abonamentul și timpul Bagheta (inclusiv sesiunea activă și coada), presiunea juridică afișată, tonul și istoricul presei, decalajul de timp simulat, sliderul de bonus reputație, cozi și identificatori interni pentru proiecte/licitații și calendarul simulării. De asemenea, browserul păstrează un marcaj de timp al ultimei vizite pentru calculul absenței.</p>
+            <p class="tsm tmut mt8"><strong>Revenire după ce ai lipsit:</strong> dacă folosești stocarea locală și au trecut cel puțin <strong>15</strong> ore reale de la ultima înregistrare a vizitei, la următoarea deschidere <strong>axa timpului simulat</strong> avansează cu același interval ca în realitate (ex.: 15 h reale → 15 h în joc), până la un plafon de maximum <strong>trei luni</strong> (~<strong>90</strong> de zile simulate pe axa jocului). Abonamentul este re-evaluat după noul timp simulat. O sesiune Bagheta deschisă nu îți consumă cota cât timp fila a fost închisă. Fără stocare locală, totul se pierde la reîncărcarea paginii.</p>
+            <p class="tsm tmut mt8">Exportul JSON din Setări descarcă exact conținutul salvat sub <strong>sifonator_state_v3</strong> (după o salvare forțată). Ștergerea datelor locale golește acea salvare și marcajul de vizită, apoi reîncarcă pagina.</p>
           </div>
         </div>
         <div class="card">
           <div class="ch"><h3>Depanare (dezvoltatori)</h3></div>
           <div class="cc">
-            <p class="tsm tmut">Deschide aplicația cu <code style="background:var(--bg);padding:2px 6px;border-radius:4px">?debug=1</code> în URL sau setează <code style="background:var(--bg);padding:2px 6px;border-radius:4px">localStorage.sifonator_debug=1</code> pentru butonul 🐛 și bara de debug.</p>
+            <p class="tsm tmut">Deschide pagina cu parametrul <strong>?debug=1</strong> în adresă, sau setează în stocarea locală a site-ului cheia <strong>sifonator_debug</strong> la valoarea <strong>1</strong>, pentru a afișa butonul 🐛 și bara de debug.</p>
           </div>
         </div>
       </div>
@@ -1181,53 +1378,37 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
       <button class="btn btn-sm btn-f" onclick="dbReset()">Reset</button>
     </div>
   </div>
+</div>
 
-  <!-- ȘPAGAFON — colț dreapta-jos, satiră „telefon pentru politicieni” -->
-  <div id="spagafon-root">
-    <div class="spgf-dock">
-      <div class="spgf-phone">
-      <button type="button" id="spgf-launcher" onclick="toggleSpagafon()" title="Șpagafon — mesaje &amp; mini-aplicații" aria-expanded="false" aria-controls="spgf-sheet">
-        <span class="spgf-badge" id="spgf-unread">0</span>
-        <span class="spgf-ico">📱</span>
-        <span class="spgf-lbl">Șpagafon</span>
-      </button>
-      <div id="spgf-sheet" aria-hidden="true">
-        <div class="spgf-notch" aria-hidden="true"></div>
-        <div class="spgf-head">
-          <div class="spgf-brand">
-            <div>
-              <h3>Șpagafon</h3>
-              <small class="mb8">rețea mobilă de încredere</small>
-            </div>
-            <button type="button" class="spgf-close" onclick="toggleSpagafon(false)" title="Închide">✕</button>
-          </div>
-          <div class="spgf-tabs" role="tablist">
-            <button type="button" class="spgf-tab on" id="spgf-tab-sms" onclick="spgfSetTab('sms')">Mesaje</button>
-            <button type="button" class="spgf-tab" id="spgf-tab-apps" onclick="spgfSetTab('apps')">Portal rapid</button>
-          </div>
+<!-- PSD Direct Connect -->
+<div id="psd-dc-portal" class="hid" aria-hidden="true">
+  <div class="psd-dc-shell">
+    <div class="psd-dc-top">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div>
+          <div class="psd-dc-brand">PSD Direct Connect™</div>
+          <div class="psd-dc-sub">Portal de integrare pentru politicieni cu influență · endpoint-uri oferite de <strong>PSD</strong></div>
         </div>
-        <div class="spgf-body">
-          <div id="spgf-pane-sms" class="spgf-pane on">
-            <div id="spgf-msgs" class="spgf-msgs"></div>
-          </div>
-          <div id="spgf-pane-apps" class="spgf-pane">
-            <button type="button" id="spgf-applet-back" class="spgf-applet-back hid" onclick="spgfCloseApplet()">← Înapoi la aplicații</button>
-            <div id="spgf-applet-host" class="spgf-applet-host"></div>
-            <div id="spgf-app-grid" class="spgf-apps spgf-app-grid">
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('dash')"><span class="ap-ico">📊</span>Tablou<span class="ap-sub">rezumat VIP</span></button>
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('proj')"><span class="ap-ico">🏗️</span>Proiecte<span class="ap-sub">șantiere „publice”</span></button>
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('tend')"><span class="ap-ico">📋</span>Licitații<span class="ap-sub">SEAP express</span></button>
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('wand')"><span class="ap-ico">✨</span>Bagheta<span class="ap-sub">timp rămas</span></button>
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('just')"><span class="ap-ico">⚖️</span>DNA info<span class="ap-sub">linie fierbinte</span></button>
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('sub')"><span class="ap-ico">💳</span>Abonament<span class="ap-sub">SifonPay™</span></button>
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('press')"><span class="ap-ico">📰</span>Presă<span class="ap-sub">spălare imagine</span></button>
-              <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('ops')"><span class="ap-ico">🛰️</span>OPS<span class="ap-sub">tactici</span></button>
-            </div>
-          </div>
-        </div>
-      </div>
+        <button type="button" class="psd-dc-btn-ghost" onclick="closePsdDcPortal()" style="flex-shrink:0;margin-top:2px">Închide</button>
       </div>
     </div>
+    <div class="psd-dc-body" id="psd-dc-body"></div>
+  </div>
+</div>
+
+<!-- ANAF Sync -->
+<div id="anaf-sync-portal" class="hid" aria-hidden="true">
+  <div class="anaf-shell">
+    <div class="anaf-top">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div>
+          <div class="anaf-brand">ANAF Sync™</div>
+          <div class="anaf-sub">Conector pentru e-Factura, SAF-T și „trasabilitate extinsă” · <strong>simulare</strong></div>
+        </div>
+        <button type="button" class="anaf-btn-sec" onclick="closeAnafSyncPortal()" style="flex-shrink:0;margin-top:2px">Închide</button>
+      </div>
+    </div>
+    <div class="anaf-body" id="anaf-sync-body"></div>
   </div>
 </div>
 
@@ -1243,11 +1424,60 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 <!-- TOASTS -->
 <div id="toasts"></div>
 
+<!-- Șpagafon: în afara #app ca să fie deasupra oricărui overlay (dialog, PSD DC, etc.) -->
+<button type="button" id="hb-mobile-spag" class="btn btn-f btn-sm" onclick="toggleSpagafon()" title="Șpagafon — mesaje">📱</button>
+<div id="spagafon-root">
+  <div class="spgf-dock">
+    <div class="spgf-phone">
+    <button type="button" id="spgf-launcher" onclick="toggleSpagafon()" title="Șpagafon — mesaje &amp; mini-aplicații" aria-expanded="false" aria-controls="spgf-sheet">
+      <span class="spgf-badge" id="spgf-unread">0</span>
+      <span class="spgf-ico">📱</span>
+      <span class="spgf-lbl">Șpagafon</span>
+    </button>
+    <div id="spgf-sheet" aria-hidden="true">
+      <div class="spgf-notch" aria-hidden="true"></div>
+      <div class="spgf-head">
+        <div class="spgf-brand">
+          <div>
+            <h3>Șpagafon</h3>
+            <small class="mb8">rețea mobilă de încredere</small>
+          </div>
+          <button type="button" class="spgf-close" onclick="toggleSpagafon(false)" title="Închide">✕</button>
+        </div>
+        <div class="spgf-tabs" role="tablist">
+          <button type="button" class="spgf-tab on" id="spgf-tab-sms" onclick="spgfSetTab('sms')">Mesaje</button>
+          <button type="button" class="spgf-tab" id="spgf-tab-apps" onclick="spgfSetTab('apps')">Portal rapid</button>
+        </div>
+      </div>
+      <div class="spgf-body">
+        <div id="spgf-pane-sms" class="spgf-pane on">
+          <div id="spgf-msgs" class="spgf-msgs"></div>
+        </div>
+        <div id="spgf-pane-apps" class="spgf-pane">
+          <button type="button" id="spgf-applet-back" class="spgf-applet-back hid" onclick="spgfCloseApplet()">← Înapoi la aplicații</button>
+          <div id="spgf-applet-host" class="spgf-applet-host"></div>
+          <div id="spgf-app-grid" class="spgf-apps spgf-app-grid">
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('dash')"><span class="ap-ico">📊</span>Tablou<span class="ap-sub">rezumat VIP</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('proj')"><span class="ap-ico">🏗️</span>Proiecte<span class="ap-sub">șantiere „publice”</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('tend')"><span class="ap-ico">📋</span>Licitații<span class="ap-sub">SEAP express</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('wand')"><span class="ap-ico">✨</span>Bagheta<span class="ap-sub">timp rămas</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('just')"><span class="ap-ico">⚖️</span>DNA info<span class="ap-sub">linie fierbinte</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('sub')"><span class="ap-ico">💳</span>Abonament<span class="ap-sub">SifonPay™</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('press')"><span class="ap-ico">📰</span>Presă<span class="ap-sub">spălare imagine</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('ops')"><span class="ap-ico">🛰️</span>OPS<span class="ap-sub">tactici</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ═══ STATE ═══
 const S={
   user:{name:'',fn:'',jud:'',party:'PSD',since:''},
-  settings:{difficulty:'normal',persona:'primarie',persistence:'in_memory'},
+  settings:{difficulty:'normal',persona:'primarie',persistence:'in_memory',spagafonLauncherMode:'both',spagafonMobileFullDisplay:false,skipProjectFinalizeConfirm:false},
   simClock:{monthTick:0,lastAdvanceTs:0},
   ledger:{publicBudget:0,redistributedSurplus:0,influenceSpend:0,reputationCost:0},
   actors:[],
@@ -1279,6 +1509,7 @@ const S={
   smsInbox:[],
   pending3DS:null,
   spagafonLastSeen:0,
+  integrations:{psdDC:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''},anafSync:{linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0}},
 };
 
 const PERSONAS={
@@ -1340,17 +1571,33 @@ const PLANS=[
 ];
 
 const DEMO_PROJ=[
-  {id:1,name:'Reabilitare DJ-404 Not Found',budget:2300000,realValue:1420000,declaredValue:2680000,status:'in_progress',quality:null,bet:null,due:'2025-06-30',lateS:false,lateF:false,hideFromWandQueue:true},
-  {id:2,name:'Modernizare iluminat public Alibaba Edition',budget:850000,realValue:520000,declaredValue:1010000,status:'completed',quality:'mantuiala',bet:null,due:'2024-12-01',lateS:false,lateF:false},
-  {id:3,name:'Sală de sport — Etapa 1: studiu de fezabilitate, fără execuție',budget:5200000,realValue:2980000,declaredValue:6400000,status:'planned',quality:null,bet:null,due:'2026-12-31',lateS:true,lateF:false},
-  {id:4,name:'Copaci artificiali UV anti-vandalism rezistenți la întreținere',budget:1200000,realValue:760000,declaredValue:1490000,status:'in_progress',quality:null,bet:null,due:'2025-03-31',lateS:false,lateF:true},
-  {id:5,name:'Digitalizare arhivă primărie (3 dosare + 1 stick USB Kingston 32GB)',budget:450000,realValue:310000,declaredValue:560000,status:'completed',quality:'moderata',bet:null,due:'2025-01-15',lateS:false,lateF:false},
+  {id:1,name:'Reabilitare DJ-404 Not Found',budget:2300000,realValue:1420000,declaredValue:2680000,status:'in_progress',quality:null,bet:null,due:'2025-06-30',lateS:false,lateF:false,hideFromWandQueue:true,projCategory:'infrastructura',dossier:[
+    {t:'08.11.2024',txt:'Deschidere dosar, aviz favorabil.'},
+    {t:'14.01.2025',txt:'Revizie lunară: progres raportat 34%, mențiuni „conform graficului”.'},
+    {t:'03.03.2025',txt:'Notă corespondență: solicitare clarificări de la proiectant (în curs).'},
+  ]},
+  {id:2,name:'Modernizare iluminat public chinezesc',budget:850000,realValue:520000,declaredValue:1010000,status:'completed',quality:'mantuiala',bet:null,due:'2024-12-01',lateS:false,lateF:false,projCategory:'infrastructura',dossier:[
+    {t:'02.06.2024',txt:'Înregistrare proiect, studiu de oportunitate aprobat.'},
+    {t:'18.09.2024',txt:'Recepție parțială: „luminile aprind, restul e poveste”.'},
+    {t:'01.12.2024',txt:'Închidere dosar cu rezerve tehnice minore (clasice).'},
+  ]},
+  {id:3,name:'Sală de sport, studiu de fezabilitate',budget:5200000,realValue:2980000,declaredValue:6400000,status:'planned',quality:null,bet:null,due:'2026-12-31',lateS:true,lateF:false,projCategory:'consultanta',dossier:[
+    {t:'10.09.2025',txt:'Depunere justificativă, etapă studiu, fără execuție în acest contract.'},
+  ]},
+  {id:4,name:'Copaci artificiali UV anti-vandalism rezistenți la întreținere',budget:1200000,realValue:760000,declaredValue:1490000,status:'in_progress',quality:null,bet:null,due:'2025-03-31',lateS:false,lateF:true,projCategory:'constructii',dossier:[
+    {t:'22.01.2025',txt:'Semnare contract furnizor, termene asumate public.'},
+    {t:'15.02.2025',txt:'Atenționare: întârziere livrare „din motive obiective”.'},
+  ]},
+  {id:5,name:'Digitalizare arhivă primărie (3 dosare + 1 stick USB Kingston 32GB)',budget:450000,realValue:310000,declaredValue:560000,status:'completed',quality:'moderata',bet:null,due:'2025-01-15',lateS:false,lateF:false,projCategory:'it_digital',dossier:[
+    {t:'05.11.2024',txt:'Stick livrat, dosare scanate parțial.'},
+    {t:'12.01.2025',txt:'Predare conform contract: funcționalitate acceptată cu rezerve.'},
+  ]},
 ];
 const DEMO_TEND=[
-  {id:1,projectId:1,name:'Achiziție flotă auto reprezentare primărie — 5x BMW X7',budget:3500000,status:'clarificari',winner:null},
-  {id:2,projectId:3,name:'Servicii consultanță dosare finanțare UE — SC Soția Primarului SRL',budget:750000,status:'evaluation',winner:null},
-  {id:3,projectId:5,name:'Consumabile birou premium — pixuri Mont Blanc x200, hârtie italiană',budget:2100000,status:'awarded',winner:'SC Papetăria VIP SRL'},
-  {id:4,projectId:4,name:'Renovare cabinet primar — marmură Carrara, candelabru Murano',budget:1800000,status:'contested',winner:'SC Luxor Interior SRL'},
+  {id:1,projectId:1,name:'Achiziție flotă auto reprezentare primărie cu 5x BMW X7',budget:3500000,status:'clarificari',winner:null},
+  {id:2,projectId:3,name:'Servicii consultanță dosare finanțare UE pentru SC Soția Primarului SRL',budget:750000,status:'evaluation',winner:null},
+  {id:3,projectId:5,name:'Consumabile birou premium, inclusiv pixuri Mont Blanc x200 și hârtie italiană',budget:2100000,status:'awarded',winner:'SC Papetăria VIP SRL'},
+  {id:4,projectId:4,name:'Renovare cabinet primar cu marmură Carrara și candelabru Murano',budget:1800000,status:'contested',winner:'SC Luxor Interior SRL'},
 ];
 const DEMO_LOG=[
   {t:'09:14',txt:'Proiect „Modernizare iluminat" finalizat. +1 punct reputație.'},
@@ -1385,12 +1632,11 @@ let _subExpiredPromptPending=false;
 let _subExpiredDlgTimer=null;
 const LS_LAST_REAL_VISIT='sifonator_last_real_visit_ts';
 const OFFLINE_GAP_NOTIFY_HOURS=15;
-const OFFLINE_SHIFT_MAX_SEC=14*86400;
+const OFFLINE_SHIFT_MAX_SEC=90*86400;
 function persistLastRealVisitTs(){
   if(S.settings.persistence!=='local_storage')return;
   try{localStorage.setItem(LS_LAST_REAL_VISIT,String(Date.now()));}catch(e){}
 }
-/** La revenire (timp real): dacă au trecut ≥15h, avansează simularea și notifică subtil. Returnează true dacă s-a aplicat simularea (UI trebuie reîmprospătat). */
 function processOfflineRealTimeGap(){
   if(S.settings.persistence!=='local_storage')return false;
   const now=Date.now();
@@ -1406,27 +1652,19 @@ function processOfflineRealTimeGap(){
     return false;
   }
   const hoursAway=gapMs/3600000;
-  const projectsDoneBefore=S.projects.filter(p=>p.status==='completed').length;
-  const monthBefore=S.simClock.monthTick;
   const shiftSec=Math.min(OFFLINE_SHIFT_MAX_SEC,Math.floor(gapMs/1000));
   S.timeShiftSec+=shiftSec;
-  const simMonths=Math.min(8,Math.max(1,Math.ceil(hoursAway/OFFLINE_GAP_NOTIFY_HOURS)));
-  advanceSimulationMonths(simMonths);
   if(S.activeSession){
     if(!S.activeSession.paused)S.activeSession.startReal+=gapMs;
     S.activeSession.lastTickAt=nowTs();
   }
   checkSubLifecycle();
-  const projectsDoneAfter=S.projects.filter(p=>p.status==='completed').length;
-  const monthsAdvanced=S.simClock.monthTick-monthBefore;
+  recalcJudiciaryPressure();
   const lines=[
-    `Ai lipsit ~${hoursAway.toFixed(1)} h (ceas real). Timpul simulat a curs: +${fSec(shiftSec)} pe „axa” jocului.`,
-    `Proceduri modelate: ~${simMonths} lun${simMonths===1?'ă':'i'} narative (proiecte, licitații, presă sporadică).`,
+    `Ai lipsit ~${hoursAway.toFixed(1)} h (ceas real). Pe axa jocului a curs același interval: +${fSec(shiftSec)} (fără avans lunar automat la proiecte/licitații).`,
   ];
-  if(monthsAdvanced>0)lines.push(`Contor simulare: +${monthsAdvanced} lun${monthsAdvanced===1?'ă':'i'} în calendarul intern.`);
-  if(projectsDoneAfter>projectsDoneBefore)lines.push(`${projectsDoneAfter-projectsDoneBefore} proiect(e) marcate finalizate în simularea din absență.`);
   if(S.activeSession)lines.push('Sesiune Baghetă: timpul petrecut cu browserul închis nu ți-a consumat cota (pauză automată).');
-  addAct(`Revenire după pauză reală (~${hoursAway.toFixed(1)} h): timp simulat +${fSec(shiftSec)}, ${simMonths} iterații lunare modelate.`);
+  addAct(`Revenire după pauză reală (~${hoursAway.toFixed(1)} h): timp simulat +${fSec(shiftSec)} pe axa jocului (fără luni modelate în absență).`);
   toast(lines.join(' '),'away');
   persistLastRealVisitTs();
   return true;
@@ -1439,7 +1677,7 @@ function saveState(){
       settings:S.settings,user:S.user,rep:S.rep,repH:S.repH,siphoned:S.siphoned,justice:S.justice,smsInbox:S.smsInbox,spagafonLastSeen:S.spagafonLastSeen,sub:S.sub,subLapsed:S.subLapsed,
       purchSec:S.purchSec,purchSecUsed:S.purchSecUsed,sessions:S.sessions,activeSession:activeSer,judiciaryRisk:S.judiciaryRisk,
       pressTone:S.pressTone,pressHistory:S.pressHistory,timeShiftSec:S.timeShiftSec,userControls:S.userControls,wandQueue:S.wandQueue,
-      projects:S.projects,tenders:S.tenders,
+      projects:S.projects,tenders:S.tenders,integrations:S.integrations,
       actLog:S.actLog,npid:S.npid,ntid:S.ntid,ledger:S.ledger,actors:S.actors,worldMemory:S.worldMemory,simClock:S.simClock
     }));
     persistLastRealVisitTs();
@@ -1468,7 +1706,11 @@ function loadState(){
     if(!Array.isArray(S.wandQueue))S.wandQueue=[];
     if(typeof S._wandLogMoneyFilter!=='boolean')S._wandLogMoneyFilter=false;
     if(typeof S.subLapsed!=='object')S.subLapsed=null;
+    ensureIntegrations();
     migrateSubState();
+    normalizeSpagafonSettings();
+    if(typeof S.settings.skipProjectFinalizeConfirm!=='boolean')S.settings.skipProjectFinalizeConfirm=false;
+    applySpagafonDisplaySettings();
     if(S.subLapsed&&S.subLapsed.tier)_subExpiredPromptPending=true;
     fixLoadedActiveSession();
     return true;
@@ -1631,19 +1873,27 @@ function advanceSimulationMonths(months){
   for(let i=0;i<months;i++){
     S.simClock.monthTick++;
     S.projects.forEach(p=>{
+      if(p.status==='completed')return;
       if(!p.monthly)p.monthly={progress:Math.floor(Math.random()*18),contractorPerf:55+Math.floor(Math.random()*35),changeOrders:0};
       if(p.status==='in_progress'){
         const drift=Math.floor(Math.random()*12)-2;
         p.monthly.progress=Math.max(0,Math.min(100,p.monthly.progress+drift+p.monthly.contractorPerf/25));
         if(Math.random()<0.28){p.monthly.changeOrders++;p.declaredValue+=Math.round(p.declaredValue*0.03);p.budget=p.declaredValue;addAct(`Modificare suplimentară (contract) pe „${p.name}”: +3% valoare declarată.`)}
-        if(p.monthly.progress>=100){p.status='completed';addAct(`Proiect „${p.name}” a fost finalizat prin avans lunar.`)}
+        if(p.monthly.progress>=100){
+          p.status='completed';
+          if(p.bet){addAct(`Pariu pe „${p.name}" anulat (finalizare automată în simulare).`);p.bet=null}
+          p.quality=rollProjectQuality(p);
+          addAct(`Proiect „${p.name}” finalizat prin avans lunar — ${qLabel(p.quality)}.`);
+        }
       }
-      if(!p.dossier)p.dossier=[];
+      ensureProjectDossier(p);
       p.dossier.unshift({t:nowDate().toLocaleDateString('ro-RO'),txt:`Revizie lunară #${S.simClock.monthTick}: progres ${(p.monthly?.progress||0).toFixed(0)}%`});
       if(p.dossier.length>20)p.dossier.pop();
     });
     const tl=Math.min(0.95,0.52*diffTune().tenderLuck);
     S.tenders.forEach(t=>{
+      const lp=t.projectId?S.projects.find(p=>p.id===t.projectId):null;
+      if(lp&&lp.status==='completed')return;
       if(t.status==='evaluation'&&Math.random()<tl){evaluateTenderNow(t);return}
       if(t.status==='contested'&&Math.random()<(0.36*diffTune().tenderLuck)){t.status='evaluation';return}
       const next={open:'clarificari',clarificari:'depuneri',depuneri:'evaluation',awarded:'executie',executie:'executie'}[t.status];
@@ -1726,10 +1976,13 @@ function recalcJudiciaryPressure(skipTimelineLog){
 function normalizeProjectAccounting(){
   S.sessions=S.sessions.filter(s=>S.projects.some(p=>p.id===s.projectId));
   S.projects.forEach(p=>{
+    if(!p.projCategory||!PROJECT_CATEGORIES[p.projCategory])p.projCategory='diverse';
+    ensureProjectDossier(p);
+    if(!p.wandUsed&&S.sessions.some(s=>s.projectId===p.id))p.wandUsed=true;
+    if(p.status==='completed')return;
     if(!p.realValue)p.realValue=Math.round((p.budget||1)*0.68);
     if(!p.declaredValue||p.declaredValue<=p.realValue)p.declaredValue=Math.round((p.budget||1)*1.2);
     p.budget=p.declaredValue;
-    if(!p.wandUsed&&S.sessions.some(s=>s.projectId===p.id))p.wandUsed=true;
   });
 }
 function fixLoadedActiveSession(){
@@ -1757,6 +2010,59 @@ function repLevel(r){
 }
 function qLabel(q){return{mantuiala:'De mântuială',moderata:'Calitate moderată',ridicata:'Calitate ridicată'}[q]||'—'}
 function qBadge(q){return{mantuiala:'br',moderata:'bo',ridicata:'bg'}[q]||'bk'}
+/** Categorii proiect: fiecare are ponderi pentru extragerea calității finale */
+const PROJECT_CATEGORIES={
+  constructii:{label:'Lucrări de construcții / execuție',short:'Construcții',hint:'Șantiere, clădiri, amenajări — risc mare de „mântuială”.',p:{mantuiala:.84,moderata:.14,ridicata:.02}},
+  infrastructura:{label:'Infrastructură (drumuri, rețele, utilități)',short:'Infrastructură',hint:'Lucrări de teren — aproape ca construcțiile.',p:{mantuiala:.80,moderata:.17,ridicata:.03}},
+  consumabile:{label:'Consumabile, birotică, rechizite',short:'Consumabile',hint:'Achiziții simple — adesea livrare conformă.',p:{mantuiala:.18,moderata:.42,ridicata:.40}},
+  it_digital:{label:'IT, software, digitalizare',short:'IT & digital',hint:'Contracte IT — pe hârtie merge bine, în practică variat.',p:{mantuiala:.52,moderata:.35,ridicata:.13}},
+  consultanta:{label:'Studii, consultanță, expertize, proiectare',short:'Consultanță',hint:'Multă hârtie și formalitate — mediu spre slab.',p:{mantuiala:.58,moderata:.32,ridicata:.10}},
+  diverse:{label:'Diverse / profil mixt',short:'Diverse',hint:'Medie satirizată (~corupție generalizată, 70–80% „mântuială”).',p:{mantuiala:.76,moderata:.19,ridicata:.05}},
+};
+function projectCategoryKey(p){
+  const k=p?.projCategory;
+  return k&&PROJECT_CATEGORIES[k]?k:'diverse';
+}
+function projectCategoryLabel(p){
+  return PROJECT_CATEGORIES[projectCategoryKey(p)].short;
+}
+function normalizeQualityWeights(w){
+  const s=w.mantuiala+w.moderata+w.ridicata;
+  if(s<=0)return{mantuiala:1/3,moderata:1/3,ridicata:1/3};
+  return{mantuiala:w.mantuiala/s,moderata:w.moderata/s,ridicata:w.ridicata/s};
+}
+/** Ponderi efective după categorie; întârziere la finalizare înclină spre calitate mai slabă. */
+function effectiveQualityWeights(p){
+  const base=PROJECT_CATEGORIES[projectCategoryKey(p)].p;
+  let w={mantuiala:base.mantuiala,moderata:base.moderata,ridicata:base.ridicata};
+  if(p?.lateF){
+    w.mantuiala*=1.22;
+    w.moderata*=1.02;
+    w.ridicata*=0.72;
+  }
+  return normalizeQualityWeights(w);
+}
+function rollProjectQuality(p){
+  const w=effectiveQualityWeights(p);
+  const r=Math.random();
+  if(r<w.mantuiala)return'mantuiala';
+  if(r<w.mantuiala+w.moderata)return'moderata';
+  return'ridicata';
+}
+/** După stabilirea calității reale (extrasă): reputație + rezolvare pariu. */
+function applyProjectCompletionRepAndBet(p,q){
+  const qpts={mantuiala:1,moderata:2,ridicata:3};
+  const bonus={mantuiala:2,moderata:3,ridicata:4};
+  let bp=qpts[q],bonPts=0,betMsg='';
+  if(p.bet){
+    if(p.bet.quality===q){bonPts=bonus[q];betMsg=` Pariu CÂȘTIGAT! +${bonPts} puncte bonus.`}
+    else betMsg=' Pariul a fost pierdut.';
+  }
+  p.quality=q;
+  p.bet=null;
+  chgRep(bp+bonPts,`Proiect „${p.name}" finalizat (${qLabel(q)})`,false,{publicProject:true});
+  addAct(`Proiect „${p.name}" finalizat — rezultat: ${qLabel(q)}.${betMsg}`);
+}
 function sLabel(s){return{planned:'Planificat',in_progress:'În desfășurare',completed:'Finalizat',late:'Întârziat'}[s]||s}
 function sBadge(s){return{planned:'bk',in_progress:'bb',completed:'bg',late:'br'}[s]||'bk'}
 function tsLabel(s){return{open:'Publicată',clarificari:'Clarificări',depuneri:'Depuneri',evaluation:'Comisie evaluare',awarded:'Adjudecată',contested:'Contestată',executie:'Execuție contract'}[s]||s}
@@ -1826,6 +2132,8 @@ function buildTenderBids(t){
   }).sort((a,b)=>b.score-a.score);
 }
 function evaluateTenderNow(t){
+  const lp=t.projectId?S.projects.find(p=>p.id===t.projectId):null;
+  if(lp&&lp.status==='completed')return;
   const ctx=tenderCtx(t);
   if(!t.bids?.length)t.bids=buildTenderBids(t);
   const top=t.bids[0];
@@ -1889,7 +2197,7 @@ function buildSimulatedPressHeadlineStrings(){
   ];
   if(S.rep>=52||S.siphoned>=320000){
     pool.push(`Recorder: echipă în ${jud}, întrebări despre licitații și „logică” bugetară.`);
-    pool.push(`Reportaj tip Nedea (fictiv): un sat din ${jud} ajunge pe sticlă la nivel național.`);
+    pool.push(`Reportaj tip Nedea: un sat din ${jud} captează atenția la nivel național.`);
     pool.push(`Presă de investigație: „Chiar dacă schema e locală, publicul din toată țara vede acum harta banilor.”`);
   }
   if(S.rep>=72||S.siphoned>=620000){
@@ -1991,7 +2299,625 @@ function applyProfile(){
   $('hb-fn') && ($('hb-fn').textContent=`${S.user.fn} · ${S.user.jud}`);
   $('dash-greet') && ($('dash-greet').textContent=`Bună ziua, ${S.user.name}! Ce sifonăm azi?`);
 }
-function renderAll(){normalizeProjectAccounting();normalizeTenderData();checkSubLifecycle();updateFundsLockUI();renderDash();renderProj();renderTend();renderJust();renderSub();renderAudit();renderPress();renderOps();renderHowto();renderSettings();updRep();updWandChip();updWandQuota();renderSessions();renderWandQueue();updWandProjectOptions();syncWandSessionUI();renderWandJobView();saveState();syncMobileMenuToggleUi();}
+function renderAll(){normalizeProjectAccounting();normalizeTenderData();checkSubLifecycle();updateFundsLockUI();renderDash();renderProj();renderTend();renderJust();renderSub();renderAudit();renderPress();renderOps();renderInteg();renderHowto();renderSettings();updRep();updWandChip();updWandQuota();renderSessions();renderWandQueue();updWandProjectOptions();syncWandSessionUI();renderWandJobView();saveState();syncMobileMenuToggleUi();applySpagafonDisplaySettings();}
+
+// ═══ MANAGER INTEGRĂRI ═══
+function ensureIntegrations(){
+  if(!S.integrations||typeof S.integrations!=='object')S.integrations={};
+  const d=S.integrations.psdDC;
+  if(!d||typeof d!=='object')S.integrations.psdDC={linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''};
+  if(typeof S.integrations.psdDC.linked!=='boolean')S.integrations.psdDC.linked=false;
+  if(typeof S.integrations.psdDC.apiKey!=='string')S.integrations.psdDC.apiKey='';
+  if(typeof S.integrations.psdDC.draftKey!=='string')S.integrations.psdDC.draftKey='';
+  if(typeof S.integrations.psdDC.pendingVerifyCode!=='string')S.integrations.psdDC.pendingVerifyCode='';
+  if(S.integrations.psdDC.linked)S.integrations.psdDC.draftKey='';
+  else if(S.integrations.psdDC.apiKey&&!S.integrations.psdDC.draftKey){
+    S.integrations.psdDC.draftKey=S.integrations.psdDC.apiKey;
+    S.integrations.psdDC.apiKey='';
+  }
+  let a=S.integrations.anafSync;
+  if(!a||typeof a!=='object'){S.integrations.anafSync={linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0};a=S.integrations.anafSync;}
+  if(typeof a.linked!=='boolean')a.linked=false;
+  if(typeof a.apiKey!=='string')a.apiKey='';
+  if(typeof a.draftKey!=='string')a.draftKey='';
+  if(typeof a.pendingCertCode!=='string')a.pendingCertCode='';
+  if(typeof a.wizardPhase!=='number'||a.wizardPhase<1)a.wizardPhase=1;
+  if(typeof a.dosarTicks!=='number'||a.dosarTicks<0)a.dosarTicks=0;
+  if(a.linked){a.draftKey='';a.pendingCertCode='';}
+  else if(a.apiKey&&!a.draftKey){a.draftKey=a.apiKey;a.apiKey='';}
+}
+function isPsdDcLinked(){ensureIntegrations();return S.integrations.psdDC.linked===true;}
+function isAnafSyncLinked(){ensureIntegrations();return S.integrations.anafSync.linked===true;}
+function isAnafSyncAuditVisible(){
+  ensureIntegrations();
+  const x=S.integrations.anafSync;
+  return!!(x&&x.linked===true&&String(x.apiKey||'').trim().length>0);
+}
+function isDnaInvestigationBlockingAnafSync(){
+  const j=S.justice;
+  if(!j)return false;
+  if(j.dnaEscalation)return true;
+  const s=j.stage||'clean';
+  return s==='ancheta'||s==='audiere'||s==='recurs';
+}
+function generatePsdDcApiKey(){
+  const a=Array.from({length:22},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random()*36)]).join('');
+  return 'sdc_live_'+a;
+}
+let _psdDcPortalStep=1;
+function openPsdDcPortal(){
+  ensureIntegrations();
+  const el=$('psd-dc-portal');
+  if(!el)return;
+  const dc=S.integrations.psdDC;
+  if(dc.linked)_psdDcPortalStep='admin';
+  else if(dc.draftKey)_psdDcPortalStep=3;
+  else if(dc.pendingVerifyCode)_psdDcPortalStep=2;
+  else _psdDcPortalStep=1;
+  el.classList.remove('hid');
+  el.setAttribute('aria-hidden','false');
+  renderPsdDcPortalBody();
+}
+function closePsdDcPortal(){
+  $('psd-dc-portal')?.classList.add('hid');
+  $('psd-dc-portal')?.setAttribute('aria-hidden','true');
+}
+function renderPsdDcPortalBody(){
+  const body=$('psd-dc-body');
+  if(!body)return;
+  ensureIntegrations();
+  const dc=S.integrations.psdDC;
+  const u=S.user;
+  if(_psdDcPortalStep==='admin'&&dc.linked){
+    body.innerHTML=`<span class="psd-dc-seal">Cont verificat</span>
+      <p>Cont <strong>politician cu influență</strong> sincronizat cu identitatea din SEAP (simulare). Gestionezi cheia API pentru SifonatorPRO și alte aplicații fictive.</p>
+      <div class="psd-dc-keybox">${escapeHtml(dc.apiKey)}</div>
+      <div class="psd-dc-actions">
+        <button type="button" class="psd-dc-btn-psd" onclick="copyPsdDcApiKey()">Copiază cheia</button>
+        <button type="button" class="psd-dc-btn-ghost" onclick="regeneratePsdDcApiKey()">Emite cheie nouă</button>
+        <button type="button" class="psd-dc-btn-ghost" onclick="revokePsdDcIntegration()">Revocă integrarea</button>
+      </div>
+      <p class="tsm" style="margin-top:14px;opacity:.85">După „cheie nouă”, reactivează legătura din Manager Integrări (SifonatorPRO).</p>`;
+    return;
+  }
+  if(_psdDcPortalStep===1){
+    body.innerHTML=`<span class="psd-dc-seal">Înregistrare</span>
+      <p>In crearea <strong>contului de politician cu influență</strong> se folosesc aceleași date ca la autentificarea prin SEAP în SifonatorPRO.</p>
+      <div class="psd-dc-grid">
+        <div class="psd-dc-row"><span class="psd-dc-k">Nume afișat</span><span class="psd-dc-v">${escapeHtml(u.name||'—')}</span></div>
+        <div class="psd-dc-row"><span class="psd-dc-k">Funcție</span><span class="psd-dc-v">${escapeHtml(u.fn||'—')}</span></div>
+        <div class="psd-dc-row"><span class="psd-dc-k">Județ</span><span class="psd-dc-v">${escapeHtml(u.jud||'—')}</span></div>
+        <div class="psd-dc-row"><span class="psd-dc-k">Filieră politică</span><span class="psd-dc-v">${escapeHtml(u.party||'—')}</span></div>
+      </div>
+      <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
+        <input type="checkbox" id="psd-dc-terms"/>
+        <span>Accept <strong>Termenii și Condițiile PSD</strong> pentru PSD Direct Connect™, utilizarea endpoint-urilor și fluxurile asociate (simulare).</span>
+      </label>
+      <div class="psd-dc-legal">„Politicianul declară că influența este folosită pentru integrări operaționale conform liniei de partid. PSD nu garantează absolvirea responsabilității juridice a politicianului.”</div>
+      <div class="psd-dc-actions">
+        <button type="button" class="psd-dc-btn-psd" onclick="psdDcPortalStep1Continue()">Continuă către verificare</button>
+      </div>`;
+    return;
+  }
+  if(_psdDcPortalStep===2){
+    body.innerHTML=`<span class="psd-dc-seal">Verificare</span>
+      <p>Ți-am trimis pe <strong>Șpagafon</strong> un cod unic. Confirmă autentificarea pentru a deschide consola cheii API.</p>
+      <label style="display:block;font-weight:700;margin-top:8px">Cod din mesaj</label>
+      <input type="text" class="psd-dc-inp" id="psd-dc-code-inp" maxlength="8" placeholder="000000" autocomplete="one-time-code"/>
+      <div class="psd-dc-actions">
+        <button type="button" class="psd-dc-btn-psd" onclick="psdDcPortalVerifyCode()">Confirmă</button>
+        <button type="button" class="psd-dc-btn-ghost" onclick="_psdDcPortalStep=1;S.integrations.psdDC.pendingVerifyCode='';S.integrations.psdDC.draftKey='';saveState();renderPsdDcPortalBody()">Înapoi</button>
+      </div>`;
+    return;
+  }
+  if(_psdDcPortalStep===3){
+    if(!dc.draftKey)dc.draftKey=generatePsdDcApiKey();
+    saveState();
+    body.innerHTML=`<span class="psd-dc-seal">Cheie API</span>
+      <p>Cont activ în PSD Direct Connect™. Cheia de mai jos este valabilă doar până o înlocuiești sau o revoci — în SifonatorPRO trebuie introdusă manual (lipire) sau trimisă cu butonul de mai jos.</p>
+      <div class="psd-dc-keybox">${escapeHtml(dc.draftKey)}</div>
+      <div class="psd-dc-actions">
+        <button type="button" class="psd-dc-btn-psd" onclick="copyPsdDcApiKey()">Copiază cheia</button>
+        <button type="button" class="psd-dc-btn-psd" onclick="finalizePsdDcIntegration()">Trimite în SifonatorPRO</button>
+      </div>
+      <p class="tsm" style="opacity:.85;margin-top:10px">În Manager Integrări, câmpul a fost golit. Lipește această cheie sau folosește „Trimite în SifonatorPRO”.</p>`;
+  }
+}
+function psdDcPortalStep1Continue(){
+  if(!$('psd-dc-terms')?.checked){toast('Trebuie să accepți termenii PSD.','warn');return}
+  ensureIntegrations();
+  const code=String(100000+Math.floor(Math.random()*900000));
+  S.integrations.psdDC.pendingVerifyCode=code;
+  S.integrations.psdDC.draftKey='';
+  saveState();
+  spagafonPushSms('PSD Direct Connect™',`Cod verificare cont politician: ${code}. Valabil 15 minute.`,{code,isPsdDcVerify:true});
+  addAct('PSD Direct Connect™: cod de verificare trimis pe Șpagafon.');
+  _psdDcPortalStep=2;
+  renderPsdDcPortalBody();
+  toast('Verifică mesajul pe Șpagafon','ok');
+}
+function psdDcPortalVerifyCode(){
+  const inp=$('psd-dc-code-inp')?.value?.replace(/\s/g,'')||'';
+  ensureIntegrations();
+  if(inp!==S.integrations.psdDC.pendingVerifyCode){toast('Cod incorect.','err');return}
+  invalidateVerifiedSpagafonCode('psd',inp);
+  S.integrations.psdDC.pendingVerifyCode='';
+  _psdDcPortalStep=3;
+  renderPsdDcPortalBody();
+  addAct('PSD Direct Connect™: autentificare confirmată; consolă cheie API deschisă.');
+  saveState();
+}
+function copyPsdDcApiKey(){
+  ensureIntegrations();
+  const dc=S.integrations.psdDC;
+  const k=_psdDcPortalStep==='admin'&&dc.linked?dc.apiKey:(_psdDcPortalStep===3?dc.draftKey:'');
+  if(!k){toast('Nu există cheie de copiat.','warn');return}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(k).then(()=>toast('Cheie copiată','ok')).catch(()=>toast(k,'ok'));
+  }else toast(k,'ok');
+}
+function finalizePsdDcIntegration(){
+  ensureIntegrations();
+  const dc=S.integrations.psdDC;
+  if(!dc.draftKey){toast('Emite mai întâi cheia din portal.','warn');return}
+  dc.apiKey=dc.draftKey;
+  dc.linked=true;
+  dc.draftKey='';
+  saveState();
+  closePsdDcPortal();
+  renderInteg();
+  addAct('PSD Direct Connect™: integrare activată în SifonatorPRO.');
+  toast('PSD Direct Connect conectat la platformă','ok');
+}
+function connectPsdDcManualKey(){
+  ensureIntegrations();
+  const v=$('integ-psd-paste')?.value?.trim()||'';
+  const dc=S.integrations.psdDC;
+  if(dc.linked){toast('Integrarea este deja activă.','warn');return}
+  if(!v){toast('Introdu sau lipește cheia API din portal (cea curentă, emisă sau regenerată).','warn');return}
+  if(!dc.draftKey){toast('Deschide portalul PSD Direct Connect și emite o cheie nouă.','warn');return}
+  if(v!==dc.draftKey){toast('Cheia nu se potrivește cu cea activă în portal.','err');return}
+  dc.apiKey=dc.draftKey;
+  dc.linked=true;
+  dc.draftKey='';
+  saveState();
+  renderInteg();
+  addAct('PSD Direct Connect™: cheie API introdusă manual în Manager Integrări.');
+  toast('Integrare PSD activată','ok');
+}
+function toggleIntegPsdKeyReveal(){
+  const inp=$('integ-psd-paste'), btn=$('integ-psd-reveal');
+  if(!inp||!btn)return;
+  const hide=inp.type==='text';
+  inp.type=hide?'password':'text';
+  btn.textContent=hide?'Afișează':'Ascunde';
+  btn.setAttribute('aria-pressed',hide?'false':'true');
+}
+function regeneratePsdDcApiKey(){
+  ensureIntegrations();
+  const dc=S.integrations.psdDC;
+  dc.apiKey='';
+  dc.linked=false;
+  dc.draftKey=generatePsdDcApiKey();
+  saveState();
+  _psdDcPortalStep=3;
+  renderPsdDcPortalBody();
+  renderInteg();
+  toast('Cheie nouă emisă. Introdu-o în Manager Integrări. Vechea cheie nu mai este valabilă.','warn');
+}
+function revokePsdDcIntegration(){
+  ensureIntegrations();
+  S.integrations.psdDC={linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''};
+  _psdDcPortalStep=1;
+  saveState();
+  if($('psd-dc-portal')&&!$('psd-dc-portal').classList.contains('hid'))renderPsdDcPortalBody();
+  renderInteg();
+  toast('Integrarea PSD Direct Connect a fost revocată','warn');
+}
+
+const ANAF_DOSAR_TICKS_NEED=4;
+function generateAnafSyncApiKey(){
+  const a=Array.from({length:22},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random()*36)]).join('');
+  return 'asf_live_'+a;
+}
+let _anafSyncPortalStep=1;
+let _anafRevokeSub=0;
+function openAnafSyncPortal(){
+  ensureIntegrations();
+  const el=$('anaf-sync-portal');
+  if(!el)return;
+  const a=S.integrations.anafSync;
+  _anafRevokeSub=0;
+  if(a.linked)_anafSyncPortalStep='admin';
+  else if(a.draftKey)_anafSyncPortalStep=5;
+  else if(a.pendingCertCode)_anafSyncPortalStep=2;
+  else if(a.wizardPhase>=3&&!a.draftKey){
+    _anafSyncPortalStep=3;
+    if(a.dosarTicks>=ANAF_DOSAR_TICKS_NEED){a.draftKey=generateAnafSyncApiKey();a.wizardPhase=4;saveState();_anafSyncPortalStep=5}
+  }
+  else _anafSyncPortalStep=1;
+  el.classList.remove('hid');
+  el.setAttribute('aria-hidden','false');
+  renderAnafSyncPortalBody();
+}
+function closeAnafSyncPortal(){
+  $('anaf-sync-portal')?.classList.add('hid');
+  $('anaf-sync-portal')?.setAttribute('aria-hidden','true');
+  _anafRevokeSub=0;
+}
+function renderAnafSyncPortalBody(){
+  const body=$('anaf-sync-body');
+  if(!body)return;
+  ensureIntegrations();
+  const a=S.integrations.anafSync;
+  const u=S.user;
+  if(_anafSyncPortalStep==='admin'&&a.linked){
+    if(_anafRevokeSub===1){
+      body.innerHTML=`<span class="anaf-seal">Revocare · pas 1/2</span>
+        <div class="anaf-warn">Pentru a continua, introduceți exact fraza de mai jos (majuscule, fără ghilimele).</div>
+        <p class="tsm" style="font-weight:800;margin:8px 0">Text obligatoriu: <code style="background:#e8eef4;padding:2px 6px">REVOCARE ANAF SYNC</code></p>
+        <label style="display:block;font-weight:700;margin-top:8px">Confirmare tastată</label>
+        <input type="text" class="anaf-inp" id="anaf-revoke-phrase" autocomplete="off" placeholder="REVOCARE ANAF SYNC"/>
+        <div class="anaf-actions">
+          <button type="button" class="anaf-btn-pri" onclick="anafSyncRevokePhraseCheck()">Continuă</button>
+          <button type="button" class="anaf-btn-sec" onclick="_anafRevokeSub=0;renderAnafSyncPortalBody()">Renunță</button>
+        </div>`;
+      return;
+    }
+    if(_anafRevokeSub===2){
+      body.innerHTML=`<span class="anaf-seal">Revocare · pas 2/2</span>
+        <p>Ultimul pas: confirmați că înțelegeți că pierdeți fluxul narativ E-Factura / trasabilitatea extinsă din SifonatorPRO (simulare).</p>
+        <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
+          <input type="checkbox" id="anaf-revoke-final-ack"/>
+          <span>Declar că solicit revocarea conștient și accept reluarea procedurii de la dosar dacă reactivez serviciul.</span>
+        </label>
+        <div class="anaf-actions">
+          <button type="button" class="anaf-btn-pri" style="background:linear-gradient(180deg,#c01c28,#8b1420)" onclick="anafSyncRevokeFinalize()">Revocă definitiv integrarea</button>
+          <button type="button" class="anaf-btn-sec" onclick="_anafRevokeSub=0;renderAnafSyncPortalBody()">Renunță</button>
+        </div>`;
+      return;
+    }
+    body.innerHTML=`<span class="anaf-seal">Cont sincronizat</span>
+      <p>Legătura <strong>ANAF Sync™</strong> este activă. Cheia de sincronizare (fictivă) pentru SifonatorPRO și alte aplicații simulate:</p>
+      <div class="anaf-keybox">${escapeHtml(a.apiKey)}</div>
+      <div class="anaf-actions">
+        <button type="button" class="anaf-btn-pri" onclick="copyAnafSyncApiKey()">Copiază cheia</button>
+        <button type="button" class="anaf-btn-sec" onclick="regenerateAnafSyncApiKey()">Emite cheie nouă (deconectează platforma)</button>
+        <button type="button" class="anaf-btn-sec" onclick="_anafRevokeSub=1;renderAnafSyncPortalBody()">Inițiere revocare completă…</button>
+      </div>
+      <p class="tsm" style="margin-top:12px;opacity:.85">Revocarea completă include confirmări multiple, conform procedurii acestui conector.</p>`;
+    return;
+  }
+  if(_anafSyncPortalStep===1){
+    const dnaBlock=isDnaInvestigationBlockingAnafSync();
+    const stRo=justiceStageRo(S.justice?.stage||'clean');
+    const esc=S.justice?.dnaEscalation?'<span style="color:#c01c28;font-weight:800"> · escaladare DNA activă</span>':'';
+    if(dnaBlock){
+      body.innerHTML=`<span class="anaf-seal">Cerere neeligibilă</span>
+        <div class="anaf-warn">ANAF Sync™ cere <strong>dovadă de integritate</strong> în platformă: nu puteți depune cererea de conectare cât timp există <strong>investigație DNA activă</strong> (anchetă, audiere sau recurs, ori escaladare DNA marcată în joc).</div>
+        <p class="tsm" style="margin-top:12px">Starea dumneavoastră acum: <strong>${stRo}</strong>${esc}.</p>
+        <p class="tsm tmut" style="line-height:1.55">Reveniți după ce linia justițiară revine la o etapă permisă (de regulă <strong>Curat</strong> sau <strong>Monitorizare</strong>, fără investigație DNA deschisă).</p>
+        <div class="anaf-actions">
+          <button type="button" class="anaf-btn-sec" onclick="closeAnafSyncPortal()">Închide</button>
+          <button type="button" class="anaf-btn-pri" onclick="closeAnafSyncPortal();navigate('just')">Deschide Sistem judiciar</button>
+        </div>`;
+      return;
+    }
+    body.innerHTML=`<span class="anaf-seal">Depunere cerere de conectare</span>
+      <div class="anaf-bureau">Cererea se bazează pe profilul din SifonatorPRO. Pentru a putea continua trebuie să nu existe <strong>investigație DNA activă</strong>; se solicită o declarație pe propria răspundere. Înregistrarea include verificare prin Șpagafon, dosar procedural și emitere token.</div>
+      <p class="tsm tmut" style="margin-bottom:10px">Stare justiție la verificare: <strong>${stRo}</strong>; eligibil pentru pasul următor.</p>
+      <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
+        <input type="checkbox" id="anaf-integrity-decl"/>
+        <span>Declar pe propria răspundere (în cadrul jocului) că <strong>nu</strong> sunt sub investigație DNA activă și că datele de identificare folosite sunt cele din profilul curent.</span>
+      </label>
+      <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
+        <input type="checkbox" id="anaf-terms-proc"/>
+        <span>Am luat la cunoștință pașii obligatorii: certificat Șpagafon, dosar cu verificări repetate, apoi token de sincronizare în Manager Integrări.</span>
+      </label>
+      <div class="anaf-warn" style="margin-top:10px;border-left-color:#0056b3;background:rgba(0,86,179,.06)">Date cerere: <strong>${escapeHtml(u.name||'—')}</strong> · ${escapeHtml(u.fn||'—')} · ${escapeHtml(u.jud||'—')}</div>
+      <div class="anaf-actions">
+        <button type="button" class="anaf-btn-pri" onclick="anafSyncPortalStep1Continue()">Depune cererea și solicită certificat</button>
+      </div>`;
+    return;
+  }
+  if(_anafSyncPortalStep===2){
+    body.innerHTML=`<span class="anaf-seal">Certificat provizoriu (Șpagafon)</span>
+      <p>Am expediat un <strong>PIN de depunere</strong> pe linia Șpagafon. Valabilitate: 30 de minute. Introduceți codul pentru a deschide dosarul electronic.</p>
+      <label style="display:block;font-weight:700;margin-top:8px">PIN certificat</label>
+      <input type="text" class="anaf-inp" id="anaf-sync-cert-inp" maxlength="8" placeholder="000000" autocomplete="one-time-code"/>
+      <div class="anaf-actions">
+        <button type="button" class="anaf-btn-pri" onclick="anafSyncPortalVerifyCert()">Validează certificatul</button>
+        <button type="button" class="anaf-btn-sec" onclick="_anafSyncPortalStep=1;ensureIntegrations();S.integrations.anafSync.pendingCertCode='';S.integrations.anafSync.draftKey='';S.integrations.anafSync.wizardPhase=1;S.integrations.anafSync.dosarTicks=0;saveState();renderAnafSyncPortalBody()">Renunță la cerere</button>
+      </div>
+      <p class="tsm tmut" style="margin-top:10px">Dacă nu vedeți mesajul, deschideți Șpagafon și folosiți butonul din SMS.</p>`;
+    return;
+  }
+  if(_anafSyncPortalStep===3){
+    const efNum=1000+(Array.from(String(u.jud||'')).reduce((s,c)=>s+c.charCodeAt(0),a.dosarTicks*1301)%8000);
+    const msgs=[
+      'Dosarul CNX/2025/EF-'+efNum+' a fost înregistrat în registrul unic. Timp estimat: nespecificat.',
+      'Traseu fișiere: ghiseu → coadă regională → eșantion aleatoriu. Nu este necesară acțiunea dumneavoastră în această etapă.',
+      'Reconciliere semnătură calificată (canal Șpagafon). Se pregătește emiterea token-ului de sincronizare pentru SifonatorPRO.',
+    ];
+    const idx=Math.min(a.dosarTicks,msgs.length-1);
+    const bar=Math.min(100,Math.round((a.dosarTicks/ANAF_DOSAR_TICKS_NEED)*100));
+    body.innerHTML=`<span class="anaf-seal">Dosar în lucru</span>
+      <p>Stadiu procedură (simulare): <strong>${a.dosarTicks}/${ANAF_DOSAR_TICKS_NEED}</strong> verificări de sistem.</p>
+      <div style="height:8px;background:#dfe7f0;border-radius:4px;overflow:hidden;margin:10px 0">
+        <div style="height:100%;width:${bar}%;background:linear-gradient(90deg,#0056b3,#1a6ec4);transition:width .2s"></div>
+      </div>
+      <div class="anaf-bureau">${escapeHtml(msgs[idx])}</div>
+      <div class="anaf-actions">
+        <button type="button" class="anaf-btn-pri" onclick="anafSyncDosarAdvance()">Actualizează stare dosar (următoarea verificare)</button>
+      </div>
+      <p class="tsm tmut">Fiecare „reîmprospătare” a stării dosarului consumă un pas procedural în fluxul de conectare.</p>`;
+    return;
+  }
+  if(_anafSyncPortalStep===5){
+    if(!a.draftKey)a.draftKey=generateAnafSyncApiKey();
+    saveState();
+    body.innerHTML=`<span class="anaf-seal">Token sincronizare</span>
+      <p>Dosarul a fost închis favorabil în simulare. Mai jos este <strong>cheia de sincronizare</strong> — lipiți-o în Manager Integrări sau folosiți butonul de trimitere.</p>
+      <div class="anaf-keybox">${escapeHtml(a.draftKey)}</div>
+      <div class="anaf-actions">
+        <button type="button" class="anaf-btn-pri" onclick="copyAnafSyncDraftKey()">Copiază cheia</button>
+        <button type="button" class="anaf-btn-pri" onclick="finalizeAnafSyncIntegration()">Trimite în SifonatorPRO</button>
+      </div>
+      <p class="tsm" style="opacity:.85;margin-top:10px">După trimitere, câmpul din Manager Integrări se golește. Reluați cu lipire manuală dacă regenerați cheia.</p>`;
+    return;
+  }
+  body.innerHTML=`<span class="anaf-seal">Reîncărcare</span><p class="tsm">Stare portal neprevăzută — reîncepeți deschiderea.</p><div class="anaf-actions"><button type="button" class="anaf-btn-pri" onclick="openAnafSyncPortal()">Reîncarcă portalul</button></div>`;
+}
+function anafSyncPortalStep1Continue(){
+  if(isDnaInvestigationBlockingAnafSync()){
+    toast('Nu puteți continua: există investigație DNA activă în SifonatorPRO.','err');
+    renderAnafSyncPortalBody();
+    return;
+  }
+  if(!$('anaf-integrity-decl')?.checked){toast('Bifați declarația de integritate.','warn');return}
+  if(!$('anaf-terms-proc')?.checked){toast('Confirmați că ați luat la cunoștință pașii procedurii.','warn');return}
+  ensureIntegrations();
+  const a=S.integrations.anafSync;
+  const code=String(100000+Math.floor(Math.random()*900000));
+  a.pendingCertCode=code;
+  a.draftKey='';
+  a.dosarTicks=0;
+  a.wizardPhase=2;
+  saveState();
+  spagafonPushSms('ANAF Sync™',`PIN depunere dosar ANAF Sync: ${code}. Valabil 30 minute. Introduceți-l în portalul de conectare.`,{code,isAnafCert:true});
+  addAct('ANAF Sync™: PIN certificat expediat pe Șpagafon; dosarul narativ se deschide după validare.');
+  _anafSyncPortalStep=2;
+  renderAnafSyncPortalBody();
+  toast('Verifică Șpagafon pentru PIN-ul de certificat','ok');
+}
+function anafSyncPortalVerifyCert(){
+  const inp=$('anaf-sync-cert-inp')?.value?.replace(/\s/g,'')||'';
+  ensureIntegrations();
+  const a=S.integrations.anafSync;
+  if(inp!==a.pendingCertCode){toast('PIN incorect sau expirat narativ.','err');return}
+  invalidateVerifiedSpagafonCode('anaf',inp);
+  a.pendingCertCode='';
+  a.dosarTicks=0;
+  a.wizardPhase=3;
+  saveState();
+  _anafSyncPortalStep=3;
+  renderAnafSyncPortalBody();
+  addAct('ANAF Sync™: certificat validat; dosarul procedural (simulare) a fost deschis.');
+  toast('Certificat acceptat — urmează etapa dosarului','ok');
+}
+function anafSyncDosarAdvance(){
+  ensureIntegrations();
+  const a=S.integrations.anafSync;
+  if(a.dosarTicks<ANAF_DOSAR_TICKS_NEED)a.dosarTicks++;
+  if(a.dosarTicks>=ANAF_DOSAR_TICKS_NEED){
+    if(!a.draftKey)a.draftKey=generateAnafSyncApiKey();
+    a.wizardPhase=4;
+    saveState();
+    _anafSyncPortalStep=5;
+    renderAnafSyncPortalBody();
+    addAct('ANAF Sync™: dosar narativ închis; token de sincronizare emis.');
+    toast('Dosar finalizat în simulare — copiază cheia sau trimite în aplicație','ok');
+    return;
+  }
+  saveState();
+  renderAnafSyncPortalBody();
+  toast('Stare dosar actualizată','ok');
+}
+function copyAnafSyncDraftKey(){
+  ensureIntegrations();
+  const k=S.integrations.anafSync.draftKey;
+  if(!k){toast('Nu există cheie de copiat.','warn');return}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(k).then(()=>toast('Cheie copiată','ok')).catch(()=>toast(k,'ok'));
+  }else toast(k,'ok');
+}
+function copyAnafSyncApiKey(){
+  ensureIntegrations();
+  const k=S.integrations.anafSync.apiKey;
+  if(!k){toast('Nu există cheie de copiat.','warn');return}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(k).then(()=>toast('Cheie copiată','ok')).catch(()=>toast(k,'ok'));
+  }else toast(k,'ok');
+}
+function finalizeAnafSyncIntegration(){
+  ensureIntegrations();
+  const a=S.integrations.anafSync;
+  if(!a.draftKey){toast('Emite mai întâi cheia din portal (finalizează dosarul).','warn');return}
+  a.apiKey=a.draftKey;
+  a.linked=true;
+  a.draftKey='';
+  a.wizardPhase=1;
+  a.dosarTicks=0;
+  saveState();
+  closeAnafSyncPortal();
+  renderInteg();
+  renderAudit();
+  addAct('ANAF Sync™: integrare activată în SifonatorPRO (simulare).');
+  toast('ANAF Sync conectat la platformă','ok');
+}
+function connectAnafSyncManualKey(){
+  ensureIntegrations();
+  const v=$('integ-anaf-paste')?.value?.trim()||'';
+  const a=S.integrations.anafSync;
+  if(a.linked){toast('Integrarea este deja activă.','warn');return}
+  if(!v){toast('Introdu sau lipește cheia din portalul ANAF Sync.','warn');return}
+  if(!a.draftKey){toast('Deschide ANAF Sync, parcurge certificatul și dosarul, apoi emite tokenul curent.','warn');return}
+  if(v!==a.draftKey){toast('Cheia nu se potrivește cu cea din portal.','err');return}
+  a.apiKey=a.draftKey;
+  a.linked=true;
+  a.draftKey='';
+  a.wizardPhase=1;
+  a.dosarTicks=0;
+  saveState();
+  renderInteg();
+  renderAudit();
+  addAct('ANAF Sync™: cheie introdusă manual în Manager Integrări.');
+  toast('ANAF Sync activat','ok');
+}
+function toggleIntegAnafKeyReveal(){
+  const inp=$('integ-anaf-paste'), btn=$('integ-anaf-reveal');
+  if(!inp||!btn)return;
+  const hide=inp.type==='text';
+  inp.type=hide?'password':'text';
+  btn.textContent=hide?'Afișează':'Ascunde';
+  btn.setAttribute('aria-pressed',hide?'false':'true');
+}
+function regenerateAnafSyncApiKey(){
+  ensureIntegrations();
+  const a=S.integrations.anafSync;
+  a.apiKey='';
+  a.linked=false;
+  a.pendingCertCode='';
+  a.draftKey=generateAnafSyncApiKey();
+  a.wizardPhase=4;
+  a.dosarTicks=ANAF_DOSAR_TICKS_NEED;
+  saveState();
+  _anafSyncPortalStep=5;
+  _anafRevokeSub=0;
+  renderAnafSyncPortalBody();
+  renderInteg();
+  renderAudit();
+  toast('Cheie nouă emisă. Dezactivat în SifonatorPRO. Lipește cheia curentă în Manager integrări.','warn');
+}
+function anafSyncRevokePhraseCheck(){
+  const got=$('anaf-revoke-phrase')?.value?.trim()||'';
+  if(got!=='REVOCARE ANAF SYNC'){toast('Textul nu corespunde exact.','err');return}
+  _anafRevokeSub=2;
+  renderAnafSyncPortalBody();
+}
+function anafSyncRevokeFinalize(){
+  if(!$('anaf-revoke-final-ack')?.checked){toast('Bifați declarația finală.','warn');return}
+  ensureIntegrations();
+  S.integrations.anafSync={linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0};
+  _anafRevokeSub=0;
+  _anafSyncPortalStep=1;
+  saveState();
+  closeAnafSyncPortal();
+  renderInteg();
+  renderAudit();
+  addAct('ANAF Sync™: revocare completă (simulare).');
+  toast('ANAF Sync a fost revocat după procedura narativă','warn');
+}
+function fillAnafCertFromSpagafon(code){
+  const inp=$('anaf-sync-cert-inp');
+  if(!inp){toast('Deschide portalul ANAF Sync la pasul cu PIN-ul certificat.','warn');return}
+  inp.value=String(code||'');
+  inp.focus();
+  try{inp.select()}catch(e){}
+  toggleSpagafon(false);
+  toast('PIN completat — apasă Validează în portalul ANAF Sync','ok');
+}
+function fillPsdDcCodeFromSpagafon(code){
+  const inp=$('psd-dc-code-inp');
+  if(!inp){toast('Deschide PSD Direct Connect la pasul de verificare cu codul din SMS.','warn');return}
+  inp.value=String(code||'');
+  inp.focus();
+  try{inp.select()}catch(e){}
+  toggleSpagafon(false);
+  toast('Cod completat. Apasă Confirmă în portal','ok');
+}
+function tryOpenPublicPay(tid,fp){
+  ensureIntegrations();
+  if(!isPsdDcLinked()){
+    dlgOpen('Integrare necesară','PSD Direct Connect™',
+      `<p class="tsm" style="line-height:1.65">Plata cu <strong>bani publici</strong> prin PSD Direct Connect™ necesită un cont verificat și o cheie API conectată în <strong>Manager Integrări</strong>.</p>`,
+      `<button type="button" class="btn btn-f" onclick="dlgClose()">Închide</button>
+       <button type="button" class="btn btn-p" onclick="dlgClose();navigate('integ')">Deschide Manager Integrări</button>`
+    );
+    return;
+  }
+  openPublicPay(tid,fp);
+}
+function tryOpenPublicPayHours(hours,cost){
+  ensureIntegrations();
+  if(!isPsdDcLinked()){
+    dlgOpen('Integrare necesară','PSD Direct Connect™',
+      `<p class="tsm" style="line-height:1.65">Plata orelor Bagheta cu <strong>bani publici</strong> folosește PSD Direct Connect™ — integrează serviciul din <strong>Manager Integrări</strong>.</p>`,
+      `<button type="button" class="btn btn-f" onclick="dlgClose()">Închide</button>
+       <button type="button" class="btn btn-p" onclick="dlgClose();navigate('integ')">Deschide Manager Integrări</button>`
+    );
+    return;
+  }
+  openPublicPayHours(hours,cost);
+}
+function renderInteg(){
+  const box=$('integ-list');
+  if(!box)return;
+  ensureIntegrations();
+  const dc=S.integrations.psdDC;
+  const an=S.integrations.anafSync;
+  const ok=isPsdDcLinked();
+  const hasStored=ok&&!!dc.apiKey;
+  const anOk=isAnafSyncLinked();
+  const anHas=anOk&&!!an.apiKey;
+  box.innerHTML=`
+    <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;background:var(--card)">
+      <div class="flex" style="justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-weight:800;font-size:16px">PSD Direct Connect™</div>
+          <p class="tsm tmut" style="margin-top:4px;line-height:1.5">Endpoint-uri pentru cereri de fonduri publice și plăți „Bani publici” din SifonatorPRO.</p>
+        </div>
+        <span class="integ-pill ${ok?'integ-pill-ok':'integ-pill-off'}">${ok?'Conectat':'Neconectat'}</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+        <button type="button" class="btn btn-psd" onclick="openPsdDcPortal()">Deschide portalul PSD Direct Connect</button>
+      </div>
+      <div class="fg mt14 mb0">
+        <label style="font-size:12px">${hasStored?'Cheie API stocată în SifonatorPRO':'Introdu sau lipește cheia din portal'}</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;align-items:stretch">
+          ${hasStored
+            ?`<input type="password" readonly id="integ-psd-paste" autocomplete="off" spellcheck="false" value="${escapeHtml(dc.apiKey)}" aria-label="Cheie API PSD Direct Connect" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
+              <button type="button" class="btn btn-f" id="integ-psd-reveal" onclick="toggleIntegPsdKeyReveal()" aria-pressed="false" title="Arată sau ascunde cheia">Afișează</button>`
+            :`<input type="text" id="integ-psd-paste" placeholder="sdc_live_…" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
+              <button type="button" class="btn btn-s" onclick="connectPsdDcManualKey()">Conectează</button>`}
+        </div>
+        <p class="tsm tmut mt6" style="line-height:1.45">${ok?'După o cheie nouă în portal, integrarea se dezactivează până lipești cheia curentă sau folosești „Trimite în SifonatorPRO”.':dc.draftKey?'Cheia activă este în portal. Copiaz-o și lipește aici (sau „Trimite” din portal).':'Deschide portalul, acceptă termenii și finalizează verificarea pentru a emite o cheie.'}</p>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;background:var(--card)">
+      <div class="flex" style="justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-weight:800;font-size:16px">ANAF Sync™</div>
+          <p class="tsm tmut" style="margin-top:4px;line-height:1.5">E-Factura și flux detaliat în aplicație (fără SPV real). Înregistrarea necesită <strong>absența unei investigații DNA active</strong> în starea curentă a jocului. Fluxul include certificat pe Șpagafon, dosar procedural și emitere token.</p>
+        </div>
+        <span class="integ-pill ${anOk?'integ-pill-ok':'integ-pill-off'}">${anOk?'Conectat':'Neconectat'}</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+        <button type="button" class="btn btn-p" onclick="openAnafSyncPortal()">Deschide portalul ANAF Sync</button>
+      </div>
+      <div class="fg mt14 mb0">
+        <label style="font-size:12px">${anHas?'Cheie sincronizare (stocată; ascunsă implicit)':'Lipește tokenul din portal după certificat și dosar'}</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;align-items:stretch">
+          ${anHas
+            ?`<input type="password" readonly id="integ-anaf-paste" autocomplete="off" spellcheck="false" value="${escapeHtml(an.apiKey)}" aria-label="Cheie ANAF Sync" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
+              <button type="button" class="btn btn-f" id="integ-anaf-reveal" onclick="toggleIntegAnafKeyReveal()" aria-pressed="false" title="Arată sau ascunde cheia">Afișează</button>`
+            :`<input type="text" id="integ-anaf-paste" placeholder="asf_live_…" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
+              <button type="button" class="btn btn-s" onclick="connectAnafSyncManualKey()">Conectează</button>`}
+        </div>
+        <p class="tsm tmut mt6" style="line-height:1.45">${anOk?'Regenerarea sau revocarea din portal dezactivează legătura până lipești noul token.':an.draftKey?'Tokenul activ este în portalul ANAF Sync — finalizează dosarul dacă încă e deschis, apoi copiază cheia.':'Deschide portalul: declarație de integritate (fără DNA activ), PIN pe Șpagafon, dosar cu verificări repetate, apoi emitere token.'}</p>
+      </div>
+    </div>`;
+}
 
 // ═══ NAV ═══
 function isMobileLayout(){
@@ -2035,6 +2961,7 @@ function navigate(v){
   if(v==='audit')renderAudit();
   if(v==='press')renderPress();
   if(v==='ops')renderOps();
+  if(v==='integ')renderInteg();
   if(v==='wand'){updWandQuota();renderSessions();renderWandQueue();syncWandSessionUI();}
   if(v==='howto')renderHowto();
   if(v==='settings')renderSettings();
@@ -2070,6 +2997,35 @@ function dlgClose(){
 }
 
 // ═══ ȘPAGAFON ═══
+function normalizeSpagafonSettings(){
+  if(!S.settings||typeof S.settings!=='object')return;
+  const m=S.settings.spagafonLauncherMode;
+  if(m!=='both'&&m!=='icon'&&m!=='text')S.settings.spagafonLauncherMode='both';
+  if(typeof S.settings.spagafonMobileFullDisplay!=='boolean')S.settings.spagafonMobileFullDisplay=false;
+}
+function applySpagafonDisplaySettings(){
+  normalizeSpagafonSettings();
+  const b=document.body;
+  if(!b)return;
+  b.classList.remove('spgf-launch-both','spgf-launch-icon','spgf-launch-text','spgf-mobile-full');
+  const mode=S.settings.spagafonLauncherMode||'both';
+  b.classList.add('spgf-launch-'+(mode==='icon'||mode==='text'?mode:'both'));
+  if(S.settings.spagafonMobileFullDisplay)b.classList.add('spgf-mobile-full');
+}
+function onSpagafonLauncherModeChange(){
+  const sel=$('settings-spgf-mode');
+  S.settings.spagafonLauncherMode=(sel&&['both','icon','text'].includes(sel.value))?sel.value:'both';
+  applySpagafonDisplaySettings();
+  renderSettings();
+  saveState();
+}
+function onSpagafonMobileFullChange(){
+  const cb=$('settings-spgf-mobile-full');
+  S.settings.spagafonMobileFullDisplay=!!cb?.checked;
+  applySpagafonDisplaySettings();
+  renderSettings();
+  saveState();
+}
 function spagafonUnreadCount(){
   const t=S.spagafonLastSeen||0;
   return S.smsInbox.filter(m=>(m.ts||0)>t).length;
@@ -2083,34 +3039,78 @@ function updSpagafonBadge(){
 function spagafonPushSms(from,body,opts){
   const o=opts||{};
   const ts=Date.now();
-  S.smsInbox.unshift({id:ts,ts,from,body,t:new Date(ts).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}),code:o.code||null,is3ds:!!o.is3ds});
+  S.smsInbox.unshift({id:ts,ts,from,body,t:new Date(ts).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}),code:o.code||null,codeConsumed:false,is3ds:!!o.is3ds,isPsdDcVerify:!!o.isPsdDcVerify,isAnafCert:!!o.isAnafCert});
   if(S.smsInbox.length>50)S.smsInbox.pop();
   updSpagafonBadge();
+  if($('spagafon-root')?.classList.contains('open')){renderSpagafon();renderSpagafonAppletUI();}
+}
+/** După verificare reușită: scoate codul din mesaj și dezactivează butoanele (nu poate fi refolosit). */
+function invalidateVerifiedSpagafonCode(kind,code){
+  const v=String(code||'');
+  if(!v||!Array.isArray(S.smsInbox))return;
+  S.smsInbox.forEach(m=>{
+    const k3=kind==='3ds'&&m.is3ds,kP=kind==='psd'&&m.isPsdDcVerify,kA=kind==='anaf'&&m.isAnafCert;
+    if((k3||kP||kA)&&String(m.code||'')===v){m.code=null;m.codeConsumed=true}
+  });
   if($('spagafon-root')?.classList.contains('open')){renderSpagafon();renderSpagafonAppletUI();}
 }
 function renderSpagafon(){
   const box=$('spgf-msgs');
   if(!box)return;
   if(!S.smsInbox.length){
-    box.innerHTML='<p class="spgf-empty">Niciun SMS încă.<br/>Codurile 3D Secure de la SifonPay™ apar aici automat.</p>';
+    box.innerHTML='<p class="spgf-empty">Niciun SMS încă.<br/>Codurile 3D Secure (SifonPay™), verificările PSD Direct Connect™ și certificatele ANAF Sync™ apar aici.</p>';
     return;
   }
   box.innerHTML=S.smsInbox.map(m=>{
-    const codeHtml=m.is3ds&&m.code
-      ?`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick="fillTdsFromSpagafon(${JSON.stringify(m.code)})">Completează în plată</button></div>`
-      :'';
-    const extra=m.is3ds?' sm-code':'';
-    return`<div class="spgf-msg${extra}"><div class="sm-from">${escapeHtml(m.from)}</div><div class="sm-body">${escapeHtml(m.body)}</div><div class="sm-time">${m.t||''}</div>${codeHtml}</div>`;
+    let actions='';
+    if(m.codeConsumed&&(m.is3ds||m.isPsdDcVerify||m.isAnafCert))actions+=`<div class="sm-actions"><span class="tsm tmut" style="display:block;opacity:.72">Cod folosit și invalidat după verificare.</span></div>`;
+    else{
+      if(m.is3ds&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillTdsFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în plată</button></div>`;
+      if(m.isPsdDcVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:var(--psd)" onclick='fillPsdDcCodeFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în PSD DC</button></div>`;
+      if(m.isAnafCert&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillAnafCertFromSpagafon(${JSON.stringify(String(m.code))})'>Completează certificat ANAF Sync</button></div>`;
+    }
+    const extra=m.is3ds||m.isPsdDcVerify||m.isAnafCert?' sm-code':'';
+    return`<div class="spgf-msg${extra}"><div class="sm-from">${escapeHtml(m.from)}</div><div class="sm-body">${escapeHtml(m.body)}</div><div class="sm-time">${m.t||''}</div>${actions}</div>`;
   }).join('');
 }
 function escapeHtml(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+/** Dosar proiect: întotdeauna tablou de {t,txt}; repară date vechi sau corupte. */
+function normalizeDossierArray(raw){
+  if(raw==null)return[];
+  if(!Array.isArray(raw))return[];
+  const out=[];
+  for(const entry of raw){
+    if(entry!=null&&typeof entry==='object'&&!Array.isArray(entry)){
+      const t=entry.t!=null?String(entry.t):'';
+      const txt=entry.txt!=null?String(entry.txt):(entry.text!=null?String(entry.text):'');
+      if(t||txt)out.push({t,txt,custom:!!entry.custom});
+    }else if(typeof entry==='string'&&entry.trim())out.push({t:'',txt:entry.trim()});
+  }
+  return out;
+}
+function ensureProjectDossier(p){
+  if(!p)return;
+  p.dossier=normalizeDossierArray(p.dossier);
+}
+function seedDossierIfEmpty(p,customTxt){
+  ensureProjectDossier(p);
+  if(p.dossier.length)return;
+  p.dossier.push({t:nowDate().toLocaleDateString('ro-RO'),txt:customTxt||'Înregistrare în registrul electronic — proiect urmărit în sistem.'});
+}
 function fillTdsFromSpagafon(code){
   const inp=$('tds-code');
-  if(inp)inp.value=code;
+  if(inp){
+    inp.value=String(code||'');
+    inp.focus();
+    try{inp.select()}catch(e){}
+  }else{
+    toast('Deschide mai întâi fereastra 3D Secure din plată.','warn');
+    return;
+  }
   toggleSpagafon(false);
-  toast('Cod completat din Șpagafon','ok');
+  toast('Cod completat din Șpagafon — apoi confirmă autentificarea.','ok');
 }
 let spgfAppletId=null;
 function spgfSetTab(which){
@@ -2165,7 +3165,7 @@ function buildSpagafonAppletHtml(id){
     const sess=S.activeSession?'⚡ sesiune activă':'😴 fără optimizare live';
     return`<div class="spgf-ap-title">Tablou VIP</div>
       ${spgfApRow('Reputație',String(S.rep)+' pt')}
-      ${spgfApRow('Sifonat (narativ)',fRON(S.siphoned))}
+      ${spgfApRow('Sifonat',fRON(S.siphoned))}
       ${spgfApRow('Presiune judiciară',String(S.judiciaryRisk)+'%')}
       ${spgfApRow('DNA / etapă',justiceStageRo(S.justice?.stage||'clean'))}
       ${spgfApRow('Bagheta (timp)',tim)}
@@ -2339,7 +3339,7 @@ function renderHowto(){
     const rows=CARD_BANK_RULES.flatMap(r=>r.prefixes.map(p=>({p,bank:r.bank,chance:r.chance})));
     const tbody=rows.map(x=>`<tr><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono)"><code>${x.p}</code></td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">${x.bank}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">~${Math.round(x.chance*100)}%</td></tr>`).join('');
     bin.innerHTML=`
-      <p class="tsm mt8" style="line-height:1.65"><strong>Prefixul (BIN)</strong> — primele <strong>6 cifre</strong> identifică o <strong>bancă fictivă</strong>. Pentru anumite prefixe există o <strong>șansă</strong> ca SifonPay™ să deschidă <strong>3D Secure</strong>: o fereastră cu <strong>timer fix de 10 minute</strong> și mesaje pe <strong>Șpagafon</strong> (telefonul HUD se ridică deasupra dialogului). Nu există introducere de cod în fereastra de plată; confirmarea este un singur pas după ce ai „parcurs” pașii narativi. Alte prefixe pot trece direct.</p>
+      <p class="tsm mt8" style="line-height:1.65"><strong>Prefixul (BIN)</strong> — primele <strong>6 cifre</strong> identifică o <strong>bancă fictivă</strong>. Pentru anumite prefixe există o <strong>șansă</strong> ca SifonPay™ să deschidă <strong>3D Secure</strong>: fereastră cu <strong>timer de 10 minute</strong>, câmp pentru <strong>codul din Șpagafon</strong> (butonul din SMS îl lipește) și confirmare. Modurile push/app simulate pot să nu afișeze cod. Alte prefixe pot trece direct fără 3DS.</p>
       <div style="overflow-x:auto;margin-top:10px">
         <table style="width:100%;font-size:12px;border-collapse:collapse">
           <thead><tr><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Prefix (6 cifre)</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Bancă fictivă</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Șansă 3DS*</th></tr></thead>
@@ -2466,6 +3466,7 @@ function ensureProjectForWand(cb){
   dlgOpen('Bagheta are nevoie de proiect','Nu există proiecte active sau planificate',
     `<p class="tsm tmut mb14">Pentru realism satiric, optimizarea trebuie legată de un proiect. Creează unul rapid acum.</p>
     <div class="fg"><label>Denumire proiect</label><input id="wand-ap-name" placeholder="ex: Canalizare inteligentă cu senzori decorativi" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none"/></div>
+    <div class="fg"><label>Categorie</label><select id="wand-ap-cat" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">${Object.keys(PROJECT_CATEGORIES).map(k=>`<option value="${k}"${k==='constructii'?' selected':''}>${escapeHtml(PROJECT_CATEGORIES[k].label)}</option>`).join('')}</select></div>
     <div class="fg"><label>Buget (RON)</label><input id="wand-ap-budget" type="number" value="1800000" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none"/></div>
     <div class="fg"><label>Termen</label><input id="wand-ap-due" type="date" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none"/></div>`,
     `<button class="btn btn-f" onclick="dlgClose();navigate('proj')">Mai târziu</button>
@@ -2483,7 +3484,11 @@ function createQuickProjForWand(){
     return;
   }
   const id=S.npid++;
-  S.projects.push({id,name,budget,realValue:Math.round(budget*0.66),declaredValue:Math.round(budget*1.22),status:'in_progress',quality:null,bet:null,due,lateS:false,lateF:false});
+  const wcat=$('wand-ap-cat')?.value;
+  const projCategory=wcat&&PROJECT_CATEGORIES[wcat]?wcat:'diverse';
+  const qp={id,name,budget,realValue:Math.round(budget*0.66),declaredValue:Math.round(budget*1.22),status:'in_progress',quality:null,bet:null,due,lateS:false,lateF:false,projCategory};
+  seedDossierIfEmpty(qp,'Proiect creat din asistent Bagheta — înregistrare în registru.');
+  S.projects.push(qp);
   dlgClose();
   updWandProjectOptions(id);
   $('w-proj')&&($('w-proj').value=String(id));
@@ -2532,6 +3537,9 @@ function saveProfile(){
 }
 
 // ═══ PROJECTS ═══
+function projectIsFinalized(p){
+  return!!(p&&p.status==='completed');
+}
 function renderProj(){
   const f=S.projFilter;
   let list=S.projects;
@@ -2548,6 +3556,7 @@ function renderProj(){
       late?`<span class="badge br">⏰ Întârziat</span>`:'',
       p.quality?`<span class="badge ${qBadge(p.quality)}">${qLabel(p.quality)}</span>`:'',
       p.bet?`<span class="badge bgold">🎲 Pariu activ</span>`:'',
+      `<span class="badge bk" title="Categorie proiect">📁 ${escapeHtml(projectCategoryLabel(p))}</span>`,
     ].filter(Boolean);
     const acts=[];
     if(p.status==='in_progress'){
@@ -2556,7 +3565,7 @@ function renderProj(){
     }
     if(p.status==='planned')acts.push(`<button class="btn btn-p btn-sm" onclick="startProj(${p.id})">▶ Începe</button>`);
     acts.push(`<button class="btn btn-f btn-sm" onclick="openProjDossier(${p.id})">🗂 Dosar</button>`);
-    acts.push(`<button class="btn btn-f btn-sm" onclick="openProjManageDlg(${p.id})">⚙️ Gestionează</button>`);
+    if(!projectIsFinalized(p))acts.push(`<button class="btn btn-f btn-sm" onclick="openProjManageDlg(${p.id})">⚙️ Gestionează</button>`);
     return`<div class="lrow${last?' mb0':''}">
       <span class="ri">${p.status==='completed'?'✅':p.status==='planned'?'📐':late?'⚠️':'🔨'}</span>
       <div style="flex:1;min-width:0">
@@ -2577,24 +3586,36 @@ function filterProj(f,el){
 }
 function startProj(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
+  if(projectIsFinalized(p)){toast('Proiectul este finalizat — nu poate fi modificat.','warn');return}
   const caps=getSubscriptionCaps(),cnt=countProjSlots();
   if(cnt.ongoing>=caps.ongoing){
     openLimitDlg('Limită proiecte active',`Nu poți începe alt proiect: limita este ${caps.ongoing} în desfășurare pentru planul curent.`);
     return;
   }
-  p.status='in_progress';renderProj();addAct(`Proiect „${p.name}" a început.`);renderDash();
+  p.status='in_progress';
+  seedDossierIfEmpty(p,'Proiect trecut în execuție — înregistrare automată în registru.');
+  renderProj();addAct(`Proiect „${p.name}" a început.`);renderDash();
   toast(`Proiect început: ${p.name}`,'ok');
 }
 function openProjManageDlg(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
+  if(projectIsFinalized(p)){toast('Proiect finalizat — datele nu mai pot fi modificate (doar consultare din Dosar).','warn');return}
   const inp='width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none';
-  dlgOpen('Gestionare Proiect',`Organizator satiric: „${p.name}"`,
+  const stOpts=[
+    `<option value="planned"${p.status==='planned'?' selected':''}>Planificat</option>`,
+    `<option value="in_progress"${p.status==='in_progress'?' selected':''}>În desfășurare</option>`,
+  ];
+  const catOpts=Object.keys(PROJECT_CATEGORIES).map(k=>{
+    const c=PROJECT_CATEGORIES[k];
+    return`<option value="${k}"${k===projectCategoryKey(p)?' selected':''}>${escapeHtml(c.label)}</option>`;
+  }).join('');
+  dlgOpen('Gestionare Proiect',
     `<div class="fg"><label>Status proiect</label>
-      <select id="pm-status" style="${inp}">
-        <option value="planned"${p.status==='planned'?' selected':''}>Planificat</option>
-        <option value="in_progress"${p.status==='in_progress'?' selected':''}>În desfășurare</option>
-        <option value="completed"${p.status==='completed'?' selected':''}>Finalizat</option>
-      </select>
+      <select id="pm-status" style="${inp}">${stOpts.join('')}</select>
+    </div>
+    <p class="tsm tmut">Finalizarea cu extragerea calității și puncte se face din listă: butonul <strong>Finalizează</strong>.</p>
+    <div class="fg"><label>Categorie (tip achiziție)</label>
+      <select id="pm-cat" style="${inp}">${catOpts}</select>
     </div>
     <div class="fg-row">
       <div class="fg"><label>Întârziere start</label>
@@ -2613,14 +3634,14 @@ function openProjManageDlg(id){
     <div class="fg-row">
       <div class="fg"><label>Valoare reală proiect (RON)</label><input id="pm-real" type="number" value="${p.realValue||Math.round(p.budget*0.7)}" style="${inp}"/></div>
       <div class="fg"><label>Valoare declarată proiect (RON)</label><input id="pm-decl" type="number" value="${p.declaredValue||Math.round(p.budget*1.18)}" style="${inp}"/></div>
-    </div>
-    <p class="tsm tmut">Poți marca explicit întârzierile pentru a reflecta realitatea „organizatorică” a proiectului.</p>`,
+    </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
      <button class="btn btn-p" onclick="saveProjManage(${id})">Salvează schimbările</button>`
   );
 }
 function saveProjManage(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
+  if(projectIsFinalized(p)){toast('Proiect finalizat — nu se pot salva modificări.','warn');return}
   const oldStatus=p.status,oldLateS=p.lateS,oldLateF=p.lateF;
   const rv=parseInt($('pm-real')?.value||'0',10);
   const dv=parseInt($('pm-decl')?.value||'0',10);
@@ -2630,7 +3651,8 @@ function saveProjManage(id){
   if(!rv||!dv||dv<rv){toast('Valorile contabile trebuie completate (declarată >= reală)','err');return}
   p.realValue=rv;
   p.declaredValue=dv;
-  if(p.status==='completed'&&p.lateF&& !p.quality)p.quality='mantuiala';
+  const cat=$('pm-cat')?.value;
+  p.projCategory=cat&&PROJECT_CATEGORIES[cat]?cat:'diverse';
   dlgClose();
   renderProj();renderDash();updWandProjectOptions();
   if(oldStatus!==p.status)addAct(`Status proiect „${p.name}" schimbat: ${sLabel(oldStatus)} → ${sLabel(p.status)}.`);
@@ -2638,21 +3660,83 @@ function saveProjManage(id){
   if(oldLateF!==p.lateF)addAct(`Proiect „${p.name}”: întârziere finalizare ${p.lateF?'marcată':'eliminată'}.`);
   toast('Proiect actualizat în organizator','ok');
 }
+function addProjDossierCustomEntry(projectId){
+  const p=S.projects.find(x=>x.id===projectId);if(!p)return;
+  if(projectIsFinalized(p)){toast('Proiect finalizat — registrul nu mai poate fi modificat.','warn');return}
+  const raw=$('dos-custom-txt')?.value?.trim()||'';
+  if(!raw){toast('Introdu textul notei pentru registru.','err');return}
+  if(raw.length>2000){toast('Textul depășește 2000 de caractere.','err');return}
+  const dateInp=$('dos-custom-date')?.value?.trim();
+  let t;
+  if(dateInp){
+    const d=new Date(dateInp+'T12:00:00');
+    t=Number.isNaN(d.getTime())?nowDate().toLocaleDateString('ro-RO'):d.toLocaleDateString('ro-RO');
+  }else t=nowDate().toLocaleDateString('ro-RO');
+  ensureProjectDossier(p);
+  p.dossier.unshift({t,txt:raw,custom:true});
+  while(p.dossier.length>20)p.dossier.pop();
+  addAct(`Registru „${p.name}": notă personală adăugată.`);
+  saveState();
+  toast('Notă adăugată în registru','ok');
+  openProjDossier(projectId);
+}
 function openProjDossier(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
-  const docs=(p.dossier||[]).slice(0,12).map(d=>`<div class="rh-row"><span>${d.t}</span><span>${d.txt}</span></div>`).join('')||'<p class="tmut tsm">Dosar gol.</p>';
+  ensureProjectDossier(p);
   const mt=p.monthly||{progress:0,contractorPerf:60,changeOrders:0};
   const tend=S.tenders.filter(t=>t.projectId===p.id);
-  const tendRows=tend.length?tend.map(t=>`<div class="rh-row"><span>${t.name}</span><span>${tsLabel(t.status)}${t.winner?` · ${t.winner}`:''}</span></div>`).join(''):'<p class="tmut tsm">Fără licitații asociate.</p>';
-  dlgOpen(`Dosar electronic: ${p.name}`,'Istoric procedural și operațional',
-    `<div class="gline"><span class="gk">Progres</span><span class="gv">${mt.progress.toFixed(0)}%</span></div>
-    <div class="gline"><span class="gk">Performanță contractor</span><span class="gv">${mt.contractorPerf}</span></div>
-    <div class="gline"><span class="gk">Modificări suplimentare (contract)</span><span class="gv">${mt.changeOrders}</span></div>
-    <div class="gline"><span class="gk">Licitații asociate</span><span class="gv">${tend.length}</span></div>
-    <div class="mb8 mt8">${tendRows}</div>
-    <hr class="sep"/>
-    <div>${docs}</div>`,
-    `<button class="btn btn-p" onclick="dlgClose()">Închide</button>`
+  const entries=p.dossier.slice(0,12);
+  const sumLines=[
+    ['Categorie',PROJECT_CATEGORIES[projectCategoryKey(p)].label],
+    ['Progres',`${mt.progress.toFixed(0)}%`],
+    ['Performanță contractor',String(mt.contractorPerf??'—')],
+    ['Modificări suplimentare (contract)',String(mt.changeOrders??0)],
+    ['Licitații asociate',String(tend.length)],
+  ];
+  const summaryHtml=`<div class="dyn-sumcard">${sumLines.map(([k,v])=>`<div class="gline"><span class="gk">${escapeHtml(k)}</span><span class="gv">${escapeHtml(v)}</span></div>`).join('')}</div>`;
+  const tenderRows=tend.map(t=>{
+    const bits=[t.winner?`Câștigător: ${t.winner}`:null,t.bids?.length?`${t.bids.length} oferte`:null,t.auditRisk!=null?`Risc audit: ${t.auditRisk}%`:null,t.evalSummary?String(t.evalSummary).slice(0,160)+(String(t.evalSummary).length>160?'…':'') :null].filter(Boolean);
+    const det=bits.length?bits.join(' · '):'—';
+    return`<tr><td>${escapeHtml(t.name)}</td><td class="dyn-nowrap"><span class="badge ${tsBadge(t.status)}">${escapeHtml(tsLabel(t.status))}</span></td><td class="dyn-muted">${escapeHtml(det)}</td><td class="dyn-num">${escapeHtml(fRON(t.budget))}</td></tr>`;
+  }).join('');
+  const tenderBlock=tend.length
+    ?`<div class="dyn-tablewrap"><table class="dyn-table" role="grid" aria-label="Licitații asociate proiectului"><thead><tr><th scope="col">Procedură</th><th scope="col">Stadiu</th><th scope="col">Detalii</th><th scope="col" class="dyn-num">Buget</th></tr></thead><tbody>${tenderRows}</tbody></table></div>`
+    :`<div class="dyn-empty" role="status">Nu există licitații legate de acest proiect. Le poți publica din secțiunea <strong>Licitații</strong>.</div>`;
+  const docRows=entries.map(d=>{
+    const badge=d.custom?`<span class="badge bk" style="font-size:9px;vertical-align:middle;margin-right:6px">Notă proprie</span>`:'';
+    return`<tr><td class="dyn-muted dyn-nowrap">${escapeHtml(d.t||'—')}</td><td>${badge}${escapeHtml(d.txt||'')}</td></tr>`;
+  }).join('');
+  const docBlock=entries.length
+    ?`<div class="dyn-tablewrap"><table class="dyn-table" role="grid" aria-label="Registru electronic proiect"><thead><tr><th scope="col" class="dyn-nowrap" style="width:30%">Data</th><th scope="col">Notă / eveniment</th></tr></thead><tbody>${docRows}</tbody></table></div>`
+    :`<div class="dyn-empty" role="status">Încă nu există linii în registru. Ele se adaugă la <strong>avansarea simulării lunare</strong>, din acțiuni automate sau cu formularul de mai jos.</div>`;
+  const addForm=!projectIsFinalized(p)
+    ?`<div class="fg mt12 mb0"><label for="dos-custom-date">Dată afișată în registru (opțional)</label>
+        <input type="date" id="dos-custom-date" class="card-inp" style="font-size:14px;width:100%;max-width:280px"/>
+      </div>
+      <div class="fg mb0"><label for="dos-custom-txt">Adaugă notă / element în registru</label>
+        <textarea id="dos-custom-txt" rows="3" placeholder="ex: Vizită teren, observații, corespondență…" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>
+        <p class="tsm tmut mt6" style="line-height:1.45">Max. 2000 caractere. Apare sus în listă, marcată ca <strong>Notă proprie</strong>.</p>
+      </div>
+      <button type="button" class="btn btn-s btn-sm mt8" onclick="addProjDossierCustomEntry(${p.id})">Adaugă în registru</button>`
+    :`<p class="tsm tmut mt10" style="line-height:1.5">Proiect <strong>finalizat</strong> — registrul este doar în consultare.</p>`;
+  dlgOpen(`Dosar electronic: ${escapeHtml(p.name)}`,'Istoric procedural și operațional',
+    `<div class="dyn-stack">
+      <section class="dyn-section" aria-labelledby="dos-sum-h">
+        <h4 class="dyn-section-h" id="dos-sum-h">Rezumat</h4>
+        ${summaryHtml}
+      </section>
+      <section class="dyn-section" aria-labelledby="dos-tend-h">
+        <h4 class="dyn-section-h" id="dos-tend-h">Licitații asociate (${tend.length})</h4>
+        ${tenderBlock}
+      </section>
+      <section class="dyn-section" aria-labelledby="dos-reg-h">
+        <h4 class="dyn-section-h" id="dos-reg-h">Registru electronic</h4>
+        ${p.dossier.length>12?`<p class="tsm tmut mb8" style="margin-top:-4px">Afișate ultimele 12 înregistrări din ${p.dossier.length}.</p>`:''}
+        ${docBlock}
+        ${addForm}
+      </section>
+    </div>`,
+    `<button type="button" class="btn btn-p" onclick="dlgClose()">Închide</button>`
   );
 }
 function openNewProjDlg(){
@@ -2664,6 +3748,8 @@ function openNewProjDlg(){
       <div class="fg"><label>Valoare declarată proiect (RON)</label><input type="number" id="np-dv" placeholder="ex: 1800000" style="${inp}"/></div>
     </div>
     <div class="fg"><label>Dată limită</label><input type="date" id="np-d" style="${inp}"/></div>
+    <div class="fg"><label>Categorie proiect</label><select id="np-cat" style="${inp}">${Object.keys(PROJECT_CATEGORIES).map(k=>`<option value="${k}"${k==='diverse'?' selected':''}>${escapeHtml(PROJECT_CATEGORIES[k].label)}</option>`).join('')}</select>
+      <p class="tsm tmut mt6" style="line-height:1.5">Indică tipul achiziției; pentru context despre calitate la finalizare, vezi <strong>Ghid &amp; reguli</strong>.</p></div>
     <div class="fg"><label>Status inițial</label><select id="np-s" style="${inp}"><option value="planned">Planificat</option><option value="in_progress">În desfășurare</option></select></div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button><button class="btn btn-p" onclick="addProj()">Adaugă Proiect</button>`
   );
@@ -2683,41 +3769,37 @@ function addProj(){
     return;
   }
   const b=dv;
-  S.projects.push({id:S.npid++,name:n,budget:b,realValue:rv,declaredValue:dv,status:s,quality:null,bet:null,due:d,lateS:false,lateF:false});
+  const cat=$('np-cat')?.value;
+  const projCategory=cat&&PROJECT_CATEGORIES[cat]?cat:'diverse';
+  const newP={id:S.npid++,name:n,budget:b,realValue:rv,declaredValue:dv,status:s,quality:null,bet:null,due:d,lateS:false,lateF:false,projCategory};
+  seedDossierIfEmpty(newP,'Proiect creat — înregistrare inițială în registrul electronic.');
+  S.projects.push(newP);
   dlgClose();renderProj();renderDash();updWandProjectOptions();addAct(`Proiect nou adăugat: „${n}" (${fRON(dv)} declarat / ${fRON(rv)} real).`);
   toast(`Proiect adăugat: ${n}`,'ok');
 }
 function openCompDlg(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
-  dlgOpen('Finalizează Proiect',`„${p.name}"`,
-    `<p class="tsm tmut mb14">Selectează calitatea reală a proiectului.${p.bet?` Ai un pariu activ pe <strong>„${qLabel(p.bet.quality)}"</strong>.`:''}</p>
-    ${[['mantuiala','🔴','De mântuială','proiect finalizat superficial',1],['moderata','🟠','Calitate moderată','acceptabil, fără probleme grave',2],['ridicata','🟢','Calitate ridicată','proiect exemplar (neobișnuit, dar posibil)',3]].map(([q,ic,lb,desc,pts])=>
-      `<label class="opt-row"><input type="radio" name="cq" value="${q}"/><div><div class="bold">${ic} ${lb}</div><div class="tsm tmut">+${pts} punct${pts>1?'e':''} reputație. ${desc}</div></div></label>`
-    ).join('')}`,
-    `<button class="btn btn-f" onclick="dlgClose()">Anulează</button><button class="btn btn-s" onclick="compProj(${id})">Finalizează</button>`
+  if(projectIsFinalized(p)||p.status!=='in_progress'){toast('Doar proiectele în desfășurare pot fi închise din listă.','warn');return}
+  if(S.settings.skipProjectFinalizeConfirm){compProj(id);return}
+  dlgOpen('Finalizează proiectul?',escapeHtml(p.name),
+    `<p class="tsm" style="line-height:1.55">Confirmi închiderea? Calitatea finală și punctele se stabilesc automat.</p>`,
+    `<button type="button" class="btn btn-f" onclick="dlgClose()">Anulează</button><button type="button" class="btn btn-s" onclick="compProj(${id})">Confirmă</button>`
   );
 }
 function compProj(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
-  const q=document.querySelector('input[name="cq"]:checked')?.value;
-  if(!q){toast('Selectează calitatea','err');return}
-  const qpts={mantuiala:1,moderata:2,ridicata:3};
-  const bonus={mantuiala:2,moderata:3,ridicata:4};
-  let bp=qpts[q],bonPts=0,betMsg='';
-  if(p.bet){
-    if(p.bet.quality===q){bonPts=bonus[q];betMsg=` Pariu CÂȘTIGAT! +${bonPts} puncte bonus.`}
-    else betMsg=' Pariul a fost pierdut.';
-  }
-  p.status='completed';p.quality=q;p.bet=null;
+  if(projectIsFinalized(p)||p.status!=='in_progress'){toast('Proiectul nu mai poate fi finalizat din această acțiune.','warn');dlgClose();return}
+  const q=rollProjectQuality(p);
+  p.status='completed';
   dlgClose();renderProj();
-  chgRep(bp+bonPts,`Proiect „${p.name}" finalizat (${qLabel(q)})`,false,{publicProject:true});
-  addAct(`Proiect „${p.name}" finalizat.${betMsg}`);
-  renderDash();
+  applyProjectCompletionRepAndBet(p,q);
+  renderDash();saveState();
 }
 function openBetDlg(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
-  dlgOpen('🎲 Pariază pe Calitate',`Proiect: „${p.name}"`,
-    `<p class="tsm tmut mb14">Pariază pe calitatea finală. Dacă ghicești, obții puncte bonus. Dacă nu, pierzi doar oportunitatea.</p>
+  if(projectIsFinalized(p)||p.status!=='in_progress'){toast('Pariul nu se poate modifica pe un proiect finalizat sau în afara execuției.','warn');return}
+  dlgOpen('🎲 Pariază pe calitate',escapeHtml(p.name),
+    `<p class="tsm tmut mb14">Alege rezultatul pe care îl anticipezi. Dacă nimeriști la finalizare, primești puncte bonus.</p>
     ${[['mantuiala','🔴','De mântuială',2],['moderata','🟠','Calitate moderată',3],['ridicata','🟢','Calitate ridicată',4]].map(([q,ic,lb,b])=>
       `<label class="opt-row"><input type="radio" name="bq" value="${q}"/><div><div class="bold">${ic} ${lb}</div><div class="tsm tmut">Dacă ghicești: +${b} puncte bonus</div></div></label>`
     ).join('')}`,
@@ -2728,6 +3810,7 @@ function placeBet(id){
   const q=document.querySelector('input[name="bq"]:checked')?.value;
   if(!q){toast('Selectează o variantă','err');return}
   const p=S.projects.find(x=>x.id===id);if(!p)return;
+  if(projectIsFinalized(p)||p.status!=='in_progress'){toast('Proiect finalizat sau ineligibil. Pariul a fost respins.','warn');return}
   p.bet={quality:q};dlgClose();renderProj();
   toast(`Pariu plasat: „${qLabel(q)}" pentru „${p.name}"`,'ok');
 }
@@ -2762,6 +3845,8 @@ function renderTend(){
 }
 function advanceTender(id){
   const t=S.tenders.find(x=>x.id===id);if(!t)return;
+  const tProj=t.projectId?S.projects.find(p=>p.id===t.projectId):null;
+  if(tProj&&tProj.status==='completed'){toast('Proiectul asociat este finalizat — licitația nu mai poate fi avansată.','warn');return}
   if(t.status==='evaluation'){
     evaluateTenderNow(t);
     renderTend();renderDash();renderJust();
@@ -2774,6 +3859,8 @@ function advanceTender(id){
 }
 function dismissContest(id){
   const t=S.tenders.find(x=>x.id===id);if(!t)return;
+  const tProj=t.projectId?S.projects.find(p=>p.id===t.projectId):null;
+  if(tProj&&tProj.status==='completed'){toast('Proiectul asociat este finalizat — nu se mai pot face modificări pe licitație.','warn');return}
   if(!t.winner)evaluateTenderNow(t);
   t.status='awarded';
   t.auditRisk=Math.max(4,Math.round((t.auditRisk||12)*0.65));
@@ -2807,6 +3894,7 @@ function addTend(){
   if(!n||!b||!pid){toast('Completează câmpurile și selectează proiectul','err');return}
   const p=S.projects.find(x=>x.id===pid);
   if(!p){toast('Proiect invalid','err');return}
+  if(p.status==='completed'){toast('Nu poți publica licitații pe un proiect deja finalizat.','warn');return}
   const complexity=clamp(Math.round((b/600000)+((p.lateS||p.lateF)?1:0)),1,5);
   const autoCl=S._wandAssistAutoClarify;
   if(autoCl!==undefined)delete S._wandAssistAutoClarify;
@@ -2836,6 +3924,8 @@ function openNewTendDlgForProject(projectId,opts){
   });
 }
 function wandAdvanceOpenTendersToClarificari(projectId){
+  const linked=S.projects.find(p=>p.id===projectId);
+  if(linked&&linked.status==='completed'){toast('Proiect finalizat — nu se mai pot modifica licitațiile.','warn');return}
   let n=0;
   S.tenders.forEach(t=>{
     if(t.projectId===projectId&&t.status==='open'){t.status='clarificari';n++;}
@@ -2866,7 +3956,7 @@ function openWandProcurementAssistDlg(projectId){
       <button type="button" class="btn btn-p" onclick="dlgClose();wandAdvanceOpenTendersToClarificari(${projectId})">→ Avansează toate la Clarificări</button>
       <button type="button" class="btn btn-f" onclick="dlgClose();openNewTendDlgForProject(${projectId},{autoAdvanceAfterPublish:true})">+ Publică altă licitație</button>
       <button type="button" class="btn btn-s" onclick="dlgClose();navigate('tend')">Deschide Licitații (manual)</button>`;
-  dlgOpen('Achiziție pentru Bagheta Magică','Publică sau avansează procedura',body+`<p class="tsm tmut mt10 mb0">După ce e gata, revino aici și apasă din nou <strong>Pornește optimizarea</strong>.</p>`,actions);
+  dlgOpen('Achiziție pentru Bagheta Magică','Publică sau avansează procedura',body+`<p class="tsm tmut mt6 mb0">După ce e gata, revino aici și apasă din nou <strong>Pornește optimizarea</strong>.</p>`,actions);
 }
 
 // ═══ WAND ═══
@@ -2922,10 +4012,10 @@ function wandDossierTickLine(inc,cum){
 }
 function wandDossierClose(reason,surplus,pname,elapsed){
   wandPushLog(`Pas FINAL — închidere sesiune (${reason}): „redistribuit" ${fRON(surplus)} în ${fTimer(elapsed)}.`);
-  if(reason==='surplus')wandPushLog('Motiv: plafon absorbție atins — nu mai există diferență declarat–real de valorificat în simulare.');
-  else if(reason==='time')wandPushLog('Motiv: cotă timp epuizată — restul rămâne teoretic în „rezervă etapa a II-a".');
-  else if(reason==='orphan')wandPushLog('Motiv: proiect dispărut din evidență — linii de jurnal anulate retroactiv (simulare).');
-  else wandPushLog('Motiv: oprire manuală — notă de reconciliere pentru registrul public (fictiv).');
+  if(reason==='surplus')wandPushLog('Motiv: plafon absorbție atins; nu mai există diferență declarat-real de valorificat în simulare.');
+  else if(reason==='time')wandPushLog('Motiv: cotă timp epuizată; restul rămâne practic irosit.');
+  else if(reason==='orphan')wandPushLog('Motiv: proiect dispărut din evidență; linii de jurnal anulate retroactiv.');
+  else wandPushLog('Motiv: oprire manuală');
   const pn=String(pname||'Proiect');
   wandPushLog(`Închidere DOSAR · „${pn.length>52?pn.slice(0,52)+'…':pn}" — sumă propagată la surplus redistribuit / buget public (conform regulilor jocului).`);
 }
@@ -3210,7 +4300,7 @@ function onWandQueueScheduleFactorInput(){
   const rr=parseFloat(meta?.dataset?.real||'0');
   const dd=parseFloat(meta?.dataset?.decl||'0');
   const maxS=wandMaxSurplusTheoretical(rr,dd,f);
-  el.innerHTML=`Factorul <strong>${pct}%</strong> definește plafonul de surplus sesiune: <strong>(declarat − real) × factor</strong> → max. <strong>${fRON(Math.round(maxS))}</strong> la valorile de mai sus. În sesiune, surplusul crește treptat până la acest plafon. „Vizibilitate simulată”: <strong>${exp}%</strong> — la <strong>≥70%</strong> factor, după start se poate declanșa o alertă narativă (ANAF/DNA).`;
+  el.innerHTML=`Factorul <strong>${pct}%</strong> definește plafonul de surplus sesiune: <strong>(declarat-real) × factor</strong> → max. <strong>${fRON(Math.round(maxS))}</strong> la valorile de mai sus. În sesiune, surplusul crește treptat până la acest plafon. La <strong>≥70%</strong> factor, după start se poate declanșa o alertă ANAF/DNA.`;
 }
 function openWandQueueScheduleEdit(queueJobId){
   const q=S.wandQueue.find(x=>x.id===queueJobId);
@@ -3251,7 +4341,7 @@ function openWandQueueScheduleDialog(projectId,opts){
     `<div id="wq-sch-meta" data-real="${est.real}" data-decl="${est.declared}" style="display:none" aria-hidden="true"></div>
     <p class="tsm tmut mb12" style="line-height:1.6"><strong>${pname}</strong><br/>
     Valoare reală (simulare): <strong>${fRON(est.real)}</strong> · Declarată: <strong>${fRON(est.declared)}</strong></p>
-    <div class="fg"><label>Factor de optimizare: <strong id="wq-sch-fac-disp">${defaultPct}</strong>% <span class="tsm tmut" style="font-weight:600">(20–95%)</span></label>
+    <div class="fg mb0"><label>Factor de optimizare: <strong id="wq-sch-fac-disp">${defaultPct}</strong>% <span class="tsm tmut" style="font-weight:600">(20-95%)</span></label>
       <input type="range" id="wq-sch-fac" min="20" max="95" value="${defaultPct}" style="width:100%;accent-color:var(--blue)" oninput="onWandQueueScheduleFactorInput()"/>
     </div>
     <p id="wq-sch-fac-hint" class="tsm" style="margin-top:10px;line-height:1.55;color:var(--text2)"></p>`,
@@ -3665,6 +4755,30 @@ function renderSettings(){
       :'După ce activezi un plan plătit din secțiunea Abonament, poți seta aici reînnoirea automată. La prima plată, aceasta este oprită implicit.';
     if(subRenewLbl)subRenewLbl.style.opacity=paid?'':'0.55';
   }
+  normalizeSpagafonSettings();
+  const spMode=$('settings-spgf-mode');
+  if(spMode)spMode.value=S.settings.spagafonLauncherMode==='icon'||S.settings.spagafonLauncherMode==='text'?S.settings.spagafonLauncherMode:'both';
+  const spFull=$('settings-spgf-mobile-full');
+  if(spFull)spFull.checked=!!S.settings.spagafonMobileFullDisplay;
+  const spHint=$('settings-spgf-mode-hint');
+  if(spHint){
+    const narrow=isMobileLayout();
+    if(!narrow){
+      spHint.textContent='Modul se aplică lansatorului din colț pe ecran lat; pe mobil compact (📱) modul nu se schimbă până bifezi forțarea (vizibilă doar la lățime ≤680px).';
+    }else if(S.settings.spagafonMobileFullDisplay){
+      spHint.textContent='Lansatorul complet din colț folosește modul selectat (același stil ca pe desktop).';
+    }else{
+      spHint.textContent='Bifează „Forțează afișare completă pe ecrane mici” ca să apară Mod afișare pentru lansatorul din colț pe acest ecran.';
+    }
+  }
+  const skipFin=$('settings-skip-proj-final-confirm');
+  if(skipFin)skipFin.checked=!!S.settings.skipProjectFinalizeConfirm;
+}
+function onSettingsSkipProjFinalizeConfirmChange(){
+  const cb=$('settings-skip-proj-final-confirm');
+  if(!S.settings)S.settings={};
+  S.settings.skipProjectFinalizeConfirm=!!cb?.checked;
+  saveState();
 }
 function onSettingsShiftInput(){
   const v=parseInt($('settings-shift-range')?.value||'0',10);
@@ -3736,6 +4850,44 @@ function updateFundsLockUI(){
 }
 // ═══ EXTRA VIEWS ═══
 function renderAudit(){
+  const anafCard=$('audit-anaf-sync-card');
+  const anafPane=$('audit-anaf-sync-pane');
+  if(anafCard&&anafPane){
+    if(!isAnafSyncAuditVisible()){
+      anafCard.classList.add('hid');
+      anafCard.setAttribute('aria-hidden','true');
+      anafPane.innerHTML='';
+    }else{
+      anafCard.classList.remove('hid');
+      anafCard.setAttribute('aria-hidden','false');
+      const now=nowDate();
+      const dstr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      const projs=S.projects.filter(p=>p.status==='in_progress'||p.status==='completed').slice(0,4);
+      const judPre=String(S.user.jud||'RO').slice(0,3).toUpperCase();
+      const efRows=(projs.length?projs:[{title:'Servicii consultanță narativă',status:'completed'}]).map((p,i)=>{
+        const h=Array.from(String(p.title||'')).reduce((s,c)=>s+c.charCodeAt(0),i*7919);
+        const n=100000+(h%899999);
+        const st=p.status==='completed'?'Închisă narativ':'În circuit';
+        const amt=8000+(h%220000);
+        return`<div class="audit-anaf-ef-row"><span>EF-RO/${escapeHtml(judPre)}/${n}</span><span>${dstr}</span><span>${fRON(amt)}</span><span style="grid-column:1/-1;font-size:11px;color:var(--text2)">${escapeHtml(p.title||'—')} · ${st}</span></div>`;
+      }).join('');
+      const actTail=S.actLog.slice(-12).reverse();
+      const details=actTail.map((ev,ix)=>{
+        const sev=/err|DNA|justi|anchet|presiune/i.test(ev.txt)?'at':'inf';
+        const lab=sev==='at'?'ATENȚIONARE':'INFORMARE';
+        const ref=1000000+(Array.from(String(ev.txt||'')).reduce((s,c)=>s+c.charCodeAt(0),ix*104729)%8999999);
+        const bureaucr=`Referință internă RO-EF-EXT/${ref}. Linie trasabilitate: „${ev.txt}” — consemnat în registrul narativ ANAF Sync™ ca eveniment de tip operațional simulat, fără corespondență în SPV. Stare: înregistrat pentru raportare de sinteză.`;
+        return`<div class="audit-anaf-detail"><span class="ad-sev ${sev}">${lab}</span>${escapeHtml(bureaucr)} <span class="tsm tmut">(${ev.t})</span></div>`;
+      }).join('');
+      const justiceExtra=S.justice?.anafAuditMessage
+        ?`<div class="audit-anaf-detail"><span class="ad-sev at">CORELAȚIE</span>Alertă tablou de bord justiție: ${escapeHtml(S.justice.anafAuditMessage)} — mapată în fluxul ANAF Sync ca „observație transversală” (simulare).</div>`
+        :'';
+      anafPane.innerHTML=`<div class="audit-anaf-ef-h" style="display:grid;grid-template-columns:1fr 100px 90px;gap:8px;padding-bottom:6px;border-bottom:2px solid var(--border)"><span>Document</span><span>Dată</span><span>Valoare</span></div>
+        ${efRows}
+        <h4 class="mt14 mb6" style="font-size:13px">Flux detaliat (extras simulat)</h4>
+        ${justiceExtra}${details||'<p class="tsm tmut">Nu există încă linii de trasabilitate extinsă — acționează în simulare pentru a popula registrul.</p>'}`;
+    }
+  }
   const el=$('audit-log');if(!el)return;
   const ledger=`<div class="card-accent-o" style="padding:10px;border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px">
     <div class="gline"><span class="gk">Buget public</span><span class="gv">${fRON(S.ledger.publicBudget)}</span></div>
@@ -4015,7 +5167,7 @@ function openSubPay(tid){
     `<p class="tsm mb14">Alege metoda de plată:</p>
     <div style="display:flex;flex-direction:column;gap:10px">
       <button class="btn btn-p" onclick="dlgClose();openCardPay('${tid}',${fp})">💳 Plată cu Cardul (SifonPay™)</button>
-      <button class="btn btn-psd" onclick="dlgClose();openPublicPay('${tid}',${fp})">🏛️ Plată cu Bani Publici (PSD Direct Connect™)</button>
+      <button class="btn btn-psd" onclick="dlgClose();tryOpenPublicPay('${tid}',${fp})">🏛️ Plată cu Bani Publici (PSD Direct Connect™)</button>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>`
   );
@@ -4055,7 +5207,9 @@ function fmtCard(inp){let v=inp.value.replace(/\D/g,'').substring(0,16);inp.valu
 function openCardPay(tid,amount){openCardCheckout({kind:'sub',tid,amount})}
 function openCardPayHours(hours,amount){openCardCheckout({kind:'hours',hours,amount})}
 function finishCardCheckout(bank3ds){
+  const tdsReserve=S.pending3DS&&S.pending3DS.reserveCode!=null?String(S.pending3DS.reserveCode):'';
   S.pending3DS=null;
+  if(bank3ds&&tdsReserve)invalidateVerifiedSpagafonCode('3ds',tdsReserve);
   const ctx=CARD_PAY_CTX;if(!ctx)return;
   if(ctx.kind==='sub'){
     activateSub(ctx.tid);
@@ -4065,6 +5219,7 @@ function finishCardCheckout(bank3ds){
     addAct(`Abonament ${pl?.name||ctx.tid} plătit cu cardul via SifonPay™${bank3ds?` (3D Secure ${bank3ds.bank})`:''}.`);
     renderSub();renderDash();
     CARD_PAY_CTX=null;
+    saveState();
     return;
   }
   if(ctx.kind==='hours'){
@@ -4076,6 +5231,7 @@ function finishCardCheckout(bank3ds){
     addAct(`${ctx.hours} ore Bagheta Magică cumpărate cu cardul (${fRON(ctx.amount)})${bank3ds?` · 3D Secure ${bank3ds.bank}`:''}.`);
     renderDash();updDebug();
     CARD_PAY_CTX=null;
+    saveState();
   }
 }
 function show3DSChallenge(bankRule,cardNum){
@@ -4098,9 +5254,11 @@ function show3DSChallenge(bankRule,cardNum){
   S.pending3DS={code:'__TDS10__',bank:bankRule.bank,tail:cardNum.slice(-4),mode:'timed_3ds',reserveCode};
   spagafonPushSms(bankRule.bank,smsBody,{code:reserveCode,is3ds:true});
   spagafonPinFor3DS(true);
+  const codeRow=reserveCode!=null?`<div class="fg mt14"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Cod rezervă (din Șpagafon)</label><input class="card-inp" id="tds-code" type="text" inputmode="numeric" maxlength="12" placeholder="000000" autocomplete="one-time-code" style="font-size:15px;letter-spacing:.12em"/></div><p class="tsm tmut mt8">Folosește butonul <strong>Completează în plată</strong> din mesajul SMS pe Șpagafon ca să lipească codul aici, apoi confirmă.</p>`:'';
   const inner=`<p class="tsm tmut mb14">Card <strong>${masked}</strong> · <strong>${bankRule.bank}</strong> solicită <strong>3D Secure</strong> (simulare SifonPay™). Ai exact <strong>${TDS_MINUTES} minute</strong>; detaliile și orice cod de rezervă sunt pe <strong>Șpagafon</strong> (deschis automat deasupra acestei ferestre).</p>
     <div style="background:var(--bg);padding:12px;border-radius:var(--r);font-size:13px;text-align:center"><span id="tds-timer" style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--orange)">${String(TDS_MINUTES).padStart(2,'0')}:00</span><div class="tsm tmut mt6">Timp rămas</div></div>
-    <p class="tsm tmut mt10">După expirare, reîncearcă plata. Butonul de mai jos confirmă că ai finalizat pașii în timpul alocat.</p>`;
+    ${codeRow}
+    <p class="tsm tmut mt6">După expirare, reîncearcă plata. Confirmă doar după ce ai introdus codul (când banca îl cere).</p>`;
   const endMs=Date.now()+TDS_MINUTES*60000;
   clearInterval(window.__tdsTimerIv);
   window.__tdsTimerIv=setInterval(()=>{
@@ -4118,6 +5276,11 @@ function show3DSChallenge(bankRule,cardNum){
 }
 function confirm3DSecure(bank){
   if(!S.pending3DS||S.pending3DS.code!=='__TDS10__'){toast('Sesiune 3D Secure expirată sau invalidă','warn');return}
+  const want=S.pending3DS.reserveCode;
+  if(want!=null&&String(want).length){
+    const got=$('tds-code')?.value?.replace(/\s/g,'')||'';
+    if(got!==String(want)){toast('Introdu codul din Șpagafon (sau butonul din SMS) înainte de confirmare.','warn');return}
+  }
   clearInterval(window.__tdsTimerIv);
   $('dlg-a').innerHTML='<span class="tsm tmut">Verificare 3D Secure...</span>';
   setTimeout(()=>{
@@ -4139,6 +5302,7 @@ function procCard(){
   },1700);
 }
 function openPublicPay(tid,amount){
+  if(!isPsdDcLinked()){toast('PSD Direct Connect nu este integrat. Deschide Manager Integrări.','warn');return}
   const pl=PLANS.find(p=>p.id===tid),com=Math.round(amount*.15),total=amount+com;
   dlgOpen('🏛️ PSD Direct Connect™','Serviciu de integrare fonduri publice',
     `<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:var(--r);margin-bottom:13px;text-align:center">
@@ -4175,6 +5339,7 @@ function procPublic(tid,total){
   );
 }
 function openPublicPayHours(hours,amount){
+  if(!isPsdDcLinked()){toast('PSD Direct Connect nu este integrat. Deschide Manager Integrări.','warn');return}
   const com=Math.round(amount*.15),total=amount+com;
   dlgOpen('🏛️ PSD Direct Connect™','Serviciu de integrare fonduri publice',
     `<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:var(--r);margin-bottom:13px;text-align:center">
@@ -4244,14 +5409,14 @@ function openBuyHDlg(){
     </div>
     <div style="display:flex;flex-direction:column;gap:9px">
       <button class="btn btn-p" onclick="dlgClose();openCardPayHours(${h},${cost})">💳 SifonPay™</button>
-      <button class="btn btn-psd" onclick="dlgClose();openPublicPayHours(${h},${cost})">🏛️ Bani Publici</button>
+      <button class="btn btn-psd" onclick="dlgClose();tryOpenPublicPayHours(${h},${cost})">🏛️ Bani Publici</button>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>`
   );
 }
 function procHours(h,cost,method){
   if(method==='card'){openCardPayHours(h,cost);return}
-  openPublicPayHours(h,cost);
+  tryOpenPublicPayHours(h,cost);
 }
 
 // ═══ DNA ═══
@@ -4337,7 +5502,9 @@ function dbLeakPresa(){
 function dbCreateProj(){
   const id=S.npid++;
   const name=`[DEBUG] Proiect rapid #${id}`;
-  S.projects.push({id,name,budget:900000,realValue:540000,declaredValue:1180000,status:'in_progress',quality:null,bet:null,due:new Date(nowTs()+86400000*120).toISOString().slice(0,10),lateS:false,lateF:false});
+  const dp={id,name,budget:900000,realValue:540000,declaredValue:1180000,status:'in_progress',quality:null,bet:null,due:new Date(nowTs()+86400000*120).toISOString().slice(0,10),lateS:false,lateF:false,projCategory:'diverse'};
+  seedDossierIfEmpty(dp,'[DEBUG] Înregistrare proiect rapid.');
+  S.projects.push(dp);
   updWandProjectOptions(id);
   renderProj();renderDash();renderOps();
   toast(`[DEBUG] Creat: ${name}`,'ok');
@@ -4367,6 +5534,7 @@ function dbReset(){
   S.rep=0;S.repH=[];S.siphoned=0;S.justice={stage:'clean',pressure:0,timeline:[],debugPin:false,dnaEscalation:false,anafAuditMessage:'',anafAuditSince:0,anafAuditShowBanner:false};S.sub=null;S.subLapsed=null;
   _subExpiredPromptPending=false;if(_subExpiredDlgTimer){clearTimeout(_subExpiredDlgTimer);_subExpiredDlgTimer=null}
   S.smsInbox=[];S.pending3DS=null;S.spagafonLastSeen=0;
+  S.integrations={psdDC:{linked:false,apiKey:'',draftKey:'',pendingVerifyCode:''},anafSync:{linked:false,apiKey:'',draftKey:'',pendingCertCode:'',wizardPhase:1,dosarTicks:0}};
   S.purchSec=0;S.purchSecUsed=0;S.activeSession=null;S.sessions=[];S.judiciaryRisk=0;S.pressTone=50;S.timeShiftSec=0;
   S.userControls={repPublicSlider:0};S.wandQueue=[];S.wandJobDetailId=null;
   S.worldMemory={blacklistedFirms:[],hostilePress:[],magistrateHeat:0,lastSpilloverMonth:-1};
@@ -4386,6 +5554,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     resizeT=setTimeout(syncLayoutForViewport,120);
   });
   syncLayoutForViewport();
+  normalizeSpagafonSettings();
+  applySpagafonDisplaySettings();
   window.addEventListener('beforeunload',()=>{
     if(S.sessTimer){clearInterval(S.sessTimer);S.sessTimer=null}
     if(S.settings.persistence==='local_storage')saveState();
