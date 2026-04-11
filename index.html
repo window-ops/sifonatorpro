@@ -2474,7 +2474,7 @@ function connectPsdDcManualKey(){
   const v=$('integ-psd-paste')?.value?.trim()||'';
   const dc=S.integrations.psdDC;
   if(dc.linked){toast('Integrarea este deja activă.','warn');return}
-  if(!v){toast('Introdu sau lipește cheia API din portal (cea curentă, emisă sau regenerată).','warn');return}
+  if(!v){toast('Introdu sau lipește cheia din portalul PSD Direct Connect.','warn');return}
   if(!dc.draftKey){toast('Deschide portalul PSD Direct Connect și emite o cheie nouă.','warn');return}
   if(v!==dc.draftKey){toast('Cheia nu se potrivește cu cea activă în portal.','err');return}
   dc.apiKey=dc.draftKey;
