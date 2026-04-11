@@ -1826,12 +1826,12 @@ function buildSimulatedPressHeadlineStrings(){
     `Post local: „Comunitatea așteaptă clarificări pe SEAP; nu e panică, e doar curiozitate.”`,
   ];
   if(S.rep>=52||S.siphoned>=320000){
-    pool.push(`Recorder (simulare): echipă în ${jud} — întrebări despre licitații și „logică” bugetară.`);
+    pool.push(`Recorder: echipă în ${jud}, întrebări despre licitații și „logică” bugetară.`);
     pool.push(`Reportaj tip Nedea (fictiv): un sat din ${jud} ajunge pe sticlă la nivel național.`);
     pool.push(`Presă de investigație: „Chiar dacă schema e locală, publicul din toată țara vede acum harta banilor.”`);
   }
   if(S.rep>=72||S.siphoned>=620000){
-    pool.push(`Recorder / DNA (narativ): aceleași cifre, două redacții — una pe teren, una în dosar.`);
+    pool.push(`Recorder / DNA: aceleași cifre, două redacții; una pe teren, una în dosar.`);
     pool.push(`Curtea de conturi citează „atitudinea relaxată” a autorității din ${jud}.`);
   }
   if(S.activeSession&&S.activeSession.factor>=0.7)pool.push(`Breaking: factor de optimizare ridicat — presa întreabă „cine a setat sliderul?”`);
@@ -1854,8 +1854,8 @@ function trySimulateNationalPressSpillover(){
   const t=nowDate();
   const tt=`${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
   const blurbs=[
-    `[investigatii] Recorder (simulare): echipă la fața locului în ${jud} — întrebări pentru ${nm} despre achiziții.`,
-    `[investigatii] Anchetă tip Nedea (fictiv): reportaj din ${jud} văzut la nivel național.`,
+    `[investigatii] Recorder: echipă la fața locului în ${jud}, întrebări pentru ${nm} despre achiziții.`,
+    `[investigatii] Anchetă tip Nedea: reportaj din ${jud} văzut la nivel național.`,
     `[investigatii] „Localul devine național”: presa de investigație leagă licitațiile din zonă de rețele mai mari.`,
   ];
   S.pressHistory.unshift({t:tt,txt:blurbs[Math.floor(Math.random()*blurbs.length)]});
@@ -2820,9 +2820,9 @@ function buildWandDossierOpenLines(name,rr,dd,f){
     `DESCHIDERE DOSAR · „${short}" — poz. 4.02 / lucrări în curs; legătură simulată cu fluxul SEAP–contabilitate primară.`,
     `Pas 01 — Reconciliere: declarat ${fRON(dd)} vs. „realitate tehnică” ${fRON(rr)}; diferența intră pe algoritmul de absorbție progresivă (fără PV la fiecare mișcare).`,
     `Pas 02 — Coeficient ${(f*100).toFixed(0)}% aplicat pe diferență; aprobare tacită în modul satiric „merge și așa".`,
-    `Pas 03 — Mapare sursă: buget local + capitole tip studii / utilități / urgență — schema obișnuită a mutărilor fără nouă licitație la fiecare pas.`,
+    `Pas 03 — Mapare sursă: buget local + contracte tip studii / utilități / urgență — schema obișnuită a mutărilor fără nouă licitație la fiecare pas.`,
     `Pas 04 — Caiet de sarcini: parametri retroactiv compatibili cu oferta câștigătoare (simulare); devizul rămâne „elastic".`,
-    `Pas 05 — Lanț subcontractare 2→3: marje agregate ascunse în capitole subevaluate și „prestări conexe".`,
+    `Pas 05 — Lanț subcontractare 2→3: marje agregate ascunse în contracte subevaluate și „prestări conexe".`,
     `Pas 06 — Jurnal în loturi la ~5s: vizibilitate redusă pentru spectatori și pentru „auditul de formă".`,
   ];
 }
@@ -2832,7 +2832,7 @@ const WAND_DOSSIER_TICK=[
   (inc,cum)=>`Lucrări suplimentare & diferențe cantitate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — deviz complementar aprobat pe flux intern.`,
   (inc,cum)=>`Rezervă tehnică → execuție: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — fără relansare procedură în simulare.`,
   (inc,cum)=>`Achiziție directă motivată (urgență / „unic furnizor”): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
-  (inc,cum)=>`Antemăsurători reîncărcate pe capitole subevaluate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Antemăsurători reîncărcate pe contracte subevaluate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Coordonare proiect + dirigenție de șantier (ore în bloc): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Marjă pe lanț subcontractanți (TVA/profit la nivel final): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`„Soluții tehnice neprevăzute" post-factum: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — încadrare utilități.`,
@@ -2849,7 +2849,7 @@ const WAND_DOSSIER_TICK=[
   (inc,cum)=>`„Verificare tehnică" facturată înainte de începerea lucrărilor: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Majorare onorariu proiectant fără schimbare de tema proiectului: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`„Asistență tehnică pe durata execuției" (tarif orar nelimitat simulat): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
-  (inc,cum)=>`Transfer discret către capitol „cheltuieli neeligibile re-clasificate": +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
+  (inc,cum)=>`Transfer discret către parlament „cheltuieli neeligibile re-clasificate": +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
 ];
 function wandDossierOpen(name,rr,dd,f){
   buildWandDossierOpenLines(name,rr,dd,f).forEach(wandPushLog);
@@ -2905,7 +2905,7 @@ function updateSessSurplusUI(){
   const ptxt=$('sess-surplus-pct');
   if(ptxt)ptxt.textContent=max>0?`${pct}% din plafon (${fRON(cur)} / ${fRON(max)})`:`Plafon 0 RON (verifică valori proiect)`;
   const ex=$('sess-exposure-wrap');
-  if(ex)ex.innerHTML=`Vizibilitate simulată (control fiscal narativ): <strong>${exp}%</strong> · Factor sesiune <strong>${(as.factor*100).toFixed(0)}%</strong>${as.factor>=0.7?' · <span style="color:var(--orange)">Factor ridicat: risc de alertă ANAF/DNA post-start</span>':''}`;
+  if(ex)ex.innerHTML=`Vizibilitate simulată (control fiscal): <strong>${exp}%</strong> · Factor sesiune <strong>${(as.factor*100).toFixed(0)}%</strong>${as.factor>=0.7?' · <span style="color:var(--orange)">Factor ridicat: risc de alertă ANAF/DNA post-start</span>':''}`;
 }
 function wPreview(){
   const r=parseFloat($('w-real')?.value)||0;
@@ -2935,7 +2935,7 @@ function updateSessQuotaHints(){
   const left=wandAvailSec();
   const q0=S.activeSession.quotaSecAtStart;
   const capLabel=q0===Infinity||q0===-1?'nelimitat (abonament)':fSec(q0);
-  const pz=S.activeSession.paused?' <strong>(PAUZĂ — timpul nu curge)</strong>':'';
+  const pz=S.activeSession.paused?' <strong>(PAUZĂ)</strong>':'';
   el.innerHTML=`Timp rămas din cota curentă: <strong>${fSec(left)}</strong> · Durată sesiune: <strong>${fTimer(elapsed)}</strong> · Cota la start: <strong>${capLabel}</strong>${pz}`;
   const pb=$('wand-pause-btn');if(pb)pb.textContent=S.activeSession.paused?'▶ Continuă':'⏸ Pauză';
 }
@@ -3750,13 +3750,13 @@ function renderJust(){
       <p class="tsm tmut" style="line-height:1.5">Înregistrare eveniment: <strong>${anafSince?new Date(anafSince).toLocaleString('ro-RO'):'—'}</strong> · inclus în <strong>Indicele de presiune</strong> de mai jos până la rezolvare sau la ascunderea bannerului.</p>
       <div class="flex" style="flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center">
         <button type="button" class="btn btn-f btn-sm" onclick="dismissAnafAuditBanner()">Am citit — ascunde bannerul</button>
-        <span class="tsm tmut">Rămâi cu urmă în istoricul de mai jos; riscul poate rămâne ridicat până la „Manipulare” sau la calmarea simulării.</span>
+        <span class="tsm tmut">Rămâi cu urmă în istoricul de mai jos; riscul poate rămâne ridicat până la „Manipulare” sau la calmarea situației.</span>
       </div>
     </div>
   </div>`:'';
   const anafFoot=!anafShow&&anafMsg?`<p class="tsm mt8" style="line-height:1.55;border-left:3px solid var(--orange);padding:8px 0 8px 12px;background:rgba(230,97,0,.06);border-radius:0 var(--r) var(--r) 0"><strong>Ultimă alertă fiscală / ANAF:</strong> ${escapeHtml(anafMsg)} <span class="tmut">(${anafSince?new Date(anafSince).toLocaleString('ro-RO'):''})</span></p>`:'';
   const riskCard=`<div class="card mb14">
-    <div class="ch"><h3>Indice Presiune Judiciară</h3><p>Calculat din fonduri, evenimente DNA, sesiune Baghetă și <strong>controale ANAF</strong> narative</p></div>
+    <div class="ch"><h3>Indice Presiune Judiciară</h3><p>Calculat din fonduri, evenimente DNA, sesiune Baghetă și controale ANAF</div>
     <div class="cc">
       <div class="gline"><span class="gk">Fonduri „optimizate” totale</span><span class="gv">${fRON(S.siphoned)}</span></div>
       <div class="gline"><span class="gk">Nivel risc estimat</span><span class="gv">${S.judiciaryRisk}% (${stress})</span></div>
