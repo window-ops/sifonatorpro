@@ -1822,9 +1822,8 @@ function buildSimulatedPressHeadlineStrings(){
   const pool=[
     `„Surse”: ${u} susține că „totul e procedural”.`,
     `Editorial: ${S.siphoned>900000?'fluxuri financiare neobișnuit de creative':'achizițiile din zonă intră în atenția publică'}.`,
-    `${S.justice?'Ultimă oră: dosar în lucru, reacții politice împărțite.':'Ultimă oră: opoziția cere transparență în licitații.'}`,
+    `${S.justice?'Ultimă oră: dosar în lucru, reacții politice împărțite.':'Ultimă oră: presa independentă cere transparență în licitații.'}`,
     `Post local: „Comunitatea așteaptă clarificări pe SEAP; nu e panică, e doar curiozitate.”`,
-    `Thread social: screenshot-uri din comisie + meme cu „optimizare”.`,
   ];
   if(S.rep>=52||S.siphoned>=320000){
     pool.push(`Recorder (simulare): echipă în ${jud} — întrebări despre licitații și „logică” bugetară.`);
@@ -3455,7 +3454,7 @@ function renderWandQueue(){
   }
   const nPending=S.wandQueue.filter(q=>q.status==='pending').length;
   if(qRows.length>=2||(nPending>=1&&!S.activeSession)){
-    parts.push(`<div class="mt10"><button type="button" class="btn btn-p btn-sm" onclick="tryStartNextQueuedWand()" ${S.activeSession?'disabled':''}>▶ Pornește următoarea din coadă</button></div>`);
+    parts.push(`<div class="mt14"><button type="button" class="btn btn-p btn-sm" onclick="tryStartNextQueuedWand()" ${S.activeSession?'disabled':''}>▶ Pornește următoarea din coadă (dacă nu pornește automat)</button></div>`);
   }
   el.innerHTML=parts.join('');
 }
