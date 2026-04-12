@@ -1028,8 +1028,8 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
                 <select id="w-proj" onchange="onWandProjectChange()" style="width:100%;padding:9px 11px;border-radius:var(--r);border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.08);color:#fff;font-family:var(--font);font-size:14px;outline:none"></select>
               </div>
               <div class="wig wsl">
-                <label>Factor de optimizare (reglabil): <strong id="wf-d">50</strong>%
-                  <span style="font-size:10px;opacity:.45">20–85% practic util; plafonul de surplus crește cu factorul.</span>
+                <label>Factor de optimizare: <strong id="wf-d">50</strong>%
+                  <span style="font-size:10px;opacity:.45">20-85% practic util; plafonul de surplus crește cu factorul.</span>
                 </label>
                 <input type="range" id="w-fac" min="20" max="95" value="50" oninput="wFactor(this.value)"/>
                 <p id="w-fac-hint" class="tsm" style="margin-top:8px;opacity:.82;line-height:1.5;color:rgba(255,255,255,.88)"></p>
@@ -1096,7 +1096,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
           <div class="cc" id="audit-anaf-sync-pane"></div>
         </div>
         <div class="card">
-          <div class="ch"><h3>Jurnal Complet Activitate</h3><p class="mb0">Numerotare <strong>#01–#N</strong> în ordine cronologică: <strong>#01</strong> = intrarea cea mai veche (jos), <strong>#N</strong> = cea mai recentă (sus).</p></div>
+          <div class="ch"><h3>Jurnal Complet Activitate</h3><p class="mb0">Numerotare <strong>#01-#N</strong> în ordine cronologică: <strong>#01</strong> = intrarea cea mai veche (jos), <strong>#N</strong> = cea mai recentă (sus).</p></div>
           <div class="cc" id="audit-log"></div>
         </div>
       </div>
@@ -1447,7 +1447,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
     <span class="dbk">SIFONAT:</span><span class="dbv" id="db-siph">0</span>
     <span class="dbk">DNA:</span><span class="dbv" id="db-just">curat</span>
     <span class="dbk">SHIFT:</span><span class="dbv" id="db-shift">0h</span>
-    <span class="dbk">API:</span><span class="dbv" id="db-api" title="PSD / ANAF / Mântuire">–/–/–</span>
+    <span class="dbk">API:</span><span class="dbv" id="db-api" title="PSD / ANAF / Mântuire">-/-/-</span>
     <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;max-width:100%;justify-content:flex-end">
       <button class="btn btn-sm" style="background:#c64600;color:#fff" onclick="dbInstantApiPsd()" title="PSD Direct Connect: cheie activă fără portal">+ API PSD</button>
       <button class="btn btn-sm" style="background:#0056b3;color:#fff" onclick="dbInstantApiAnaf()" title="ANAF Sync: cheie activă fără portal">+ API ANAF</button>
@@ -2182,7 +2182,7 @@ const PROJECT_CATEGORIES={
   consumabile:{label:'Consumabile, birotică, rechizite',short:'Consumabile',hint:'Achiziții simple — adesea livrare conformă.',p:{mantuiala:.18,moderata:.42,ridicata:.40}},
   it_digital:{label:'IT, software, digitalizare',short:'IT & digital',hint:'Contracte IT — pe hârtie merge bine, în practică variat.',p:{mantuiala:.52,moderata:.35,ridicata:.13}},
   consultanta:{label:'Studii, consultanță, expertize, proiectare',short:'Consultanță',hint:'Multă hârtie și formalitate — mediu spre slab.',p:{mantuiala:.58,moderata:.32,ridicata:.10}},
-  diverse:{label:'Diverse / profil mixt',short:'Diverse',hint:'Medie satirizată (~corupție generalizată, 70–80% „mântuială”).',p:{mantuiala:.76,moderata:.19,ridicata:.05}},
+  diverse:{label:'Diverse / profil mixt',short:'Diverse',hint:'Medie satirizată (aproximativ corupție generalizată, 70-80% „mântuială”).',p:{mantuiala:.76,moderata:.19,ridicata:.05}},
 };
 // projectCategoryKey: category key.
 function projectCategoryKey(p){
@@ -2825,7 +2825,7 @@ function renderMantuirePortalBody(){
     if(!m.registrationPaid){
       if(pane==='methods'){
         checkout=`${orderSummaryBlock}
-        <p class="tsm tmut">Alege metoda (ca la abonament sau ore Baghetă). PSD necesită integrare activă în Manager Integrări.</p>
+        <p class="tsm tmut">Alege metoda de plată. PSD DC necesită integrare activă în Manager Integrări.</p>
         <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
           <button type="button" class="mantp-btn-pri" onclick="mantuirePayPaneNav('card')">💳 Plată cu cardul (SifonPay)</button>
           <button type="button" class="mantp-btn-pri" style="background:linear-gradient(180deg,#7a0000,#a40000);border:none" onclick="mantuirePortalTryPsdInline()">🏛️ Plată cu bani publici (PSD Direct Connect)</button>
@@ -3235,8 +3235,8 @@ function mantuireFormatApproxEta(j,now){
     hi=Math.max(lo+1,Math.ceil(sec*1.12)+1);
   }
   if(hi<=lo)hi=lo+1;
-  if(sec<4)return`≈ ${lo}–${hi} s (finețe)`;
-  return`ETA aprox. ${lo}–${hi} s`;
+  if(sec<4)return`≈ ${lo}-${hi} s (puțin)`;
+  return`ETA aprox. ${lo}-${hi} s`;
 }
 // Mantuire Proiects portal or queue (mantuireRefreshLivePanels).
 function mantuireRefreshLivePanels(){
