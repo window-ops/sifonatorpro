@@ -1028,9 +1028,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
                 <select id="w-proj" onchange="onWandProjectChange()" style="width:100%;padding:9px 11px;border-radius:var(--r);border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.08);color:#fff;font-family:var(--font);font-size:14px;outline:none"></select>
               </div>
               <div class="wig wsl">
-                <label>Factor de optimizare: <strong id="wf-d">50</strong>%
-                  <span style="font-size:10px;opacity:.45">20-85% practic util; plafonul de surplus crește cu factorul.</span>
-                </label>
+                <label>Factor de optimizare: <strong id="wf-d">50</strong>%</label>
                 <input type="range" id="w-fac" min="20" max="95" value="50" oninput="wFactor(this.value)"/>
                 <p id="w-fac-hint" class="tsm" style="margin-top:8px;opacity:.82;line-height:1.5;color:rgba(255,255,255,.88)"></p>
               </div>
@@ -2780,7 +2778,7 @@ function renderMantuirePortalBody(){
       <p><span class="mant-api-pill">${escapeHtml(envLab)}</span> <span class="mant-api-pill">${escapeHtml(mantuireTierMeta(m.apiTier||'parohial').label)}</span></p>
       <p class="tsm" style="margin:8px 0">Cheie <strong>secretă</strong> API (<code>mnt_sk_…</code>):</p>
       <div class="mantp-keybox">${escapeHtml(m.apiKey)}</div>
-      <p class="tsm tmut">Creată: ${escapeHtml(cAt)} · Ultima folosire simulată: ${escapeHtml(uAt)}</p>
+      <p class="tsm tmut">Creată: ${escapeHtml(cAt)} · Ultima folosire: ${escapeHtml(uAt)}</p>
       <div class="mantp-actions">
         <button type="button" class="mantp-btn-pri" onclick="copyMantuirePortalKey(true)">Copiază cheia secretă</button>
         <button type="button" class="mantp-btn-sec" onclick="regenerateMantuireApiKey()">Emite cheie nouă (deconectează platforma)</button>
@@ -5389,7 +5387,7 @@ function buildWandDossierOpenLines(name,rr,dd,f){
   const nm=String(name||'Proiect');
   const short=nm.length>58?nm.slice(0,58)+'…':nm;
   return[
-    `DESCHIDERE DOSAR · „${short}" — poz. 4.02 / lucrări în curs; legătură simulată cu fluxul SEAP, contabilitate primară.`,
+    `DESCHIDERE DOSAR · „${short}" — poz. 4.02 / lucrări în curs; legătură cu fluxul SEAP, contabilitate primară.`,
     `Pas 01 — Reconciliere: declarat ${fRON(dd)} vs. „realitate tehnică” ${fRON(rr)}; diferența intră pe algoritmul de absorbție progresivă.`,
     `Pas 02 — Coeficient ${(f*100).toFixed(0)}% aplicat pe diferență; aprobare tacită în modul satiric „merge și așa".`,
     `Pas 03 — Mapare sursă: buget local + contracte tip studii / utilități / urgență.`,
@@ -5466,7 +5464,7 @@ function refreshWandFactorHint(){
   const el=$('w-fac-hint');if(!el)return;
   const f=parseFloat($('w-fac')?.value||50)/100;
   const exp=wandExposurePercentFromFactor(f);
-  el.innerHTML=`Factorul <strong>${(f*100).toFixed(0)}%</strong> înmulțește doar diferența (declarat - real): plafonul de surplus extras în sesiune este <strong>(declarat - real) × factor</strong>. În sesiune, surplusul crește treptat până la acest plafon (viteza depinde de timp și de dificultate). „Vizibilitate simulată” (control): <strong>${exp}%</strong>. Ea crește cu factorul și cu severitatea etapei juridice. La <strong>≥70%</strong> factor, după start se poate declanșa o alertă narativă (ANAF/DNA).`;
+  el.innerHTML=`Factorul <strong>${(f*100).toFixed(0)}%</strong> înmulțește doar diferența (declarat - real): plafonul de surplus extras în sesiune este <strong>(declarat - real) × factor</strong>. În sesiune, surplusul crește treptat până la acest plafon (viteza depinde de timp și de dificultate). „Vizibilitate” (control): <strong>${exp}%</strong>. Ea crește cu factorul și cu severitatea etapei juridice. La <strong>≥70%</strong> factor, după start se poate declanșa o alertă narativă (ANAF/DNA).`;
 }
 // Refreshes sess surplus ui in the UI or derived fields.
 function updateSessSurplusUI(){
@@ -5485,7 +5483,7 @@ function updateSessSurplusUI(){
   const ptxt=$('sess-surplus-pct');
   if(ptxt)ptxt.textContent=max>0?`${pct}% din plafon (${fRON(cur)} / ${fRON(max)})`:`Plafon 0 RON (verifică valori proiect)`;
   const ex=$('sess-exposure-wrap');
-  if(ex)ex.innerHTML=`Vizibilitate simulată (control fiscal): <strong>${exp}%</strong> · Factor sesiune <strong>${(as.factor*100).toFixed(0)}%</strong>${as.factor>=0.7?' · <span style="color:var(--orange)">Factor ridicat: risc de alertă ANAF/DNA post-start</span>':''}`;
+  if(ex)ex.innerHTML=`Vizibilitate (control fiscal): <strong>${exp}%</strong> · Factor sesiune <strong>${(as.factor*100).toFixed(0)}%</strong>${as.factor>=0.7?' · <span style="color:var(--orange)">Factor ridicat: risc de alertă ANAF/DNA post-start</span>':''}`;
 }
 // wPreview: preview.
 function wPreview(){
