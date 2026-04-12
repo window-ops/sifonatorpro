@@ -2804,7 +2804,7 @@ function renderMantuirePortalBody(){
         <input type="checkbox" id="mant-terms"/>
         <span>Accept <strong>Termenii și condițiile</strong> <strong>Mântuire Proiecte</strong> pentru utilizarea API, a cheii secrete și a consumului de unități de mântuire (UM).</span>
       </label>
-      <div class="mantp-legal">„Utilizatorul declară că solicitările de schimbare a statutului proiectelor se fac în cadrul fluxului simulat. Furnizorul nu garantează efecte în afara aplicației.”</div>
+      <div class="mantp-legal">„Utilizatorul declară că solicitările de schimbare a statutului proiectelor se fac în cadrul fluxului afișat. Furnizorul nu garantează efecte în afara aplicației.”</div>
       <div class="mantp-actions">
         <button type="button" class="mantp-btn-pri" onclick="mantuirePortalStep1Continue()">Continuă</button>
       </div>`;
@@ -3867,7 +3867,7 @@ function renderAnafSyncPortalBody(){
       return;
     }
     body.innerHTML=`<span class="anaf-seal">Depunere cerere de conectare</span>
-      <div class="anaf-bureau">Cererea se bazează pe profilul din SifonatorPRO. Pentru a putea continua trebuie să nu existe <strong>investigație DNA activă</strong>; se solicită o declarație pe propria răspundere. Înregistrarea include verificare prin Șpagafon, dosar procedural și emitere token.</div>
+      <div class="anaf-bureau">Cererea se bazează pe profilul din SifonatorPRO. Pentru a putea continua trebuie să nu existe <strong>investigație DNA activă</strong>. Se solicită o declarație pe propria răspundere. Înregistrarea include verificare prin Șpagafon, dosar procedural și emitere token.</div>
       <p class="tsm tmut" style="margin-bottom:10px">Stare justiție la verificare: <strong>${stRo}</strong>; eligibil pentru pasul următor.</p>
       <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
         <input type="checkbox" id="anaf-integrity-decl"/>
@@ -5399,17 +5399,17 @@ function buildWandDossierOpenLines(name,rr,dd,f){
   ];
 }
 const WAND_DOSSIER_TICK=[
-  (inc,cum)=>`Înregistrare: „studii & expertize" +${fRON(Math.round(inc))} (cumul ${fRON(Math.round(cum))}) — livrabile tip PDF, factură pe etapă.`,
-  (inc,cum)=>`Rectificare buget / HCL suport: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — mutare între articole, același volum de „lucrare".`,
-  (inc,cum)=>`Lucrări suplimentare & diferențe cantitate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — deviz complementar aprobat pe flux intern.`,
-  (inc,cum)=>`Rezervă tehnică → execuție: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — fără relansare procedură în simulare.`,
+  (inc,cum)=>`Înregistrare: „studii & expertize" +${fRON(Math.round(inc))} (cumul ${fRON(Math.round(cum))}). Livrabile tip PDF, factură pe etapă.`,
+  (inc,cum)=>`Rectificare buget / HCL suport: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}. Mutare între articole, același volum de „lucrare".`,
+  (inc,cum)=>`Lucrări suplimentare & diferențe cantitate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}. Deviz complementar aprobat pe flux intern.`,
+  (inc,cum)=>`Rezervă tehnică → execuție: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} fără relansare procedură.`,
   (inc,cum)=>`Achiziție directă motivată (urgență / „unic furnizor”): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Antemăsurători reîncărcate pe contracte subevaluate: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Coordonare proiect + dirigenție de șantier (ore în bloc): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Marjă pe lanț subcontractanți (TVA/profit la nivel final): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
-  (inc,cum)=>`„Soluții tehnice neprevăzute" post-factum: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — încadrare utilități.`,
+  (inc,cum)=>`„Soluții tehnice neprevăzute" post-factum: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}, încadrare utilități.`,
   (inc,cum)=>`Penalități negociate la zero contra acceptării suplimentului: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
-  (inc,cum)=>`Avansuri raportate ca progres fizic: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))} — situație de șantier cosmetizată.`,
+  (inc,cum)=>`Avansuri raportate ca progres fizic: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}, situație de șantier cosmetizată.`,
   (inc,cum)=>`Consultanță „management proiect" (intangibil): +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Dotări cu specificații copiate din catalogul câștigătorului: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
   (inc,cum)=>`Închidere parțială pe loturi pentru grăbire decontare: +${fRON(Math.round(inc))}; cumul ${fRON(Math.round(cum))}.`,
@@ -5439,7 +5439,7 @@ function wandDossierClose(reason,surplus,pname,elapsed){
   else if(reason==='orphan')wandPushLog('Motiv: proiect dispărut din evidență; linii de jurnal anulate retroactiv.');
   else wandPushLog('Motiv: oprire manuală');
   const pn=String(pname||'Proiect');
-  wandPushLog(`Închidere DOSAR · „${pn.length>52?pn.slice(0,52)+'…':pn}" — sumă propagată la surplus redistribuit / buget public (conform regulilor jocului).`);
+  wandPushLog(`Închidere DOSAR · „${pn.length>52?pn.slice(0,52)+'…':pn}" — sumă propagată la surplus redistribuit / buget public.`);
 }
 // wFactor: factor.
 function wFactor(v){$('wf-d')&&($('wf-d').textContent=v);wPreview();refreshWandFactorHint()}
@@ -6319,7 +6319,7 @@ function deleteLocalStorageAndSignOut(){
 function searchMorePublicFunds(){
   const gain=Math.round((PERSONAS[S.settings.persona]?.budget||12e6)*0.07*(0.9+Math.random()*0.35));
   S.ledger.publicBudget+=gain;
-  addAct(`Căutare surse publice: identificat flux fictiv de ${fRON(gain)}.`);
+  addAct(`Căutare surse publice: identificat flux de ${fRON(gain)}.`);
   updateFundsLockUI();
   renderDash();
   renderAudit();
