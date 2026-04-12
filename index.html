@@ -393,8 +393,8 @@ body.debug-bar-visible #spagafon-root .spgf-dock{
 }
 
 /* ── SPAGAFON ── */
-#spagafon-root{position:fixed;inset:0;z-index:10050;pointer-events:none}
-#spagafon-root.spgf-pinned-3ds{z-index:10060}
+#spagafon-root{position:fixed;inset:0;z-index:10250;pointer-events:none}
+#spagafon-root.spgf-pinned-3ds{z-index:10260}
 body:has(#app.hid) #spagafon-root,
 body:has(#app.hid) #hb-mobile-spag{display:none!important;visibility:hidden;pointer-events:none}
 .spgf-dock{
@@ -576,7 +576,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
   body.spgf-mobile-full #hb-mobile-spag{display:none!important}
   #hb-mobile-spag{
     position:fixed;
-    z-index:10055;
+    z-index:10255;
     top:auto;
     bottom:max(12px,env(safe-area-inset-bottom,0px));
     right:max(12px,env(safe-area-inset-right,0px));
@@ -7072,7 +7072,7 @@ function updDebug(){
     mCred.disabled=!ok;
     mCred.title=ok?'Adaugă 50 unități monetare simulate Mântuire':'Necesită API Mântuire Proiecte activă (ex. „+ API Mântuire”)';
   }
-  if(isDebugUnlocked()&&$('debug-bar')&&!$('debug-bar').classList.contains('hid'))syncDebugBarLayout();
+  if(isDebugUnlocked())syncDebugBarLayout();
 }
 // Debug panel action (dbAddRep).
 function dbAddRep(n){chgRep(n,`[DEBUG] +${n} puncte adăugate manual`)}
