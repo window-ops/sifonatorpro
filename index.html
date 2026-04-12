@@ -978,7 +978,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
       <!-- ── MÂNTUIRE PROIECTE ── -->
       <div id="view-mantuire" class="view">
         <div class="vh">
-          <div><h2>Mântuire Proiecte™</h2><p>Actualizează proiectele încă „de mântuială” la stadiul <strong>Mântuit</strong>. Aici vezi creditele, coada și setările fiecărei cereri.</p></div>
+          <div><h2>Mântuire Proiecte</h2><p>Actualizează proiectele încă „de mântuială” la stadiul <strong>Mântuit</strong>. Aici vezi creditele, coada și setările fiecărei cereri.</p></div>
         </div>
         <div id="mantuire-app-root"></div>
       </div>
@@ -1307,7 +1307,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
               <li><strong>Meniu lateral</strong> grupează ecranele. <em>Principal:</em> Tablou de Bord, Proiecte Publice, Licitații. <em>Instrumente:</em> Bagheta Magică, Manager Integrări. <em>Monitorizare:</em> Audit &amp; Trasabilitate, Presa &amp; Percepție, Centrul Operațional. <em>Juridic &amp; Financiar:</em> Sistem Judiciar, Abonament &amp; Plăți, Ghid &amp; reguli, Setări utilizator. În subsol apare versiunea afișată (v2.0) și textul de subsol din interfață.</li>
               <li><strong>Antet:</strong> nume utilizator (deschide dialog profil), badge partid, cip reputație (navigare la Sistem Judiciar).</li>
               <li><strong>Ecrane înguste:</strong> apare butonul de meniu tip hamburger; meniul lateral se deschide și se închide din antet.</li>
-              <li><strong>Ecrane suplimentare (nu au intrare separată în meniu):</strong> detaliul unei sesiuni Bagheta (dosar + jurnal) se deschide din istoricul sesiunilor; portalele <strong>PSD Direct Connect™</strong> și <strong>ANAF Sync™</strong> se deschid ca ferestre peste restul aplicației; mesajele scurte (toast) și dialogurile apar deasupra conținutului obișnuit.</li>
+              <li><strong>Ecrane suplimentare (nu au intrare separată în meniu):</strong> detaliul unei sesiuni Bagheta (dosar + jurnal) se deschide din istoricul sesiunilor; portalele <strong>PSD Direct Connect</strong> și <strong>ANAF Sync</strong> se deschid ca ferestre peste restul aplicației; mesajele scurte (toast) și dialogurile apar deasupra conținutului obișnuit.</li>
             </ul>
           </div>
         </div>
@@ -1329,7 +1329,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
               <li><strong>Proiecte Publice:</strong> listă proiecte cu buget, valori declarate vs reale, status, <strong>categorie</strong> (tip achiziție), pariu opțional pe calitatea finală și buton de finalizare; punctele de reputație țin de rezultatul extras. Orientări despre ce înseamnă categoriile în termeni reali sunt în secțiunea dedicată din acest ghid.</li>
               <li><strong>Licitații:</strong> listă proceduri, avansare manuală pe etape, creare licitație legată obligatoriu de proiect planificat sau în desfășurare.</li>
               <li><strong>Bagheta Magică:</strong> formular sesiune, coadă, istoric sesiuni; reguli detaliate într-o secțiune dedicată mai jos.</li>
-              <li><strong>Manager Integrări:</strong> catalog cu <strong>PSD Direct Connect™</strong> și <strong>ANAF Sync™</strong>; deschidere portal simulat; câmp lipire cheie API în platformă după fluxul portalului.</li>
+              <li><strong>Manager Integrări:</strong> catalog cu <strong>PSD Direct Connect</strong> și <strong>ANAF Sync</strong>; deschidere portal simulat; câmp lipire cheie API în platformă după fluxul portalului.</li>
               <li><strong>Audit &amp; Trasabilitate:</strong> sumar contabil (buget public, surplus redistribuit, cheltuieli influență, cost reputațional) și jurnal complet de activitate numerotat (<strong>#01</strong> = intrarea cea mai veche în listă, <strong>#N</strong> = cea mai recentă); secțiunea <strong>ANAF Sync · E-Factura &amp; flux detaliat</strong> apare doar după ce integrarea ANAF este conectată <strong>și</strong> ai o cheie API salvată în Manager integrări; conținutul combină proiecte, ultimele evenimente din jurnal și, dacă există, mesajul de alertă ANAF din Sistemul judiciar.</li>
               <li><strong>Presa &amp; Percepție:</strong> acțiuni cu cost reputație (unde e cazul), scor imagine, canale ostile/neutre, titluri simulate, istoric intervenții.</li>
               <li><strong>Centrul Operațional:</strong> proiecte în execuție, sesiune Bagheta activă/inactivă, presiune juridică procentuală, etapă justiție, etichetă narativă pentru „fereastră operațională”.</li>
@@ -1340,11 +1340,11 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Manager Integrări</h3><p>PSD Direct Connect™ și ANAF Sync™</p></div>
+          <div class="ch"><h3>Manager Integrări</h3><p>PSD Direct Connect și ANAF Sync</p></div>
           <div class="cc">
             <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
-              <li><strong>PSD Direct Connect™:</strong> portal în mai mulți pași (termeni, verificare cont prin cod trimis ca SMS fictiv pe Șpagafon, emitere cheie provizorie care începe cu <strong>sdc_live_</strong>, lipire sau buton „Trimite” în Manager). Urmărești dacă contul e verificat și dacă există cheie activă sau cod în așteptare. Fără integrare activă, plata cu „bani publici” (PSD) la abonament sau ore nu apare în fluxul de plată.</li>
-              <li><strong>ANAF Sync™:</strong> la început, dacă justiția este în <strong>anchetă</strong>, <strong>audiere</strong>, <strong>recurs</strong> sau există <strong>escaladare DNA</strong>, portalul afișează blocare și nu permite depunerea cererii; în rest: declarație de integritate și termeni, PIN certificat pe Șpagafon, dosar cu <strong>patru</strong> actualizări successive de stare, apoi cheie provizorie care începe cu <strong>asf_live_</strong>, de lipit sau trimisă în Manager ca la PSD. După conectare: copiere cheie, regenerare (cheia veche nu mai e valabilă până nu lipești una nouă), revocare în doi pași (trebuie tastat exact textul indicat pe ecran, apoi confirmare cu bifă).</li>
+              <li><strong>PSD Direct Connect:</strong> portal în mai mulți pași (termeni, verificare cont prin cod trimis ca SMS fictiv pe Șpagafon, emitere cheie provizorie care începe cu <strong>sdc_live_</strong>, lipire sau buton „Trimite” în Manager). Urmărești dacă contul e verificat și dacă există cheie activă sau cod în așteptare. Fără integrare activă, plata cu „bani publici” (PSD) la abonament sau ore nu apare în fluxul de plată.</li>
+              <li><strong>ANAF Sync:</strong> la început, dacă justiția este în <strong>anchetă</strong>, <strong>audiere</strong>, <strong>recurs</strong> sau există <strong>escaladare DNA</strong>, portalul afișează blocare și nu permite depunerea cererii; în rest: declarație de integritate și termeni, PIN certificat pe Șpagafon, dosar cu <strong>patru</strong> actualizări successive de stare, apoi cheie provizorie care începe cu <strong>asf_live_</strong>, de lipit sau trimisă în Manager ca la PSD. După conectare: copiere cheie, regenerare (cheia veche nu mai e valabilă până nu lipești una nouă), revocare în doi pași (trebuie tastat exact textul indicat pe ecran, apoi confirmare cu bifă).</li>
               <li>Ambele integrări se salvează împreună cu restul progresului când folosești stocarea locală în browser.</li>
             </ul>
           </div>
@@ -1383,10 +1383,10 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
           </div>
         </div>
         <div class="card mb14">
-          <div class="ch"><h3>Plăți fictive: abonamente, ore &amp; SifonPay™</h3><p>Același tip de flux pentru abonament și pentru ore</p></div>
+          <div class="ch"><h3>Plăți fictive: abonamente, ore &amp; SifonPay</h3><p>Același tip de flux pentru abonament și pentru ore</p></div>
           <div class="cc">
-            <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: <strong>SifonPay™</strong> (card) sau <strong>PSD Direct Connect™</strong> („bani publici”), cu pași simulați. Pentru PSD Direct Connect trebuie mai întâi integrarea din <strong>Instrumente → Manager Integrări</strong> (cont verificat + cheie API). Nu există variantă „instant” care să sari peste flux.</p>
-            <p class="tsm tmut mt8">Tranzacția apare narativ ca procesată de SifonPay™; datele cardului sunt fictive.</p>
+            <p class="tsm" style="line-height:1.65"><strong>Abonamentele</strong> și <strong>orele Bagheta Magică</strong> (fără abonament activ) trec prin același tip de parcurs: <strong>SifonPay</strong> (card) sau <strong>PSD Direct Connect</strong> („bani publici”), cu pași simulați. Pentru PSD Direct Connect trebuie mai întâi integrarea din <strong>Instrumente → Manager Integrări</strong> (cont verificat + cheie API). Nu există variantă „instant” care să sari peste flux.</p>
+            <p class="tsm tmut mt8">Tranzacția apare narativ ca procesată de SifonPay; datele cardului sunt fictive.</p>
             <div id="howto-sifonpay-bin" class="mt6"></div>
           </div>
         </div>
@@ -1401,7 +1401,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
           <div class="ch"><h3>Șpagafon</h3><p>Mesaje, portal rapid, poziționare</p></div>
           <div class="cc">
             <ul style="font-size:13px;line-height:1.7;color:var(--text2);padding-left:18px">
-              <li><strong>Mesaje:</strong> inbox SMS fictiv (până la 50 de mesaje păstrate); coduri pentru SifonPay™ 3DS, verificare PSD, certificat ANAF; butoane care copiază codul în câmpul din dialogul deschis. Contorul de necitite ține minte ultima dată la care ai văzut mesajele.</li>
+              <li><strong>Mesaje:</strong> inbox SMS fictiv (până la 50 de mesaje păstrate); coduri pentru SifonPay 3DS, verificare PSD, certificat ANAF; butoane care copiază codul în câmpul din dialogul deschis. Contorul de necitite ține minte ultima dată la care ai văzut mesajele.</li>
               <li><strong>Portal rapid:</strong> tab cu mini-aplicații care deschid ecranele Tablou, Proiecte, Licitații, Bagheta, Sistem Judiciar, Abonament, Presă, Centrul Operațional; varianta „ecran mare” închide Șpagafonul și duce la acel ecran în aplicația principală.</li>
               <li><strong>Mobil:</strong> în colțul din dreapta-jos există un buton compact (📱). În Setări, <strong>Forțează afișare completă pe ecrane mici (lățime până la 680px)</strong> înlocuiește butonul compact cu același lansator din colț ca pe ecranul lat și îți permite să alegi <strong>Mod afișare</strong> (pictogramă și text, doar pictogramă sau doar text); preferința se salvează cu restul setărilor.</li>
             </ul>
@@ -1479,7 +1479,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
     <div class="psd-dc-top">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
         <div>
-          <div class="psd-dc-brand">PSD Direct Connect™</div>
+          <div class="psd-dc-brand">PSD Direct Connect</div>
           <div class="psd-dc-sub">Portal de integrare pentru politicieni cu influență · endpoint-uri oferite de <strong>PSD</strong></div>
         </div>
         <button type="button" class="psd-dc-btn-ghost" onclick="closePsdDcPortal()" style="flex-shrink:0;margin-top:2px">Închide</button>
@@ -1495,7 +1495,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
     <div class="anaf-top">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
         <div>
-          <div class="anaf-brand">ANAF Sync™</div>
+          <div class="anaf-brand">ANAF Sync</div>
           <div class="anaf-sub">Conector pentru e-Factura, SAF-T și „trasabilitate extinsă”</div>
         </div>
         <button type="button" class="anaf-btn-sec" onclick="closeAnafSyncPortal()" style="flex-shrink:0;margin-top:2px">Închide</button>
@@ -1511,7 +1511,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
     <div class="mantp-top">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
         <div>
-          <div class="mantp-brand">Mântuire Proiecte™</div>
+          <div class="mantp-brand">Mântuire Proiecte</div>
           <div class="mantp-sub">Portal de conectare API · proiecte finalizate slab pot fi <strong>mântuite</strong> prin API</div>
         </div>
         <button type="button" class="mantp-btn-close" onclick="closeMantuirePortal()" style="flex-shrink:0;margin-top:2px">Închide</button>
@@ -1570,8 +1570,8 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
             <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('proj')"><span class="ap-ico">🏗️</span>Proiecte<span class="ap-sub">șantiere „publice”</span></button>
             <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('tend')"><span class="ap-ico">📋</span>Licitații<span class="ap-sub">SEAP express</span></button>
             <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('wand')"><span class="ap-ico">✨</span>Bagheta<span class="ap-sub">timp rămas</span></button>
-            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('just')"><span class="ap-ico">⚖️</span>DNA info<span class="ap-sub">linie fierbinte</span></button>
-            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('sub')"><span class="ap-ico">💳</span>Abonament<span class="ap-sub">SifonPay™</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('just')"><span class="ap-ico">⚖️</span>DNA info<span class="ap-sub">linie penală</span></button>
+            <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('sub')"><span class="ap-ico">💳</span>Abonament<span class="ap-sub">SifonPay</span></button>
             <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('press')"><span class="ap-ico">📰</span>Presă<span class="ap-sub">spălare imagine</span></button>
             <button type="button" class="spgf-app-btn" onclick="spgfOpenApplet('ops')"><span class="ap-ico">🛰️</span>OPS<span class="ap-sub">tactici</span></button>
           </div>
@@ -2419,7 +2419,7 @@ function trySimulateNationalPressSpillover(){
   S.pressHistory.unshift({t:tt,txt:blurbs[Math.floor(Math.random()*blurbs.length)]});
   if(S.pressHistory.length>30)S.pressHistory.pop();
   S.pressTone=Math.max(0,S.pressTone-7);
-  addAct(`Presă națională de investigație (simulare): urmărire în ${S.user.jud||'zonă'} — vizibilitate dincolo de TV local.`);
+  addAct(`Presă națională de investigație: urmărire în ${S.user.jud||'zonă'}. Vizibilitate dincolo de TV local.`);
   if((S.justice?.stage||'clean')==='clean'&&Math.random()<0.22){
     S.justice.dnaEscalation=true;
     $('nbj')?.classList.remove('hid');
@@ -2666,7 +2666,7 @@ function mantuireApplyLiveKeyConsequences(pts,projectName,tierId){
     ts:nowTs(),
     stage:S.justice.stage,
     pressure:S.justice.pressure,
-    detail:`Mântuire Proiecte™ (cheie live): „${escapeHtml(shortN)}” — presă mai rece, urmă investigativă accentuată (simulare).`
+    detail:`Mântuire Proiecte (cheie live): „${escapeHtml(shortN)}”; presă mai rece, urmă investigativă accentuată.`
   });
   addAct(`Presă / justiție: mântuire cu cheie live pe „${shortN}”. Imagine publică mai slabă, interes crescut al investigațiilor.`);
 }
@@ -2793,8 +2793,8 @@ function renderMantuirePortalBody(){
   const regBr=mantuireRegistrationFeeBreakdown();
   if(_mantuirePortalStep===1){
     body.innerHTML=`<span class="mantp-seal">Înregistrare furnizor</span>
-      <p>Înregistrarea folosește datele din profilul SifonatorPRO. Serviciul <strong>Mântuire Proiecte™</strong> este consumat pe cereri în <strong>unități de mântuire (UM)</strong> și limitează câte cereri pot rula în același timp. La final alegi dacă cheia este pentru încercări sau pentru utilizare obișnuită.</p>
-      <div class="mantp-bureau">După acceptarea termenilor urmează <strong>plata taxei de înregistrare</strong> (${regFee} RON, plată unică), prin <strong>SifonPay™</strong> sau <strong>PSD Direct Connect™</strong>. Apoi primești codul pe <strong>Șpagafon</strong> și emiterea cheii. Poți lipi cheia în Manager Integrări sau folosi <strong>Trimite în SifonatorPRO</strong>.</div>
+      <p>Înregistrarea folosește datele din profilul SifonatorPRO. Serviciul <strong>Mântuire Proiecte</strong> este consumat pe cereri în <strong>unități de mântuire (UM)</strong> și limitează câte cereri pot rula în același timp. La final alegi dacă cheia este pentru încercări sau pentru utilizare obișnuită.</p>
+      <div class="mantp-bureau">După acceptarea termenilor urmează <strong>plata taxei de înregistrare</strong> (${regFee} RON, plată unică), prin <strong>SifonPay</strong> sau <strong>PSD Direct Connect</strong>. Apoi primești codul pe <strong>Șpagafon</strong> și emiterea cheii. Poți lipi cheia în Manager Integrări sau folosi <strong>Trimite în SifonatorPRO</strong>.</div>
       <div style="display:grid;gap:8px;margin:12px 0;padding:12px;background:#fff;border:1px solid #d4c4de;border-radius:4px">
         <div style="display:flex;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px dashed #e8e0ef;padding-bottom:6px"><span style="font-weight:600;color:#5c3d6e">Nume</span><span style="font-weight:700;text-align:right">${escapeHtml(u.name||'—')}</span></div>
         <div style="display:flex;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px dashed #e8e0ef;padding-bottom:6px"><span style="font-weight:600;color:#5c3d6e">Funcție</span><span style="font-weight:700;text-align:right">${escapeHtml(u.fn||'—')}</span></div>
@@ -2802,7 +2802,7 @@ function renderMantuirePortalBody(){
       </div>
       <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
         <input type="checkbox" id="mant-terms"/>
-        <span>Accept <strong>Termenii și condițiile</strong> <strong>Mântuire Proiecte™</strong> pentru utilizarea API, a cheii secrete și a consumului de unități de mântuire (UM).</span>
+        <span>Accept <strong>Termenii și condițiile</strong> <strong>Mântuire Proiecte</strong> pentru utilizarea API, a cheii secrete și a consumului de unități de mântuire (UM).</span>
       </label>
       <div class="mantp-legal">„Utilizatorul declară că solicitările de schimbare a statutului proiectelor se fac în cadrul fluxului simulat. Furnizorul nu garantează efecte în afara aplicației.”</div>
       <div class="mantp-actions">
@@ -2827,13 +2827,13 @@ function renderMantuirePortalBody(){
         checkout=`${orderSummaryBlock}
         <p class="tsm tmut">Alege metoda (ca la abonament sau ore Baghetă). PSD necesită integrare activă în Manager Integrări.</p>
         <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
-          <button type="button" class="mantp-btn-pri" onclick="mantuirePayPaneNav('card')">💳 Plată cu cardul (SifonPay™)</button>
-          <button type="button" class="mantp-btn-pri" style="background:linear-gradient(180deg,#7a0000,#a40000);border:none" onclick="mantuirePortalTryPsdInline()">🏛️ Plată cu bani publici (PSD Direct Connect™)</button>
+          <button type="button" class="mantp-btn-pri" onclick="mantuirePayPaneNav('card')">💳 Plată cu cardul (SifonPay)</button>
+          <button type="button" class="mantp-btn-pri" style="background:linear-gradient(180deg,#7a0000,#a40000);border:none" onclick="mantuirePortalTryPsdInline()">🏛️ Plată cu bani publici (PSD Direct Connect)</button>
         </div>
         <div class="mantp-actions"><button type="button" class="mantp-btn-sec" onclick="mantuirePortalPaymentBack()">Înapoi</button></div>`;
       }else if(pane==='card'){
         checkout=`<div style="background:#fff;border:1px solid #d4c4de;border-radius:4px;padding:12px;margin:10px 0;font-size:12px">
-          <div style="font-weight:800;color:#5c2b70;margin-bottom:8px">SifonPay™ · Înregistrare API</div>
+          <div style="font-weight:800;color:#5c2b70;margin-bottom:8px">SifonPay · Înregistrare API</div>
           <div style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed #e8e0ef;padding-bottom:6px;margin-bottom:6px"><span>Preț referință</span><span>${regBr.list} RON</span></div>
           ${regBr.pct>0&&regBr.saved>0?`<div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:6px"><span>Reducere reputație (${regBr.pct.toFixed(1)}%)</span><span style="color:#1a6b2e;font-weight:700">-${regBr.saved} RON</span></div>`:''}
           <div style="display:flex;justify-content:space-between;gap:8px;font-weight:800"><span>Total de încasat</span><span style="color:#5c2b70">${regFee} RON</span></div>
@@ -2858,8 +2858,8 @@ function renderMantuirePortalBody(){
         </div>`;
       }else if(pane==='psd'){
         checkout=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:4px;margin:10px 0;text-align:center">
-          <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect™</div>
-          <div style="font-size:11px;opacity:.75">Înregistrare acces API Mântuire Proiecte™</div>
+          <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect</div>
+          <div style="font-size:11px;opacity:.75">Înregistrare acces API Mântuire Proiecte</div>
         </div>
         <div style="background:#fff;border:1px solid #d4c4de;padding:11px;border-radius:4px;font-size:13px;margin-bottom:12px">
           <div class="flex" style="justify-content:space-between;margin-bottom:3px;font-size:11px;color:#6b5a72"><span>Preț referință taxă (înainte de reducere)</span><span>${regBr.list} RON</span></div>
@@ -2871,10 +2871,10 @@ function renderMantuirePortalBody(){
         </div>
         <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
           <select id="mantpay-psd-int" class="mantp-inp" style="margin-top:4px">
-            <option>Partid (PSD) — Ruta standard, 3-5 zile</option>
-            <option>Rețea locală de influență — Ruta urgentă, 1-2 zile</option>
-            <option>Conexiuni ministeriale — Ruta diplomatică, 24h</option>
-            <option>Ministru de resort — Ruta VIP, 4 ore</option>
+            <option>Partid (PSD): Ruta standard, 3-5 zile</option>
+            <option>Rețea locală de influență: Ruta urgentă, 1-2 zile</option>
+            <option>Conexiuni ministeriale: Ruta diplomatică, 24h</option>
+            <option>Ministru de resort: Ruta privilegiată, 4 ore</option>
           </select>
         </div>
         <div class="mantp-actions">
@@ -2894,7 +2894,7 @@ function renderMantuirePortalBody(){
       ? `, cu <strong>reducere reputație ${regBr.pct.toFixed(1)}%</strong> (-${regBr.saved} RON), plătești <strong>${regFee} RON</strong>`
       : `. Acum nu se aplică reducere din reputație (0,1% per punct, max 25%, ca la abonamente)`;
     body.innerHTML=`<span class="mantp-seal">Taxă înregistrare</span>
-      <p>Taxă unică pentru deschiderea accesului API <strong>Mântuire Proiecte™</strong>: preț de referință <strong>${regBr.list} RON</strong>${regIntroExtra}.</p>
+      <p>Taxă unică pentru deschiderea accesului API <strong>Mântuire Proiecte</strong>: preț de referință <strong>${regBr.list} RON</strong>${regIntroExtra}.</p>
       ${m.registrationPaid?`<p class="tsm" style="color:#2d7a3e;font-weight:700">Plată înregistrată.</p>
       <p class="tsm tmut">Următorul pas este codul de verificare pe Șpagafon.</p>
       <div class="mantp-actions">
@@ -2928,7 +2928,7 @@ function renderMantuirePortalBody(){
           <option value="test"${envSel==='test'?' selected':''}>Cheie test (încercări)</option>
         </select>
       </div>
-      <p>Înregistrarea <strong>Mântuire Proiecte™</strong> este gata. Copiază <strong>cheia secretă</strong> (<code>mnt_sk_…</code>) în Manager Integrări.</p>
+      <p>Înregistrarea <strong>Mântuire Proiecte</strong> este gata. Copiază <strong>cheia secretă</strong> (<code>mnt_sk_…</code>) în Manager Integrări.</p>
       <p class="tsm tmut" style="margin:6px 0 4px">Cheie secretă</p>
       <div class="mantp-keybox">${escapeHtml(m.draftKey)}</div>
       <div class="mantp-actions">
@@ -2959,15 +2959,15 @@ function mantuirePayPaneNav(p){
 function mantuirePortalTryPsdInline(){
   ensureIntegrations();
   if(!isPsdDcLinked()){
-    dlgOpen('Continuare · taxă înregistrare','PSD Direct Connect™',
-      `<p class="tsm" style="line-height:1.65">Pentru plata cu <strong>bani publici</strong> prin PSD Direct Connect™ este nevoie de cont verificat și cheie API în <strong>Manager Integrări</strong>. Poți plăti acum cu <strong>SifonPay™</strong> (card) sau să închizi portalul și să configurezi integrarea PSD, apoi revii la plată.</p>
+    dlgOpen('Continuare · taxă înregistrare','PSD Direct Connect',
+      `<p class="tsm" style="line-height:1.65">Pentru plata cu <strong>bani publici</strong> prin PSD Direct Connect este nevoie de cont verificat și cheie API în <strong>Manager Integrări</strong>. Poți plăti acum cu <strong>SifonPay</strong> (card) sau să închizi portalul și să configurezi integrarea PSD, apoi revii la plată.</p>
      <p class="tsm tmut" style="margin-top:12px;font-weight:700">Alege cum continui:</p>
      <ul class="tsm" style="margin:8px 0 0 18px;line-height:1.55;padding:0">
-       <li><strong>Plătesc cu SifonPay™</strong>: rămâi în acest portal și completezi cardul.</li>
-       <li><strong>Închid portalul · Manager Integrări</strong>: configurezi PSD Direct Connect™, apoi deschizi din nou <strong>Mântuire Proiecte™</strong> pentru plată.</li>
+       <li><strong>Plătesc cu SifonPay</strong>: rămâi în acest portal și completezi cardul.</li>
+       <li><strong>Închid portalul · Manager Integrări</strong>: configurezi PSD Direct Connect, apoi deschizi din nou <strong>Mântuire Proiecte</strong> pentru plată.</li>
      </ul>
      <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
-       <button type="button" class="btn btn-p" onclick="dlgClose();mantuirePayPaneNav('card')">Plătesc cu SifonPay™</button>
+       <button type="button" class="btn btn-p" onclick="dlgClose();mantuirePayPaneNav('card')">Plătesc cu SifonPay</button>
        <button type="button" class="btn btn-psd" onclick="dlgClose();closeMantuirePortal();navigate('integ')">Închid portalul · Manager Integrări</button>
        <button type="button" class="btn btn-f" onclick="dlgClose()">Închide</button>
      </div>`,
@@ -2984,7 +2984,7 @@ function mantuirePortalProcCardInline(){
   const num=$('mantpay-num')?.value?.replace(/\s/g,'');
   if(!num||num.length<16||!cardExpFilled('mantpay-exp-mm','mantpay-exp-yy')||!$('mantpay-cvv')?.value){toast('Completează datele cardului','err');return}
   const st=$('mant-pay-card-status');
-  if(st)st.innerHTML='<p class="tsm tmut" style="text-align:center;margin:12px 0">Se procesează prin SifonPay™…</p>';
+  if(st)st.innerHTML='<p class="tsm tmut" style="text-align:center;margin:12px 0">Se procesează prin SifonPay…</p>';
   setTimeout(()=>{
     const bankRule=needs3DS(num);
     if(bankRule){show3DSChallenge(bankRule,num);return}
@@ -3021,7 +3021,7 @@ function mantuirePortalStartPsdAnim(){
         _mantuirePsdAnim=null;
         mantuireMarkRegistrationPaidAndSendSms();
         toast('Taxă înregistrată. Verifică mesajul pe Șpagafon.','ok');
-        addAct(`Mântuire Proiecte™: taxă înregistrare API plătită din fonduri publice (${int}). ${fRON(total)} sifonați.`);
+        addAct(`Mântuire Proiecte: taxă înregistrare API plătită din fonduri publice (${int}). ${fRON(total)} sifonați.`);
         saveState();
       },900);
     },i*950)
@@ -3048,8 +3048,8 @@ function mantuirePortalSendVerifySms(){
   m.registryTicks=0;
   m.wizardPhase=3;
   saveState();
-  spagafonPushSms('Mântuire Proiecte™',`Cod verificare API Mântuire Proiecte: ${code}. Valabil 15 minute. Introduceți-l în portalul furnizorului.`,{code,isMantuireVerify:true});
-  addAct('Mântuire Proiecte™: cod de verificare trimis pe Șpagafon.');
+  spagafonPushSms('Mântuire Proiecte',`Cod verificare API Mântuire Proiecte: ${code}. Valabil 15 minute. Introduceți-l în portalul furnizorului.`,{code,isMantuireVerify:true});
+  addAct('Mântuire Proiecte: cod de verificare trimis pe Șpagafon.');
   _mantuirePortalStep=3;
   renderMantuirePortalBody();
   toast('Verifică mesajul pe Șpagafon','ok');
@@ -3092,13 +3092,13 @@ function mantuirePortalVerifyCode(){
   saveState();
   _mantuirePortalStep=4;
   renderMantuirePortalBody();
-  addAct('Mântuire Proiecte™: verificare confirmată; consolă cheie API deschisă.');
+  addAct('Mântuire Proiecte: verificare confirmată; consolă cheie API deschisă.');
   toast('Cod acceptat. Copiază cheia sau trimite în aplicație','ok');
 }
 // Prefills fields from external hints: mantuire verify from spagafon.
 function fillMantuireVerifyFromSpagafon(code){
   const inp=$('mant-verify-inp');
-  if(!inp){toast('Deschide portalul Mântuire Proiecte™ la pasul de verificare.','warn');return}
+  if(!inp){toast('Deschide portalul Mântuire Proiecte la pasul de verificare.','warn');return}
   inp.value=sanitizeVerifCodeDigits(code,6);
   inp.focus();
   try{inp.select()}catch(e){}
@@ -3141,8 +3141,8 @@ function finalizeMantuireIntegration(){
   syncMantuireAccessUi();
   renderInteg();
   renderMantuire();
-  addAct('Mântuire Proiecte™: integrare activată în SifonatorPRO.');
-  toast('Mântuire Proiecte™ conectat la platformă','ok');
+  addAct('Mântuire Proiecte: integrare activată în SifonatorPRO.');
+  toast('Mântuire Proiecte conectat la platformă','ok');
 }
 // regenerateMantuireApiKey: mantuire api key.
 function regenerateMantuireApiKey(){
@@ -3194,12 +3194,12 @@ const MANTUIRE_ACTIVITY_BASE=[
   'Blocare optimistică în registrul public simulat…',
   'Reconciliere răspuns ↔ cache etichetă…',
   'Propagare stadiu „Mântuit” spre Proiecte Publice…',
-  'Coerență SEAP (simulare): verificare finală…',
+  'Coerență în SEAP: verificare finală…',
 ];
 const MANTUIRE_ACTIVITY_SRV={
   mit_buc:['Nod capitală: coadă lungă — re-sortare…','Presă: jitter rută marcat în log…'],
   proto_iasi:['Nod regional: cuplare serie canonică…'],
-  manastire_cdn:['CDN „latency”: invalidare margină…'],
+  manastire_cdn:['CDN: invalidare margină…'],
   arhiva_vest:['Arhivă: slot rapid, serie dedicată…'],
 };
 // Mantuire Proiects portal or queue (mantuireActivityPoolForJob).
@@ -3270,10 +3270,10 @@ function connectMantuireCloudKey(){
   const v=$('integ-mant-paste')?.value?.trim()||'';
   const m=S.integrations.mantuireCloud;
   if(m.linked){toast('Integrarea este deja activă.','warn');return;}
-  if(!v){toast('Introdu sau lipește cheia din portalul Mântuire Proiecte™.','warn');return;}
+  if(!v){toast('Introdu sau lipește cheia din portalul Mântuire Proiecte.','warn');return;}
   if(/^mnt_pk_/i.test(v)){toast('Cheile vechi mnt_pk_… nu mai sunt folosite. Lipește doar cheia secretă mnt_sk_live_… sau mnt_sk_test_….','warn');return;}
   if(!/^mnt_sk_(live|test)_/i.test(v)){toast('Format așteptat: mnt_sk_live_… sau mnt_sk_test_…','warn');return;}
-  if(!m.draftKey){toast('Deschide portalul Mântuire Proiecte™, confirmă codul din Șpagafon, apoi copiază cheia secretă emisă.','warn');return;}
+  if(!m.draftKey){toast('Deschide portalul Mântuire Proiecte, confirmă codul din Șpagafon, apoi copiază cheia secretă emisă.','warn');return;}
   if(v!==m.draftKey){toast('Cheia nu se potrivește cu cea din portal.','err');return;}
   m.apiKey=m.draftKey;
   m.linked=true;
@@ -3291,8 +3291,8 @@ function connectMantuireCloudKey(){
   clearMantuireDrainTimer();
   mantuireStopLiveTicker();
   saveState();syncMantuireAccessUi();renderInteg();renderMantuire();
-  addAct('Mântuire Proiecte™: cheie secretă introdusă în Manager Integrări (5 unități de mântuire la start, coadă resetată).');
-  toast('Mântuire Proiecte™ este conectat. Primești 5 unități de mântuire pentru început.','ok');
+  addAct('Mântuire Proiecte: cheie secretă introdusă în Manager Integrări (5 unități de mântuire la start, coadă resetată).');
+  toast('Mântuire Proiecte este conectat. Primești 5 unități de mântuire pentru început.','ok');
 }
 // revokeMantuireCloud: mantuire cloud.
 function revokeMantuireCloud(){
@@ -3305,8 +3305,8 @@ function revokeMantuireCloud(){
   mantuireStopLiveTicker();
   saveState();syncMantuireAccessUi();renderInteg();renderMantuire();
   if($('mantuire-portal')&&!$('mantuire-portal').classList.contains('hid'))renderMantuirePortalBody();
-  addAct('Mântuire Proiecte™: integrare revocată.');
-  toast('Integrarea Mântuire Proiecte™ a fost revocată','warn');
+  addAct('Mântuire Proiecte: integrare revocată.');
+  toast('Integrarea Mântuire Proiecte a fost revocată','warn');
 }
 // Toggles integ mant key reveal on or off.
 function toggleIntegMantKeyReveal(){
@@ -3336,12 +3336,12 @@ function processMantuireQueue(){
         p.quality='mantuit';
         seedDossierIfEmpty(p,'');
         if(apiEnv==='test'){
-          p.dossier.push({t:nowDate().toLocaleString('ro-RO'),txt:'Mântuire Proiecte™ (cheie test): cerere de probă; etichetă „Mântuit” plasată pentru demonstrație.'});
-          addAct(`Mântuire Proiecte™: „${p.name}” mântuit prin API cu cheie test, fără acumulare de puncte de reputație.`);
+          p.dossier.push({t:nowDate().toLocaleString('ro-RO'),txt:'Mântuire Proiecte (cheie test): cerere de probă; etichetă „Mântuit” plasată pentru demonstrație.'});
+          addAct(`Mântuire Proiecte: „${p.name}” mântuit prin API cu cheie test, fără acumulare de puncte de reputație.`);
         }else{
-          p.dossier.push({t:nowDate().toLocaleString('ro-RO'),txt:'Mântuire Proiecte™ (cheie live): proiect mântuit prin API; etichetă „Mântuit” plasată. Pot apărea și alte consecințe (presă, urmăriri).'});
-          chgRep(pts,`Mântuire Proiecte™ — „${p.name}” (mântuit)`,false,{raw:true});
-          addAct(`Mântuire Proiecte™: „${p.name}” mântuit prin API cu cheie live (+${pts} puncte de reputație).`);
+          p.dossier.push({t:nowDate().toLocaleString('ro-RO'),txt:'Mântuire Proiecte (cheie live): proiect mântuit prin API; etichetă „Mântuit” plasată. Pot apărea și alte consecințe (presă, urmăriri).'});
+          chgRep(pts,`Mântuire Proiecte — „${p.name}” (mântuit)`,false,{raw:true});
+          addAct(`Mântuire Proiecte: „${p.name}” mântuit prin API cu cheie live (+${pts} puncte de reputație).`);
           mantuireApplyLiveKeyConsequences(pts,p.name,apiTier);
           simRefresh=true;
         }
@@ -3402,7 +3402,7 @@ function mantuirePurchaseTokens(){
   const bonus=base>=8?Math.max(1,Math.floor(base*0.1)):0;
   const add=base+bonus;
   S.mantuire.credits=add;
-  addAct(`Mântuire Proiecte™: achiziționat pachet — +${add} unități de mântuire${bonus>0?` (inclus ${bonus} bonus la volum)`:''}.`);
+  addAct(`Mântuire Proiecte: achiziționat pachet — +${add} unități de mântuire${bonus>0?` (inclus ${bonus} bonus la volum)`:''}.`);
   toast(`Pachet activat: +${add} unități de mântuire`,'ok');
   saveState();renderMantuire();renderInteg();
 }
@@ -3448,7 +3448,7 @@ function mantuireEnqueueFromUi(){
   S.mantuire.credits-=umCost;
   mantuireTouchKeyUsed();
   S.mantuire.queue.push({id:jid,requestId,projectId:pid,endTs:t0+delay,startedAt:t0,durationMs:delay,pts,srvId:srv.id,apiEnv,apiTier,umCost:umCost});
-  addAct(`Mântuire Proiecte™: cerere ${requestId} pentru „${p.name}” (${srv.name}, ${mantuireEnvPillLabel(apiEnv)}).`);
+  addAct(`Mântuire Proiecte: cerere ${requestId} pentru „${p.name}” (${srv.name}, ${mantuireEnvPillLabel(apiEnv)}).`);
   toast(`Cerere acceptată (${mantuireEnvPillLabel(apiEnv)}). ETA ~${Math.round(delay/1000)}s`,'ok');
   saveState();renderMantuire();renderProj();updRep();scheduleMantuireDrainTick();
 }
@@ -3621,7 +3621,7 @@ function renderPsdDcPortalBody(){
   const u=S.user;
   if(_psdDcPortalStep==='admin'&&dc.linked){
     body.innerHTML=`<span class="psd-dc-seal">Cont verificat</span>
-      <p>Cont <strong>politician cu influență</strong> sincronizat cu identitatea din SEAP (simulare). Gestionezi cheia API pentru SifonatorPRO și alte aplicații fictive.</p>
+      <p>Cont <strong>politician cu influență</strong> sincronizat cu identitatea din SEAP. Gestionezi cheia API pentru SifonatorPRO și alte aplicații fictive.</p>
       <div class="psd-dc-keybox">${escapeHtml(dc.apiKey)}</div>
       <div class="psd-dc-actions">
         <button type="button" class="psd-dc-btn-psd" onclick="copyPsdDcApiKey()">Copiază cheia</button>
@@ -3642,7 +3642,7 @@ function renderPsdDcPortalBody(){
       </div>
       <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
         <input type="checkbox" id="psd-dc-terms"/>
-        <span>Accept <strong>Termenii și Condițiile PSD</strong> pentru PSD Direct Connect™, utilizarea endpoint-urilor și fluxurile asociate (simulare).</span>
+        <span>Accept <strong>Termenii și Condițiile PSD</strong> pentru PSD Direct Connect, utilizarea endpoint-urilor și fluxurile asociate.</span>
       </label>
       <div class="psd-dc-legal">„Politicianul declară că influența este folosită pentru integrări operaționale conform liniei de partid. PSD nu garantează absolvirea responsabilității juridice a politicianului.”</div>
       <div class="psd-dc-actions">
@@ -3665,7 +3665,7 @@ function renderPsdDcPortalBody(){
     if(!dc.draftKey)dc.draftKey=generatePsdDcApiKey();
     saveState();
     body.innerHTML=`<span class="psd-dc-seal">Cheie API</span>
-      <p>Cont activ în PSD Direct Connect™. Cheia de mai jos este valabilă doar până o înlocuiești sau o revoci. În SifonatorPRO trebuie introdusă manual (lipire) sau trimisă cu butonul de mai jos.</p>
+      <p>Cont activ în PSD Direct Connect. Cheia de mai jos este valabilă doar până o înlocuiești sau o revoci. În SifonatorPRO trebuie introdusă manual (lipire) sau trimisă cu butonul de mai jos.</p>
       <div class="psd-dc-keybox">${escapeHtml(dc.draftKey)}</div>
       <div class="psd-dc-actions">
         <button type="button" class="psd-dc-btn-psd" onclick="copyPsdDcApiKey()">Copiază cheia</button>
@@ -3682,8 +3682,8 @@ function psdDcPortalStep1Continue(){
   S.integrations.psdDC.pendingVerifyCode=code;
   S.integrations.psdDC.draftKey='';
   saveState();
-  spagafonPushSms('PSD Direct Connect™',`Cod verificare cont politician: ${code}. Valabil 15 minute.`,{code,isPsdDcVerify:true});
-  addAct('PSD Direct Connect™: cod de verificare trimis pe Șpagafon.');
+  spagafonPushSms('PSD Direct Connect',`Cod verificare cont politician: ${code}. Valabil 15 minute.`,{code,isPsdDcVerify:true});
+  addAct('PSD Direct Connect: cod de verificare trimis pe Șpagafon.');
   _psdDcPortalStep=2;
   renderPsdDcPortalBody();
   toast('Verifică mesajul pe Șpagafon','ok');
@@ -3697,7 +3697,7 @@ function psdDcPortalVerifyCode(){
   S.integrations.psdDC.pendingVerifyCode='';
   _psdDcPortalStep=3;
   renderPsdDcPortalBody();
-  addAct('PSD Direct Connect™: autentificare confirmată; consolă cheie API deschisă.');
+  addAct('PSD Direct Connect: autentificare confirmată; consolă cheie API deschisă.');
   saveState();
 }
 // Clipboard copy helper: psd dc api key.
@@ -3721,7 +3721,7 @@ function finalizePsdDcIntegration(){
   saveState();
   closePsdDcPortal();
   renderInteg();
-  addAct('PSD Direct Connect™: integrare activată în SifonatorPRO.');
+  addAct('PSD Direct Connect: integrare activată în SifonatorPRO.');
   toast('PSD Direct Connect conectat la platformă','ok');
 }
 // connectPsdDcManualKey: psd dc manual key.
@@ -3738,7 +3738,7 @@ function connectPsdDcManualKey(){
   dc.draftKey='';
   saveState();
   renderInteg();
-  addAct('PSD Direct Connect™: cheie API introdusă manual în Manager Integrări.');
+  addAct('PSD Direct Connect: cheie API introdusă manual în Manager Integrări.');
   toast('Integrare PSD activată','ok');
 }
 // Toggles integ psd key reveal on or off.
@@ -3829,7 +3829,7 @@ function renderAnafSyncPortalBody(){
     }
     if(_anafRevokeSub===2){
       body.innerHTML=`<span class="anaf-seal">Revocare · pas 2/2</span>
-        <p>Ultimul pas: confirmați că înțelegeți că pierdeți fluxul narativ E-Factura / trasabilitatea extinsă din SifonatorPRO (simulare).</p>
+        <p>Ultimul pas: confirmați că înțelegeți că pierdeți fluxul narativ E-Factura / trasabilitatea extinsă din SifonatorPRO.</p>
         <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;cursor:pointer">
           <input type="checkbox" id="anaf-revoke-final-ack"/>
           <span>Declar că solicit revocarea conștient și accept reluarea procedurii de la dosar dacă reactivez serviciul.</span>
@@ -3841,7 +3841,7 @@ function renderAnafSyncPortalBody(){
       return;
     }
     body.innerHTML=`<span class="anaf-seal">Cont sincronizat</span>
-      <p>Legătura <strong>ANAF Sync™</strong> este activă. Cheia de sincronizare (fictivă) pentru SifonatorPRO și alte aplicații simulate:</p>
+      <p>Legătura <strong>ANAF Sync</strong> este activă. Cheia de sincronizare pentru SifonatorPRO și alte aplicații:</p>
       <div class="anaf-keybox">${escapeHtml(a.apiKey)}</div>
       <div class="anaf-actions">
         <button type="button" class="anaf-btn-pri" onclick="copyAnafSyncApiKey()">Copiază cheia</button>
@@ -3857,7 +3857,7 @@ function renderAnafSyncPortalBody(){
     const esc=S.justice?.dnaEscalation?'<span style="color:#c01c28;font-weight:800"> · escaladare DNA activă</span>':'';
     if(dnaBlock){
       body.innerHTML=`<span class="anaf-seal">Cerere neeligibilă</span>
-        <div class="anaf-warn">ANAF Sync™ cere <strong>dovadă de integritate</strong> în platformă: nu puteți depune cererea de conectare cât timp există <strong>investigație DNA activă</strong> (anchetă, audiere sau recurs, ori escaladare DNA marcată în joc).</div>
+        <div class="anaf-warn">ANAF Sync cere <strong>dovadă de integritate</strong> în platformă: nu puteți depune cererea de conectare cât timp există <strong>investigație DNA activă</strong> (anchetă, audiere sau recurs, ori escaladare DNA marcată în joc).</div>
         <p class="tsm" style="margin-top:12px">Starea dumneavoastră acum: <strong>${stRo}</strong>${esc}.</p>
         <p class="tsm tmut" style="line-height:1.55">Reveniți după ce linia justițiară revine la o etapă permisă (de regulă <strong>Curat</strong> sau <strong>Monitorizare</strong>, fără investigație DNA deschisă).</p>
         <div class="anaf-actions">
@@ -3905,7 +3905,7 @@ function renderAnafSyncPortalBody(){
     const idx=Math.min(a.dosarTicks,msgs.length-1);
     const bar=Math.min(100,Math.round((a.dosarTicks/ANAF_DOSAR_TICKS_NEED)*100));
     body.innerHTML=`<span class="anaf-seal">Dosar în lucru</span>
-      <p>Stadiu procedură (simulare): <strong>${a.dosarTicks}/${ANAF_DOSAR_TICKS_NEED}</strong> verificări de sistem.</p>
+      <p>Stadiu procedură: <strong>${a.dosarTicks}/${ANAF_DOSAR_TICKS_NEED}</strong> verificări de sistem.</p>
       <div style="height:8px;background:#dfe7f0;border-radius:4px;overflow:hidden;margin:10px 0">
         <div style="height:100%;width:${bar}%;background:linear-gradient(90deg,#0056b3,#1a6ec4);transition:width .2s"></div>
       </div>
@@ -3948,8 +3948,8 @@ function anafSyncPortalStep1Continue(){
   a.dosarTicks=0;
   a.wizardPhase=2;
   saveState();
-  spagafonPushSms('ANAF Sync™',`PIN depunere dosar ANAF Sync: ${code}. Valabil 30 minute. Introduceți-l în portalul de conectare.`,{code,isAnafCert:true});
-  addAct('ANAF Sync™: PIN certificat expediat pe Șpagafon; dosarul narativ se deschide după validare.');
+  spagafonPushSms('ANAF Sync',`PIN depunere dosar ANAF Sync: ${code}. Valabil 30 minute. Introduceți-l în portalul de conectare.`,{code,isAnafCert:true});
+  addAct('ANAF Sync: PIN certificat expediat pe Șpagafon; dosarul narativ se deschide după validare.');
   _anafSyncPortalStep=2;
   renderAnafSyncPortalBody();
   toast('Verifică Șpagafon pentru PIN-ul de certificat','ok');
@@ -3967,7 +3967,7 @@ function anafSyncPortalVerifyCert(){
   saveState();
   _anafSyncPortalStep=3;
   renderAnafSyncPortalBody();
-  addAct('ANAF Sync™: certificat validat; dosarul procedural (simulare) a fost deschis.');
+  addAct('ANAF Sync: Certificat validat. Dosarul procedural a fost deschis.');
   toast('Certificat acceptat. Urmează etapa dosarului.','ok');
 }
 // ANAF Sync portal (anafSyncDosarAdvance).
@@ -3981,7 +3981,7 @@ function anafSyncDosarAdvance(){
     saveState();
     _anafSyncPortalStep=5;
     renderAnafSyncPortalBody();
-    addAct('ANAF Sync™: dosar narativ închis; token de sincronizare emis.');
+    addAct('ANAF Sync: dosar narativ închis; token de sincronizare emis.');
     toast('Dosar finalizat în simulare. Copiază cheia sau trimite-o în aplicație.','ok');
     return;
   }
@@ -4021,7 +4021,7 @@ function finalizeAnafSyncIntegration(){
   closeAnafSyncPortal();
   renderInteg();
   renderAudit();
-  addAct('ANAF Sync™: integrare activată în SifonatorPRO (simulare).');
+  addAct('ANAF Sync: integrare activată în SifonatorPRO.');
   toast('ANAF Sync conectat la platformă','ok');
 }
 // connectAnafSyncManualKey: anaf sync manual key.
@@ -4041,7 +4041,7 @@ function connectAnafSyncManualKey(){
   saveState();
   renderInteg();
   renderAudit();
-  addAct('ANAF Sync™: cheie introdusă manual în Manager Integrări.');
+  addAct('ANAF Sync: cheie introdusă manual în Manager Integrări.');
   toast('ANAF Sync activat','ok');
 }
 // Toggles integ anaf key reveal on or off.
@@ -4089,7 +4089,7 @@ function anafSyncRevokeFinalize(){
   closeAnafSyncPortal();
   renderInteg();
   renderAudit();
-  addAct('ANAF Sync™: revocare completă (simulare).');
+  addAct('ANAF Sync: revocare completă.');
   toast('ANAF Sync a fost revocat după procedura narativă','warn');
 }
 // Prefills fields from external hints: anaf cert from spagafon.
@@ -4116,8 +4116,8 @@ function fillPsdDcCodeFromSpagafon(code){
 function tryOpenPublicPay(tid,fp){
   ensureIntegrations();
   if(!isPsdDcLinked()){
-    dlgOpen('Integrare necesară','PSD Direct Connect™',
-      `<p class="tsm" style="line-height:1.65">Plata cu <strong>bani publici</strong> prin PSD Direct Connect™ necesită un cont verificat și o cheie API conectată în <strong>Manager Integrări</strong>.</p>`,
+    dlgOpen('Integrare necesară','PSD Direct Connect',
+      `<p class="tsm" style="line-height:1.65">Plata cu <strong>bani publici</strong> prin PSD Direct Connect necesită un cont verificat și o cheie API conectată în <strong>Manager Integrări</strong>.</p>`,
       `<button type="button" class="btn btn-f" onclick="dlgClose()">Închide</button>
        <button type="button" class="btn btn-p" onclick="dlgClose();navigate('integ')">Deschide Manager Integrări</button>`
     );
@@ -4129,8 +4129,8 @@ function tryOpenPublicPay(tid,fp){
 function tryOpenPublicPayHours(hours,cost){
   ensureIntegrations();
   if(!isPsdDcLinked()){
-    dlgOpen('Integrare necesară','PSD Direct Connect™',
-      `<p class="tsm" style="line-height:1.65">Plata orelor Bagheta cu <strong>bani publici</strong> folosește PSD Direct Connect™. Integrează serviciul din <strong>Manager Integrări</strong>.</p>`,
+    dlgOpen('Integrare necesară','PSD Direct Connect',
+      `<p class="tsm" style="line-height:1.65">Plata orelor Bagheta cu <strong>bani publici</strong> folosește PSD Direct Connect. Integrează serviciul din <strong>Manager Integrări</strong>.</p>`,
       `<button type="button" class="btn btn-f" onclick="dlgClose()">Închide</button>
        <button type="button" class="btn btn-p" onclick="dlgClose();navigate('integ')">Deschide Manager Integrări</button>`
     );
@@ -4157,7 +4157,7 @@ function renderInteg(){
     <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;background:var(--card)">
       <div class="integ-card-head">
         <div>
-          <div style="font-weight:800;font-size:16px">PSD Direct Connect™</div>
+          <div style="font-weight:800;font-size:16px">PSD Direct Connect</div>
           <p class="tsm tmut" style="margin-top:4px;line-height:1.5">Endpoint-uri pentru cereri de fonduri publice și plăți „Bani publici” din SifonatorPRO.</p>
         </div>
         <span class="integ-pill ${ok?'integ-pill-ok':'integ-pill-off'}">${ok?'Conectat':'Neconectat'}</span>
@@ -4180,7 +4180,7 @@ function renderInteg(){
     <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;background:var(--card)">
       <div class="integ-card-head">
         <div>
-          <div style="font-weight:800;font-size:16px">ANAF Sync™</div>
+          <div style="font-weight:800;font-size:16px">ANAF Sync</div>
           <p class="tsm tmut" style="margin-top:4px;line-height:1.5">E-Factura și flux detaliat în aplicație. Înregistrarea necesită <strong>absența unei investigații DNA active</strong> în starea curentă a jocului. Fluxul include certificat pe Șpagafon, dosar procedural și emitere token.</p>
         </div>
         <span class="integ-pill ${anOk?'integ-pill-ok':'integ-pill-off'}">${anOk?'Conectat':'Neconectat'}</span>
@@ -4203,24 +4203,24 @@ function renderInteg(){
     <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;background:var(--card)">
       <div class="integ-card-head">
         <div>
-          <div style="font-weight:800;font-size:16px">Mântuire Proiecte™</div>
+          <div style="font-weight:800;font-size:16px">Mântuire Proiecte</div>
           <p class="tsm tmut" style="margin-top:6px;line-height:1.5">În <strong>portalul</strong> furnizorului plătești o taxă unică de înregistrare, apoi primești cheia secretă (<code>mnt_sk_…</code>). După activare în aplicație, folosește panoul <strong>Mântuire Proiecte</strong> pentru cereri pentru a dobândi, potențial, puncte de reputație adiționale pe proiecte de mântuială.</p>
         </div>
         <span class="integ-pill ${mtOk?'integ-pill-ok':'integ-pill-off'}">${mtOk?'Conectat':'Neconectat'}</span>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-        <button type="button" class="btn btn-mant" onclick="openMantuirePortal()">Deschide portalul Mântuire Proiecte™</button>
+        <button type="button" class="btn btn-mant" onclick="openMantuirePortal()">Deschide portalul Mântuire Proiecte</button>
       </div>
       <div class="fg mt14 mb0">
         <label style="font-size:12px">${mtHas?'Cheie secretă stocată':'Lipește cheia secretă mnt_sk_live_… sau mnt_sk_test_…'}</label>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;align-items:stretch">
           ${mtHas
-            ?`<input type="password" readonly id="integ-mant-paste" autocomplete="off" spellcheck="false" value="${escapeHtml(mc.apiKey)}" aria-label="Cheie API Mântuire Proiecte™" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
+            ?`<input type="password" readonly id="integ-mant-paste" autocomplete="off" spellcheck="false" value="${escapeHtml(mc.apiKey)}" aria-label="Cheie API Mântuire Proiecte" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
               <button type="button" class="btn btn-f" id="integ-mant-reveal" onclick="toggleIntegMantKeyReveal()" aria-pressed="false" title="Arată sau ascunde cheia">Afișează</button>`
             :`<input type="text" id="integ-mant-paste" placeholder="mnt_sk_live_…" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:12px"/>
               <button type="button" class="btn btn-s" onclick="connectMantuireCloudKey()">Conectează</button>`}
         </div>
-        <p class="tsm tmut mt6" style="line-height:1.45">${mtOk?'După o cheie nouă în portal, integrarea se dezactivează până lipești cheia curentă sau folosești „Trimite în SifonatorPRO”. La prima conectare primești <strong>5 unități de mântuire</strong> (credite); poți cumpăra un pachet nou doar când soldul este zero.':mc.draftKey?'Cheia activă este în portalul Mântuire Proiecte™. Copiază <strong>cheia secretă</strong> de acolo.':'Deschide portalul: termeni, cod pe Șpagafon, apoi cheia secretă.'}</p>
+        <p class="tsm tmut mt6" style="line-height:1.45">${mtOk?'După o cheie nouă în portal, integrarea se dezactivează până lipești cheia curentă sau folosești „Trimite în SifonatorPRO”. La prima conectare primești <strong>5 unități de mântuire</strong> (credite); poți cumpăra un pachet nou doar când soldul este zero.':mc.draftKey?'Cheia activă este în portalul Mântuire Proiecte. Copiază <strong>cheia secretă</strong> de acolo.':'Deschide portalul: termeni, cod pe Șpagafon, apoi cheia secretă.'}</p>
       </div>
     </div>`;
 }
@@ -4265,7 +4265,7 @@ function navigate(v){
   if(v==='mantuire'){
     ensureMantuireIntegration();
     if(!isMantuireLinked()){
-      toast('Conectează mai întâi API-ul Mântuire Proiecte™ din Manager Integrări (Instrumente).','warn');
+      toast('Conectează mai întâi API-ul Mântuire Proiecte din Manager Integrări (Instrumente).','warn');
       v='integ';
     }
   }
@@ -4396,7 +4396,7 @@ function renderSpagafon(){
   const box=$('spgf-msgs');
   if(!box)return;
   if(!S.smsInbox.length){
-    box.innerHTML='<p class="spgf-empty">Niciun SMS încă.<br/>Codurile 3D Secure (SifonPay™), verificările PSD Direct Connect™, certificatele ANAF Sync™ și codurile Mântuire Proiecte™ apar aici.</p>';
+    box.innerHTML='<p class="spgf-empty">Niciun SMS încă.<br/>Codurile 3D Secure (SifonPay), verificările PSD Direct Connect, certificatele ANAF Sync și codurile Mântuire Proiecte apar aici.</p>';
     return;
   }
   box.innerHTML=S.smsInbox.map(m=>{
@@ -4406,7 +4406,7 @@ function renderSpagafon(){
       if(m.is3ds&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillTdsFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în plată</button></div>`;
       if(m.isPsdDcVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:var(--psd)" onclick='fillPsdDcCodeFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în PSD DC</button></div>`;
       if(m.isAnafCert&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillAnafCertFromSpagafon(${JSON.stringify(String(m.code))})'>Completează certificat ANAF Sync</button></div>`;
-      if(m.isMantuireVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:#5c2b70;color:#fff" onclick='fillMantuireVerifyFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în Mântuire Proiecte™</button></div>`;
+      if(m.isMantuireVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:#5c2b70;color:#fff" onclick='fillMantuireVerifyFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în Mântuire Proiecte</button></div>`;
     }
     const extra=m.is3ds||m.isPsdDcVerify||m.isAnafCert||m.isMantuireVerify?' sm-code':'';
     return`<div class="spgf-msg${extra}"><div class="sm-from">${escapeHtml(m.from)}</div><div class="sm-body">${escapeHtml(m.body)}</div><div class="sm-time">${m.t||''}</div>${actions}</div>`;
@@ -4585,7 +4585,7 @@ function buildSpagafonAppletHtml(id){
   if(id==='sub'){
     const pl=hasPaidSubscription()?PLANS.find(p=>p.id===S.sub.tier):null;
     const line=pl?`${pl.name} · exp. ${(S.sub.exp||'').slice(0,10)}`:'Fără abonament plătit (limite gratuite)';
-    return`<div class="spgf-ap-title">SifonPay™ mobil</div>
+    return`<div class="spgf-ap-title">SifonPay mobil</div>
       ${spgfApRow('Status',line)}
       ${spgfApRow('Reducere reputație',disc().toFixed(1)+'%')}
       <p class="spgf-ap-mut">3D Secure și „fonduri publice” rămân pe ecranul mare</p>
@@ -4637,7 +4637,7 @@ function toggleSpagafon(force){
 }
 // Spagafon SMS shell (spagafonWelcome).
 function spagafonWelcome(){
-  spagafonPushSms('Șpagafon','Bun venit! Ai activat linia mobilă „de serviciu". SMS-urile pentru 3D Secure (SifonPay™) apar în Mesaje.');
+  spagafonPushSms('Șpagafon','Bun venit! Ai activat linia mobilă „de serviciu". SMS-urile pentru 3D Secure (SifonPay) apar în Mesaje.');
 }
 
 // ═══ REPUTATION ═══
@@ -4703,7 +4703,7 @@ function renderHowto(){
     const rows=CARD_BANK_RULES.flatMap(r=>r.prefixes.map(p=>({p,bank:r.bank,chance:r.chance})));
     const tbody=rows.map(x=>`<tr><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono)"><code>${x.p}</code></td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">${x.bank}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">~${Math.round(x.chance*100)}%</td></tr>`).join('');
     bin.innerHTML=`
-      <p class="tsm mt8" style="line-height:1.65"><strong>Prefixul (BIN)</strong> înseamnă primele <strong>6 cifre</strong>, care identifică o <strong>bancă fictivă</strong>. Pentru anumite prefixe există o <strong>șansă</strong> ca SifonPay™ să deschidă <strong>3D Secure</strong>: fereastră cu <strong>timer de 10 minute</strong>, câmp pentru <strong>codul din Șpagafon</strong> (butonul din SMS îl lipește) și confirmare. Modurile push/app simulate pot să nu afișeze cod. Alte prefixe pot trece direct fără 3DS.</p>
+      <p class="tsm mt8" style="line-height:1.65"><strong>Prefixul (BIN)</strong> înseamnă primele <strong>6 cifre</strong>, care identifică o <strong>bancă fictivă</strong>. Pentru anumite prefixe există o <strong>șansă</strong> ca SifonPay să deschidă <strong>3D Secure</strong>: fereastră cu <strong>timer de 10 minute</strong>, câmp pentru <strong>codul din Șpagafon</strong> (butonul din SMS îl lipește) și confirmare. Modurile push/app simulate pot să nu afișeze cod. Alte prefixe pot trece direct fără 3DS.</p>
       <div style="overflow-x:auto;margin-top:10px">
         <table style="width:100%;font-size:12px;border-collapse:collapse">
           <thead><tr><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Prefix (6 cifre)</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Bancă fictivă</th><th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)">Șansă 3DS*</th></tr></thead>
@@ -5785,7 +5785,7 @@ function openWandQueueScheduleDialog(projectId,opts){
   dlgOpen(editId!=null?'Parametri sarcină în coadă':'Programează în coadă (parametri)',sub,
     `<div id="wq-sch-meta" data-real="${est.real}" data-decl="${est.declared}" style="display:none" aria-hidden="true"></div>
     <p class="tsm tmut mb12" style="line-height:1.6"><strong>${pname}</strong><br/>
-    Valoare reală (simulare): <strong>${fRON(est.real)}</strong> · Declarată: <strong>${fRON(est.declared)}</strong></p>
+    Valoare reală: <strong>${fRON(est.real)}</strong> · Declarată: <strong>${fRON(est.declared)}</strong></p>
     <div class="fg mb0"><label>Factor de optimizare: <strong id="wq-sch-fac-disp">${defaultPct}</strong>% <span class="tsm tmut" style="font-weight:600">(20-95%)</span></label>
       <input type="range" id="wq-sch-fac" min="20" max="95" value="${defaultPct}" style="width:100%;accent-color:var(--blue)" oninput="onWandQueueScheduleFactorInput()"/>
     </div>
@@ -6360,7 +6360,7 @@ function renderAudit(){
         const sev=/err|DNA|justi|anchet|presiune/i.test(ev.txt)?'at':'inf';
         const lab=sev==='at'?'ATENȚIONARE':'INFORMARE';
         const ref=1000000+(Array.from(String(ev.txt||'')).reduce((s,c)=>s+c.charCodeAt(0),ix*104729)%8999999);
-        const bureaucr=`Referință internă RO-EF-EXT/${ref}. Linie trasabilitate: „${ev.txt}”. Evenimentul este consemnat în registrul narativ ANAF Sync™ fără corespondență în SPV. Stare: înregistrat pentru raportare de sinteză.`;
+        const bureaucr=`Referință internă RO-EF-EXT/${ref}. Linie trasabilitate: „${ev.txt}”. Evenimentul este consemnat în registrul narativ ANAF Sync fără corespondență în SPV. Stare: înregistrat pentru raportare de sinteză.`;
         return`<div class="audit-anaf-detail"><span class="ad-sev ${sev}">${lab}</span>${escapeHtml(bureaucr)} <span class="tsm tmut">(${ev.t})</span></div>`;
       }).join('');
       const justiceExtra=S.justice?.anafAuditMessage
@@ -6664,8 +6664,8 @@ function openSubPay(tid){
   dlgOpen(`Abonează-te la ${pl.name}`,`${fp} RON/lună`,
     `<p class="tsm mb14">Alege metoda de plată:</p>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <button class="btn btn-p" onclick="dlgClose();openCardPay('${tid}',${fp})">💳 Plată cu Cardul (SifonPay™)</button>
-      <button class="btn btn-psd" onclick="dlgClose();tryOpenPublicPay('${tid}',${fp})">🏛️ Plată cu Bani Publici (PSD Direct Connect™)</button>
+      <button class="btn btn-p" onclick="dlgClose();openCardPay('${tid}',${fp})">💳 Plată cu Cardul (SifonPay)</button>
+      <button class="btn btn-psd" onclick="dlgClose();tryOpenPublicPay('${tid}',${fp})">🏛️ Plată cu Bani Publici (PSD Direct Connect)</button>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>`
   );
@@ -6687,10 +6687,10 @@ function openCardCheckout(ctx){
   CARD_PAY_CTX=ctx;
   const isHours=ctx.kind==='hours';
   const isMant=ctx.kind==='mantuire_reg';
-  const label=isHours?`${ctx.hours} ore Bagheta Magică`:isMant?'Înregistrare API Mântuire Proiecte™':(PLANS.find(p=>p.id===ctx.tid)?.name||'Abonament');
+  const label=isHours?`${ctx.hours} ore Bagheta Magică`:isMant?'Înregistrare API Mântuire Proiecte':(PLANS.find(p=>p.id===ctx.tid)?.name||'Abonament');
   const cadence=isHours||isMant?'plată unică':'/lună';
   dlgOpen('','',
-    `<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay™</div><div class="sp-tag">Plăți discrete pentru oameni cu inițiativă</div></div>
+    `<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay</div><div class="sp-tag">Plăți discrete pentru oameni cu inițiativă</div></div>
     <div style="padding:18px">
       <div class="tsm tmut mb14"><strong>${label}</strong> — ${ctx.amount} RON ${cadence}</div>
       <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Număr card</label><input class="card-inp" id="cp-num" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"/></div>
@@ -6752,7 +6752,7 @@ function finishCardCheckout(bank3ds){
     const pl=PLANS.find(p=>p.id===ctx.tid);
     dlgClose();
     toast(`✅ Abonament ${pl?.name||''} activat!`,'ok');
-    addAct(`Abonament ${pl?.name||ctx.tid} plătit cu cardul via SifonPay™${bank3ds?` (3D Secure ${bank3ds.bank})`:''}.`);
+    addAct(`Abonament ${pl?.name||ctx.tid} plătit cu cardul via SifonPay${bank3ds?` (3D Secure ${bank3ds.bank})`:''}.`);
     renderSub();renderDash();
     CARD_PAY_CTX=null;
     saveState();
@@ -6760,7 +6760,7 @@ function finishCardCheckout(bank3ds){
   }
   if(ctx.kind==='mantuire_reg'){
     dlgClose();
-    addAct(`Mântuire Proiecte™: taxă înregistrare API plătită cu cardul (${fRON(ctx.amount)})${bank3ds?` · 3D Secure ${bank3ds.bank}`:''}.`);
+    addAct(`Mântuire Proiecte: taxă înregistrare API plătită cu cardul (${fRON(ctx.amount)})${bank3ds?` · 3D Secure ${bank3ds.bank}`:''}.`);
     mantuireMarkRegistrationPaidAndSendSms();
     CARD_PAY_CTX=null;
     saveState();
@@ -6787,20 +6787,20 @@ function show3DSChallenge(bankRule,cardNum){
   let smsBody='';
   if(mode==='sms_code'){
     reserveCode=String(100000+Math.floor(Math.random()*900000));
-    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): cod rezervă ${reserveCode}. Fereastra de confirmare: ${TDS_MINUTES} minute. Detalii pe Șpagafon.`;
+    smsBody=`SifonPay 3D Secure (${bankRule.bank}): cod rezervă ${reserveCode}. Fereastra de confirmare: ${TDS_MINUTES} minute. Detalii pe Șpagafon.`;
   }else if(mode==='otp_email'){
     reserveCode=String(100000+Math.floor(Math.random()*900000));
-    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): cod e-mail/SMS rezervă ${reserveCode}. Timp limită desktop: ${TDS_MINUTES} minute.`;
+    smsBody=`SifonPay 3D Secure (${bankRule.bank}): cod e-mail/SMS rezervă ${reserveCode}. Timp limită desktop: ${TDS_MINUTES} minute.`;
   }else if(mode==='push_timer'||mode==='bank_app'){
-    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): confirmă în aplicația băncii sau urmează pașii din mesaj. Timp disponibil: ${TDS_MINUTES} minute.`;
+    smsBody=`SifonPay 3D Secure (${bankRule.bank}): confirmă în aplicația băncii sau urmează pașii din mesaj. Timp disponibil: ${TDS_MINUTES} minute.`;
   }else{
-    smsBody=`SifonPay™ 3D Secure (${bankRule.bank}): autentificare suplimentară. ${TDS_MINUTES} minute.`;
+    smsBody=`SifonPay 3D Secure (${bankRule.bank}): autentificare suplimentară. ${TDS_MINUTES} minute.`;
   }
   S.pending3DS={code:'__TDS10__',bank:bankRule.bank,tail:cardNum.slice(-4),mode:'timed_3ds',reserveCode};
   spagafonPushSms(bankRule.bank,smsBody,{code:reserveCode,is3ds:true});
   spagafonPinFor3DS(true);
   const codeRow=reserveCode!=null?`<div class="fg mt14"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Cod rezervă (din Șpagafon)</label><input class="card-inp verif-code-inp" id="tds-code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="12" placeholder="000000" autocomplete="one-time-code" style="font-size:15px;letter-spacing:.12em" oninput="this.value=this.value.replace(/\\D/g,'').slice(0,12)"/></div><p class="tsm tmut mt8">Folosește butonul <strong>Completează în plată</strong> din mesajul SMS pe Șpagafon ca să lipească codul aici, apoi confirmă.</p>`:'';
-  const inner=`<p class="tsm tmut mb14">Card <strong>${masked}</strong> · <strong>${bankRule.bank}</strong> solicită <strong>3D Secure</strong> (simulare SifonPay™). Ai exact <strong>${TDS_MINUTES} minute</strong>; detaliile și orice cod de rezervă sunt pe <strong>Șpagafon</strong> (deschis automat deasupra acestei ferestre).</p>
+  const inner=`<p class="tsm tmut mb14">Card <strong>${masked}</strong> · <strong>${bankRule.bank}</strong> solicită <strong>3D Secure</strong> (simulare SifonPay). Ai exact <strong>${TDS_MINUTES} minute</strong>; detaliile și orice cod de rezervă sunt pe <strong>Șpagafon</strong> (deschis automat deasupra acestei ferestre).</p>
     <div style="background:var(--bg);padding:12px;border-radius:var(--r);font-size:13px;text-align:center"><span id="tds-timer" style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--orange)">${String(TDS_MINUTES).padStart(2,'0')}:00</span><div class="tsm tmut mt6">Timp rămas</div></div>
     ${codeRow}
     <p class="tsm tmut mt6">După expirare, reîncearcă plata. Confirmă doar după ce ai introdus codul (când banca îl cere).</p>`;
@@ -6840,8 +6840,8 @@ function procCard(){
   if(!ctx){toast('Nu există context de plată','err');return}
   const num=$('cp-num')?.value?.replace(/\s/g,'');
   if(!num||num.length<16||!cardExpFilled('cp-exp-mm','cp-exp-yy')||!$('cp-cvv')?.value){toast('Completează datele cardului','err');return}
-  $('dlg-a').innerHTML='<span class="tsm tmut">Se procesează prin SifonPay™...</span>';
-  $('dlg-c').innerHTML=`<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay™</div></div><div style="padding:32px;text-align:center"><div class="spinner"></div><p class="tsm tmut">Procesare discretă în curs...</p></div>`;
+  $('dlg-a').innerHTML='<span class="tsm tmut">Se procesează prin SifonPay...</span>';
+  $('dlg-c').innerHTML=`<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay</div></div><div style="padding:32px;text-align:center"><div class="spinner"></div><p class="tsm tmut">Procesare discretă în curs...</p></div>`;
   setTimeout(()=>{
     const bankRule=needs3DS(num);
     if(bankRule){show3DSChallenge(bankRule,num);return}
@@ -6852,9 +6852,9 @@ function procCard(){
 function openPublicPay(tid,amount){
   if(!isPsdDcLinked()){toast('PSD Direct Connect nu este integrat. Deschide Manager Integrări.','warn');return}
   const pl=PLANS.find(p=>p.id===tid),com=Math.round(amount*.15),total=amount+com;
-  dlgOpen('🏛️ PSD Direct Connect™','Serviciu de integrare fonduri publice',
+  dlgOpen('🏛️ PSD Direct Connect','Serviciu de integrare fonduri publice',
     `<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:var(--r);margin-bottom:13px;text-align:center">
-      <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect™</div>
+      <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect</div>
       <div style="font-size:11px;opacity:.55">Rețeaua noastră de influență la dispoziția ta</div>
     </div>
     <div style="background:var(--bg);padding:11px;border-radius:var(--r);font-size:13px;margin-bottom:13px">
@@ -6864,10 +6864,10 @@ function openPublicPay(tid,amount){
     </div>
     <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
       <select id="pp-int" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
-        <option>Partid (PSD) — Ruta standard, 3-5 zile</option>
-        <option>Rețea locală de influență — Ruta urgentă, 1-2 zile</option>
-        <option>Conexiuni ministeriale — Ruta diplomatică, 24h</option>
-        <option>Ministru de resort — Ruta VIP, 4 ore</option>
+        <option>Partid (PSD): Ruta standard, 3-5 zile</option>
+        <option>Rețea locală de influență: Ruta urgentă, 1-2 zile</option>
+        <option>Conexiuni ministeriale: Ruta diplomatică, 24h</option>
+        <option>Ministru de resort: Ruta privilegiată, 4 ore</option>
       </select>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
@@ -6878,7 +6878,7 @@ function openPublicPay(tid,amount){
 function procPublic(tid,total){
   const int=$('pp-int')?.value?.split('—')[0].trim()||'Partid';
   $('dlg-a').innerHTML='';
-  $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect™</div></div>
+  $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect</div></div>
     <div style="padding:18px;text-align:center"><div style="font-size:26px;margin-bottom:8px">📤</div><p class="tsm tmut">Cererea parcurge rețeaua de influență...</p><div id="pp-steps" style="text-align:left;margin-top:13px;font-size:12px;color:var(--text2)"></div></div>`;
   ['📨 Cerere trimisă către intermediar...','🤝 Negociere discretă în curs...','📋 Documentație „justificativă" generată automat...','✅ Fonduri publice aprobate și transferate!'].forEach((s,i)=>
     setTimeout(()=>{
@@ -6891,9 +6891,9 @@ function procPublic(tid,total){
 function openPublicPayHours(hours,amount){
   if(!isPsdDcLinked()){toast('PSD Direct Connect nu este integrat. Deschide Manager Integrări.','warn');return}
   const com=Math.round(amount*.15),total=amount+com;
-  dlgOpen('🏛️ PSD Direct Connect™','Serviciu de integrare fonduri publice',
+  dlgOpen('🏛️ PSD Direct Connect','Serviciu de integrare fonduri publice',
     `<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px 15px;border-radius:var(--r);margin-bottom:13px;text-align:center">
-      <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect™</div>
+      <div style="font-size:17px;margin-bottom:2px">🏛️ PSD Direct Connect</div>
       <div style="font-size:11px;opacity:.55">Flux operațional pentru cumpărare ore Baghetă</div>
     </div>
     <div style="background:var(--bg);padding:11px;border-radius:var(--r);font-size:13px;margin-bottom:13px">
@@ -6903,10 +6903,10 @@ function openPublicPayHours(hours,amount){
     </div>
     <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
       <select id="pp-int-h" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
-        <option>Partid (PSD) — Ruta standard, 3-5 zile</option>
-        <option>Rețea locală de influență — Ruta urgentă, 1-2 zile</option>
-        <option>Conexiuni ministeriale — Ruta diplomatică, 24h</option>
-        <option>Ministru de resort — Ruta VIP, 4 ore</option>
+        <option>Partid (PSD): Ruta standard, 3-5 zile</option>
+        <option>Rețea locală de influență: Ruta urgentă, 1-2 zile</option>
+        <option>Conexiuni ministeriale: Ruta diplomatică, 24h</option>
+        <option>Ministru de resort: Ruta privilegiată, 4 ore</option>
       </select>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
@@ -6918,7 +6918,7 @@ function procPublicHours(hours,total){
   if(hasPaidSubscription()){toast('Ai abonament plătit activ; orele extra sunt indisponibile.','warn');dlgClose();return}
   const int=$('pp-int-h')?.value?.split('—')[0].trim()||'Partid';
   $('dlg-a').innerHTML='';
-  $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect™</div></div>
+  $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect</div></div>
     <div style="padding:18px;text-align:center"><div style="font-size:26px;margin-bottom:8px">📤</div><p class="tsm tmut">Cererea parcurge rețeaua de influență...</p><div id="pp-steps-h" style="text-align:left;margin-top:13px;font-size:12px;color:var(--text2)"></div></div>`;
   ['📨 Cerere trimisă către intermediar...','🤝 Negociere discretă în curs...','📋 Documentație „justificativă" generată automat...','✅ Fonduri publice aprobate și transferate!'].forEach((s,i)=>
     setTimeout(()=>{
@@ -6964,7 +6964,7 @@ function openBuyHDlg(){
       <div class="tsm tmut">${fRON(h*50)}${d>0?` → ${fRON(cost)} (discount ${d.toFixed(1)}%)`:''}  </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:9px">
-      <button class="btn btn-p" onclick="dlgClose();openCardPayHours(${h},${cost})">💳 SifonPay™</button>
+      <button class="btn btn-p" onclick="dlgClose();openCardPayHours(${h},${cost})">💳 SifonPay</button>
       <button class="btn btn-psd" onclick="dlgClose();tryOpenPublicPayHours(${h},${cost})">🏛️ Bani Publici</button>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>`
@@ -7227,7 +7227,7 @@ function dbInstantApiAll(){
 // Debug panel: push a sample 3D Secure SMS to Spagafon.
 function dbSpagafonSampleSms(){
   const code=String(100000+Math.floor(Math.random()*900000));
-  spagafonPushSms('SifonPay™',`Cod 3D Secure: ${code}. Valabil 10 minute.`,{code,is3ds:true});
+  spagafonPushSms('SifonPay',`Cod 3D Secure: ${code}. Valabil 10 minute.`,{code,is3ds:true});
   toast('[DEBUG] SMS simulat în Șpagafon','ok');
 }
 // Debug panel: add Mântuire usage credits.
