@@ -57,6 +57,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .btn-g{background:var(--gold);color:#fff}
 .btn-psd{background:var(--psd);color:#fff}
 .btn-mant{background:#5c2b70;color:#fff}.btn-mant:hover{background:#6b3485}
+.btn-mant-soft{background:rgba(92,43,112,.08);color:#5c2b70;border:1px solid rgba(92,43,112,.28)}.btn-mant-soft:hover{background:rgba(92,43,112,.14)}
 .btn-full{width:100%}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
 .btn-sm{padding:5px 10px;font-size:12px}
@@ -4790,12 +4791,13 @@ function renderInteg(){
       <div class="integ-card-head">
         <div>
           <div class="integ-card-title">Mântuire Proiecte</div>
-          <p class="tsm tmut integ-card-desc integ-card-desc--mant">În <strong>portalul</strong> furnizorului plătești o taxă unică de înregistrare, apoi primești cheia secretă (<code>mnt_sk_…</code>). După activare în aplicație, folosește panoul <strong>Mântuire Proiecte</strong> pentru cereri de mântuire pentru a dobândi, potențial, puncte de reputație adiționale pe proiecte de mântuială.</p>
+          <p class="tsm tmut integ-card-desc integ-card-desc--mant">În <strong>portalul</strong> furnizorului plătești o taxă unică de înregistrare, apoi primești cheia secretă (<code>mnt_sk_…</code>). După activare în aplicație, folosește panoul <strong>Mântuire Proiecte</strong> pentru cereri de mântuire pentru a dobândi, potențial, puncte de reputație adiționale pe proiecte de mântuială. Pentru prezentarea completă, consultă <strong>site-ul oficial Mântuire Proiecte</strong>.</p>
         </div>
         <span class="integ-pill ${mtOk?'integ-pill-ok':'integ-pill-off'}">${mtOk?'Conectat':'Neconectat'}</span>
       </div>
       <div class="integ-card-actions">
         <button type="button" class="btn btn-mant" onclick="openMantuirePortal()">Deschide portalul Mântuire Proiecte</button>
+        <a class="btn btn-mant-soft" href="site/mantuire-proiecte.html#acasa:intro" target="_blank" rel="noopener noreferrer">Vezi site-ul Mântuire Proiecte</a>
       </div>
       <div class="fg mt14 mb0">
         <label>${mtHas?'Cheie secretă stocată':'Lipește cheia secretă mnt_sk_live_… sau mnt_sk_test_…'}</label>
