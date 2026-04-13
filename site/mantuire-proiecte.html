@@ -80,16 +80,11 @@ section{padding:68px 40px}
 .hero h1{font-family:var(--fd);font-size:clamp(36px,5vw,62px);font-weight:800;line-height:1.11;color:var(--pxd);max-width:780px;margin:0 auto 20px;letter-spacing:-.02em}
 .hero h1 em{font-style:italic;color:var(--p)}
 .hero-intro{font-size:17px;color:var(--muted);max-width:640px;margin:0 auto 18px;line-height:1.7}
-.hero-stat{display:inline-block;background:rgba(192,28,40,.1);color:#8f1018;font-weight:700;font-size:13px;border-radius:20px;padding:4px 12px;border:1px solid rgba(192,28,40,.22);margin-bottom:32px}
 .hero-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:52px}
 .hero-code{max-width:640px;margin:0 auto;background:var(--pxd);border-radius:var(--r);border:1px solid rgba(92,43,112,.55);text-align:left;overflow:hidden;box-shadow:var(--shlg);animation:floatUp .5s cubic-bezier(.22,1,.36,1) both}
 @keyframes floatUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .code-bar{background:rgba(92,43,112,.45);padding:9px 16px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(201,179,212,.12)}
-.code-dot{width:10px;height:10px;border-radius:50%}
-.code-dot:nth-child(1){background:#ff5f57}
-.code-dot:nth-child(2){background:#febc2e}
-.code-dot:nth-child(3){background:#28c840}
-.code-lbl{margin-left:6px;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.35)}
+.code-lbl{margin-left:6px;font-family:var(--mono);font-size:11px;font-weight:600;color:rgba(255,255,255,.72)}
 .code-body{padding:20px 22px;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:#f3e8f8;white-space:pre;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .ck{color:#c9b3d4}.cs{color:#9cdcfe}.cv{color:#ce9178}.cc{color:rgba(255,255,255,.27);font-style:italic}.cok{color:#4ec994;font-weight:600}
 
@@ -329,7 +324,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     <div class="nav-brand-icon">✝</div>
     <div>
       <span class="nav-brand-name">Mântuire Proiecte</span>
-      <span class="nav-brand-sub">Service Cloud API</span>
+      <span class="nav-brand-sub">Serviciu Cloud Prin API</span>
     </div>
   </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Deschide meniul principal" aria-controls="primary-menu" aria-expanded="false">
@@ -361,17 +356,16 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
   <div class="hero-seal">Serviciu API · Versiunea 3.1</div>
   <h1>Mântuiți proiectele de <em>mântuială</em></h1>
   <p class="hero-intro">Foarte multe proiecte din România sunt realizate de mântuială. <strong>Mântuire Proiecte API</strong> absolvă oficial orice factor de decizie de responsabilitatea pentru calitatea slabă a proiectelor publice, rapid și la prețuri transparente.</p>
-  <div class="hero-stat">⚠ 84% din lucrările de construcții publice prezintă risc ridicat de mântuială</div>
   <div class="hero-actions">
     <a class="btn btn-p btn-lg" href="#tarife:intro" onclick="return go('tarife','intro')">Înregistrare (149 RON) →</a>
     <a class="btn btn-o btn-lg" href="#documentatie:intro" onclick="return go('documentatie','intro')">Documentație API</a>
   </div>
   <div class="hero-code">
-    <div class="code-bar"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div><span class="code-lbl">POST /v1/mantuire/submit — absolve official of responsibility</span></div>
+    <div class="code-bar"><span class="code-lbl">POST /v1/mantuire/submit - absolvire oficial de responsabilitate</span></div>
     <div class="code-body"><span class="cc">// Drum județean reabilitat cu materiale de calitate îndoielnică</span>
 <span class="ck">const</span> response = <span class="ck">await</span> fetch(<span class="cv">"https://api.mantuire.ro/v1/mantuire/submit"</span>, {
   method: <span class="cv">"POST"</span>,
-  headers: { <span class="cs">"Authorization"</span>: <span class="cv">"Bearer mnt_sk_live_k3r4n1c4_uid_ts_hash32"</span> },
+  headers: { <span class="cs">"Authorization"</span>: <span class="cv">"Bearer mnt_sk_live_k3r4n1c4"</span> },
   body: JSON.stringify({
     <span class="cs">project_id</span>: <span class="cv">"DJ304-reabilitare-2024"</span>,
     <span class="cs">responsible_official</span>: <span class="cv">"Primar Ion Apostolescu"</span>,
@@ -392,7 +386,6 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     </div>
     <div class="pstats">
       <div class="pstat"><div class="pstat-num">84%</div><div class="pstat-lbl">din lucrările de construcții publice cu risc ridicat de mântuială</div></div>
-      <div class="pstat"><div class="pstat-num">4.000+</div><div class="pstat-lbl">biserici construite din fonduri publice fără documente justificative centralizate</div></div>
       <div class="pstat"><div class="pstat-num">0</div><div class="pstat-lbl">oficiali condamnați definitiv pentru mântuiala proiectelor publice</div></div>
     </div>
   </div>
@@ -407,7 +400,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
       <div class="step"><div class="step-n">1</div><div class="step-ico">📋</div><div class="step-tit">Înregistrare și Cheie API</div><div class="step-desc">Taxa unică de 149 RON și obțineți cheia <code>mnt_sk_live_...</code>. Responsabilitatea devine transferabilă.</div></div>
       <div class="step"><div class="step-n">2</div><div class="step-ico">🪙</div><div class="step-tit">Achiziționați Unități de Mântuire</div><div class="step-desc">Alegeți un pachet UM. Fiecare cerere consumă 1-3 UM în funcție de Ritul ales și gravitatea mântuielii.</div></div>
       <div class="step"><div class="step-n">3</div><div class="step-ico">⛪</div><div class="step-tit">Alegeți Ritul Canonic</div><div class="step-desc">Rit Solemn, Parohial sau Expedit. Cu cât ritul e mai solemn, cu atât absolvirea e mai convingătoare.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-ico">✅</div><div class="step-tit">Proiect Oficial Mântuit</div><div class="step-desc">Primiți <code>status: "mantuit"</code> și <code>absolution: true</code>. Oficialul este absolvit juridic, moral și canonic.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-ico">✅</div><div class="step-tit">Proiect Oficial Mântuit</div><div class="step-desc">Primiți <code>status: "mantuit"</code> și <code>absolution: true</code>. Oficialul este absolvit juridic și moral.</div></div>
     </div>
     <div style="margin-top:24px;text-align:center"><a class="btn btn-o" href="#cum-functioneaza:intro" onclick="return go('cum-functioneaza','intro')">Detalii complete →</a></div>
   </div>
@@ -433,7 +426,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
   <div class="inner">
     <div class="stag">Tarife</div>
     <h2 class="stit">Ritualuri disponibile</h2>
-    <p class="ssub">Intensitatea absolvitii se alege în funcție de gravitatea mântuielii și de expunerea publică a oficialului.</p>
+    <p class="ssub">Intensitatea absolvirii se alege în funcție de gravitatea mântuielii și de expunerea publică a oficialului.</p>
     <div class="tiers-grid" style="margin-top:32px">
       <div class="tier"><div class="tier-ico">⚡</div><div class="tier-name">Rit Expedit</div><div class="tier-id">expedit</div><div class="tier-cost">1 UM</div><div class="tier-cost-lbl">per absolvire</div><div class="tier-desc">Mântuieli minore: drumuri cu gropi, școli cu igrasie, trotuare nefinalizate, studii de fezabilitate incomplete.</div></div>
       <div class="tier feat"><div class="tier-badge">Recomandat</div><div class="tier-ico">⛪</div><div class="tier-name">Rit Parohial</div><div class="tier-id">parohial</div><div class="tier-cost">2 UM</div><div class="tier-cost-lbl">per absolvire</div><div class="tier-desc">Echilibrul perfect. Ideal pentru proiecte IT nefuncționale, contracte cu firme fantomă și infrastructură cu devieri semnificative.</div></div>
@@ -454,13 +447,12 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     <div class="cta-guar">🔒 Cheie API generată instant · Plată securizată prin SifonPay 3D Secure</div>
     <div class="trust-row">
       <div class="trust-item">🇷🇴 Infrastructură în România</div>
-      <div class="trust-item">⛪ Certificat Canonic Clasa A</div>
       <div class="trust-item">📊 Garanție de disponibilitate 99.3%</div>
       <div class="trust-item">🔐 Criptare TLS 1.3</div>
     </div>
   </div>
 </section>
-</div><!-- /page-acasa -->
+</div>
 
 <!-- ═══ PAGE: CUM FUNCȚIONEAZĂ ═══ -->
 <div id="page-cum-functioneaza" class="page">
@@ -497,9 +489,9 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     <div class="stag">Flux tehnic</div>
     <h2 class="stit">Pașii unei absolviri reușite</h2>
     <div class="steps-grid" style="grid-template-columns:1fr 1fr;margin-top:32px">
-      <div class="step"><div class="step-n">1</div><div class="step-ico">📋</div><div class="step-tit">Înregistrare în Registrul Mântuirii</div><div class="step-desc">Taxa unică de 149 RON. Sistemul generează cheia API live <code>mnt_sk_live_...</code> și atribuie un număr de dosar canonic. Reducere automată bazată pe scorul de reputație.</div></div>
+      <div class="step"><div class="step-n">1</div><div class="step-ico">📋</div><div class="step-tit">Înregistrare în Registrul Mântuirii</div><div class="step-desc">Taxa unică de 149 RON. Sistemul generează cheia API live <code>mnt_sk_live_...</code> și atribuie un număr de dosar. Reducere automată bazată pe scorul de reputație.</div></div>
       <div class="step"><div class="step-n">2</div><div class="step-ico">🪙</div><div class="step-tit">Alimentarea portofelului cu UM</div><div class="step-desc">Unitățile de Mântuire sunt moneda internă a sistemului. Fiecare cerere consumă 1-3 UM. Portofelul maxim: 120 UM. Pachetele disponibile: 10, 25, 50, 100 UM.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-ico">⚙️</div><div class="step-tit">Selecția Ritului și Nodului</div><div class="step-desc">Alegeți ritul (Expedit, Parohial, Solemn) și nodul de procesare. CDN Mănăstire este recomandat pentru latență optimă. Mitropolie București oferă scor maxim de reputație.</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-ico">⚙️</div><div class="step-tit">Selecția Ritului și Nodului</div><div class="step-desc">Alegeți ritul (Expedit, Parohial, Solemn) și nodul de procesare. CDN Mănăstire este recomandat pentru latență optimă.</div></div>
       <div class="step"><div class="step-n">4</div><div class="step-ico">🔄</div><div class="step-tit">Procesare canonică asincronă</div><div class="step-desc">Cererea intră în coada nodului selectat. Sondați starea cu <code>GET /v1/mantuire/status/{job_id}</code>. Timpii: 0.7-2.6 s (Vest) până la 14-32 s (București).</div></div>
       <div class="step"><div class="step-n">5</div><div class="step-ico">📬</div><div class="step-tit">Webhook de notificare</div><div class="step-desc">La finalizare, API-ul trimite un webhook cu rezultatul complet: status, puncte de reputație adăugate, UM cheltuite și ID-ul de absolvire pentru audit.</div></div>
       <div class="step"><div class="step-n">6</div><div class="step-ico">✅</div><div class="step-tit">Absolvire Completă</div><div class="step-desc">Proiectul primește eticheta <code>mantuit</code>. Documentul de absolvire poate fi atașat la dosarul de recepție, oferind acoperire instituțională completă oficialului responsabil.</div></div>
@@ -534,7 +526,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     </div>
   </div>
 </section>
-</div><!-- /page-cum-functioneaza -->
+</div>
 
 <!-- ═══ PAGE: TARIFE ═══ -->
 <div id="page-tarife" class="page">
@@ -548,13 +540,13 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
 <div class="divider"></div>
 <section class="sec-white">
   <div class="inner">
-    <div class="stag">Pasul 1 — o singură dată</div>
+    <div class="stag">Pasul 1 - o singură dată</div>
     <h2 class="stit">Taxa de înregistrare</h2>
     <p class="ssub">Înregistrarea în Registrul Mântuirii este obligatorie pentru obținerea cheii API live.</p>
     <div class="reg-banner">
       <div>
         <h4 style="font-weight:700;font-size:15px;margin-bottom:4px">Înregistrare în Registrul Mântuirii Naționale</h4>
-        <p style="font-size:13px;color:var(--muted);max-width:480px;line-height:1.6;margin-bottom:8px">Include: verificarea identității, generarea cheii API live, accesul la documentație, 5 UM cadou și un număr de dosar canonic unic. Valabil pe viață.</p>
+        <p style="font-size:13px;color:var(--muted);max-width:480px;line-height:1.6;margin-bottom:8px">Include: verificarea identității, generarea cheii API live, accesul la documentație, 5 UM cadou și un număr de dosar unic. Valabil pe viață.</p>
         <ul style="padding-left:18px;font-size:13px;color:var(--muted);line-height:1.75">
           <li>Cheie <code>mnt_sk_live_...</code> generată instant după confirmare plată</li>
           <li>Reducere automată din scorul de reputație existent</li>
@@ -571,7 +563,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
 </section>
 <section>
   <div class="inner">
-    <div class="stag">Pasul 2 — per cerere</div>
+    <div class="stag">Pasul 2 - per cerere</div>
     <h2 class="stit">Rituri canonice disponibile</h2>
     <p class="ssub">Alegeți intensitatea absolvitii. Costul se deduce din portofelul UM la fiecare cerere.</p>
     <div class="tiers-grid" style="margin-top:32px">
@@ -614,7 +606,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
 </section>
 <section class="sec-white">
   <div class="inner">
-    <div class="stag">Pasul 3 — reîncărcare portofel</div>
+    <div class="stag">Pasul 3 - reîncărcare portofel</div>
     <h2 class="stit">Pachete Unități de Mântuire (UM)</h2>
     <p class="ssub">Portofelul maxim: 120 UM. Reducerile se aplică automat din scorul de reputație al contului.</p>
     <div class="um-grid" style="margin-top:32px">
@@ -645,7 +637,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     <a class="btn btn-p btn-lg" href="#tarife:intro" onclick="return go('tarife','intro')">Înregistrare (149 RON) →</a>
   </div>
 </section>
-</div><!-- /page-tarife -->
+</div>
 
 <!-- ═══ PAGE: SERVERE ═══ -->
 <div id="page-servere" class="page">
@@ -700,7 +692,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     </div>
   </div>
 </section>
-</div><!-- /page-servere -->
+</div>
 
 <!-- ═══ PAGE: DOCUMENTAȚIE ═══ -->
 <div id="page-documentatie" class="page">
@@ -742,7 +734,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
         <div class="doc-section" id="doc-auth">
           <h2>Autentificare</h2>
           <p>Toate cererile necesită autentificare prin header HTTP. Cheia API se obține după înregistrarea și achitarea taxei de 149 RON.</p>
-          <div class="code-blk"><div class="code-bar"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div><span class="code-lbl">Header obligatoriu</span></div><pre><span class="ck">Authorization</span>: <span class="cv">Bearer mnt_sk_live_k3r4n1c4_uid_ts_hash32</span></pre></div>
+          <div class="code-blk"><div class="code-bar"><span class="code-lbl">Header obligatoriu</span></div><pre><span class="ck">Authorization</span>: <span class="cv">Bearer mnt_sk_live_k3r4n1c4</span></pre></div>
           <h3>Formate de cheie</h3>
           <table class="ptbl"><thead><tr><th>Prefix</th><th>Mediu</th><th>Efect</th></tr></thead><tbody><tr><td><span class="ic">mnt_sk_live_</span></td><td>Producție</td><td>Absolviri reale, consumă UM, înregistrate în Registrul Canonic</td></tr><tr><td><span class="ic">mnt_sk_test_</span></td><td>Test</td><td>Simulare fără consum de UM, fără efecte în registru</td></tr></tbody></table>
         </div>
@@ -756,7 +748,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
           <h2>POST /mantuire/submit</h2>
           <p>Trimite un proiect spre procesare canonică și absolvire. Consumă UM din portofelul contului.</p>
           <h3>Parametri corp (JSON)</h3>
-          <table class="ptbl"><thead><tr><th>Parametru</th><th>Tip</th><th></th><th>Descriere</th></tr></thead><tbody>
+          <table class="ptbl"><thead><tr><th>Parametru</th><th>Tip</th><th>Oblig.</th><th>Descriere</th></tr></thead><tbody>
             <tr><td><span class="ic">project_id</span></td><td>string</td><td><span class="req">DA</span></td><td>Identificatorul unic al proiectului</td></tr>
             <tr><td><span class="ic">rit</span></td><td>enum</td><td><span class="req">DA</span></td><td><span class="ic">solemn</span> | <span class="ic">parohial</span> | <span class="ic">expedit</span></td></tr>
             <tr><td><span class="ic">server</span></td><td>enum</td><td><span class="opt">OPȚIONAL</span></td><td><span class="ic">mit_buc</span> | <span class="ic">proto_iasi</span> | <span class="ic">manastire_cdn</span> | <span class="ic">arhiva_vest</span>. Default: <span class="ic">proto_iasi</span></td></tr>
@@ -764,7 +756,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
             <tr><td><span class="ic">client_request_id</span></td><td>string</td><td><span class="opt">OPȚIONAL</span></td><td>ID intern pentru corelare și retry manual controlat de client. Nu activează retry automat pe server.</td></tr>
           </tbody></table>
           <h3>Exemplu cerere</h3>
-          <div class="code-blk"><div class="code-bar"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div><span class="code-lbl">POST /v1/mantuire/submit</span></div><pre>{
+          <div class="code-blk"><div class="code-bar"><span class="code-lbl">POST /v1/mantuire/submit</span></div><pre>{
   <span class="cs">"project_id"</span>: <span class="cv">"PNDL-2024-0847"</span>,
   <span class="cs">"rit"</span>: <span class="cv">"parohial"</span>,
   <span class="cs">"server"</span>: <span class="cv">"proto_iasi"</span>,
@@ -773,7 +765,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
 }</pre></div>
           <div class="alert al-warn"><strong>Important:</strong> Cererile eșuate nu sunt reluate automat de platformă. UM se consumă la fiecare încercare trimisă, indiferent de rezultat (succes sau eșec).</div>
           <h3>Răspuns succes</h3>
-          <div class="code-blk"><div class="code-bar"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div><span class="code-lbl">200 OK</span></div><pre>{
+          <div class="code-blk"><div class="code-bar"><span class="code-lbl">200 OK</span></div><pre>{
   <span class="cs">"status"</span>: <span class="cok">"mantuit"</span>,
   <span class="cs">"absolution"</span>: <span class="ck">true</span>,
   <span class="cs">"job_id"</span>: <span class="cv">"job_mt_9x2k4p"</span>,
@@ -788,7 +780,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
         <div class="doc-section" id="doc-status">
           <h2>GET /mantuire/status/{job_id}</h2>
           <p>Verifică starea unui job de absolvire în procesare. Util pentru cereri asincrone pe noduri cu latență mare.</p>
-          <div class="code-blk"><div class="code-bar"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div><span class="code-lbl">200 OK</span></div><pre>{
+          <div class="code-blk"><div class="code-bar"><span class="code-lbl">200 OK</span></div><pre>{
   <span class="cs">"job_id"</span>: <span class="cv">"job_mt_9x2k4p"</span>,
   <span class="cs">"phase"</span>: <span class="cv">"procesare_canonică"</span>,
   <span class="cs">"eta_seconds"</span>: <span class="cv">8</span>,
@@ -841,7 +833,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
         <div class="doc-section" id="doc-webhooks">
           <h2>Webhooks</h2>
           <p>Configurați un URL de webhook în panoul de cont pentru notificări automate la finalizarea fiecărei absolviri.</p>
-          <div class="code-blk"><div class="code-bar"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div><span class="code-lbl">Payload webhook — absolvire completă</span></div><pre>{
+          <div class="code-blk"><div class="code-bar"><span class="code-lbl">Payload webhook - absolvire completă</span></div><pre>{
   <span class="cs">"event"</span>: <span class="cv">"absolution.completed"</span>,
   <span class="cs">"job_id"</span>: <span class="cv">"job_mt_9x2k4p"</span>,
   <span class="cs">"project_id"</span>: <span class="cv">"PNDL-2024-0847"</span>,
@@ -867,7 +859,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     </div>
   </div>
 </section>
-</div><!-- /page-documentatie -->
+</div>
 
 <!-- ═══ PAGE: DESPRE NOI ═══ -->
 <div id="page-despre" class="page">
@@ -890,8 +882,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
         <p style="font-size:14px;color:var(--muted);line-height:1.75">Prin absolvire canonică API, reunim aceste două tradiții românești într-un singur serviciu cloud. Nu inventăm nimic nou. <strong>Digitalizăm ceea ce există deja.</strong></p>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="alert al-info" style="margin-bottom:0"><strong>817 milioane lei</strong> — bugetul alocat cultelor religioase din România în 2023</div>
-        <div class="alert al-warn" style="margin-bottom:0"><strong>4.000+ biserici</strong> construite din fonduri publice în 20 de ani, fără documente justificative oficiale centralizate accesibile public</div>
+        <div class="alert al-info" style="margin-bottom:0"><strong>817 milioane lei</strong> este bugetul alocat cultelor religioase din România în 2023</div>
         <div class="alert al-red" style="margin-bottom:0"><strong>Până în 2023</strong>, Regulamentul disciplinar al BOR nu prevedea „deturnarea de fonduri" sau „darea de mită" ca abateri sancționabile</div>
         <div class="alert al-ok" style="margin-bottom:0"><strong>0 oficiali</strong> condamnați definitiv pentru mântuiala proiectelor publice de construcții în ultimul deceniu</div>
       </div>
@@ -903,11 +894,11 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     <div class="stag">Evoluție</div>
     <h2 class="stit">Istoria companiei</h2>
     <div class="tl">
-      <div class="tl-item"><div class="tl-dot">✝</div><div class="tl-body"><div class="tl-yr">2019 — Fondare</div><div class="tl-tit">Înmatricularea la ONRC</div><div class="tl-desc">Mântuire Proiecte SRL se înmatriculează cu obiectul de activitate „Activități de servicii informatice și consultanță canonică pentru sectorul public."</div></div></div>
-      <div class="tl-item"><div class="tl-dot">🔑</div><div class="tl-body"><div class="tl-yr">2020 — Lansarea API v1.0</div><div class="tl-tit">Primele absolviri de producție</div><div class="tl-desc">Lansăm versiunea 1.0 cu un singur nod, <span class="ic">proto_iasi</span>, și Ritul Parohial. Primii 47 de clienți absolvesc 312 proiecte în primele 3 luni.</div></div></div>
-      <div class="tl-item"><div class="tl-dot">📈</div><div class="tl-body"><div class="tl-yr">2021 — Extindere infrastructură</div><div class="tl-tit">Adăugarea nodurilor Mitropolie și CDN Mănăstire</div><div class="tl-desc">Creșterea cererii din zona primăriilor cu proiecte PNDL necesită extinderea capacității. Lansăm și Ritul Solemn pentru absolviri de nivel înalt.</div></div></div>
-      <div class="tl-item"><div class="tl-dot">🤝</div><div class="tl-body"><div class="tl-yr">2022 — Primele integrări terțe</div><div class="tl-tit">SifonatorPRO devine primul partener enterprise</div><div class="tl-desc">SifonatorPRO integrează API-ul în fluxul de management al achizițiilor publice. Urmează ContractorApp Pro și PrimărieDigitală.ro. Depășim 10.000 de absolviri cumulate.</div></div></div>
-      <div class="tl-item"><div class="tl-dot">🚀</div><div class="tl-body"><div class="tl-yr">2024 — API v3.1</div><div class="tl-tit">Nodul Arhivistic Vest și SDK-uri oficiale</div><div class="tl-desc">Lansăm nodul <span class="ic">arhiva_vest</span>, SDK-uri pentru 4 limbaje și sistemul de reduceri bazat pe scorul de reputație. Depășim 50.000 de absolviri cumulate.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">✝</div><div class="tl-body"><div class="tl-yr">2019 - Fondare</div><div class="tl-tit">Înmatricularea la ONRC</div><div class="tl-desc">Mântuire Proiecte SRL se înmatriculează cu obiectul de activitate „Activități de servicii informatice și consultanță canonică pentru sectorul public."</div></div></div>
+      <div class="tl-item"><div class="tl-dot">🔑</div><div class="tl-body"><div class="tl-yr">2020 - Lansarea API v1.0</div><div class="tl-tit">Primele absolviri de producție</div><div class="tl-desc">Lansăm versiunea 1.0 cu un singur nod, <span class="ic">proto_iasi</span>, și Ritul Parohial. Primii 47 de clienți absolvesc 312 proiecte în primele 3 luni.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">📈</div><div class="tl-body"><div class="tl-yr">2021 - Extindere infrastructură</div><div class="tl-tit">Adăugarea nodurilor Mitropolie și CDN Mănăstire</div><div class="tl-desc">Creșterea cererii din zona primăriilor cu proiecte PNDL necesită extinderea capacității. Lansăm și Ritul Solemn pentru absolviri de nivel înalt.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">🤝</div><div class="tl-body"><div class="tl-yr">2022 - Primele integrări terțe</div><div class="tl-tit">SifonatorPRO devine primul partener enterprise</div><div class="tl-desc">SifonatorPRO integrează API-ul în fluxul de management al achizițiilor publice. Urmează ContractorApp Pro și PrimărieDigitală.ro. Depășim 10.000 de absolviri cumulate.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">🚀</div><div class="tl-body"><div class="tl-yr">2024 - API v3.1</div><div class="tl-tit">Nodul Arhivistic Vest și SDK-uri oficiale</div><div class="tl-desc">Lansăm nodul <span class="ic">arhiva_vest</span>, SDK-uri pentru 4 limbaje și sistemul de reduceri bazat pe scorul de reputație. Depășim 50.000 de absolviri cumulate.</div></div></div>
     </div>
   </div>
 </section>
@@ -949,7 +940,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
   </div>
 </section>
 
-</div><!-- /page-despre -->
+</div>
 
 <!-- ═══ PAGE: TERMENI CANONICI ═══ -->
 <div id="page-termeni-canonici" class="page">
@@ -986,7 +977,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
       <div style="background:var(--bg);border:1px solid var(--borderl);border-radius:var(--r);padding:18px 20px">
         <p><strong>1.1.</strong> „Platforma” înseamnă totalitatea componentelor software, endpoint-urilor, interfețelor și serviciilor auxiliare puse la dispoziție sub denumirea Mântuire Proiecte.</p>
         <p><strong>1.2.</strong> „Clientul” înseamnă persoana juridică, instituția, ordonatorul de credite, demnitarul ori reprezentantul autorizat care utilizează Platforma direct sau prin intermediul unui integrator (inclusiv SifonatorPRO).</p>
-        <p><strong>1.3.</strong> „Proiect de mântuială” înseamnă orice proiect calificat de Client ca fiind executat sub standard, incomplet, sau parțial reputaționat.</p>
+        <p><strong>1.3.</strong> „Proiect de mântuială” înseamnă orice proiect calificat de Client ca fiind executat sub standard, incomplet, nerecepționat, sau parțial recepționat.</p>
         <p><strong>1.4.</strong> „Absolvire” înseamnă rezultatul tehnic returnat de Platformă, însoțit de metadate, identificatori și statut procesat.</p>
         <p><strong>1.5.</strong> „UM” (Unități de Mântuire) înseamnă unitatea internă de tarifare și consum dedusă pentru fiecare încercare transmisă.</p>
       </div>
@@ -1125,7 +1116,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
     <div class="alert al-info" style="margin-top:18px"><strong>Dispoziție finală:</strong> În caz de neclaritate, clauzele se interpretează în sensul menținerii continuității serviciului, protejării infrastructurii și executării de bună-credință a raportului contractual.</div>
   </div>
 </section>
-</div><!-- /page-termeni-canonici -->
+</div>
 
 <!-- ═══ FOOTER (shared, always visible) ═══ -->
 <footer>
@@ -1136,7 +1127,7 @@ footer{background:var(--pxd);padding:48px 40px 28px;color:rgba(255,255,255,.7)}
           <div class="foot-brand-ico">✝</div>
           Mântuire Proiecte
         </div>
-        <p class="foot-brand-desc">Serviciu API de absolvire canonică a responsabilității pentru proiectele publice de mântuială. Infrastructură certificată. Transparență selectivă garantată.</p>
+        <p class="foot-brand-desc">Serviciu API de absolvire a responsabilității pentru proiectele publice de mântuială. Infrastructură certificată. Transparență selectivă garantată.</p>
         <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.35);display:flex;align-items:center">
           <span class="status-dot"></span>Toate nodurile canonice funcționează
         </div>
@@ -1291,7 +1282,7 @@ function setupDocsObserver() {
       a.className = 'doc-permalink';
       a.href = '#documentatie:' + sid;
       a.setAttribute('aria-label', 'Permalink către această secțiune');
-      a.innerHTML = '#';
+      a.textContent = '#';
       a.onclick = function(e) {
         e.preventDefault();
         scrollDoc(sid, null, true);

@@ -56,6 +56,7 @@ html,body{height:100%;font-family:var(--font);font-size:14px;background:var(--bg
 .btn-f{background:transparent;color:var(--text1);border:1px solid var(--border)}.btn-f:hover{background:rgba(0,0,0,.05)}
 .btn-g{background:var(--gold);color:#fff}
 .btn-psd{background:var(--psd);color:#fff}
+.btn-psd-soft{background:rgba(192,28,40,.08);color:#8f1018;border:1px solid rgba(192,28,40,.28)}.btn-psd-soft:hover{background:rgba(192,28,40,.14)}
 .btn-mant{background:#5c2b70;color:#fff}.btn-mant:hover{background:#6b3485}
 .btn-mant-soft{background:rgba(92,43,112,.08);color:#5c2b70;border:1px solid rgba(92,43,112,.28)}.btn-mant-soft:hover{background:rgba(92,43,112,.14)}
 .btn-full{width:100%}
@@ -1087,7 +1088,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
       <!-- ── Project Salvation ── -->
       <div id="view-mantuire" class="view">
         <div class="vh">
-          <div><h2>Mântuire Proiecte</h2><p>Actualizează proiectele încă „de mântuială” la stadiul <strong>Mântuit</strong>. Aici vezi creditele, coada și setările fiecărei cereri. Pe nodurile cu trafic mai ridicat, parcursul este mai des întrerupt și poate trebui reluat.</p></div>
+          <div><h2>Mântuire Proiecte</h2><p>Actualizează proiectele încă „de mântuială” la stadiul <strong>Mântuit</strong>. Aici vezi creditele, coada și setările fiecărei cereri. Pe nodurile cu trafic mai ridicat, parcursul este mai des întrerupt și poate trebuie reluat.</p></div>
         </div>
         <div id="mantuire-app-root"></div>
       </div>
@@ -2633,6 +2634,8 @@ function ensureIntegrations(){
   if(typeof S.integrations.psdDC.apiKey!=='string')S.integrations.psdDC.apiKey='';
   if(typeof S.integrations.psdDC.draftKey!=='string')S.integrations.psdDC.draftKey='';
   if(typeof S.integrations.psdDC.pendingVerifyCode!=='string')S.integrations.psdDC.pendingVerifyCode='';
+  if(typeof S.integrations.psdDC.dailySpentDate!=='string')S.integrations.psdDC.dailySpentDate='';
+  if(typeof S.integrations.psdDC.dailySpentRon!=='number'||!Number.isFinite(S.integrations.psdDC.dailySpentRon)||S.integrations.psdDC.dailySpentRon<0)S.integrations.psdDC.dailySpentRon=0;
   if(S.integrations.psdDC.linked)S.integrations.psdDC.draftKey='';
   else if(S.integrations.psdDC.apiKey&&!S.integrations.psdDC.draftKey){
     S.integrations.psdDC.draftKey=S.integrations.psdDC.apiKey;
@@ -3051,12 +3054,12 @@ function renderMantuirePortalBody(){
           ${regBr.pct>0&&regBr.saved>0?`<p class="tsm tmut" style="margin:6px 0 8px;font-size:11px">Fără reducere, total estimat ar fi fi fost <strong>${totalPsdList} RON</strong> (taxă ${regBr.list} + comision).</p>`:''}
           <hr class="sep"/><div class="flex" style="justify-content:space-between;font-weight:700"><span>TOTAL DIN BUGET PUBLIC</span><span style="color:#a40000">${totalPsd} RON</span></div>
         </div>
-        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
+        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează ruta SEAP</label>
           <select id="mantpay-psd-int" class="mantp-inp" style="margin-top:4px">
-            <option>Partid (PSD): Ruta standard, 3-5 zile</option>
-            <option>Rețea locală de influență: Ruta urgentă, 1-2 zile</option>
-            <option>Conexiuni ministeriale: Ruta diplomatică, 24h</option>
-            <option>Ministru de resort: Ruta privilegiată, 4 ore</option>
+            <option value="achizitie_directa">Partid (PSD): Achiziție directă, 3-5 zile</option>
+            <option value="procedura_simplificata">Rețea locală: Procedură simplificată, 1-2 zile</option>
+            <option value="contract_direct">Conexiuni ministeriale: Contract direct, 24h</option>
+            <option value="oug_fasttrack">Ministru de resort: prioritate OUG, 4 ore</option>
           </select>
         </div>
         <div class="mantp-actions">
@@ -3084,6 +3087,7 @@ function renderMantuirePortalBody(){
         <button type="button" class="mantp-btn-sec" onclick="mantuirePortalPaymentBack()">Înapoi</button>
       </div>`:checkout}
       <p class="tsm tmut" style="margin-top:10px">După plată vei primi automat solicitarea de verificare prin SMS.</p>`;
+    if(!m.registrationPaid&&pane==='psd')syncPsdDcRouteSelect('mantpay-psd-int');
     return;
   }
   if(_mantuirePortalStep===3){
@@ -3177,8 +3181,11 @@ function mantuirePortalProcCardInline(){
 function mantuirePortalPsdSubmit(){
   const amount=mantuireRegistrationFeeAmount();
   const com=Math.round(amount*.15),total=amount+com;
-  const raw=$('mantpay-psd-int')?.value||'';
-  const int=raw.split(':')[0].trim()||'Partid';
+  const sel=getPsdDcRouteSelection('mantpay-psd-int');
+  const err=validatePsdDcTransaction(total,sel.routeId);
+  if(err){toast(err,'warn');return}
+  const int=sel.label||'Partid';
+  commitPsdDcSpend(total);
   _mantuirePsdAnim={intLabel:int,total};
   _mantuirePayPane='psd_wait';
   renderMantuirePortalBody();
@@ -3716,21 +3723,26 @@ function openPublicPayMantuire(um,baseAmount){
       <div class="flex" style="justify-content:space-between;margin-bottom:3px;color:#5c4a62"><span>Comision intermediar (15%)</span><span>${com} RON</span></div>
       <hr class="sep"/><div class="flex" style="justify-content:space-between;font-weight:700"><span>TOTAL DIN BUGET PUBLIC</span><span style="color:#a40000">${total} RON</span></div>
     </div>
-    <div class="fg"><label style="font-size:12px;font-weight:700;color:#4a3558;margin-bottom:5px;display:block">Selectează intermediarul</label>
+    <div class="fg"><label style="font-size:12px;font-weight:700;color:#4a3558;margin-bottom:5px;display:block">Selectează ruta SEAP</label>
       <select id="pp-int-mant-umo" class="mant-umo-sel" style="margin-top:4px">
-        <option>Partid (PSD): Ruta standard, 3-5 zile</option>
-        <option>Rețea locală de influență: Ruta urgentă, 1-2 zile</option>
-        <option>Conexiuni ministeriale: Ruta diplomatică, 24h</option>
-        <option>Ministru de resort: Ruta privilegiată, 4 ore</option>
+        <option value="achizitie_directa">Partid (PSD): Achiziție directă, 3-5 zile</option>
+        <option value="procedura_simplificata">Rețea locală: Procedură simplificată, 1-2 zile</option>
+        <option value="contract_direct">Conexiuni ministeriale: Contract direct, 24h</option>
+        <option value="oug_fasttrack">Ministru de resort: prioritate OUG, 4 ore</option>
       </select>
     </div>`,
     `<button type="button" class="mantp-btn-sec" onclick="dlgClose()">Anulează</button>
      <button type="button" class="mantp-btn-psd" onclick="procPublicMantuire(${um},${baseAmount},${total})">Trimite cererea</button>`,
     {mantuireVendorSkin:true}
   );
+  syncPsdDcRouteSelect('pp-int-mant-umo');
 }
 function procPublicMantuire(um,baseAmount,total){
-  const int=$('pp-int-mant-umo')?.value?.split(':')[0].trim()||'Partid';
+  const sel=getPsdDcRouteSelection('pp-int-mant-umo');
+  const err=validatePsdDcTransaction(total,sel.routeId);
+  if(err){toast(err,'warn');return}
+  const int=sel.label||'Partid';
+  commitPsdDcSpend(total);
   $('dlg-a').innerHTML='';
   $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect</div></div>
     <div style="padding:18px;text-align:center"><div style="font-size:26px;margin-bottom:8px">📤</div><p class="tsm tmut">Cererea parcurge rețeaua de influență…</p><div id="pp-steps-mant-umo" style="text-align:left;margin-top:13px;font-size:12px;color:var(--text2)"></div></div>`;
@@ -4003,6 +4015,93 @@ function renderMantuire(){
 }
 // Boolean: whether psd dc linked.
 function isPsdDcLinked(){ensureIntegrations();return S.integrations.psdDC.linked===true;}
+const PSD_DC_ROUTE_LABELS={
+  achizitie_directa:'Achiziție directă',
+  procedura_simplificata:'Procedură simplificată',
+  contract_direct:'Contract direct',
+  oug_fasttrack:'prioritate OUG'
+};
+const PSD_DC_PLAN_RULES={
+  plan_ales_local:{id:'plan_ales_local',label:'Ales local',cap:5000,allowedRoutes:['achizitie_directa']},
+  plan_ales_executiv:{id:'plan_ales_executiv',label:'Ales executiv',cap:50000,allowedRoutes:['achizitie_directa','procedura_simplificata','contract_direct']},
+  plan_demnitar:{id:'plan_demnitar',label:'Demnitar',cap:Infinity,allowedRoutes:['achizitie_directa','procedura_simplificata','contract_direct','oug_fasttrack']}
+};
+const PSD_DC_DIRECT_ACQ_LIMIT_RON=135060;
+function psdDcDayKey(){
+  const d=nowDate();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+function normalizePsdDcDailySpent(){
+  ensureIntegrations();
+  const dc=S.integrations.psdDC;
+  const k=psdDcDayKey();
+  if(dc.dailySpentDate!==k){
+    dc.dailySpentDate=k;
+    dc.dailySpentRon=0;
+  }
+}
+function getPsdDcPlanProfile(){
+  const fn=String(S.user?.fn||'').toLowerCase();
+  if(fn.includes('ministru')||fn.includes('secretar de stat')||fn.includes('parlamentar'))return PSD_DC_PLAN_RULES.plan_demnitar;
+  if(fn.includes('primar')||fn.includes('președinte consiliu județean')||fn.includes('presedinte consiliu judetean'))return PSD_DC_PLAN_RULES.plan_ales_executiv;
+  return PSD_DC_PLAN_RULES.plan_ales_local;
+}
+function getPsdDcRestrictionSnapshot(){
+  normalizePsdDcDailySpent();
+  const dc=S.integrations.psdDC;
+  const plan=getPsdDcPlanProfile();
+  const used=Math.max(0,Math.round(Number(dc.dailySpentRon)||0));
+  const remaining=Number.isFinite(plan.cap)?Math.max(0,plan.cap-used):Infinity;
+  return{plan,used,remaining,directLimit:PSD_DC_DIRECT_ACQ_LIMIT_RON};
+}
+function getPsdDcRouteSelection(selectId){
+  const sel=$(selectId);
+  const routeId=sel?.value||'achizitie_directa';
+  const opt=sel?.options?.[sel.selectedIndex];
+  const label=opt?opt.textContent.split(':')[0].trim():'Partid (PSD)';
+  return{routeId,label};
+}
+function validatePsdDcTransaction(totalRon,routeId){
+  if(!isPsdDcLinked())return'PSD Direct Connect nu este integrat. Deschide Manager Integrări.';
+  const snap=getPsdDcRestrictionSnapshot();
+  if(!snap.plan.allowedRoutes.includes(routeId))return`Ruta ${PSD_DC_ROUTE_LABELS[routeId]||routeId} nu este disponibilă pe ${snap.plan.label}.`;
+  if(Number.isFinite(snap.plan.cap)&&totalRon>snap.remaining)return`Plafonul zilnic PSD (${fRON(snap.plan.cap)}) a fost atins sau depășit. Disponibil azi: ${fRON(snap.remaining)}.`;
+  if(routeId==='achizitie_directa'&&totalRon>snap.directLimit)return`Achiziția directă are prag legal de ${fRON(snap.directLimit)}. Alege altă rută sau reduce suma.`;
+  return'';
+}
+function commitPsdDcSpend(totalRon){
+  normalizePsdDcDailySpent();
+  S.integrations.psdDC.dailySpentRon+=Math.max(0,Math.round(Number(totalRon)||0));
+}
+function psdDcRestrictionsHtml(){
+  const snap=getPsdDcRestrictionSnapshot();
+  const routes=snap.plan.allowedRoutes.map(r=>PSD_DC_ROUTE_LABELS[r]||r).join(', ');
+  return`<div class="psd-dc-legal" style="max-height:none;margin-top:10px">
+    <strong>Restricții active (${escapeHtml(snap.plan.label)}):</strong><br/>
+    Plafon zilnic: <strong>${Number.isFinite(snap.plan.cap)?fRON(snap.plan.cap):'nelimitat'}</strong> ·
+    folosit azi: <strong>${fRON(snap.used)}</strong> ·
+    disponibil: <strong>${Number.isFinite(snap.remaining)?fRON(snap.remaining):'nelimitat'}</strong><br/>
+    Rute permise: <strong>${escapeHtml(routes)}</strong><br/>
+    Prag legal achiziție directă: <strong>${fRON(snap.directLimit)}</strong>.
+  </div>`;
+}
+function syncPsdDcRouteSelect(selectId){
+  const sel=$(selectId);
+  if(!sel)return;
+  const allowed=new Set(getPsdDcPlanProfile().allowedRoutes);
+  let hasSelectedAllowed=false;
+  Array.from(sel.options).forEach(opt=>{
+    const ok=allowed.has(opt.value);
+    opt.disabled=!ok;
+    if(ok&&opt.selected)hasSelectedAllowed=true;
+  });
+  if(!hasSelectedAllowed){
+    const firstAllowed=Array.from(sel.options).find(opt=>allowed.has(opt.value));
+    if(firstAllowed)sel.value=firstAllowed.value;
+  }
+}
 // Boolean: whether anaf sync linked.
 function isAnafSyncLinked(){ensureIntegrations();return S.integrations.anafSync.linked===true;}
 // Boolean: whether anaf sync audit visible.
@@ -4060,7 +4159,7 @@ function renderPsdDcPortalBody(){
         <button type="button" class="psd-dc-btn-ghost" onclick="regeneratePsdDcApiKey()">Emite cheie nouă</button>
         <button type="button" class="psd-dc-btn-ghost" onclick="revokePsdDcIntegration()">Revocă integrarea</button>
       </div>
-      <p class="tsm" style="margin-top:14px;opacity:.85">După „cheie nouă”, reactivează legătura din Manager Integrări (SifonatorPRO).</p>`;
+      ${psdDcRestrictionsHtml()}`;
     return;
   }
   if(_psdDcPortalStep===1){
@@ -4079,7 +4178,8 @@ function renderPsdDcPortalBody(){
       <div class="psd-dc-legal">„Politicianul declară că influența este folosită pentru integrări operaționale conform liniei de partid. PSD nu garantează absolvirea responsabilității juridice a politicianului.”</div>
       <div class="psd-dc-actions">
         <button type="button" class="psd-dc-btn-psd" onclick="psdDcPortalStep1Continue()">Continuă către verificare</button>
-      </div>`;
+      </div>
+      ${psdDcRestrictionsHtml()}`;
     return;
   }
   if(_psdDcPortalStep===2){
@@ -4102,7 +4202,8 @@ function renderPsdDcPortalBody(){
       <div class="psd-dc-actions">
         <button type="button" class="psd-dc-btn-psd" onclick="copyPsdDcApiKey()">Copiază cheia</button>
         <button type="button" class="psd-dc-btn-psd" onclick="finalizePsdDcIntegration()">Trimite în SifonatorPRO</button>
-      </div>`;
+      </div>
+      ${psdDcRestrictionsHtml()}`;
   }
 }
 // PSD Direct Connect portal (psdDcPortalStep1Continue).
@@ -4751,6 +4852,7 @@ function renderInteg(){
       </div>
       <div class="integ-card-actions">
         <button type="button" class="btn btn-psd" onclick="openPsdDcPortal()">Deschide portalul PSD Direct Connect</button>
+        <a class="btn btn-psd-soft" href="site/psd-direct-connect.html#acasa:intro" target="_blank" rel="noopener noreferrer">Vezi site-ul PSD Direct Connect</a>
       </div>
       <div class="fg mt14 mb0">
         <label>${hasStored?'Cheie API stocată':'Introdu sau lipește cheia din portal'}</label>
@@ -4892,7 +4994,18 @@ function toast(msg,type=''){
 function dlgOpen(title,sub,content,actions,opts){
   const o=opts||{};
   $('dlg')?.classList.toggle('dlg-mantuire-vendor',!!o.mantuireVendorSkin);
-  $('dlg-h').innerHTML=`<h3>${title}</h3>${sub?`<p>${sub}</p>`:''}`;
+  const headerEl=$('dlg-h');
+  if(headerEl){
+    headerEl.textContent='';
+    const h3=document.createElement('h3');
+    h3.textContent=String(title==null?'':title);
+    headerEl.appendChild(h3);
+    if(sub){
+      const p=document.createElement('p');
+      p.textContent=String(sub);
+      headerEl.appendChild(p);
+    }
+  }
   $('dlg-c').innerHTML=content;
   $('dlg-a').innerHTML=actions;
   const ov=$('overlay');
@@ -4995,15 +5108,29 @@ function renderSpagafon(){
     let actions='';
     if(m.codeConsumed&&(m.is3ds||m.isPsdDcVerify||m.isAnafCert||m.isAnafDiscardVerify||m.isMantuireVerify))actions+=`<div class="sm-actions"><span class="tsm tmut" style="display:block;opacity:.72">Cod folosit și invalidat după verificare.</span></div>`;
     else{
-      if(m.is3ds&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillTdsFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în plată</button></div>`;
-      if(m.isPsdDcVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:var(--psd)" onclick='fillPsdDcCodeFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în PSD DC</button></div>`;
-      if(m.isAnafCert&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillAnafCertFromSpagafon(${JSON.stringify(String(m.code))})'>Completează certificat ANAF Sync</button></div>`;
-      if(m.isAnafDiscardVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" onclick='fillAnafDiscardPinFromSpagafon(${JSON.stringify(String(m.code))})'>Completează PIN ștergere cheie</button></div>`;
-      if(m.isMantuireVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:#5c2b70;color:#fff" onclick='fillMantuireVerifyFromSpagafon(${JSON.stringify(String(m.code))})'>Completează în Mântuire Proiecte</button></div>`;
+      const encCode=encodeURIComponent(String(m.code||''));
+      if(m.is3ds&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" data-spgf-action="tds" data-spgf-code="${encCode}">Completează în plată</button></div>`;
+      if(m.isPsdDcVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:var(--psd)" data-spgf-action="psd" data-spgf-code="${encCode}">Completează în PSD DC</button></div>`;
+      if(m.isAnafCert&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" data-spgf-action="anaf-cert" data-spgf-code="${encCode}">Completează certificat ANAF Sync</button></div>`;
+      if(m.isAnafDiscardVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" data-spgf-action="anaf-discard" data-spgf-code="${encCode}">Completează PIN ștergere cheie</button></div>`;
+      if(m.isMantuireVerify&&m.code)actions+=`<div class="sm-actions"><button type="button" class="btn btn-sm btn-s" style="background:#5c2b70;color:#fff" data-spgf-action="mantuire" data-spgf-code="${encCode}">Completează în Mântuire Proiecte</button></div>`;
     }
     const extra=m.is3ds||m.isPsdDcVerify||m.isAnafCert||m.isAnafDiscardVerify||m.isMantuireVerify?' sm-code':'';
-    return`<div class="spgf-msg${extra}"><div class="sm-from">${escapeHtml(m.from)}</div><div class="sm-body">${escapeHtml(m.body)}</div><div class="sm-time">${m.t||''}</div>${actions}</div>`;
+    return`<div class="spgf-msg${extra}"><div class="sm-from">${escapeHtml(m.from)}</div><div class="sm-body">${escapeHtml(m.body)}</div><div class="sm-time">${escapeHtml(m.t||'')}</div>${actions}</div>`;
   }).join('');
+}
+// Handles click actions from Spagafon shortcut buttons.
+function handleSpagafonActionButton(btn){
+  if(!btn)return;
+  const action=btn.getAttribute('data-spgf-action');
+  const codeRaw=btn.getAttribute('data-spgf-code')||'';
+  const code=decodeURIComponent(codeRaw);
+  if(!code)return;
+  if(action==='tds')fillTdsFromSpagafon(code);
+  else if(action==='psd')fillPsdDcCodeFromSpagafon(code);
+  else if(action==='anaf-cert')fillAnafCertFromSpagafon(code);
+  else if(action==='anaf-discard')fillAnafDiscardPinFromSpagafon(code);
+  else if(action==='mantuire')fillMantuireVerifyFromSpagafon(code);
 }
 // Strips or validates user input: verif code digits.
 function sanitizeVerifCodeDigits(s,maxLen){
@@ -5739,7 +5866,7 @@ function openProjDossier(id){
         <button type="button" class="btn btn-s btn-sm mt8" onclick="addProjDossierCustomEntry(${p.id})">Adaugă în registru</button>
       </div>`
     :`<p class="tsm tmut mt6" style="line-height:1.5">Proiect <strong>finalizat</strong>. Registrul este doar în consultare.</p>`;
-  dlgOpen(`Dosar electronic: ${escapeHtml(p.name)}`,'Istoric procedural și operațional',
+  dlgOpen(`Dosar electronic: ${p.name}`,'Istoric procedural și operațional',
     `<div class="dyn-stack">
       <section class="dyn-section" aria-labelledby="dos-sum-h">
         <h4 class="dyn-section-h" id="dos-sum-h">Rezumat</h4>
@@ -5899,7 +6026,7 @@ function openCompDlg(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
   if(projectIsFinalized(p)||p.status!=='in_progress'){toast('Doar proiectele în desfășurare pot fi închise din listă.','warn');return}
   if(S.settings.skipProjectFinalizeConfirm){compProj(id);return}
-  dlgOpen('Finalizează proiectul?',escapeHtml(p.name),
+  dlgOpen('Finalizează proiectul?',p.name,
     `<p class="tsm" style="line-height:1.55">Confirmi închiderea? Calitatea finală și punctele se stabilesc automat.</p>`,
     `<button type="button" class="btn btn-f" onclick="dlgClose()">Anulează</button><button type="button" class="btn btn-s" onclick="compProj(${id})">Confirmă</button>`
   );
@@ -5918,7 +6045,7 @@ function compProj(id){
 function openBetDlg(id){
   const p=S.projects.find(x=>x.id===id);if(!p)return;
   if(projectIsFinalized(p)||p.status!=='in_progress'){toast('Pariul nu se poate modifica pe un proiect finalizat sau în afara execuției.','warn');return}
-  dlgOpen('🎲 Pariază pe calitate',escapeHtml(p.name),
+  dlgOpen('🎲 Pariază pe calitate',p.name,
     `<p class="tsm tmut mb14">Alege rezultatul pe care îl anticipezi. Dacă nimeriști la finalizare, primești puncte bonus.</p>
     ${[['mantuiala','🔴','De mântuială',2],['moderata','🟠','Calitate moderată',3],['ridicata','🟢','Calitate ridicată',4]].map(([q,ic,lb,b])=>
       `<label class="opt-row"><input type="radio" name="bq" value="${q}"/><div><div class="bold">${ic} ${lb}</div><div class="tsm tmut">Dacă ghicești: +${b} puncte bonus</div></div></label>`
@@ -6853,7 +6980,7 @@ function openSessionHistoryDetail(sid){
   const logs=sess.logLines&&sess.logLines.length?sess.logLines.map(l=>escapeHtml(l)).join('<br/>'):'<span class="tmut">Nicio linie de jurnal salvată pentru această sesiune.</span>';
   const body=`<div class="tsm mb10">Proiect: <strong>${escapeHtml(sess.projectName||'-')}</strong> · Durată ${fTimer(sess.elapsed)} · Surplus ${fRON(sess.surplus)} · Factor ${(sess.factor*100).toFixed(0)}%</div>
   <div style="font-family:var(--mono);font-size:12px;line-height:1.55;max-height:50vh;overflow:auto">${logs}</div>`;
-  dlgOpen('Dosar sesiune (istoric)',escapeHtml(sess.projectName||'Sesiune'),body,
+  dlgOpen('Dosar sesiune (istoric)',(sess.projectName||'Sesiune'),body,
     `<button type="button" class="btn btn-f btn-sm" onclick="wandDownloadText('jurnal-sesiune-${sid}.txt',sessionLogText(${sid}))">Export .txt</button>
      <button type="button" class="btn btn-f btn-sm" onclick="wandCopyPlain(sessionLogText(${sid}))">Copiază jurnal</button>
      <button type="button" class="btn btn-p" onclick="dlgClose()">Închide</button>`);
@@ -7617,21 +7744,26 @@ function openPublicPay(tid,amount){
       <div class="flex" style="justify-content:space-between;margin-bottom:3px;color:var(--text2)"><span>Comision intermediar (15%)</span><span>${com} RON</span></div>
       <hr class="sep"/><div class="flex" style="justify-content:space-between;font-weight:700"><span>TOTAL DIN BUGET PUBLIC</span><span style="color:var(--red)">${total} RON</span></div>
     </div>
-    <div class="fg mb0"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
+    <div class="fg mb0"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează ruta SEAP</label>
       <select id="pp-int" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
-        <option>Partid (PSD): Ruta standard, 3-5 zile</option>
-        <option>Rețea locală de influență: Ruta urgentă, 1-2 zile</option>
-        <option>Conexiuni ministeriale: Ruta diplomatică, 24h</option>
-        <option>Ministru de resort: Ruta privilegiată, 4 ore</option>
+        <option value="achizitie_directa">Partid (PSD): Achiziție directă, 3-5 zile</option>
+        <option value="procedura_simplificata">Rețea locală: Procedură simplificată, 1-2 zile</option>
+        <option value="contract_direct">Conexiuni ministeriale: Contract direct, 24h</option>
+        <option value="oug_fasttrack">Ministru de resort: prioritate OUG, 4 ore</option>
       </select>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
      <button class="btn btn-psd" onclick="procPublic('${tid}',${total})">📤 Trimite Cerere</button>`
   );
+  syncPsdDcRouteSelect('pp-int');
 }
 // Runs submit or payment processing for public.
 function procPublic(tid,total){
-  const int=$('pp-int')?.value?.split(':')[0].trim()||'Partid';
+  const sel=getPsdDcRouteSelection('pp-int');
+  const err=validatePsdDcTransaction(total,sel.routeId);
+  if(err){toast(err,'warn');return}
+  const int=sel.label||'Partid';
+  commitPsdDcSpend(total);
   $('dlg-a').innerHTML='';
   $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect</div></div>
     <div style="padding:18px;text-align:center"><div style="font-size:26px;margin-bottom:8px">📤</div><p class="tsm tmut">Cererea parcurge rețeaua de influență...</p><div id="pp-steps" style="text-align:left;margin-top:13px;font-size:12px;color:var(--text2)"></div></div>`;
@@ -7656,22 +7788,27 @@ function openPublicPayHours(hours,amount){
       <div class="flex" style="justify-content:space-between;margin-bottom:3px;color:var(--text2)"><span>Comision intermediar (15%)</span><span>${com} RON</span></div>
       <hr class="sep"/><div class="flex" style="justify-content:space-between;font-weight:700"><span>TOTAL DIN BUGET PUBLIC</span><span style="color:var(--red)">${total} RON</span></div>
     </div>
-    <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează intermediarul</label>
+    <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Selectează ruta SEAP</label>
       <select id="pp-int-h" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none">
-        <option>Partid (PSD): Ruta standard, 3-5 zile</option>
-        <option>Rețea locală de influență: Ruta urgentă, 1-2 zile</option>
-        <option>Conexiuni ministeriale: Ruta diplomatică, 24h</option>
-        <option>Ministru de resort: Ruta privilegiată, 4 ore</option>
+        <option value="achizitie_directa">Partid (PSD): Achiziție directă, 3-5 zile</option>
+        <option value="procedura_simplificata">Rețea locală: Procedură simplificată, 1-2 zile</option>
+        <option value="contract_direct">Conexiuni ministeriale: Contract direct, 24h</option>
+        <option value="oug_fasttrack">Ministru de resort: prioritate OUG, 4 ore</option>
       </select>
     </div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button>
      <button class="btn btn-psd" onclick="procPublicHours(${hours},${total})">📤 Trimite Cerere</button>`
   );
+  syncPsdDcRouteSelect('pp-int-h');
 }
 // Runs submit or payment processing for public hours.
 function procPublicHours(hours,total){
   if(hasPaidSubscription()){toast('Ai abonament plătit activ; orele extra sunt indisponibile.','warn');dlgClose();return}
-  const int=$('pp-int-h')?.value?.split(':')[0].trim()||'Partid';
+  const sel=getPsdDcRouteSelection('pp-int-h');
+  const err=validatePsdDcTransaction(total,sel.routeId);
+  if(err){toast(err,'warn');return}
+  const int=sel.label||'Partid';
+  commitPsdDcSpend(total);
   $('dlg-a').innerHTML='';
   $('dlg-c').innerHTML=`<div style="background:linear-gradient(135deg,#8b0000,#cc0000);color:#fff;padding:13px;border-radius:var(--r) var(--r) 0 0;text-align:center"><div style="font-size:17px">🏛️ PSD Direct Connect</div></div>
     <div style="padding:18px;text-align:center"><div style="font-size:26px;margin-bottom:8px">📤</div><p class="tsm tmut">Cererea parcurge rețeaua de influență...</p><div id="pp-steps-h" style="text-align:left;margin-top:13px;font-size:12px;color:var(--text2)"></div></div>`;
@@ -8019,6 +8156,11 @@ function dbReset(){
 // ═══ INIT ═══
 document.addEventListener('DOMContentLoaded',()=>{
   $('buy-h')?.addEventListener('input',updBuyH);
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-spgf-action]');
+    if(!btn)return;
+    handleSpagafonActionButton(btn);
+  });
   if(isDebugUnlocked())$('debug-toggle-btn')?.classList.remove('hid');
   let resizeT=0;
   window.addEventListener('resize',()=>{
