@@ -3032,7 +3032,7 @@ function renderMantuirePortalBody(){
               <input class="card-inp mantp-inp" id="mantpay-exp-yy" placeholder="AA" maxlength="2" inputmode="numeric" pattern="[0-9]*" autocomplete="cc-exp-year" aria-label="Anul expirării (2 cifre, AA)" oninput="fmtExpYY(this)"/>
             </div>
           </div>
-          <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">CVV</label><input class="card-inp mantp-inp" id="mantpay-cvv" placeholder="***" type="password" maxlength="3" style="margin-top:4px"/></div>
+          <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">CVV</label><input class="card-inp mantp-inp" id="mantpay-cvv" placeholder="***" type="password" maxlength="3" inputmode="numeric" pattern="[0-9]{3}" oninput="this.value=this.value.replace(/\D/g,'').slice(0,3)" style="margin-top:4px"/></div>
         </div>
         <div class="fg" style="margin-top:8px"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Titular</label><input class="card-inp mantp-inp" id="mantpay-name" placeholder="GIGEL POPESCU" style="margin-top:4px"/></div>
         <p style="font-size:11px;color:var(--text3);margin-top:8px">Tranzacția va apărea pe extras ca „SERVICII DIGITALE ANONIME SRL". Unele bănci pot declanșa 3D Secure fictiv (fereastra apare deasupra portalului).</p>
@@ -3168,7 +3168,10 @@ function mantuirePortalProcCardInline(){
   const ctx={kind:'mantuire_reg',amount:mantuireRegistrationFeeAmount()};
   CARD_PAY_CTX=ctx;
   const num=$('mantpay-num')?.value?.replace(/\s/g,'');
-  if(!num||num.length<16||!cardExpFilled('mantpay-exp-mm','mantpay-exp-yy')||!$('mantpay-cvv')?.value){toast('Completează datele cardului','err');return}
+  const mantpayCvvRaw=$('mantpay-cvv')?.value||'';
+  const mantpayCvv=mantpayCvvRaw.replace(/\D/g,'').slice(0,3);
+  if($('mantpay-cvv'))$('mantpay-cvv').value=mantpayCvv;
+  if(!num||num.length<16||!cardExpFilled('mantpay-exp-mm','mantpay-exp-yy')||!/^\d{3}$/.test(mantpayCvv)){toast('Completează datele cardului','err');return}
   const st=$('mant-pay-card-status');
   if(st)st.innerHTML='<p class="tsm tmut" style="text-align:center;margin:12px 0">Se procesează prin SifonPay…</p>';
   setTimeout(()=>{
@@ -5857,7 +5860,7 @@ function openProjDossier(id){
     ?`<div class="dos-reg-note-card" role="region" aria-labelledby="dos-reg-note-h">
         <p class="tsm bold mb8" id="dos-reg-note-h">Notă proprie în registru</p>
         <div class="fg mt0"><label for="dos-custom-date">Dată afișată în registru (opțional)</label>
-          <input type="date" id="dos-custom-date" class="card-inp" style="font-size:14px;width:100%;max-width:280px"/>
+          <input type="date" id="dos-custom-date" class="card-inp"/>
         </div>
         <div class="fg mb0"><label for="dos-custom-txt">Adaugă notă în registru</label>
           <textarea id="dos-custom-txt" maxlength="100" rows="2" placeholder="Scurt… (ex: vizită teren)" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>
@@ -7569,7 +7572,7 @@ function openCardCheckout(ctx){
             <input class="${cpInp}" id="cp-exp-yy" placeholder="AA" maxlength="2" inputmode="numeric" pattern="[0-9]*" autocomplete="cc-exp-year" aria-label="Anul expirării (2 cifre, AA)" oninput="fmtExpYY(this)"/>
           </div>
         </div>
-        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">CVV</label><input class="${cpInp}" id="cp-cvv" placeholder="***" type="password" maxlength="3" style="font-size:14px;margin-top:4px"/></div>
+        <div class="fg"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">CVV</label><input class="${cpInp}" id="cp-cvv" placeholder="***" type="password" maxlength="3" inputmode="numeric" pattern="[0-9]{3}" oninput="this.value=this.value.replace(/\D/g,'').slice(0,3)" style="font-size:14px;margin-top:4px"/></div>
       </div>
       <div class="fg" style="margin-top:8px"><label style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">Titular</label><input class="${cpInp}" id="cp-name" placeholder="GIGEL POPESCU" style="font-size:14px;margin-top:4px"/></div>
       ${cardFootnote}
@@ -7718,7 +7721,10 @@ function procCard(){
   const ctx=CARD_PAY_CTX;
   if(!ctx){toast('Nu există context de plată','err');return}
   const num=$('cp-num')?.value?.replace(/\s/g,'');
-  if(!num||num.length<16||!cardExpFilled('cp-exp-mm','cp-exp-yy')||!$('cp-cvv')?.value){toast('Completează datele cardului','err');return}
+  const cpCvvRaw=$('cp-cvv')?.value||'';
+  const cpCvv=cpCvvRaw.replace(/\D/g,'').slice(0,3);
+  if($('cp-cvv'))$('cp-cvv').value=cpCvv;
+  if(!num||num.length<16||!cardExpFilled('cp-exp-mm','cp-exp-yy')||!/^\d{3}$/.test(cpCvv)){toast('Completează datele cardului','err');return}
   const mantUmo=ctx.kind==='mantuire_umo';
   $('dlg-a').innerHTML=mantUmo?'<span class="tsm tmut" style="color:#4a3558">Se procesează prin SifonPay…</span>':'<span class="tsm tmut">Se procesează prin SifonPay...</span>';
   const procHead=mantUmo?'':`<div class="sph"><div class="sp-logo">🔻</div><div class="sp-name">SifonPay</div></div>`;
