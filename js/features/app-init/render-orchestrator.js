@@ -1,0 +1,38 @@
+;(function(){
+function renderAll(){
+  globalThis.normalizeProjectAccounting();
+  globalThis.normalizeTenderData();
+  globalThis.checkSubLifecycle();
+  globalThis.updateFundsLockUI();
+  globalThis.processMantuireQueue();
+  globalThis.syncMantuireAccessUi();
+  globalThis.renderDash();
+  globalThis.renderProj();
+  globalThis.renderTend();
+  globalThis.renderJust();
+  globalThis.renderSub();
+  globalThis.renderAudit();
+  globalThis.renderPress();
+  globalThis.renderOps();
+  globalThis.renderInteg();
+  globalThis.renderMantuire();
+  if(globalThis.$('view-howto')?.classList.contains('active'))globalThis.renderHowto();
+  globalThis.renderSettings();
+  globalThis.updRep();
+  globalThis.updWandChip();
+  globalThis.updWandQuota();
+  globalThis.renderSessions();
+  globalThis.renderWandQueue();
+  globalThis.updWandProjectOptions();
+  globalThis.syncWandSessionUI();
+  globalThis.renderWandJobView();
+  globalThis.saveState();
+  globalThis.syncMobileMenuToggleUi();
+  globalThis.applySpagafonDisplaySettings();
+  globalThis.scheduleMantuireDrainTick();
+}
+function initAppRenderOrchestrator(){
+  globalThis.renderAll=renderAll;
+}
+globalThis.initAppRenderOrchestrator=initAppRenderOrchestrator;
+})();
