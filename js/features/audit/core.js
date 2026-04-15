@@ -34,7 +34,7 @@ function renderAudit(){
         :'';
       anafPane.innerHTML=`<div class="audit-anaf-ef-h" style="display:grid;grid-template-columns:1fr 100px 90px;gap:8px;padding-bottom:6px;border-bottom:2px solid var(--border)"><span>Document</span><span>Dată</span><span>Valoare</span></div>
         ${efRows}
-        <h4 class="mt14 mb6" style="font-size:13px">Flux detaliat (extras simulat)</h4>
+        <h4 class="mt14 mb6" style="font-size:13px">Flux detaliat</h4>
         ${justiceExtra}${details||'<p class="tsm tmut">Nu există încă linii de trasabilitate extinsă. Folosește programul pentru a popula registrul.</p>'}`;
     }
   }
