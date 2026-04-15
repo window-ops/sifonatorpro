@@ -18,7 +18,8 @@
     const ronFmt=new Intl.NumberFormat('ro-RO',{
       style:'currency',
       currency:'RON',
-      maximumFractionDigits:0
+      maximumFractionDigits:0,
+      useGrouping:false
     });
     globalThis.fRON=function(n){return ronFmt.format(Number(n)||0);};
   }
