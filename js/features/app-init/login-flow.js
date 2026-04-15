@@ -31,7 +31,8 @@ function selDemo(v){
 }
 function doLogin(){
   globalThis.S.settings.persistence=globalThis.$('l-persist')?.value||'in_memory';
-  if(demoChoice!=='demo'&&globalThis.S.settings.persistence==='local_storage'&&globalThis.loadState()){
+  if(globalThis.S.settings.persistence==='local_storage'&&globalThis.loadState()){
+    globalThis.dismissDisc?.();
     globalThis.$('login-screen')?.classList.add('hid');
     globalThis.processOfflineRealTimeGap();
     globalThis.migrateSubState();
@@ -71,6 +72,23 @@ function doLogin(){
   globalThis.saveState();
   globalThis.toast(`Autentificat cu succes, ${name}!`,'ok');
 }
+function tryAutoLoginFromLocalStorage(){
+  if(!globalThis.hasPersistedState||!globalThis.hasPersistedState())return false;
+  if(!globalThis.loadState||!globalThis.loadState())return false;
+  if(globalThis.S.settings.persistence!=='local_storage')return false;
+  if(!globalThis.S.user||!String(globalThis.S.user.name||'').trim())return false;
+  globalThis.$('l-persist') && (globalThis.$('l-persist').value='local_storage');
+  globalThis.dismissDisc?.();
+  globalThis.$('login-screen')?.classList.add('hid');
+  globalThis.processOfflineRealTimeGap();
+  globalThis.migrateSubState();
+  globalThis.ensureWandTimer();
+  applyProfile();
+  globalThis.renderAll();
+  globalThis.$('app')?.classList.remove('hid');
+  globalThis.updSpagafonBadge();
+  return true;
+}
 function applyProfile(){
   globalThis.$('hb-name') && (globalThis.$('hb-name').textContent=globalThis.S.user.name);
   globalThis.$('hb-party') && (globalThis.$('hb-party').textContent=globalThis.S.user.party, globalThis.$('hb-party').style.background=globalThis.partyColor(globalThis.S.user.party));
@@ -80,6 +98,7 @@ function applyProfile(){
 function initAppInitLoginFlow(){
   globalThis.selDemo=selDemo;
   globalThis.doLogin=doLogin;
+  globalThis.tryAutoLoginFromLocalStorage=tryAutoLoginFromLocalStorage;
   globalThis.applyProfile=applyProfile;
 }
 globalThis.initAppInitLoginFlow=initAppInitLoginFlow;

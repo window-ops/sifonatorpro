@@ -16,10 +16,10 @@ function renderPress(){
       <div class="tsm tmut" style="margin-top:4px">${score>=60?'Narațiune controlată; TV local poate redeveni „aliniat” dacă imaginea rămâne sus.':score>=35?'Imagine mixtă, întrebări incomode în conferințe.':'Presiune mare în media de investigație.'}</div>`;
   }
   const lines=globalThis.buildSimulatedPressHeadlineStrings();
-  const feedRows=(lines.length?lines:['Titluri simulate se încarcă…']).map(h=>`<div class="act-i"><span class="act-t">🗞️</span><span>${h}</span></div>`).join('');
+  const feedRows=(lines.length?lines:['Titluri simulate se încarcă…']).map(h=>`<div class="act-i"><span class="act-t">🗞️</span><span>${globalThis.escapeHtml(h)}</span></div>`).join('');
   globalThis.$('press-feed')&&(globalThis.$('press-feed').innerHTML=feedRows);
   globalThis.$('press-history')&&(globalThis.$('press-history').innerHTML=(globalThis.S.pressHistory.length
-    ?globalThis.S.pressHistory.slice(0,10).map(h=>`<div class="act-i"><span class="act-t">${h.t}</span><span>${h.txt}</span></div>`).join('')
+    ?globalThis.S.pressHistory.slice(0,10).map(h=>`<div class="act-i"><span class="act-t">${globalThis.escapeHtml(h.t)}</span><span>${globalThis.escapeHtml(h.txt)}</span></div>`).join('')
     :'<p class="tmut tsm">Nicio intervenție narativă înregistrată.</p>'));
 }
 function initPressPage(){

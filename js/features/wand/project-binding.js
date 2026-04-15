@@ -2,7 +2,7 @@
 function updWandProjectOptions(prefId){
   const sel=globalThis.$('w-proj');if(!sel)return;
   const previous=prefId!=null&&prefId!==undefined?String(prefId):sel.value;
-  const opts=['<option value="">(Selectează proiect)</option>'].concat(globalThis.S.projects.filter(p=>!p.hideFromWandQueue).map(p=>{const used=globalThis.projectWandAlreadyUsed(p.id),fin=p.status==='completed',dis=used||fin;return`<option value="${p.id}"${dis?' disabled':''}>${p.name}${used?' · ✓ Bagheta folosită':''}${fin&&!used?' · finalizat (ineligibil)':''} · ${globalThis.sLabel(p.status)}</option>`;}));
+  const opts=['<option value="">(Selectează proiect)</option>'].concat(globalThis.S.projects.filter(p=>!p.hideFromWandQueue).map(p=>{const used=globalThis.projectWandAlreadyUsed(p.id),fin=p.status==='completed',dis=used||fin;return`<option value="${globalThis.escapeHtml(String(p.id))}"${dis?' disabled':''}>${globalThis.escapeHtml(p.name)}${used?' · ✓ Bagheta folosită':''}${fin&&!used?' · finalizat (ineligibil)':''} · ${globalThis.escapeHtml(globalThis.sLabel(p.status))}</option>`;}));
   sel.innerHTML=opts.join('');
   let next='';
   const prevOk=previous&&globalThis.S.projects.some(p=>String(p.id)===previous)&&!globalThis.projectWandAlreadyUsed(parseInt(previous,10))&&!globalThis.S.projects.find(p=>String(p.id)===previous)?.hideFromWandQueue&&globalThis.S.projects.find(p=>String(p.id)===previous)?.status!=='completed';

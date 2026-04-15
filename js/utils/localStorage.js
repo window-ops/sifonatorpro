@@ -1,5 +1,59 @@
 ;(function(){
 const LS_STATE_KEY='sifonator_state';
+function stripDangerousMarkup(s){
+  // Defense-in-depth: persisted state must never contain markup that could become executable
+  // if any UI render path forgets escapeHtml.
+  return String(s==null?'':s)
+    .replace(/[\u0000-\u001F\u007F]/g,' ')
+    .replace(/\s{2,}/g,' ')
+    .trim();
+}
+function sanitizeLoadedState(d){
+  if(!d||typeof d!=='object')return d;
+  // User profile strings (shown in multiple places).
+  if(d.user&&typeof d.user==='object'){
+    if(typeof d.user.name==='string')d.user.name=stripDangerousMarkup(d.user.name);
+    if(typeof d.user.fn==='string')d.user.fn=stripDangerousMarkup(d.user.fn);
+    if(typeof d.user.jud==='string')d.user.jud=stripDangerousMarkup(d.user.jud);
+    if(typeof d.user.party==='string')d.user.party=stripDangerousMarkup(d.user.party);
+    if(typeof d.user.since==='string')d.user.since=stripDangerousMarkup(d.user.since);
+  }
+  // Core entities frequently rendered into HTML strings.
+  if(Array.isArray(d.projects)){
+    d.projects.forEach(p=>{
+      if(!p||typeof p!=='object')return;
+      if(typeof p.name==='string')p.name=stripDangerousMarkup(p.name);
+      if(Array.isArray(p.dossier))p.dossier.forEach(r=>{
+        if(!r||typeof r!=='object')return;
+        if(typeof r.t==='string')r.t=stripDangerousMarkup(r.t);
+        if(typeof r.txt==='string')r.txt=stripDangerousMarkup(r.txt);
+      });
+    });
+  }
+  if(Array.isArray(d.tenders)){
+    d.tenders.forEach(t=>{
+      if(!t||typeof t!=='object')return;
+      if(typeof t.name==='string')t.name=stripDangerousMarkup(t.name);
+      if(typeof t.winner==='string')t.winner=stripDangerousMarkup(t.winner);
+      if(typeof t.evalSummary==='string')t.evalSummary=stripDangerousMarkup(t.evalSummary);
+    });
+  }
+  if(Array.isArray(d.actLog)){
+    d.actLog.forEach(a=>{
+      if(!a||typeof a!=='object')return;
+      if(typeof a.t==='string')a.t=stripDangerousMarkup(a.t);
+      if(typeof a.txt==='string')a.txt=stripDangerousMarkup(a.txt);
+    });
+  }
+  if(Array.isArray(d.smsInbox)){
+    d.smsInbox.forEach(m=>{
+      if(!m||typeof m!=='object')return;
+      if(typeof m.from==='string')m.from=stripDangerousMarkup(m.from);
+      if(typeof m.body==='string')m.body=stripDangerousMarkup(m.body);
+    });
+  }
+  return d;
+}
 function sanitizePersistedPreferencesFromLoad(d){
   const S=globalThis.S;
   const pf=String(S.projFilter||'all');
@@ -19,15 +73,16 @@ function saveState(){
   const S=globalThis.S;
   if(S.settings.persistence!=='local_storage')return;
   try{
-    const activeSer=S.activeSession?{...S.activeSession,quotaSecAtStart:S.activeSession.quotaSecAtStart===Infinity?-1:S.activeSession.quotaSecAtStart,pausedMsTotal:S.activeSession.pausedMsTotal||0,_pauseAt:S.activeSession._pauseAt||0}:null;
-    localStorage.setItem(LS_STATE_KEY,JSON.stringify({
-      settings:S.settings,user:S.user,rep:S.rep,repH:S.repH,siphoned:S.siphoned,justice:S.justice,smsInbox:S.smsInbox,spagafonLastSeen:S.spagafonLastSeen,sub:S.sub,subLapsed:S.subLapsed,
-      purchSec:S.purchSec,purchSecUsed:S.purchSecUsed,sessions:S.sessions,activeSession:activeSer,judiciaryRisk:S.judiciaryRisk,
-      pressTone:S.pressTone,pressHistory:S.pressHistory,timeShiftSec:S.timeShiftSec,userControls:S.userControls,wandQueue:S.wandQueue,
-      projFilter:S.projFilter,pressDefaultChannel:S.pressDefaultChannel||'tv_local',wandJobDetailId:S.wandJobDetailId??null,wandLogMoneyFilter:!!S._wandLogMoneyFilter,
-      projects:S.projects,tenders:S.tenders,integrations:S.integrations,mantuire:S.mantuire,
-      actLog:S.actLog,npid:S.npid,ntid:S.ntid,ledger:S.ledger,actors:S.actors,worldMemory:S.worldMemory,simClock:S.simClock
-    }));
+    const payload={...S};
+    payload.sessTimer=null;
+    payload.pending3DS=null;
+    payload._wandLogMoneyFilter=!!S._wandLogMoneyFilter;
+    payload.pressDefaultChannel=S.pressDefaultChannel||'tv_local';
+    payload.wandJobDetailId=S.wandJobDetailId??null;
+    payload.activeSession=S.activeSession
+      ?{...S.activeSession,quotaSecAtStart:S.activeSession.quotaSecAtStart===Infinity?-1:S.activeSession.quotaSecAtStart,pausedMsTotal:S.activeSession.pausedMsTotal||0,_pauseAt:S.activeSession._pauseAt||0}
+      :null;
+    localStorage.setItem(LS_STATE_KEY,JSON.stringify(payload));
     globalThis.persistLastRealVisitTs();
   }catch(e){}
 }
@@ -36,7 +91,7 @@ function loadState(){
   try{
     const raw=localStorage.getItem(LS_STATE_KEY);
     if(!raw)return false;
-    const d=JSON.parse(raw);
+    const d=sanitizeLoadedState(JSON.parse(raw));
     if(!d||!d.settings)return false;
     Object.assign(S,d);
     if(S.justice){
@@ -97,6 +152,9 @@ function deleteLocalStorageAndSignOut(){
     `<button type="button" class="btn btn-f" onclick="dlgClose()">Renunță</button>
      <button type="button" class="btn btn-d" onclick="wipeLocalStorageAndReload()">Șterge &amp; ieșire</button>`);
 }
+function hasPersistedState(){
+  try{return !!localStorage.getItem(LS_STATE_KEY);}catch(e){return false;}
+}
 function initLocalStorageUtils(){
   globalThis.LS_STATE_KEY=LS_STATE_KEY;
   globalThis.sanitizePersistedPreferencesFromLoad=sanitizePersistedPreferencesFromLoad;
@@ -105,6 +163,7 @@ function initLocalStorageUtils(){
   globalThis.exportLocalStorageState=exportLocalStorageState;
   globalThis.wipeLocalStorageAndReload=wipeLocalStorageAndReload;
   globalThis.deleteLocalStorageAndSignOut=deleteLocalStorageAndSignOut;
+  globalThis.hasPersistedState=hasPersistedState;
 }
 globalThis.initLocalStorageUtils=initLocalStorageUtils;
 })();

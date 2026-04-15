@@ -29,11 +29,14 @@ function renderProj(){
     if(p.status==='planned')acts.push(`<button class="btn btn-p btn-sm" onclick="startProj(${p.id})">▶ Începe</button>`);
     acts.push(`<button class="btn btn-f btn-sm" onclick="openProjDossier(${p.id})">🗂 Dosar</button>`);
     if(!globalThis.projectIsFinalized(p))acts.push(`<button class="btn btn-f btn-sm" onclick="openProjManageDlg(${p.id})">⚙️ Gestionează</button>`);
+    const safeName=globalThis.escapeHtml(p.name||'');
+    const safeStatus=globalThis.escapeHtml(globalThis.sLabel(p.status));
+    const safeDue=globalThis.escapeHtml(String(p.due||''));
     return`<div class="lrow${last?' mb0':''}">
       <span class="ri">${p.status==='completed'?'✅':p.status==='planned'?'📐':late?'⚠️':'🔨'}</span>
       <div style="flex:1;min-width:0">
-        <div class="rt">${p.name}</div>
-        <div class="rs">${globalThis.fRON(p.budget)} · ${globalThis.sLabel(p.status)} · Termen: ${p.due}</div>
+        <div class="rt">${safeName}</div>
+        <div class="rs">${globalThis.escapeHtml(globalThis.fRON(p.budget))} · ${safeStatus} · Termen: ${safeDue}</div>
         <div class="rs">Real: ${globalThis.fRON(p.realValue||0)} · Declarat: ${globalThis.fRON(p.declaredValue||0)} · Progres lunar: ${(p.monthly?.progress||0).toFixed(0)}%</div>
         ${bdgs.length?`<div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap">${bdgs.join('')}</div>`:''}
       </div>

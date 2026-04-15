@@ -1,7 +1,7 @@
 ;(function(){
 const MANTUIRE_SERVERS=[
   {id:'mit_buc',name:'Mitropolie, Nod București',hint:'Cozi mari generate de dosarele Capitalei și presă intensă',minMs:14000,maxMs:32000,trafficTier:3},
-  {id:'proto_iasi',name:'Protopopiat Regional, Iași',hint:'Trafic moderat pe magistrala canonică moldavă',minMs:6000,maxMs:15000,trafficTier:2},
+  {id:'proto_iasi',name:'Protopopiat Regional, Iași',hint:'Trafic moderat pe magistrala canonică moldovenească',minMs:6000,maxMs:15000,trafficTier:2},
   {id:'manastire_cdn',name:'CDN Mănăstire',hint:'Nod echilibrat pentru uz curent',minMs:3200,maxMs:9000,trafficTier:1},
   {id:'arhiva_vest',name:'Nod Arhivistic Vest',hint:'Procesare pe serie dedicată cu prioritate maximă',minMs:700,maxMs:2600,trafficTier:0},
 ];

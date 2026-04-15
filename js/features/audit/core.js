@@ -47,7 +47,7 @@ function renderAudit(){
   </div>`;
   if(!globalThis.S.actLog.length){el.innerHTML=ledger+'<p class="tmut tsm">Nu există acțiuni auditate.</p>';return}
   const n=globalThis.S.actLog.length;
-  el.innerHTML=ledger+globalThis.S.actLog.map((a,i)=>`<div class="act-i"><span class="act-t">${a.t}</span><span>#${String(n-i).padStart(2,'0')} · ${a.txt}</span></div>`).join('');
+  el.innerHTML=ledger+globalThis.S.actLog.map((a,i)=>`<div class="act-i"><span class="act-t">${globalThis.escapeHtml(a.t)}</span><span>#${String(n-i).padStart(2,'0')} · ${globalThis.escapeHtml(a.txt)}</span></div>`).join('');
 }
 
 function initAudit(){

@@ -12,7 +12,7 @@ function renderDash(){
     <div class="sc"><div class="si">📋</div><div class="sv">${globalThis.S.tenders.length}</div><div class="sl">Licitații</div><div class="sd">${openT} deschise</div></div>
     <div class="sc"><div class="si">⚠️</div><div class="sv" style="color:var(--orange)">${late}</div><div class="sl">Proiecte cu Probleme</div><div class="sd ${late>0?'neg':''}">${late>0?'Necesită atenție':'Totul în regulă!'}</div></div>`;
   globalThis.$('act-log').innerHTML=globalThis.S.actLog.slice(0,5).map(a=>
-    `<div class="act-i"><span class="act-t">${a.t}</span><span>${a.txt}</span></div>`
+    `<div class="act-i"><span class="act-t">${globalThis.escapeHtml(a.t)}</span><span>${globalThis.escapeHtml(a.txt)}</span></div>`
   ).join('')||'<p class="tmut tsm">Nicio activitate.</p>';
   const sc=globalThis.$('sub-status-dash');
   if(sc){

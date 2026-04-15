@@ -72,7 +72,7 @@ function openNewTendDlg(){
     `<div class="fg"><label>Denumire procedură</label><input type="text" id="nt-n" maxlength="200" autocomplete="off" placeholder="ex: Furnizare produse de curățat premium" style="${inp}"/><span id="nt-err-n" class="nt-field-err hid" role="alert"></span></div>
     <div class="fg"><label>Proiect asociat (obligatoriu)</label><select id="nt-pid" style="${inp}">
       <option value="">(Selectează proiect)</option>
-      ${eligible.map(p=>`<option value="${p.id}">${p.name}</option>`).join('')}
+      ${eligible.map(p=>`<option value="${globalThis.escapeHtml(String(p.id))}">${globalThis.escapeHtml(p.name||'')}</option>`).join('')}
     </select><span id="nt-err-pid" class="nt-field-err hid" role="alert"></span></div>
     <div class="fg"><label>Valoare estimată (RON)</label><input type="number" id="nt-b" inputmode="numeric" min="1" step="1" placeholder="ex: 2500000" style="${inp}"/><span id="nt-err-b" class="nt-field-err hid" role="alert"></span></div>
     <div class="fg"><label>Tip procedură</label><select id="nt-type" style="${inp}">
