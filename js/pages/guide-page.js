@@ -73,7 +73,7 @@ function openGuideYoutubeVideoEmbed(videoId,title){
       <strong>${safeTitle}</strong>
       <span class="badge bk">YouTube embed</span>
     </div>
-    <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#000">
+    <div class="yt-embed">
       <iframe
         width="957"
         height="538"

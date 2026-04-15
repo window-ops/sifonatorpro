@@ -4,6 +4,7 @@ function bindAppInitEvents(){
     if(globalThis.S.settings.persistence!=='local_storage')return false;
     if(globalThis.$('app')?.classList.contains('hid'))return false;
     if(globalThis.hasPersistedState&&globalThis.hasPersistedState())return false;
+    if(globalThis.setSkipLocalStorageSaveOnce)globalThis.setSkipLocalStorageSaveOnce(true);
     location.reload();
     return true;
   };
@@ -28,7 +29,7 @@ function bindAppInitEvents(){
   globalThis.applySpagafonDisplaySettings();
   window.addEventListener('beforeunload',()=>{
     if(globalThis.S.sessTimer){clearInterval(globalThis.S.sessTimer);globalThis.S.sessTimer=null;}
-    if(globalThis.S.settings.persistence==='local_storage')globalThis.saveState();
+    if(globalThis.S.settings.persistence==='local_storage'&&!(globalThis.shouldSkipLocalStorageSaveOnce&&globalThis.shouldSkipLocalStorageSaveOnce()))globalThis.saveState();
   });
   document.addEventListener('visibilitychange',()=>{
     if(document.visibilityState!=='visible')return;
@@ -41,6 +42,8 @@ function bindAppInitEvents(){
     if(e.key!==globalThis.LS_STATE_KEY)return;
     localStorageMissingWhileLoggedIn();
   });
+  // Same-tab deletion in devtools doesn't trigger storage event; poll lightly.
+  setInterval(()=>{localStorageMissingWhileLoggedIn();},1200);
   if(!globalThis.tryAutoLoginFromLocalStorage?.()){
     globalThis.$('login-screen')?.classList.remove('hid');
     globalThis.$('app')?.classList.add('hid');

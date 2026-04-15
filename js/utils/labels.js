@@ -8,7 +8,7 @@ function pressChannelRo(id){
   const m={tv_local:'TV local',tv_national:'TV național',social:'Rețele sociale',investigatii:'Investigații'};
   return m[id]||String(id).replace(/_/g,' ');
 }
-function diffLabelRo(d){return{easy:'Ușor',normal:'Normal',hard:'Greu'}[d]||d;}
+function diffLabelRo(d){return{easy:'Ușor',normal:'Normal',hard:'Greu',custom:'Personalizat'}[d]||d;}
 function partyColor(p){return{PSD:'#cc0000',PNL:'#ffaa00',USR:'#1a73e8',AUR:'#b8a000',UDMR:'#009900',Independent:'#666'}[p]||'#555';}
 function initLabelUtils(){
   globalThis.qLabel=qLabel;

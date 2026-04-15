@@ -6,7 +6,7 @@ function recalcJudiciaryPressure(skipTimelineLog){
   const fundHeat=Math.min(75,Math.round(S.siphoned/220000*globalThis.diffTune().fundHeat));
   const pressHeat=Math.max(0,55-S.pressTone);
   const personaMult=globalThis.PERSONAS[S.settings.persona]?.scrutiny||1;
-  const diffMult=globalThis.DIFFS[S.settings.difficulty]||1;
+  const diffMult=globalThis.diffTune().judiciary||1;
   let pressure=Math.round((procurementHeat+fundHeat+pressHeat)*personaMult*diffMult);
   pressure=Math.min(100,pressure);
   if(S.justice?.dnaEscalation)pressure=Math.max(pressure,60);

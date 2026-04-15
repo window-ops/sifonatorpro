@@ -28,9 +28,7 @@ function wandExposurePercentFromFactor(f){
   let pct=Math.round(Math.min(95,Math.max(6,16+fac*78)));
   if(stage==='ancheta')pct=Math.min(100,pct+14);
   else if(stage&&stage!=='clean'&&stage!=='monitorizare')pct=Math.min(100,pct+10);
-  const diff=globalThis.S.settings.difficulty||'normal';
-  if(diff==='hard')pct=Math.min(100,pct+6);
-  if(diff==='easy')pct=Math.max(5,pct-5);
+  pct=globalThis.clamp(pct+Math.round(globalThis.diffTune().wandExposureOffset||0),5,100);
   return Math.min(100,Math.max(5,pct));
 }
 function refreshWandFactorHint(){

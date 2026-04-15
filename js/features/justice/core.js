@@ -79,7 +79,7 @@ function manipJust(type){
   }
   const cost=globalThis.manipCost(type==='ancheta'?'ancheta':'puscarie');
   if(globalThis.S.rep<cost){globalThis.toast(`Insuficiente puncte (${globalThis.S.rep}/${cost})`,'err');return}
-  globalThis.dlgOpen('⚖️ Manipulare Sistem Judiciar',
+  globalThis.dlgOpen('⚖️ Manipulare Sistem Judiciar','',
     `<div style="background:linear-gradient(135deg,#1a0000,#2d0000);border:1px solid var(--red);border-radius:var(--r);padding:13px 15px;margin-bottom:13px;color:#fff">
       <div style="color:#ff6b6b;font-weight:700;margin-bottom:3px">⚠️ Satirizează fenomenul real</div>
       <div style="font-size:12px;opacity:.7">Parodiază mecanisme prin care politicieni au scăpat de condamnări prin prescripție, influență sau modificări legislative. Ex: cazul Marian Vanghelie, dosar 11 ani, prescris în 2025.</div>

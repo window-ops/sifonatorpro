@@ -1,5 +1,9 @@
 ;(function(){
 let demoChoice='demo';
+function dismissDisclaimerIfPresent(){
+  if(typeof globalThis.dismissDisc==='function'){globalThis.dismissDisc();return;}
+  globalThis.$('disc-wrap')?.classList.add('hid');
+}
 function applyDemoSeed(){
   globalThis.S.projects=JSON.parse(JSON.stringify(globalThis.DEMO_PROJ||[]));
   globalThis.S.tenders=JSON.parse(JSON.stringify(globalThis.DEMO_TEND||[]));
@@ -32,7 +36,7 @@ function selDemo(v){
 function doLogin(){
   globalThis.S.settings.persistence=globalThis.$('l-persist')?.value||'in_memory';
   if(globalThis.S.settings.persistence==='local_storage'&&globalThis.loadState()){
-    globalThis.dismissDisc?.();
+    dismissDisclaimerIfPresent();
     globalThis.$('login-screen')?.classList.add('hid');
     globalThis.processOfflineRealTimeGap();
     globalThis.migrateSubState();
@@ -78,7 +82,7 @@ function tryAutoLoginFromLocalStorage(){
   if(globalThis.S.settings.persistence!=='local_storage')return false;
   if(!globalThis.S.user||!String(globalThis.S.user.name||'').trim())return false;
   globalThis.$('l-persist') && (globalThis.$('l-persist').value='local_storage');
-  globalThis.dismissDisc?.();
+  dismissDisclaimerIfPresent();
   globalThis.$('login-screen')?.classList.add('hid');
   globalThis.processOfflineRealTimeGap();
   globalThis.migrateSubState();

@@ -1,5 +1,5 @@
 ;(function(){
-function repMax(){return{easy:280,normal:250,hard:220}[globalThis.S.settings.difficulty]||250;}
+function repMax(){return Math.max(180,Math.round(globalThis.diffTune().repMax||250));}
 function manipCost(kind){
   const base=kind==='ancheta'?150:200;
   return Math.max(80,Math.round(base*globalThis.diffTune().justiceRepCost));

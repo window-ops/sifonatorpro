@@ -1,5 +1,11 @@
 ;(function(){
 const LS_STATE_KEY='sifonator_state';
+function shouldSkipLocalStorageSaveOnce(){
+  return !!globalThis.__skipLocalStorageSaveOnce;
+}
+function setSkipLocalStorageSaveOnce(v){
+  globalThis.__skipLocalStorageSaveOnce=!!v;
+}
 function stripDangerousMarkup(s){
   // Defense-in-depth: persisted state must never contain markup that could become executable
   // if any UI render path forgets escapeHtml.
@@ -72,6 +78,9 @@ function sanitizePersistedPreferencesFromLoad(d){
 function saveState(){
   const S=globalThis.S;
   if(S.settings.persistence!=='local_storage')return;
+  if(shouldSkipLocalStorageSaveOnce())return;
+  // If localStorage existed in this runtime and was deleted afterwards, do not recreate it.
+  if(globalThis.__lsStateInitialized===true&&!hasPersistedState())return;
   try{
     const payload={...S};
     payload.sessTimer=null;
@@ -83,6 +92,7 @@ function saveState(){
       ?{...S.activeSession,quotaSecAtStart:S.activeSession.quotaSecAtStart===Infinity?-1:S.activeSession.quotaSecAtStart,pausedMsTotal:S.activeSession.pausedMsTotal||0,_pauseAt:S.activeSession._pauseAt||0}
       :null;
     localStorage.setItem(LS_STATE_KEY,JSON.stringify(payload));
+    globalThis.__lsStateInitialized=true;
     globalThis.persistLastRealVisitTs();
   }catch(e){}
 }
@@ -94,6 +104,7 @@ function loadState(){
     const d=sanitizeLoadedState(JSON.parse(raw));
     if(!d||!d.settings)return false;
     Object.assign(S,d);
+    globalThis.__lsStateInitialized=true;
     if(S.justice){
       if(typeof S.justice.debugPin!=='boolean')S.justice.debugPin=false;
       if(typeof S.justice.dnaEscalation!=='boolean')S.justice.dnaEscalation=false;
@@ -113,6 +124,7 @@ function loadState(){
     globalThis.ensureIntegrations();
     globalThis.ensureMantuireState();
     globalThis.ensureMantuireIntegration();
+    if(typeof globalThis.normalizeDifficultySettings==='function')globalThis.normalizeDifficultySettings();
     globalThis.migrateSubState();
     globalThis.normalizeSpagafonSettings();
     if(typeof S.settings.skipProjectFinalizeConfirm!=='boolean')S.settings.skipProjectFinalizeConfirm=false;
@@ -141,6 +153,7 @@ function exportLocalStorageState(){
   globalThis.toast('Fișier descărcat','ok');
 }
 function wipeLocalStorageAndReload(){
+  setSkipLocalStorageSaveOnce(true);
   try{
     localStorage.removeItem(globalThis.LS_STATE_KEY);
     localStorage.removeItem(globalThis.LS_LAST_REAL_VISIT||'sifonator_last_real_visit_ts');
@@ -164,6 +177,10 @@ function initLocalStorageUtils(){
   globalThis.wipeLocalStorageAndReload=wipeLocalStorageAndReload;
   globalThis.deleteLocalStorageAndSignOut=deleteLocalStorageAndSignOut;
   globalThis.hasPersistedState=hasPersistedState;
+  globalThis.shouldSkipLocalStorageSaveOnce=shouldSkipLocalStorageSaveOnce;
+  globalThis.setSkipLocalStorageSaveOnce=setSkipLocalStorageSaveOnce;
+  if(typeof globalThis.__skipLocalStorageSaveOnce!=='boolean')globalThis.__skipLocalStorageSaveOnce=false;
+  if(typeof globalThis.__lsStateInitialized!=='boolean')globalThis.__lsStateInitialized=hasPersistedState();
 }
 globalThis.initLocalStorageUtils=initLocalStorageUtils;
 })();

@@ -1,7 +1,7 @@
 ;(function(){
 const S={
   user:{name:'',fn:'',jud:'',party:'PSD',since:''},
-  settings:{difficulty:'normal',persona:'primarie',persistence:'in_memory',spagafonLauncherMode:'both',spagafonMobileFullDisplay:false,skipProjectFinalizeConfirm:false,enableFinalizeExecAssist:true,enableMantuireFeature:true,mantuireNeutralBranding:false},
+  settings:{difficulty:'normal',customDifficulty:{judiciary:1,repGain:1,repLoss:1,pressCost:1,wandRate:1,fundHeat:1,tenderLuck:1,justiceRepCost:1,repMax:250,wandExposureOffset:0},persona:'primarie',persistence:'in_memory',spagafonLauncherMode:'both',spagafonMobileFullDisplay:false,skipProjectFinalizeConfirm:false,enableFinalizeExecAssist:true,enableMantuireFeature:true,mantuireNeutralBranding:false},
   simClock:{monthTick:0,lastAdvanceTs:0},
   ledger:{publicBudget:0,redistributedSurplus:0,influenceSpend:0,reputationCost:0},
   actors:[],
@@ -37,6 +37,20 @@ const S={
   mantuire:{credits:5,serverId:'proto_iasi',queue:[],history:[],usageLog:[],usageByDay:{},stats:{ok:0,fail:0},showUmDayChart:false},
 };
 const DIFFS={easy:0.85,normal:1,hard:1.2};
+const DEFAULT_CUSTOM_DIFFICULTY={judiciary:1,repGain:1,repLoss:1,pressCost:1,wandRate:1,fundHeat:1,tenderLuck:1,justiceRepCost:1,repMax:250,wandExposureOffset:0};
+const CUSTOM_DIFFICULTY_LIMITS={
+  judiciary:[0.5,1.8],
+  repGain:[0.6,1.4],
+  repLoss:[0.6,1.6],
+  pressCost:[0.6,1.6],
+  wandRate:[0.6,1.5],
+  fundHeat:[0.6,1.6],
+  tenderLuck:[0.6,1.4],
+  justiceRepCost:[0.6,1.6],
+  repMax:[180,400],
+  wandExposureOffset:[-12,12],
+};
+function clampNum(v,min,max){return Math.min(max,Math.max(min,v));}
 const PRESS_CHANNELS=['tv_local','tv_national','social','investigatii'];
 const TIME_SHIFT_MAX_DAYS=30;
 const PLANS=[
@@ -45,8 +59,41 @@ const PLANS=[
   {id:'pro',name:'Oligarh Pro',price:499,secMonth:36000,maxOngoing:20,maxPending:20,repMultCap:0.15,feats:['Max. 20 proiecte în lucru / 20 planificate','Licitații prioritare','Shift temporal','Bonus reputație la proiecte până la 15%'],protection:true,timeShift:true,feat:true},
   {id:'ent',name:'Interlop Enterprise',price:1999,secMonth:-1,maxOngoing:Infinity,maxPending:Infinity,repMultCap:0.25,feats:['Proiecte nelimitate','Protector DNA inclus','Shift temporal','Bonus reputație la proiecte până la 25%','Bagheta nelimitată/lună'],protection:true,timeShift:true,feat:false},
 ];
+function clampDifficultyValue(k,v){
+  const lim=CUSTOM_DIFFICULTY_LIMITS[k];
+  if(!lim)return v;
+  const num=Number(v);
+  if(!Number.isFinite(num))return DEFAULT_CUSTOM_DIFFICULTY[k];
+  return clampNum(num,lim[0],lim[1]);
+}
+function normalizeCustomDifficultySettings(raw){
+  const src=raw&&typeof raw==='object'?raw:{};
+  return{
+    judiciary:clampDifficultyValue('judiciary',src.judiciary),
+    repGain:clampDifficultyValue('repGain',src.repGain),
+    repLoss:clampDifficultyValue('repLoss',src.repLoss),
+    pressCost:clampDifficultyValue('pressCost',src.pressCost),
+    wandRate:clampDifficultyValue('wandRate',src.wandRate),
+    fundHeat:clampDifficultyValue('fundHeat',src.fundHeat),
+    tenderLuck:clampDifficultyValue('tenderLuck',src.tenderLuck),
+    justiceRepCost:clampDifficultyValue('justiceRepCost',src.justiceRepCost),
+    repMax:Math.round(clampDifficultyValue('repMax',src.repMax)),
+    wandExposureOffset:Math.round(clampDifficultyValue('wandExposureOffset',src.wandExposureOffset)),
+  };
+}
+function normalizeDifficultySettings(){
+  if(!S.settings||typeof S.settings!=='object')S.settings={};
+  const d=String(S.settings.difficulty||'normal');
+  S.settings.difficulty=['easy','normal','hard','custom'].includes(d)?d:'normal';
+  S.settings.customDifficulty=normalizeCustomDifficultySettings(S.settings.customDifficulty);
+}
 function diffTune(){
+  normalizeDifficultySettings();
   const d=S.settings.difficulty||'normal';
+  if(d==='custom'){
+    const c=S.settings.customDifficulty;
+    return{...c,repMax:Math.round(c.repMax)};
+  }
   return{
     judiciary:DIFFS[d]||1,
     repGain:d==='easy'?1.12:d==='hard'?0.88:1,
@@ -56,6 +103,8 @@ function diffTune(){
     fundHeat:d==='easy'?0.9:d==='hard'?1.1:1,
     tenderLuck:d==='easy'?1.08:d==='hard'?0.92:1,
     justiceRepCost:d==='easy'?0.9:d==='hard'?1.12:1,
+    repMax:d==='easy'?280:d==='hard'?220:250,
+    wandExposureOffset:d==='easy'?-5:d==='hard'?6:0,
   };
 }
 function hasPaidSubscription(){return !!(S.sub&&S.sub.tier&&S.sub.tier!=='free');}
@@ -125,16 +174,22 @@ function legacyDebugResetEphemeralUiState(){
   if(typeof globalThis.resetSpagafonEphemeralState==='function')globalThis.resetSpagafonEphemeralState();
 }
 function initStateModule(){
+  normalizeDifficultySettings();
   migrateSubState();
   initActors();
 }
 globalThis.S=S;
 globalThis.PLANS=PLANS;
 globalThis.DIFFS=DIFFS;
+globalThis.DEFAULT_CUSTOM_DIFFICULTY=DEFAULT_CUSTOM_DIFFICULTY;
+globalThis.CUSTOM_DIFFICULTY_LIMITS=CUSTOM_DIFFICULTY_LIMITS;
 globalThis.PRESS_CHANNELS=PRESS_CHANNELS;
 globalThis.TIME_SHIFT_MAX_DAYS=TIME_SHIFT_MAX_DAYS;
 globalThis.PERSONAS=globalThis.PERSONAS||{};
 globalThis.diffTune=diffTune;
+globalThis.clampDifficultyValue=clampDifficultyValue;
+globalThis.normalizeCustomDifficultySettings=normalizeCustomDifficultySettings;
+globalThis.normalizeDifficultySettings=normalizeDifficultySettings;
 globalThis.hasPaidSubscription=hasPaidSubscription;
 globalThis.migrateSubState=migrateSubState;
 globalThis.initActors=initActors;

@@ -1,4 +1,25 @@
 ;(function(){
+function onSettingsDifficultyChange(){
+  const sel=globalThis.$('settings-difficulty');
+  if(!globalThis.S.settings)globalThis.S.settings={};
+  const v=String(sel?.value||'normal');
+  globalThis.S.settings.difficulty=['easy','normal','hard','custom'].includes(v)?v:'normal';
+  if(typeof globalThis.normalizeDifficultySettings==='function')globalThis.normalizeDifficultySettings();
+  globalThis.saveState();
+  globalThis.renderSettings();
+  globalThis.renderAll();
+}
+function onSettingsCustomDifficultyInput(key,value){
+  if(!globalThis.S.settings)globalThis.S.settings={};
+  if(!globalThis.S.settings.customDifficulty||typeof globalThis.S.settings.customDifficulty!=='object'){
+    globalThis.S.settings.customDifficulty={...globalThis.DEFAULT_CUSTOM_DIFFICULTY};
+  }
+  globalThis.S.settings.customDifficulty[key]=globalThis.clampDifficultyValue?globalThis.clampDifficultyValue(key,value):Number(value);
+  if(typeof globalThis.normalizeDifficultySettings==='function')globalThis.normalizeDifficultySettings();
+  globalThis.saveState();
+  globalThis.renderSettings();
+  globalThis.renderAll();
+}
 function onSettingsSkipProjFinalizeConfirmChange(){
   const cb=globalThis.$('settings-skip-proj-final-confirm');
   if(!globalThis.S.settings)globalThis.S.settings={};
@@ -58,6 +79,8 @@ function onSettingsRepInput(){
   globalThis.saveState();
 }
 function initSettingsFeature(){
+  globalThis.onSettingsDifficultyChange=onSettingsDifficultyChange;
+  globalThis.onSettingsCustomDifficultyInput=onSettingsCustomDifficultyInput;
   globalThis.onSettingsSkipProjFinalizeConfirmChange=onSettingsSkipProjFinalizeConfirmChange;
   globalThis.onSettingsFinalizeExecAssistChange=onSettingsFinalizeExecAssistChange;
   globalThis.onSettingsMantuireEnabledChange=onSettingsMantuireEnabledChange;

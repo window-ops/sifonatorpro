@@ -1,5 +1,34 @@
 ;(function(){
 function renderSettings(){
+  if(typeof globalThis.normalizeDifficultySettings==='function')globalThis.normalizeDifficultySettings();
+  const diffSel=globalThis.$('settings-difficulty');
+  const diffHint=globalThis.$('settings-difficulty-hint');
+  const customWrap=globalThis.$('settings-custom-difficulty-wrap');
+  const c=globalThis.S.settings.customDifficulty||globalThis.DEFAULT_CUSTOM_DIFFICULTY;
+  if(diffSel)diffSel.value=globalThis.S.settings.difficulty||'normal';
+  if(customWrap)customWrap.classList.toggle('hid',(globalThis.S.settings.difficulty||'normal')!=='custom');
+  if(diffHint){
+    diffHint.textContent=(globalThis.S.settings.difficulty||'normal')==='custom'
+      ?'Mod Personalizat activ: valorile de mai jos se aplică imediat în economie, justiție, reputație și Baghetă.'
+      :'Poți schimba dificultatea oricând; efectul se aplică imediat asupra calculelor viitoare.';
+  }
+  const setNum=(id,val,digits=2,suffix='')=>{
+    const el=globalThis.$(id);
+    if(el)el.value=String(val);
+    const disp=globalThis.$(id+'-disp');
+    if(disp)disp.textContent=`${Number(val).toFixed(digits)}${suffix}`;
+  };
+  setNum('settings-cdiff-judiciary',c.judiciary,2,'x');
+  setNum('settings-cdiff-rep-gain',c.repGain,2,'x');
+  setNum('settings-cdiff-rep-loss',c.repLoss,2,'x');
+  setNum('settings-cdiff-press-cost',c.pressCost,2,'x');
+  setNum('settings-cdiff-wand-rate',c.wandRate,2,'x');
+  setNum('settings-cdiff-fund-heat',c.fundHeat,2,'x');
+  setNum('settings-cdiff-tender-luck',c.tenderLuck,2,'x');
+  setNum('settings-cdiff-justice-rep',c.justiceRepCost,2,'x');
+  setNum('settings-cdiff-rep-max',Math.round(c.repMax),0,'');
+  setNum('settings-cdiff-wand-exp',Math.round(c.wandExposureOffset),0,' pct');
+
   const isLs=globalThis.S.settings.persistence==='local_storage';
   const ph=globalThis.$('settings-persist-hint');if(ph)ph.textContent=isLs
     ?'Sesiunea este salvată în localStorage. Poți exporta înainte de migrare sau șterge pentru deconectare completă.'
