@@ -110,6 +110,7 @@ function saveProjManage(id){
   if(oldLateF!==p.lateF)globalThis.addAct(`Proiect „${p.name}”: întârziere finalizare ${p.lateF?'marcată':'eliminată'}.`);
   if(oldProc!==p.procurementMode)globalThis.addAct(`Procedură proiect „${p.name}" schimbată: ${globalThis.procurementModeLabel(oldProc)} → ${globalThis.procurementModeLabel(p.procurementMode)}.`);
   globalThis.toast('Proiect actualizat în organizator','ok');
+  globalThis.scheduleSearchReindex?.();
 }
 function addProjDossierCustomEntry(projectId){
   const p=globalThis.S.projects.find(x=>x.id===projectId);if(!p)return;
@@ -152,7 +153,15 @@ function openProjDossier(id){
   const categories=projectCategoriesMap();
   const pCat=globalThis.projectCategoryKey(p);
   const pCatLabel=(categories[pCat]?.label)||'Diverse';
+  const q=globalThis.getProjectQualityDisplayData?globalThis.getProjectQualityDisplayData(p):null;
+  const cov=globalThis.projectTenderCoverageSummary?globalThis.projectTenderCoverageSummary(p):null;
   const sumLines=[['Categorie',pCatLabel],['Progres',`${mt.progress.toFixed(0)}%`],['Performanță contractor',String(mt.contractorPerf??'-')],['Modificări suplimentare (contract)',String(mt.changeOrders??0)],['Licitații asociate',String(tend.length)]];
+  if(q){
+    sumLines.push(['Scor integritate',`${q.integrity}/100`],['Scor livrare',`${q.delivery}/100`],['Scor capacitate',`${q.capacity}/100`],['Indicatori de risc',String(q.redFlags)]);
+  }
+  if(cov&&globalThis.projectUsesTenderFlow(p)){
+    sumLines.push(['Acoperire licitații (total)',`${cov.anyPct}%`],['Acoperire adjudecat/executat',`${cov.awardedPct}% (minim ${cov.minAwardedPct}%)`]);
+  }
   const summaryHtml=`<div class="dyn-sumcard">${sumLines.map(([k,v])=>`<div class="gline"><span class="gk">${globalThis.escapeHtml(k)}</span><span class="gv">${globalThis.escapeHtml(v)}</span></div>`).join('')}</div>`;
   const tenderRows=tend.map(t=>{const bits=[t.winner?`Câștigător: ${t.winner}`:null,t.bids?.length?`${t.bids.length} oferte`:null,t.auditRisk!=null?`Risc audit: ${t.auditRisk}%`:null,t.evalSummary?String(t.evalSummary).slice(0,160)+(String(t.evalSummary).length>160?'…':'') :null].filter(Boolean);const det=bits.length?bits.join(' · '):'-';return`<tr><td>${globalThis.escapeHtml(t.name)}</td><td class="dyn-nowrap"><span class="badge ${globalThis.tsBadge(t.status)}">${globalThis.escapeHtml(globalThis.tsLabel(t.status))}</span></td><td class="dyn-muted">${globalThis.escapeHtml(det)}</td><td class="dyn-num">${globalThis.escapeHtml(globalThis.fRON(t.budget))}</td></tr>`;}).join('');
   const tenderBlock=tend.length?`<div class="dyn-tablewrap"><table class="dyn-table" role="grid" aria-label="Licitații asociate proiectului"><thead><tr><th scope="col">Procedură</th><th scope="col">Stadiu</th><th scope="col">Detalii</th><th scope="col" class="dyn-num">Buget</th></tr></thead><tbody>${tenderRows}</tbody></table></div>`:`<div class="dyn-empty" role="status">Nu există licitații legate de acest proiect. Le poți publica din secțiunea <strong>Licitații</strong>.</div>`;
@@ -181,21 +190,48 @@ function readProjectMoneyEl(el){
 function npClearNewProjFieldHighlights(){for(const id of['np-n','np-rv','np-dv','np-d','np-s']){const e=globalThis.$(id);if(!e)continue;e.classList.remove('np-field-invalid');e.removeAttribute('aria-invalid');}}
 function npTouchNewProjField(id){const e=globalThis.$(id);if(!e)return;e.classList.remove('np-field-invalid');e.removeAttribute('aria-invalid');}
 function npMarkNewProjInvalid(ids){npClearNewProjFieldHighlights();for(const id of ids){const e=globalThis.$(id);if(!e)continue;e.classList.add('np-field-invalid');e.setAttribute('aria-invalid','true');}}
+function npUpdateRiskPreview(){
+  const out=globalThis.$('np-risk-preview');
+  if(!out)return;
+  const rv=readProjectMoneyEl(globalThis.$('np-rv'));
+  const dv=readProjectMoneyEl(globalThis.$('np-dv'));
+  if(!Number.isFinite(rv)||!Number.isFinite(dv)||dv<rv){
+    out.innerHTML='<span class="badge bk">Completează valorile pentru previzualizare</span>';
+    return;
+  }
+  const tmp={
+    id:-1,
+    projCategory:globalThis.$('np-cat')?.value||'diverse',
+    declaredValue:dv,
+    realValue:rv,
+    lateF:false,
+    lateS:false,
+    procurementMode:globalThis.$('np-proc')?.value==='direct'?'direct':'licitatie',
+    monthly:{contractorPerf:60,changeOrders:0,progress:0},
+  };
+  const q=globalThis.getProjectQualityDisplayData?globalThis.getProjectQualityDisplayData(tmp):null;
+  if(!q){
+    out.innerHTML='<span class="badge bk">Previzualizare indisponibilă</span>';
+    return;
+  }
+  out.innerHTML=`<span class="badge bk">Integritate ${q.integrity}</span><span class="badge bk">Livrare ${q.delivery}</span><span class="badge bk">Capacitate ${q.capacity}</span><span class="badge bb">Indicatori risc ${q.redFlags}</span>`;
+}
 function openNewProjDlg(){
   const inp='width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;outline:none';
   globalThis.dlgOpen('Proiect Public Nou','Conform HG nr. [REDACTAT]/2024 privind achizițiile publice',
     `<div class="fg"><label for="np-n">Denumire proiect</label><input type="text" id="np-n" placeholder="ex: Reabilitare stradă principală" style="${inp}" autocomplete="off" oninput="npTouchNewProjField('np-n')"/></div>
-    <div class="fg-row"><div class="fg"><label for="np-rv">Valoare reală proiect (RON)</label><input type="number" id="np-rv" inputmode="decimal" min="1" step="1" placeholder="ex: 980000" style="${inp}" oninput="npTouchNewProjField('np-rv')"/></div>
-      <div class="fg"><label for="np-dv">Valoare declarată proiect (RON)</label><input type="number" id="np-dv" inputmode="decimal" min="1" step="1" placeholder="ex: 1800000" style="${inp}" oninput="npTouchNewProjField('np-dv');npUpdateProcHelper()"/></div></div>
+    <div class="fg-row"><div class="fg"><label for="np-rv">Valoare reală proiect (RON)</label><input type="number" id="np-rv" inputmode="decimal" min="1" step="1" placeholder="ex: 980000" style="${inp}" oninput="npTouchNewProjField('np-rv');npUpdateRiskPreview()"/></div>
+      <div class="fg"><label for="np-dv">Valoare declarată proiect (RON)</label><input type="number" id="np-dv" inputmode="decimal" min="1" step="1" placeholder="ex: 1800000" style="${inp}" oninput="npTouchNewProjField('np-dv');npUpdateProcHelper();npUpdateRiskPreview()"/></div></div>
     <div class="fg"><label for="np-d">Dată limită</label><input type="date" id="np-d" style="${inp}" onchange="npTouchNewProjField('np-d')"/></div>
-    <div class="fg"><label for="np-cat">Categorie proiect</label><select id="np-cat" style="${inp}" onchange="npUpdateProcHelper()">${Object.keys(projectCategoriesMap()).map(k=>`<option value="${k}"${k==='diverse'?' selected':''}>${globalThis.escapeHtml(projectCategoriesMap()[k].label)}</option>`).join('')}</select>
-      <p class="tsm tmut mt6" style="line-height:1.5">Alege <strong>domeniul și complexitatea</strong> (șantier, drumuri, consumabile, IT…): categoria ajustează <strong>moderat</strong> șansele relative la finalizare; ponderea mare vine din <strong>valori</strong>, <strong>termene</strong> și (pe licitații) din <strong>corupție simulată</strong> (inclusiv câștigători „de casă”). Detalii în <strong>Ghid &amp; reguli</strong>.</p></div>
-    <div class="fg"><label for="np-proc">Procedură principală</label><select id="np-proc" style="${inp}" onchange="npUpdateProcHelper()"><option value="licitatie">Licitație publică</option><option value="direct">Achiziție directă</option></select>
+    <div class="fg"><label for="np-cat">Categorie proiect</label><select id="np-cat" style="${inp}" onchange="npUpdateProcHelper();npUpdateRiskPreview()">${Object.keys(projectCategoriesMap()).map(k=>`<option value="${k}"${k==='diverse'?' selected':''}>${globalThis.escapeHtml(projectCategoriesMap()[k].label)}</option>`).join('')}</select>
+      <p class="tsm tmut mt6" style="line-height:1.5">Alege <strong>domeniul și complexitatea</strong> (șantier, drumuri, consumabile, IT…): categoria ajustează <strong>moderat</strong> șansele relative la finalizare; ponderea mare vine din <strong>valori</strong>, <strong>termene</strong> și (pe licitații) din <strong>corupție simulată</strong> (inclusiv câștigători „de casă”). Proiectele foarte oneste (diferență declarat-real max. 2%, fără întârziere la finalizare, fără câștigător „de casă”) nu pot ieși „De mântuială”. Detalii în <strong>Ghid &amp; reguli</strong>.</p></div>
+    <div class="fg mb6"><label for="np-proc">Procedură principală</label><select id="np-proc" style="${inp}" onchange="npUpdateProcHelper();npUpdateRiskPreview()"><option value="licitatie">Licitație publică</option><option value="direct">Achiziție directă</option></select>
       <p id="np-proc-help" class="tsm tmut mt6" style="line-height:1.5"></p></div>
-    <div class="fg"><label for="np-s">Status inițial</label><select id="np-s" style="${inp}" onchange="npTouchNewProjField('np-s')"><option value="planned">Planificat</option><option value="in_progress">În desfășurare</option></select></div>`,
+    <details class="hig-acc mt8" open><summary class="tsm" style="cursor:pointer;font-weight:700">Previzualizare risc (live)</summary><div id="np-risk-preview" class="mt8" style="display:flex;gap:6px;flex-wrap:wrap"><span class="badge bk">Completează valorile pentru previzualizare</span></div></details>
+    <div class="fg mb0"><label for="np-s" class="mt6">Status inițial</label><select id="np-s" style="${inp}" onchange="npTouchNewProjField('np-s')"><option value="planned">Planificat</option><option value="in_progress">În desfășurare</option></select></div>`,
     `<button class="btn btn-f" onclick="dlgClose()">Anulează</button><button class="btn btn-p" onclick="addProj()">Adaugă Proiect</button>`
   );
-  npClearNewProjFieldHighlights();globalThis.npUpdateProcHelper();requestAnimationFrame(()=>{try{globalThis.$('np-n')?.focus();}catch(e){}});
+  npClearNewProjFieldHighlights();globalThis.npUpdateProcHelper();npUpdateRiskPreview();requestAnimationFrame(()=>{try{globalThis.$('np-n')?.focus();}catch(e){}});
 }
 function addProj(){
   const nEl=globalThis.$('np-n'),dEl=globalThis.$('np-d'),sEl=globalThis.$('np-s'),rvEl=globalThis.$('np-rv'),dvEl=globalThis.$('np-dv');
@@ -220,6 +256,7 @@ function addProj(){
   globalThis.S.projects.push(newP);
   globalThis.dlgClose();globalThis.renderProj();globalThis.renderDash();globalThis.updWandProjectOptions();globalThis.addAct(`Proiect nou adăugat: „${n}" (${globalThis.fRON(dv)} declarat / ${globalThis.fRON(rv)} real).`);
   globalThis.toast(`Proiect adăugat: ${n}`,'ok');
+  globalThis.scheduleSearchReindex?.();
 }
 function initProjectsFeature(){
   globalThis.projectIsFinalized=projectIsFinalized;
@@ -235,6 +272,7 @@ function initProjectsFeature(){
   globalThis.npClearNewProjFieldHighlights=npClearNewProjFieldHighlights;
   globalThis.npTouchNewProjField=npTouchNewProjField;
   globalThis.npMarkNewProjInvalid=npMarkNewProjInvalid;
+  globalThis.npUpdateRiskPreview=npUpdateRiskPreview;
   globalThis.openNewProjDlg=openNewProjDlg;
   globalThis.addProj=addProj;
 }
