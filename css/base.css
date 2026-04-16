@@ -637,7 +637,7 @@ details.hig-acc[open] summary{margin-bottom:8px}
 .card-inp:focus{border-color:var(--blue)}
 .sp-exp-field{display:flex;align-items:center;gap:6px;width:100%}
 .sp-exp-field .card-inp,.sp-exp-field .mantp-inp{flex:1;min-width:0;text-align:center;letter-spacing:.12em;margin-top:0}
-.sp-cvv-inp{margin-top:4px;text-align:center;letter-spacing:.12em}
+.sp-cvv-inp{text-align:center;letter-spacing:.12em}
 .sp-exp-sep{flex-shrink:0;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--text3);line-height:1;user-select:none;padding:0 2px}
 
 /* ── ACTIVITY ── */
@@ -1034,8 +1034,7 @@ body.spagafon-open #hb-mobile-spag{display:none!important}
 .dos-reg-note-card{border:1px solid var(--border);border-radius:var(--rm);padding:12px 14px;margin-top:14px;background:var(--card)}
 .dos-reg-note-card > p:first-child{margin-top:0}
 
-
-/* extracted repeated inline styles */
+/* Extracted repeated inline styles */
 .u-mt3-shrink0{margin-top:3px;flex-shrink:0}
 .u-mt6{margin-top:6px}
 .u-flex-between-start-12{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
